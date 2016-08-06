@@ -29,5 +29,15 @@ namespace DoctorWeb.Models
         {
             return new ApplicationDbContext();
         }
+
+        public DbSet<Doctor> Doctors { get; set; }
+        public DbSet<Instruction> Instructions { get; set; }
+        public DbSet<Medicine> Medicines { get; set; }
+        public DbSet<Patient> Patients { get; set; }
+        public DbSet<PatientType> PatientTypes { get; set; }
+        public DbSet<PaymentType> PaymentTypes { get; set; }
+        public DbSet<PrescriptionMaster> Prescriptions { get; set; }
+        public DbSet<PrescriptionMedicine> PrescriptionMedicines { get; set; }
+
     }
 }

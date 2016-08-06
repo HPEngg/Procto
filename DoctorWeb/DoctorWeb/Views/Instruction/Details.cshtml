@@ -1,0 +1,50 @@
+﻿@model DoctorWeb.Models.Instruction
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Instruction</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.InstructionName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InstructionName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InstructionDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InstructionDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Action)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Action)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsSync)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsSync)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

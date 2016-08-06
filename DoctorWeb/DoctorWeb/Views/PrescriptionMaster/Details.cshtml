@@ -1,0 +1,122 @@
+﻿@model DoctorWeb.Models.PrescriptionMaster
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PrescriptionMaster</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Days)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Days)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Diagnosis)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Diagnosis)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Procedure)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Procedure)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.N)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.N)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.O)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.O)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.P)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.P)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.D)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.D)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.M)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.M)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Percent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Percent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Less)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Less)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rs)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rs)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsSync)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsSync)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

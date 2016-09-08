@@ -1,10 +1,9 @@
 ﻿@model IEnumerable<DoctorWeb.Models.Doctor>
 
 @{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
     ViewBag.Title = "Index";
 }
-
-<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")

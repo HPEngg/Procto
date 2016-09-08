@@ -1,4 +1,5 @@
 ﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
     //ViewBag.Title = "DoctorWeb";
 }
 
@@ -35,10 +36,10 @@
         <div class="top">
             <!---- top part start --->
             <div class="logo">
-                <a href="#"><img src="/Content/img/logo.png"></a>
+                <a href="#"><img src="/Content/Images/logo.png"></a>
             </div>
             <div class="reslogo">
-                <a href="#"><img src="/Content/img/res_logo.png"></a>
+                <a href="#"><img src="/Content/Images/res_logo.png"></a>
             </div>
             <div class="search">
                 <form>
@@ -486,7 +487,7 @@
                 <!-- fieldsets  two-->
                 <div class="form_fieldset_div">
                     <fieldset style="height: 600px;">
-                        <h2 class="fs-title" style="text-align:center;"><a href="#" class="webcam_img"><img src="/Content/img/webcam.png" /></a><a href="#" class="profile_pic_img"><img src="/Content/img/profilepic.png" /></a>Prescription Form</h2>
+                        <h2 class="fs-title" style="text-align:center;"><a href="#" class="webcam_img"><img src="/Content/Images/webcam.png" /></a><a href="#" class="profile_pic_img"><img src="/Content/Images/profilepic.png" /></a>Prescription Form</h2>
                         <label title="Rx" class="rx_label">Rx</label>
                         <label title="Rx" style="float:right; border:0px solid; padding-top:10px;">
                             <input type="text" name="patient_days_presc" id="patient_days_presc" placeholder="Days" style="width:70px;" />
@@ -811,7 +812,7 @@ bottom:0;" class="pmtype_div">
                 formSubmitted: function () {
                 },
                 redirectUrl: "print_save.php",
-                defaultImage: "img/1456172680_image.png",
+                defaultImage: "Images/1456172680_image.png",
             });
         });
 

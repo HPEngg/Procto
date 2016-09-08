@@ -1,0 +1,280 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title DoctorWeb</title>
+    <link rel="stylesheet" href="~/Content/css/login.css" type="text/css" />
+    <link rel="stylesheet" href="~/Content/css/prettify.css" type="text/css" />
+    <script type="text/javascript" src="~/Content/js/prettify.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery-migrate-1.1.1.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery-ui-1.9.2.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery.flot.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery.flot.resize.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="~/Content/js/custom.js"></script>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </div>
+        </div>*@
+
+
+    <div class="mainwrapper">
+        <!-- START OF LEFT PANEL -->
+        <div class="leftpanel">
+            <div class="logopanel">
+                <h1><a href="dashboard.html"><img src="/Content/Images/logo.png"></a></h1>
+            </div>
+            <!--logopanel-->
+            <div class="datewidget">Today is @String.Format("{0:dddd, MMMM d, yyyy hh:mmtt}", @System.DateTime.Now)</div>
+            <!--plainwidget-->
+            <div class="leftmenu">
+                <ul class="nav nav-tabs nav-stacked">
+                    <li class="nav-header">Main Navigation</li>
+                    <li class="active"><div id="icondiv"><span class="icon-align-justify"></span></div><div id="icontitlediv">@Html.ActionLink("Add Image", "Index", "Doctor")</div></li>
+                    <li class="dropdown">
+                        <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Invoice List</div></a>
+                        <ul>
+                            <li><div id="icontitlediv">@Html.ActionLink("Daily List", "Index", "Doctor")</div></li>
+                            <li><div id="icontitlediv">@Html.ActionLink("Weekly List", "Index", "Doctor")</div></li>
+                            <li><div id="icontitlediv">@Html.ActionLink("Monthly List", "Index", "Doctor")</div></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Medicine</div></a>
+                        <ul>
+                            <li><div id="icontitlediv">@Html.ActionLink("Medicine List", "Index", "Doctor")</div></li>
+                            <li><div id="icontitlediv">@Html.ActionLink("Category", "Index", "Doctor")</div></li>
+                        </ul>
+                    </li>
+                    @* PATIENT TYPE *@
+                    <li class="dropdown">
+                        <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Patient Type</div></a>
+                        <ul>
+                            <li><div id="icontitlediv">@Html.ActionLink("Add Patient Type", "Create", "PatientType")</div></li>
+                            <li><div id="icontitlediv">@Html.ActionLink("Patient Type List", "Index", "PatientType")</div></li>
+                        </ul>
+                    </li>
+
+                    @* PAYMENT TYPE *@
+                    <li class="dropdown">
+                        <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Payment Type</div></a>
+                        <ul>
+                            <li><div id="icontitlediv">@Html.ActionLink("Add Payment Type", "Create", "PaymentType")</div></li>
+                            <li><div id="icontitlediv">@Html.ActionLink("Payment Type List", "Index", "PaymentType")</div></li>
+                        </ul>
+                    </li>
+
+                    @* INSTRUCTION *@
+                    <li class="dropdown">
+                        <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Instruction</div></a>
+                        <ul>
+                            <li><div id="icontitlediv">@Html.ActionLink("Add Instruction", "Create", "Instruction")</div></li>
+                            <li><div id="icontitlediv">@Html.ActionLink("Instruction List", "Index", "Instruction")</div></li>
+                        </ul>
+                    </li>
+
+                    @* DOCTOR *@
+                    <li class="dropdown">
+                        <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Doctor</div></a>
+                        <ul>
+                            <li><div id="icontitlediv">@Html.ActionLink("Add Doctor", "Create", "Doctor")</div></li>
+                            <li><div id="icontitlediv">@Html.ActionLink("Doctors List", "Index", "Doctor")</div></li>
+                        </ul>
+                    </li>
+
+
+
+
+                    @*<li><div id="icondiv"><span class="icon-briefcase"></span></div><div id="icontitlediv">@Html.ActionLink("Referring By", "Index", "Doctor")</div></li>
+
+                    <li class="dropdown">
+                        <a href=""><span class="icon-briefcase"></span> Doctor</a>
+                        <ul>
+                            <li><a href="elements.html">Theme Components</a></li>
+                            <li><a href="bootstrap.html">Bootstrap Components</a></li>
+                            <li>@Html.ActionLink("Add New", "Create", "Doctor")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href=""><span class="icon-th-list"></span> Tables</a>
+                        <ul>
+                            <li><a href="table-static.html">Static Table</a></li>
+                            <li><a href="table-dynamic.html">Dynamic Table</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="typography.html"><span class="icon-font"></span> Typography</a></li>
+                    <li><a href="charts.html"><span class="icon-signal"></span> Graph &amp; Charts</a></li>
+                    <li><a href="messages.html"><span class="icon-envelope"></span> Messages</a></li>
+                    <li><a href="buttons.html"><span class="icon-hand-up"></span> Buttons &amp; Icons</a></li>
+                    <li class="dropdown">
+                        <a href=""><span class="icon-pencil"></span> Forms</a>
+                        <ul>
+                            <li><a href="forms.html">Form Styles</a></li>
+                            <li><a href="wizards.html">Wizard Form</a></li>
+                            <li><a href="wysiwyg.html">WYSIWYG</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="calendar.html"><span class="icon-calendar"></span> Calendar</a></li>
+                    <li><a href="animations.html"><span class="icon-play"></span> Animations</a></li>
+                    <li class="dropdown">
+                        <a href=""><span class="icon-book"></span> Other Pages</a>
+                        <ul>
+                            <li><a href="404.html">404 Error Page</a></li>
+                            <li><a href="invoice.html">Invoice Page</a></li>
+                            <li><a href="editprofile.html">Edit Profile</a></li>
+                            <li><a href="grid.html">Grid Styles</a></li>
+                        </ul>
+                    </li>*@
+                </ul>
+            </div>
+            <!--leftmenu-->
+        </div>
+        <!--mainleft-->
+        <!-- END OF LEFT PANEL -->
+        <!-- START OF RIGHT PANEL -->
+
+
+        <div class="rightpanel">
+
+            <div class="headerpanel">
+                <a href="" class="showmenu"></a>
+            </div>
+            <!--headerpanel-->
+
+            <div class="pagetitle">
+                <h1>@ViewBag.Title</h1>
+            </div>
+            <!--pagetitle-->
+            <div class="maincontent">
+
+                <div class="container body-content">
+                    @RenderBody()
+                    <hr />
+                    @*<footer>
+                            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+                        </footer>*@
+                </div>
+
+                @Scripts.Render("~/bundles/jquery")
+                @Scripts.Render("~/bundles/bootstrap")
+                @RenderSection("scripts", required: false)
+
+            </div>
+        </div>
+        <!-- END OF RIGHT PANEL -->
+        <div class="clearfix"></div>
+        <div class="footer">
+            <div class="footerleft"><a href="http://shreetechnolabs.com/" target="_blank">www.shreetechnolabs.com</a></div>
+            <div class="footerright">&copy; Krishna Hospital </div>
+        </div>
+        <!--footer-->
+    </div>
+    <script type="text/javascript">
+jQuery(document).ready(function(){
+
+		// basic chart
+		var flash = [[0, 2], [1, 6], [2,3], [3, 8], [4, 5], [5, 13], [6, 8]];
+		var html5 = [[0, 5], [1, 4], [2,4], [3, 1], [4, 9], [5, 10], [6, 13]];
+
+		function showTooltip(x, y, contents) {
+			jQuery('<div id="tooltip" class="tooltipflot">' + contents + '</div>').css( {
+				position: 'absolute',
+				display: 'none',
+				top: y + 5,
+				left: x + 5
+			}).appendTo("body").fadeIn(200);
+		}
+
+
+		var plot = jQuery.plot(jQuery("#chartplace2"),
+			   [ { data: flash, label: "Flash(x)", color: "#fb6409"}, { data: html5, label: "HTML5(x)", color: "#096afb"} ], {
+				   series: {
+					   lines: { show: true, fill: true, fillColor: { colors: [ { opacity: 0.05 }, { opacity: 0.15 } ] } },
+					   points: { show: true }
+				   },
+				   legend: { position: 'nw'},
+				   grid: { hoverable: true, clickable: true, borderColor: '#ccc', borderWidth: 1, labelMargin: 10 },
+				   yaxis: { min: 0, max: 15 }
+				 });
+
+		var previousPoint = null;
+		jQuery("#chartplace2").bind("plothover", function (event, pos, item) {
+			jQuery("#x").text(pos.x.toFixed(2));
+			jQuery("#y").text(pos.y.toFixed(2));
+
+			if(item) {
+				if (previousPoint != item.dataIndex) {
+					previousPoint = item.dataIndex;
+
+					jQuery("#tooltip").remove();
+					var x = item.datapoint[0].toFixed(2),
+					y = item.datapoint[1].toFixed(2);
+
+					showTooltip(item.pageX, item.pageY,
+									item.series.label + " of " + x + " = " + y);
+				}
+
+			} else {
+			   jQuery("#tooltip").remove();
+			   previousPoint = null;
+			}
+
+		});
+
+		jQuery("#chartplace2").bind("plotclick", function (event, pos, item) {
+			if (item) {
+				jQuery("#clickdata").text("You clicked point " + item.dataIndex + " in " + item.series.label + ".");
+				plot.highlight(item.series, item.datapoint);
+			}
+		});
+
+
+		// bar graph
+		var d2 = [];
+		for (var i = 0; i <= 10; i += 1)
+			d2.push([i, parseInt(Math.random() * 30)]);
+
+		var stack = 0, bars = true, lines = false, steps = false;
+		jQuery.plot(jQuery("#bargraph2"), [ d2 ], {
+			series: {
+				stack: stack,
+				lines: { show: lines, fill: true, steps: steps },
+				bars: { show: bars, barWidth: 0.6 }
+			},
+			grid: { hoverable: true, clickable: true, borderColor: '#bbb', borderWidth: 1, labelMargin: 10 },
+			colors: ["#06c"]
+		});
+
+		// calendar
+		jQuery('#calendar').datepicker();
+
+
+});
+    </script>
+</body>
+</html>

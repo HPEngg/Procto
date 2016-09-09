@@ -55,7 +55,5 @@ namespace DoctorWeb.Models
         public string Proctoscopy { get; set; }
         public bool LightOnOff { get; set; }
         public string RemindMeAbout { get; set; }
-
-        public bool IsSync { get; set; }
     }
 }

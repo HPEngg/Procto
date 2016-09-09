@@ -20,6 +20,5 @@ namespace DoctorWeb.Models
         public int Percent { get; set; }
         public string Less { get; set; }
         public string Rs { get; set; }
-        public bool IsSync { get; set; }
     }
 }

@@ -5,10 +5,11 @@ using System.Web;
 
 namespace DoctorWeb.Models
 {
-    public class Instruction
+    public class Offline
     {
         public int ID { get; set; }
-        public string InstructionName { get; set; }
-        public string InstructionDescription { get; set; }
+        public DateTime ExecutedAt { get; set; }
+        public string Query { get; set; }
+        public bool IsExecuted { get; set; }
     }
 }

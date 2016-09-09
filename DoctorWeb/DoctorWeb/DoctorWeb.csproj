@@ -220,6 +220,7 @@
     <Compile Include="Models\Instruction.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Medicine.cs" />
+    <Compile Include="Models\Offline.cs" />
     <Compile Include="Models\Patient.cs" />
     <Compile Include="Models\PatientType.cs" />
     <Compile Include="Models\PaymentType.cs" />

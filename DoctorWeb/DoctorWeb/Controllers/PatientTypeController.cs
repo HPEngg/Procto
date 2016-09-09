@@ -46,7 +46,7 @@ namespace DoctorWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,PatientTypeName,IsSync")] PatientType patientType)
+        public ActionResult Create([Bind(Include = "ID,PatientTypeName")] PatientType patientType)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace DoctorWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,PatientTypeName,IsSync")] PatientType patientType)
+        public ActionResult Edit([Bind(Include = "ID,PatientTypeName")] PatientType patientType)
         {
             if (ModelState.IsValid)
             {

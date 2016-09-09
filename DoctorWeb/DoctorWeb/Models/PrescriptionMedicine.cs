@@ -17,6 +17,5 @@ namespace DoctorWeb.Models
         public int PatientTypeID { get; set; }
         public int InstructionID { get; set; }
         public DateTime Date { get; set; }
-        public bool IsSync { get; set; }
     }
 }

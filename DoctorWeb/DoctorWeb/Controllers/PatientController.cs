@@ -46,7 +46,7 @@ namespace DoctorWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,StatusColor,Status,Age,Gender,Address,DepartmentID,Contact,Email,Occupation,Habit,FoodPreference,ReferredBy,KCO,ComplainForm,Constipation,ConstipationMore,Pain,PainMore,Burning,BurningMore,Bleeding,BleedingMore,Itching,ItchingMore,PusDrainage,PusDrainageMore,Swelling,SwellingMore,SCO,ACO,Allergy,History,Weight,Height,T,PR,BP,SPO2,Other,PileMass,Proctoscopy,LightOnOff,RemindMeAbout,IsSync")] Patient patient)
+        public ActionResult Create([Bind(Include = "ID,StatusColor,Status,Age,Gender,Address,DepartmentID,Contact,Email,Occupation,Habit,FoodPreference,ReferredBy,KCO,ComplainForm,Constipation,ConstipationMore,Pain,PainMore,Burning,BurningMore,Bleeding,BleedingMore,Itching,ItchingMore,PusDrainage,PusDrainageMore,Swelling,SwellingMore,SCO,ACO,Allergy,History,Weight,Height,T,PR,BP,SPO2,Other,PileMass,Proctoscopy,LightOnOff,RemindMeAbout")] Patient patient)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace DoctorWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,StatusColor,Status,Age,Gender,Address,DepartmentID,Contact,Email,Occupation,Habit,FoodPreference,ReferredBy,KCO,ComplainForm,Constipation,ConstipationMore,Pain,PainMore,Burning,BurningMore,Bleeding,BleedingMore,Itching,ItchingMore,PusDrainage,PusDrainageMore,Swelling,SwellingMore,SCO,ACO,Allergy,History,Weight,Height,T,PR,BP,SPO2,Other,PileMass,Proctoscopy,LightOnOff,RemindMeAbout,IsSync")] Patient patient)
+        public ActionResult Edit([Bind(Include = "ID,StatusColor,Status,Age,Gender,Address,DepartmentID,Contact,Email,Occupation,Habit,FoodPreference,ReferredBy,KCO,ComplainForm,Constipation,ConstipationMore,Pain,PainMore,Burning,BurningMore,Bleeding,BleedingMore,Itching,ItchingMore,PusDrainage,PusDrainageMore,Swelling,SwellingMore,SCO,ACO,Allergy,History,Weight,Height,T,PR,BP,SPO2,Other,PileMass,Proctoscopy,LightOnOff,RemindMeAbout")] Patient patient)
         {
             if (ModelState.IsValid)
             {

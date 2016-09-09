@@ -12,7 +12,5 @@ namespace DoctorWeb.Models
         public string Email { get; set; }
         public string Contact { get; set; }
         public string DoctorType { get; set; }
-        public string Action { get; set; }
-        public bool IsSync { get; set; }
     }
 }

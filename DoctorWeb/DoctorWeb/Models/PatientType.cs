@@ -9,6 +9,5 @@ namespace DoctorWeb.Models
     {
         public int ID { get; set; }
         public string PatientTypeName { get; set; }
-        public bool IsSync { get; set; }
     }
 }

@@ -38,6 +38,6 @@ namespace DoctorWeb.Models
         public DbSet<PaymentType> PaymentTypes { get; set; }
         public DbSet<PrescriptionMaster> Prescriptions { get; set; }
         public DbSet<PrescriptionMedicine> PrescriptionMedicines { get; set; }
-
+        public DbSet<Offline> OfflineRecords { get; set; }
     }
 }

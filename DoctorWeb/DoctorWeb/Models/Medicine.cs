@@ -15,7 +15,5 @@ namespace DoctorWeb.Models
         public string After { get; set; }
         public string Night { get; set; }
         public string Time { get; set; }
-        public string Action { get; set; }
-        public bool IsSync { get; set; }
     }
 }

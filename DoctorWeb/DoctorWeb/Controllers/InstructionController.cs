@@ -46,7 +46,7 @@ namespace DoctorWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,InstructionName,InstructionDescription,Action,IsSync")] Instruction instruction)
+        public ActionResult Create([Bind(Include = "ID,InstructionName,InstructionDescription")] Instruction instruction)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace DoctorWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,InstructionName,InstructionDescription,Action,IsSync")] Instruction instruction)
+        public ActionResult Edit([Bind(Include = "ID,InstructionName,InstructionDescription")] Instruction instruction)
         {
             if (ModelState.IsValid)
             {

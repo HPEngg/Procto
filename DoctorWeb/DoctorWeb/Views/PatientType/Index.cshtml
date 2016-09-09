@@ -15,9 +15,6 @@
         <th>
             @Html.DisplayNameFor(model => model.PatientTypeName)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsSync)
-        </th>
         <th></th>
     </tr>
 
@@ -25,9 +22,6 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.PatientTypeName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsSync)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |

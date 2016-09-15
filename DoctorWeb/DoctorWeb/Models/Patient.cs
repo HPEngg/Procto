@@ -14,16 +14,18 @@ namespace DoctorWeb.Models
         public int Age { get; set; }
         public Gender Gender { get; set; }
         public string Address { get; set; }
-        public int DepartmentID { get; set; }
+        public Department DepartmentID { get; set; }
         public string Contact { get; set; }
         public string Email { get; set; }
         public string Occupation { get; set; }
         public Habit Habit { get; set; }
         public FoodPreference FoodPreference { get; set; }
-        public int ReferredBy { get; set; }
+        public ReferredBy ReferredBy { get; set; }
+
+        public Doctor Doctor { get; set; }
 
         public string KCO { get; set; }
-        public int ComplainForm { get; set; }
+        public string ComplainForm { get; set; }
         public int Constipation { get; set; }
         public string ConstipationMore { get; set; }
         public int Pain { get; set; }
@@ -31,7 +33,7 @@ namespace DoctorWeb.Models
         public int Burning { get; set; }
         public string BurningMore { get; set; }
         public int Bleeding { get; set; }
-        public string BleedingMore { get; set; }
+        public Bleeding BleedingMore { get; set; }
         public int Itching { get; set; }
         public string ItchingMore { get; set; }
         public int PusDrainage { get; set; }
@@ -39,15 +41,15 @@ namespace DoctorWeb.Models
         public int Swelling { get; set; }
         public string SwellingMore { get; set; }
 
-        public int SCO { get; set; }
-        public int ACO { get; set; }
+        public string SCO { get; set; }
+        public string ACO { get; set; }
         public string Allergy { get; set; }
         public string History { get; set; }
 
         public float Weight { get; set; }
         public float Height { get; set; }
         public int T { get; set; }
-        public float PR { get; set; }
+        public string PR { get; set; }
         public int BP { get; set; }
         public string SPO2 { get; set; }
         public string Other { get; set; }

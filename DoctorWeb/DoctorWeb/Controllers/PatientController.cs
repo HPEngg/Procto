@@ -52,7 +52,7 @@ namespace DoctorWeb.Controllers
             {
                 db.Patients.Add(patient);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create");
             }
 
             return View(patient);

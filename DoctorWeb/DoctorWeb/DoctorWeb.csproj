@@ -223,6 +223,7 @@
     <Compile Include="Models\Enums\ReferredBy.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Instruction.cs" />
+    <Compile Include="Models\Invoice.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Medicine.cs" />
     <Compile Include="Models\Offline.cs" />

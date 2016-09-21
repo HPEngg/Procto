@@ -5,40 +5,93 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title DoctorWeb</title>
     @Styles.Render("~/Content/css")
+
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
 <body>
-    @*<div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
-        </div>
-    </div>*@
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        @*<footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>*@
-    </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
-</body>
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <style>
+        </style>
+        <meta charset="UTF-8">
+        <title>Dr.Software</title>
+
+
+        <link rel="stylesheet" href="/Content/css/reset.css">
+        <link rel="stylesheet" type="text/css" href="/Content/css/font.css" />
+        <link rel="stylesheet" type="text/css" href="/Content/css/picedit.css" />
+        <link rel="stylesheet" href="/Content/css/style.css">
+        <link rel="stylesheet" type="text/css" href="/Content/css/patient.css" />
+        <link href='/Content/css/responsive-tables.css' rel='stylesheet'>
+
+        <script type="text/javascript" src="/Content/js/jquery-1.12.0.min.js"></script>
+
+        <link rel="stylesheet" href="/Content/css/examples.css">
+        <link rel="stylesheet" href="/Content/css/fontawesome-stars.css">
+        <link rel="stylesheet" href="/Content/css/font-awesome.min.css">
+        <script type="text/javascript" src="/Content/js/html-table-search.js"></script>
+
+        <script src="/Content/js/jquery.barrating.js"></script>
+        <script src="/Content/js/examples.js"></script>
+        <script type="text/javascript" src="/Content/js/webcam.js"></script>
+
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="top">
+                <!---- top part start --->
+                <div class="logo">
+                    <a href="#"><img src="/Content/Images/logo.png"></a>
+                </div>
+                <div class="reslogo">
+                    <a href="#"><img src="/Content/Images/res_logo.png"></a>
+                </div>
+                <div class="search">
+                    <form>
+                        <input class="search_text" type="textbox" name="search" ID="in_search">
+                        <button style="float: left;" class="okok" data-popup-open="popup-1" href="#" id="search_btn">Search</button>
+                    </form>
+                    <a class="okok" href="admin/" style="float: right;"><button>Admin</button></a>
+                </div>
+            </div><!---- top part End --->
+            <div style="clear:both"></div>
+            @*<div class="navbar navbar-inverse navbar-fixed-top">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                        </div>
+                        <div class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav">
+                                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                                <li>@Html.ActionLink("About", "About", "Home")</li>
+                                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                            </ul>
+                            @Html.Partial("_LoginPartial")
+                        </div>
+                    </div>
+                </div>*@
+            @*  <div class="container body-content">*@
+            <div>
+                <!-- multistep form -->
+                    @RenderBody()
+                <hr />
+                @*<footer>
+                        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+                    </footer>*@
+            </div>
+
+            @Scripts.Render("~/bundles/jquery")
+            @Scripts.Render("~/bundles/bootstrap")
+            @RenderSection("scripts", required: false)
+    </body>
 </html>

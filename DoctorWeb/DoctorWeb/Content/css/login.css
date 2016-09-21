@@ -216,7 +216,7 @@ h4 {
 
         .leftmenu .nav-tabs li:first-child {
             border-top: 1px solid #bbb;
-            padding-left:20px;
+            /*padding-left:20px;*/
         }
 
         .leftmenu .nav-tabs li a {
@@ -4705,4 +4705,8 @@ body.loginbody {
 
 #username, #password {
     line-height: 30px !important;
+}
+
+.leftmenu .nav-tabs li a {
+    box-shadow:none;
 }

@@ -211,12 +211,16 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CustomModels\Prescription.cs" />
     <Compile Include="Models\Doctor.cs" />
+    <Compile Include="Models\Enums\Bleeding.cs" />
+    <Compile Include="Models\Enums\Department.cs" />
     <Compile Include="Models\Enums\FoodPreference.cs" />
     <Compile Include="Models\Enums\Gender.cs" />
     <Compile Include="Models\Enums\Habit.cs" />
     <Compile Include="Models\Enums\MedicineType.cs" />
     <Compile Include="Models\Enums\PatientStatus.cs" />
+    <Compile Include="Models\Enums\ReferredBy.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Instruction.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -262,6 +266,7 @@
     <Content Include="Content\css\jquery.tagsinput.css" />
     <Content Include="Content\css\jquery.ui.css" />
     <Content Include="Content\css\login.css" />
+    <Content Include="Content\css\patient.css" />
     <Content Include="Content\css\picedit.css" />
     <Content Include="Content\css\prettify.css" />
     <Content Include="Content\css\reset.css" />
@@ -498,6 +503,7 @@
     <Content Include="Views\PrescriptionMedicine\Edit.cshtml" />
     <Content Include="Views\PrescriptionMedicine\Index.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Views\Prescription\Create.cshtml" />
     <Content Include="Views\Pictures\Create.cshtml" />
     <Content Include="Views\Pictures\Delete.cshtml" />
     <Content Include="Views\Pictures\Details.cshtml" />

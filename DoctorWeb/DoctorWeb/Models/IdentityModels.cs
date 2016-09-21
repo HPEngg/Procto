@@ -39,5 +39,7 @@ namespace DoctorWeb.Models
         public DbSet<PrescriptionMaster> Prescriptions { get; set; }
         public DbSet<PrescriptionMedicine> PrescriptionMedicines { get; set; }
         public DbSet<Offline> OfflineRecords { get; set; }
+        public DbSet<Picture> Pictures { get; set; }
+
     }
 }

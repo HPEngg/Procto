@@ -7,7 +7,7 @@ namespace DoctorWeb.Models.CustomModels
 {
     public class Prescription
     {
-        public PrescriptionMaster PrescriptionMaster { get; set; }
+        public Prescription PrescriptionMaster { get; set; }
         public List<PrescriptionMedicine> Medicines { get; set; }
     }
 }

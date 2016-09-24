@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -30,16 +31,23 @@ namespace DoctorWeb.Models
             return new ApplicationDbContext();
         }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+        }
+
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<Instruction> Instructions { get; set; }
         public DbSet<Medicine> Medicines { get; set; }
         public DbSet<Patient> Patients { get; set; }
         public DbSet<PatientType> PatientTypes { get; set; }
         public DbSet<PaymentType> PaymentTypes { get; set; }
-        public DbSet<PrescriptionMaster> Prescriptions { get; set; }
+        public DbSet<Prescription> Prescriptions { get; set; }
         public DbSet<PrescriptionMedicine> PrescriptionMedicines { get; set; }
         public DbSet<Offline> OfflineRecords { get; set; }
         public DbSet<Picture> Pictures { get; set; }
+        public DbSet<Charge> Charges { get; set; }
 
     }
 }

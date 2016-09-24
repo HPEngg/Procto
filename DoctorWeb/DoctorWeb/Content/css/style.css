@@ -865,3 +865,21 @@ td {
     height: 50px;
     margin-left: 10px;
 }
+
+
+.co_from_main {
+  float: left;
+  margin-right: 5px;
+  width: 48%;
+}
+
+.my-mdform .mystep2all .label_res {
+  float: left;
+  text-align: left;
+  width: 100% !important;
+}
+
+.widthheight {
+    max-width:100% !important;
+    float:left !important;
+}

@@ -10,5 +10,7 @@ namespace DoctorWeb.Models
         public int ID { get; set; }
         public string PaymentTypeName { get; set; }
         public decimal Rupees { get; set; }
+
+        public IEnumerable<Charge> Charges { get; set; }
     }
 }

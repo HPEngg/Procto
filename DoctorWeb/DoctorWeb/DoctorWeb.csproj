@@ -203,27 +203,31 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Charge.cs" />
     <Compile Include="Models\CustomModels\Prescription.cs" />
     <Compile Include="Models\Doctor.cs" />
     <Compile Include="Models\Enums\Bleeding.cs" />
     <Compile Include="Models\Enums\Department.cs" />
+    <Compile Include="Models\Enums\Doz.cs" />
+    <Compile Include="Models\Enums\DozTiming.cs" />
     <Compile Include="Models\Enums\FoodPreference.cs" />
     <Compile Include="Models\Enums\Gender.cs" />
     <Compile Include="Models\Enums\Habit.cs" />
     <Compile Include="Models\Enums\MedicineType.cs" />
+    <Compile Include="Models\Enums\OINTType.cs" />
     <Compile Include="Models\Enums\PatientStatus.cs" />
     <Compile Include="Models\Enums\ReferredBy.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Instruction.cs" />
-    <Compile Include="Models\Invoice.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Medicine.cs" />
     <Compile Include="Models\Offline.cs" />
     <Compile Include="Models\Patient.cs" />
+    <Compile Include="Models\PatientHistory.cs" />
     <Compile Include="Models\PatientType.cs" />
     <Compile Include="Models\PaymentType.cs" />
     <Compile Include="Models\Picture.cs" />
-    <Compile Include="Models\PrescriptionMaster.cs" />
+    <Compile Include="Models\Prescription.cs" />
     <Compile Include="Models\PrescriptionMedicine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -461,6 +465,11 @@
     <Content Include="Views\Pictures\Details.cshtml" />
     <Content Include="Views\Pictures\Edit.cshtml" />
     <Content Include="Views\Pictures\Index.cshtml" />
+    <Content Include="Views\Doctors\Create.cshtml" />
+    <Content Include="Views\Doctors\Delete.cshtml" />
+    <Content Include="Views\Doctors\Details.cshtml" />
+    <Content Include="Views\Doctors\Edit.cshtml" />
+    <Content Include="Views\Doctors\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

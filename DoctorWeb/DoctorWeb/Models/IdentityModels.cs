@@ -48,6 +48,6 @@ namespace DoctorWeb.Models
         public DbSet<Offline> OfflineRecords { get; set; }
         public DbSet<Picture> Pictures { get; set; }
         public DbSet<Charge> Charges { get; set; }
-
+        public DbSet<PrescriptionCategory> PrescriptionCategories { get; set; }
     }
 }

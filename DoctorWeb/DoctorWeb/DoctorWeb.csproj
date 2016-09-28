@@ -228,6 +228,7 @@
     <Compile Include="Models\PaymentType.cs" />
     <Compile Include="Models\Picture.cs" />
     <Compile Include="Models\Prescription.cs" />
+    <Compile Include="Models\PrescriptionCategory.cs" />
     <Compile Include="Models\PrescriptionMedicine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />

@@ -4,6 +4,8 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using DoctorWeb.Models.Tools;
+using System.Data.Entity.Infrastructure.Interception;
 
 namespace DoctorWeb.Models
 {
@@ -21,6 +23,11 @@ namespace DoctorWeb.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        static ApplicationDbContext()
+        {
+            DbInterception.Add(new OfflineInterceptor());
+        }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

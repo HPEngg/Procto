@@ -241,6 +241,6 @@ C:\Users\laptop\Source\Repos\Procto\DoctorWeb\DoctorWeb\bin\Microsoft.Owin.Secur
 C:\Users\laptop\Source\Repos\Procto\DoctorWeb\DoctorWeb\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\laptop\Source\Repos\Procto\DoctorWeb\DoctorWeb\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\laptop\Source\Repos\Procto\DoctorWeb\DoctorWeb\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\laptop\Source\Repos\Procto\DoctorWeb\DoctorWeb\obj\Debug\DoctorWeb.csprojResolveAssemblyReference.cache
 C:\Users\laptop\Source\Repos\Procto\DoctorWeb\DoctorWeb\obj\Debug\DoctorWeb.dll
 C:\Users\laptop\Source\Repos\Procto\DoctorWeb\DoctorWeb\obj\Debug\DoctorWeb.pdb
+C:\Users\laptop\Source\Repos\Procto\DoctorWeb\DoctorWeb\obj\Debug\DoctorWeb.csprojResolveAssemblyReference.cache

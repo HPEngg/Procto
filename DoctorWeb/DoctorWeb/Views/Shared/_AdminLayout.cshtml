@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@{string ctrName = ViewContext.RouteData.Values["controller"].ToString();}
+@{string actnName = ViewContext.RouteData.Values["action"].ToString();}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -55,6 +58,16 @@
             <div class="leftmenu">
                 <ul class="nav nav-tabs nav-stacked">
                     <li class="nav-header" style="padding-left:20px;">Main Navigation</li>
+                    <li @if (ctrName == "Pictures" && actnName == "Index") { <text> class="active" </text> }><div id="icondiv"><span class="icon-align-justify"></span></div><div id="icontitlediv">@Html.ActionLink("Add Image", "Index", "Pictures")</div></li>
+                    <li @if (ctrName == "Pictures" && actnName == "Create") { <text> class="active" </text>  }><div id="icondiv"><span class="icon-align-justify"></span></div><div id="icontitlediv">@Html.ActionLink("Test", "Create", "Pictures")</div></li>
+                    <li class="dropdown">
+                        <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Invoice List</div></a>
+                        <ul @if ((ctrName == "Account" && actnName == "Register") || (ctrName == "Account" && actnName == "Login") || (ctrName == "Account" && actnName == "ForgotPassword")) { <text> style="display:block;" </text>  }>
+                            <li @if (ctrName == "Account" && actnName == "Register") { <text> class="active" </text>  }><div id="icontitlediv">@Html.ActionLink("Daily List", "Register", "Account")</div></li>
+                            <li @if (ctrName == "Account" && actnName == "Login") { <text> class="active" </text>  }><div id="icontitlediv">@Html.ActionLink("Weekly List", "Login", "Account")</div></li>
+                            <li @if (ctrName == "Account" && actnName == "ForgotPassword") { <text> class="active" </text>  }><div id="icontitlediv">@Html.ActionLink("Monthly List", "ForgotPassword", "Account")</div></li>
+                        </ul>
+                    </li>
                     <li class="active"><div id="icondiv"><span class="icon-align-justify"></span></div><div id="icontitlediv">@Html.ActionLink("Add Image", "Index", "Pictures")</div></li>
                     <li class="dropdown">
                         <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Invoice List</div></a>

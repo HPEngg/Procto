@@ -1,934 +1,412 @@
-﻿@{
+﻿@model DoctorWeb.Models.CustomModels.PatientHome
+
+@{
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    //ViewBag.Title = "DoctorWeb";
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <style>
-    </style>
-    <meta charset="UTF-8">
-    <title>Dr.Software</title>
+<h2>Patient</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 
-
-    <link rel="stylesheet" href="/Content/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="/Content/css/font.css" />
-    <link rel="stylesheet" type="text/css" href="/Content/css/picedit.css" />
-    <link rel="stylesheet" href="/Content/css/style.css">
-    <link href='/Content/css/responsive-tables.css' rel='stylesheet'>
-
-    <script type="text/javascript" src="/Content/js/jquery-1.12.0.min.js"></script>
-
-    <link rel="stylesheet" href="/Content/css/examples.css">
-    <link rel="stylesheet" href="/Content/css/fontawesome-stars.css">
-    <link rel="stylesheet" href="/Content/css/font-awesome.min.css">
-    <script type="text/javascript" src="/Content/js/html-table-search.js"></script>
-
-    <script src="/Content/js/jquery.barrating.js"></script>
-    <script src="/Content/js/examples.js"></script>
-    <script type="text/javascript" src="/Content/js/webcam.js"></script>
-
-</head>
-
-<body>
-    <div class="container">
-        <div class="top">
-            <!---- top part start --->
-            <div class="logo">
-                <a href="#"><img src="/Content/Images/logo.png"></a>
+    <div class="form-horizontal">
+        <h4>Patient</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Patient.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.Patient.Status, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Patient.Status, "", new { @class = "text-danger" })
             </div>
-            <div class="reslogo">
-                <a href="#"><img src="/Content/Images/res_logo.png"></a>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Patient.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Patient.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Patient.Name, "", new { @class = "text-danger" })
             </div>
-            <div class="search">
-                <form>
-                    <input class="search_text" type="textbox" name="search" ID="in_search">
-                    <button style="float: left;" class="okok" data-popup-open="popup-1" href="#" id="search_btn">Search</button>
-                </form>
-                <a class="okok" href="admin/" style="float: right;"><button>Admin</button></a>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Patient.Age, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Patient.Age, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Patient.Age, "", new { @class = "text-danger" })
             </div>
-        </div><!---- top part End --->
-        <div style="clear:both"></div>
-        <div>
-            <!-- multistep form --><div id="msform">
-                <form action="systam/patient_info_pro.php" method="post">
-                    <!-- progressbar -->
-                    <ul id="progressbar">
-                        <li class="active">Step1</li>
-                        <li>Step2</li>
-                        <li>Step3</li>
-                    </ul>
-                    <div class="form_fieldset_div">
-                        <!-- fieldsets -- one-->
-                        <fieldset class="left_part_form1">
-
-                            <h2 class="fs-title">Patient Details</h2>
-                            <label style='width:100%;text-align:left; color:blue;display:block;'>Patient No. 34</label>		        <div class="menu">
-                                <label class="menu_label">Status:</label>
-                                <div class="roundedOne">
-                                    <input type="radio" value="1" id="green" name="patient_status" checked />
-                                    <label for="roundedOne"></label>
-                                </div>
-                                <div class="red">
-                                    <input type="radio" value="2" id="red" name="patient_status" />
-                                    <label for="red"></label>
-                                </div>
-                                <div class="yellow">
-                                    <input type="radio" value="3" id="yellow" name="patient_status" />
-                                    <label for="yellow"></label>
-                                </div>
-                            </div>
-
-                            <input type='hidden' readonly name='patient_no' id='patient_no' placeholder='Patient No' value='64' />
-                            <input type="text" name="patient_name" id="patient_name" placeholder="status" />
-                            <input type="number" name="patient_age" id="patient_age" placeholder=" age" />
-                            <select name="patient_sex" id="patient_sex"><option value="male">male</option><option value="female">Female</option></select>
-                            <input type="text" name="patient_address" id="patient_address" placeholder="address" />
-                            <select name="patient_department" id="patient_department">
-
-                                <option readonly value="" selected="selected">--Select--Department--</option>
-                                <option value="ANORECTAL">ANORECTAL</option>
-                                <option value="AYURVED">AYURVED</option>
-                                <option value="ALLOPATH">ALLOPATH</option>
-                                <option value="V.M.">V.M.</option>
-
-                            </select>
-
-
-                            <input type="number" name="patient_cno" id="patient_cno" placeholder="Contact" maximum="10" minimum="10" />
-                            <input type="text" name="patient_email" id="patient_email" placeholder="Email" />
-                            <input type="hidden" name="patient_city" id="patient_city" placeholder="City" />
-                            <input type="textbox" name="patient_occupation" id="patient_occupation" placeholder="Occupation" />
-                            <select name="patient_habit_label" multiple="multiple">
-                                <option readonly value="" selected="selected">--Habit--</option>
-                                <option value="alcohol">Alcohol</option>
-                                <option value="smoking">Smoking</option>
-                                <option value="tobacco">tobacco</option>
-                                <option value="other">other</option>
-                            </select>
-                            <input type="text" name="patient_habit" id="patient_habit" placeholder="habit" style="display:none;" />
-                            <select name="patient_diet">
-                                <option readonly value="">--Diet--</option>
-                                <option value="veg" selected="selected">Veg</option>
-                                <option value="nonveg">Nonveg</option>
-                            </select>
-                            <select name="patient_doctor_referl_labal" id="patient_doctor_referl_labal">
-                                <option readonly value="" selected="selected">Referred By</option>
-
-                                <option value="doctor">Doctor</option>
-                                <option value="newspaper">News Paper Ads</option>
-                                <option value="self">Self</option>
-                                <option value="patient/relative">Patient/Relative</option>
-                                <option value="signboard">Sign Board</option>
-                            </select>
-                            <input type="text" style="display:none" name="patient_doctor_referl" id="patient_doctor_referl" placeholder="Referal Doctor Name" />
-                            <input type="text" style="display:none" name="patient_relative_referl" id="patient_relative_referl" placeholder="Referal patient Name" />
-
-                        </fieldset>
-                        <fieldset class="left_part_form2 div_scrollbar">
-                            <h2 class="fs-title fs-title_cmplnfrm">Complain Form</h2>
-
-                            <input type='hidden' name='patient_followup_no' placeholder='Follow up No' id='patient_followup_no' value='54' />		<input type="hidden" name="patient_cf" placeholder="Complaint Form" id="patient_cf" value="999999" />
-
-                            <div class="mdform my-mdform">
-                                <div class="mystep2all">
-                                    <div class="mylabels">
-                                        <input style="width:20px;" type="radio" value="r" id="patient_r_p" name="patient_r_p" />R
-                                        <input style="width:20px;" type="radio" value="p" id="patient_r_p" name="patient_r_p" />P
-                                    </div>
-
-                                    <input class="my-input" style="min-width:60%;" type="text" name="patient_kco" id="patient_kco" placeholder="K/C/O"/ >
-                                </div>
-                            </div>
-
-                            <!--      <div class="mdform">
-
-                                    <!--<select name="patient_kco" id="patient_kco" >
-                                                    <option readonly value="">K/C/O</option>
-
-                                </select>-->
-                            <!--</div>-->
-
-                            <div class="mdform my-mdform">
-                                <div class="mystep2all">
-                                    <div class="mylabels">Complain from</div>
-                                    <input class="my-input" style="min-width:60%;" type="text" name="patient_com_from" id="patient_com_from" placeholder="Complain from" />
-                                </div>
-                            </div>
-
-
-                            <div class="mdform my-mdform " id="ayurveda_c_o" style="display:none;">
-                                <div class="mystep2all">
-                                    <div class="mylabels">C/O Ayurveda</div>
-                                    <input class="my-input" style="min-width:60%;" type="text" name="patient_co_aurveda" id="patient_co_aurveda" placeholder="Complain from" />
-                                </div>
-                            </div>
-
-
-
-
-
-                            <div class="mdform my-mdform">
-                                <div class="mystep2all">
-                                    <div class="mylabels">Constipation</div>
-                                    <div class="my-rating">
-                                        <select name="patient_constipation_rating">
-                                            <option value=""></option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                        </select>
-                                    </div><!--end rate item-->
-                                    <input class="my-input" type="text" name="patient_constipation" id="patient_constipation" placeholder="Constipation" />
-                                </div>
-
-                            </div><!--mdform-->
-
-                            <div class="mdform my-mdform">
-                                <div class="mystep2all">
-                                    <div class="mylabels">Pain</div>
-                                    <div class="my-rating">
-                                        <select name="patient_pain_rating">
-                                            <option value=""></option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                        </select>
-                                    </div>
-                                    <input class="my-input" type="text" name="patient_pain" id="patient_pain" placeholder="Pain" />
-
-                                </div>
-                            </div>
-
-
-
-
-                            <div class="mdform my-mdform">
-                                <div class="mystep2all">
-                                    <div class="mylabels">Burning</div>
-                                    <div class="my-rating">
-                                        <select name="patient_burning_rating">
-                                            <option value=""></option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                        </select>
-                                    </div>
-                                    <input class="my-input" type="text" name="patient_burning" id="patient_burning" placeholder="Burning" />
-
-                                </div>
-                            </div>
-
-
-                            <div class="mdform my-mdform">
-                                <div class="mystep2all">
-                                    <div class="mylabels">Bleeding</div>
-
-
-                                    <div class="my-rating">
-                                        <select name="patient_bleeding_rating">
-                                            <option value=""></option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                        </select>
-                                    </div>
-
-                                    <select class="my-input" name="patient_bleeding" id="patient_bleeding">
-                                        <option value="">--SELECT--</option>
-                                        <option value="streak">streak</option>
-                                        <option value="stream">stream</option>
-                                        <option value="drop">drop</option>
-                                    </select>
-                                </div>
-                            </div>
-
-
-
-
-                            <div class="mdform my-mdform">
-                                <div class="mystep2all">
-                                    <div class="mylabels">Itching</div>
-
-
-                                    <div class="my-rating">
-                                        <select name="patient_eching_rating">
-                                            <option value=""></option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                        </select>
-                                    </div>
-                                    <input class="my-input" type="text" name="patient_eching" id="patient_eching" placeholder="Itching" />
-
-                                </div>
-                            </div>
-
-                            <div class="mdform my-mdform">
-                                <div class="mystep2all">
-                                    <div class="mylabels">Pus drainage</div>
-
-                                    <div class="my-rating">
-                                        <select name="patient_pus_drainage_rating">
-                                            <option value=""></option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                        </select>
-                                    </div>
-                                    <input class="my-input" type="text" name="patient_pus_drainage" id="patient_pus_drainage" placeholder="Pus Drainage" />
-                                </div>
-                            </div>
-
-
-
-                            <div class="mdform my-mdform">
-                                <div class="mystep2all">
-                                    <div class="mylabels">Swelling</div>
-
-                                    <div class="my-rating">
-                                        <select name="patient_swelling_rating">
-                                            <option value=""></option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                        </select>
-                                    </div>
-                                    <input class="my-input" type="text" name="patient_swelling" id="patient_swelling" placeholder="swelling" />
-                                </div>
-                            </div>
-
-                            <div class="mdform my-mdform">
-                                <div class="mystep2all">
-                                    <div class="mylabels">S/C/O</div>
-
-                                    <input type="radio" value="1&deg" id="patient_sco" name="patient_sco" style="width:20px;" />1&deg
-                                    <input type="radio" value="2&deg" id="patient_sco" name="patient_sco" style="width:20px;" />2&deg
-                                    <input type="radio" value="3&deg" id="patient_sco" name="patient_sco" style="width:20px;" />3&deg
-                                    <input type="radio" value="4&deg" id="patient_sco" name="patient_sco" style="width:20px;" />4&deg
-
-
-                                </div>
-
-
-
-                            </div>
-
-
-
-                            <div class="mdform my-mdform">
-                                <div class="mystep2all">
-                                    <div class="mylabels">A/C/O</div>
-
-                                    <input class="my-input" style="min-width:60%;" type="text" name="patient_asso_comp" id="patient_asso_comp" placeholder="A/C/O" />
-                                </div>
-                            </div>
-
-                            <div class="mdform my-mdform">
-                                <div class="mystep2all">
-                                    <div class="mylabels">Allergy</div>
-                                    <input class="my-input" type="text" name="patient_alergy" style="min-width:60%;" id="patient_alergy" placeholder="Allergy" />
-                                </div>
-                            </div>
-
-                            <div class="mdform my-mdform">
-                                <div class="mystep2all">
-                                    <div class="mylabels">History</div>
-                                    <input class="my-input" type="text" style="min-width:60%;" name="patient_history" id="patient_history" placeholder="History" />
-
-                                </div>
-                            </div>
-
-
-
-
-                            <input type="button" class="next action-button" value="Submit Query" id="next2" />
-                        </fieldset>
-                    </div>
-
-                    <!----- Discharge Form ---->
-
-                </form>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Patient.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.Patient.Gender, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Patient.Gender, "", new { @class = "text-danger" })
             </div>
-
-            <script>
-                $(document).ready(function (e) {
-                    $('select[name=patient_department]').change(function () {
-                        if ($('select[name=patient_department]').val() == 'AYURVED')
-                            $("#ayurveda_c_o").show(1);
-                        else
-                            $("#ayurveda_c_o").css("display", "none");
-                        $('input[name=patient_co_aurveda]').val('');
-                    });
-
-                    $('select[name=patient_habit_label]').change(function () {
-                        if ($('select[name=patient_habit_label]').val() == 'other') {
-                            $('input[name=patient_habit]').css("display", "block");
-                            $('input[name=patient_habit]').val('');
-                        }
-                        else {
-                            $('input[name=patient_habit]').val('');
-                            $('input[name=patient_habit]').css("display", "none");
-                            $('input[name=patient_habit]').val($('select[name=patient_habit_label]').val());
-                        }
-
-                    });
-
-
-
-                    $('select[name=patient_doctor_referl_labal]').change(function () {
-
-                        $('input[name=patient_doctor_referl]').val('');
-
-                        if ($(this).val() == "doctor") {
-                            $('input[name=patient_doctor_referl]').css('display', 'block');
-
-                            $('input[name=patient_relative_referl]').css('display', 'none');
-                        }
-                        else if ($(this).val() == "patient/relative") {
-                            $('input[name=patient_relative_referl]').css('display', 'block');
-                            $('input[name=patient_doctor_referl]').css('display', 'none');
-                        }
-                        else {
-                            $('input[name=patient_doctor_referl]').hide();
-                            $('input[name=patient_relative_referl]').hide();
-                        }
-
-                    });
-
-                });
-
-            </script>
-
-            <style>
-                .containerpopup {
-                    position: fixed;
-                    width: 100%;
-                    height: 100%;
-                    border: 1px solid;
-                    background-color: rgba(0,0,0,0.5);
-                    display: none;
-                    z-index: 99999999;
-                    top: 0;
-                    left: 0;
-                }
-
-                    .containerpopup .popupmain {
-                        border: 1px solid;
-                        margin-bottom: 10px;
-                        width: 80%;
-                        height: 600px;
-                        overflow-y: scroll;
-                        background-color: #FFF;
-                        margin: 0 auto;
-                        position: relative;
-                        padding: 20px;
-                    }
-
-                        .containerpopup .popupmain .closebut {
-                            position: absolute;
-                            right: 0;
-                            top: 0;
-                            width: 30px;
-                            height: 30px;
-                            background-color: red;
-                            background-image: url(closebut.jpg);
-                            background-size: cover;
-                        }
-            </style>
-
-            <script>
-                $(document).ready(function (e) {
-                    $("#red").click(function () {
-                        $("#step4").css("display", "block");
-                    });
-                    $("#green").click(function () {
-                        $("#step4").css("display", "none");
-                    });
-                    $("#yellow").click(function () {
-                        $("#step4").css("display", "none");
-                    });
-
-
-
-                    $("#clearme").click(function () {
-
-                    });
-
-                    $(".containerpopup .popupmain .closebut").click(function () {
-                        $(".containerpopup").hide(500);
-                    });
-
-
-                    $(".containerpopup .popupmain .closebut").click(function () {
-                        $(".containerpopup").hide(500);
-                    });
-
-                });
-            </script>
-            <div id="msform_right">
-                <input type="hidden" class="toatalrowcou" value="4" />
-                <!-- progressbar -->
-                <!-- fieldsets  two-->
-                <div class="form_fieldset_div">
-                    <fieldset style="height: 600px;">
-                        <h2 class="fs-title" style="text-align:center;"><a href="#" class="webcam_img"><img src="/Content/Images/webcam.png" /></a><a href="#" class="profile_pic_img"><img src="/Content/Images/profilepic.png" /></a>Prescription Form</h2>
-                        <label title="Rx" class="rx_label">Rx</label>
-                        <label title="Rx" style="float:right; border:0px solid; padding-top:10px;">
-                            <input type="text" name="patient_days_presc" id="patient_days_presc" placeholder="Days" style="width:70px;" />
-                            <input type="text" name="patient_diagnosis_presc" id="patient_diagnosis_presc" placeholder="Diagnosis" style="width:140px;" />
-                            <select name="doc_nm" class="pre1" style="width: 85px!important; padding: 0!important;color:#000; display:none;" required>
-                                <option>Doctors Name</option>
-                                <br />
-                                <b>Warning</b>:  Invalid argument supplied for foreach() in
-                                <b>/home/u320066704/public_html/prescription.php</b> on line
-                                <b>21</b>
-                                <br />
-                            </select>
-                        </label>
-                        <h3 class="fs-subtitle"></h3>
-
-
-
-                        <div style="width: 96%;" class="btn_box">
-                            <input id="btnp1" readonly style="border: 1px solid rgb(69,117,212);color:rgb(69,117,212)" class="btn_p a" value="P1" content="0;U">
-
-                            <input id="btnp1" readonly style="border: 1px solid rgb(69,117,212);color:rgb(69,117,212)" class="btn_p a" value="P2" content="0;U">
-
-                            <input id="btnp1" readonly style="border: 1px solid rgb(69,117,212);color:rgb(69,117,212)" class="btn_p a" value="P3" content="0;U">
-
-                            <input id="btnp1" readonly style="border: 1px solid rgb(69,117,212);color:rgb(69,117,212)" class="btn_p a" value="P4" content="0;U">
-
-                            <input id="btnp1" readonly style="border: 1px solid rgb(69,117,212);color:rgb(69,117,212)" class="btn_p a" value="P5" content="0;U">
-
-                            <input id="btnp1" readonly style="border: 1px solid rgb(69,117,212);color:rgb(69,117,212)" class="btn_p a" value="P6" content="0;U">
-
-                            <input style="border: 1px solid yellow;color:red;" value="+" class="add_field_button btn_p" type="button" required>
-                        </div>
-
-                        <br />
-                        <div id="div1">
-                            <div class="input_fields_wrap" id="input_fields_wrap_js">
-                                <div id="divname_1" class="divnamepresc"><select name="medicine['medicine_type'][]" class="pre tabname" id="tabname_1" style="width: 85px!important; padding: 0!important;"><option value="OINT">OINT</option><option value="Tab">Tab</option><option value="Syp">Syp</option><option value="Cap">Cap</option></select><input style="width:120px;" class="pre" type="textbox" name="medicine['medicine_nm'][]" value="OINTOINT" placeholder=""><select name="medicine['medicine_morning'][]" class="pre svar" style="width: 40px!important; padding: 0!important;"><option value="0">0</option>medicine_night<option value="1/2">1/2</option>medicine_night<option value="1">1</option>medicine_night<option value="2">2</option>medicine_night<option value="3">3</option>medicine_night<option value="4">4</option>medicine_night<option>5ml</option>medicine_night<option>10ml</option>medicine_night<option>15ml</option>medicine_night<option>20ml</option></select><select name="medicine['medicine_after'][]" class="pre bpor" style="width: 40px!important; padding: 0!important;"><option value="0">0</option>medicine_night<option value="1/2">1/2</option>medicine_night<option value="1">1</option>medicine_night<option value="2">2</option>medicine_night<option value="3">3</option>medicine_night<option value="4">4</option>medicine_night<option>5ml</option>medicine_night<option>10ml</option>medicine_night<option>15ml</option>medicine_night<option>20ml</option></select><select name="medicine['medicine_night'][]" class="pre sanj" style="width: 40px!important; padding: 0!important;"><option value="0">0</option>medicine_night<option value="1/2">1/2</option>medicine_night<option value="1">1</option>medicine_night<option value="2">2</option>medicine_night<option value="3">3</option>medicine_night<option value="4">4</option>medicine_night<option>5ml</option>medicine_night<option>10ml</option>medicine_night<option>15ml</option>medicine_night<option>20ml</option></select><select name="medicine['medicine_time'][]" class="pre" style="width: 90px!important; padding: 0!important;"><option>After Food</option><option>Before Food</option></select><input id="qut_1" class="pre qut" type="textbox" name="medicine['qut'][]" value="" placeholder="Qut" style="width: 50px;color:#000; padding: 6px;"><a href="#" class="remove_field" style="text-decoration:none;font-weight:bold;">--</a></div><div id="divname_2" class="divnamepresc"><select name="medicine['medicine_type'][]" class="pre tabname" id="tabname_2" style="width: 85px!important; padding: 0!important;"><option value="OINT">OINT</option><option value="Tab">Tab</option><option value="Syp">Syp</option><option value="Cap">Cap</option></select><input style="width:120px;" class="pre" type="textbox" name="medicine['medicine_nm'][]" value="OINTOINT" placeholder=""><select name="medicine['medicine_morning'][]" class="pre svar" style="width: 40px!important; padding: 0!important;"><option value="0">0</option>medicine_night<option value="1/2">1/2</option>medicine_night<option value="1">1</option>medicine_night<option value="2">2</option>medicine_night<option value="3">3</option>medicine_night<option value="4">4</option>medicine_night<option>5ml</option>medicine_night<option>10ml</option>medicine_night<option>15ml</option>medicine_night<option>20ml</option></select><select name="medicine['medicine_after'][]" class="pre bpor" style="width: 40px!important; padding: 0!important;"><option value="0">0</option>medicine_night<option value="1/2">1/2</option>medicine_night<option value="1">1</option>medicine_night<option value="2">2</option>medicine_night<option value="3">3</option>medicine_night<option value="4">4</option>medicine_night<option>5ml</option>medicine_night<option>10ml</option>medicine_night<option>15ml</option>medicine_night<option>20ml</option></select><select name="medicine['medicine_night'][]" class="pre sanj" style="width: 40px!important; padding: 0!important;"><option value="0">0</option>medicine_night<option value="1/2">1/2</option>medicine_night<option value="1">1</option>medicine_night<option value="2">2</option>medicine_night<option value="3">3</option>medicine_night<option value="4">4</option>medicine_night<option>5ml</option>medicine_night<option>10ml</option>medicine_night<option>15ml</option>medicine_night<option>20ml</option></select><select name="medicine['medicine_time'][]" class="pre" style="width: 90px!important; padding: 0!important;"><option>After Food</option><option>Before Food</option></select><input id="qut_2" class="pre qut" type="textbox" name="medicine['qut'][]" value="" placeholder="Qut" style="width: 50px;color:#000; padding: 6px;"><a href="#" class="remove_field" style="text-decoration:none;font-weight:bold;">--</a></div><div id="divname_3" class="divnamepresc"><select name="medicine['medicine_type'][]" class="pre tabname" id="tabname_3" style="width: 85px!important; padding: 0!important;"><option value="OINT">OINT</option><option value="Tab">Tab</option><option value="Syp">Syp</option><option value="Cap">Cap</option></select><input style="width:120px;" class="pre" type="textbox" name="medicine['medicine_nm'][]" value="OINTOINT" placeholder=""><select name="medicine['medicine_morning'][]" class="pre svar" style="width: 40px!important; padding: 0!important;"><option value="0">0</option>medicine_night<option value="1/2">1/2</option>medicine_night<option value="1">1</option>medicine_night<option value="2">2</option>medicine_night<option value="3">3</option>medicine_night<option value="4">4</option>medicine_night<option>5ml</option>medicine_night<option>10ml</option>medicine_night<option>15ml</option>medicine_night<option>20ml</option></select><select name="medicine['medicine_after'][]" class="pre bpor" style="width: 40px!important; padding: 0!important;"><option value="0">0</option>medicine_night<option value="1/2">1/2</option>medicine_night<option value="1">1</option>medicine_night<option value="2">2</option>medicine_night<option value="3">3</option>medicine_night<option value="4">4</option>medicine_night<option>5ml</option>medicine_night<option>10ml</option>medicine_night<option>15ml</option>medicine_night<option>20ml</option></select><select name="medicine['medicine_night'][]" class="pre sanj" style="width: 40px!important; padding: 0!important;"><option value="0">0</option>medicine_night<option value="1/2">1/2</option>medicine_night<option value="1">1</option>medicine_night<option value="2">2</option>medicine_night<option value="3">3</option>medicine_night<option value="4">4</option>medicine_night<option>5ml</option>medicine_night<option>10ml</option>medicine_night<option>15ml</option>medicine_night<option>20ml</option></select><select name="medicine['medicine_time'][]" class="pre" style="width: 90px!important; padding: 0!important;"><option>After Food</option><option>Before Food</option></select><input id="qut_3" class="pre qut" type="textbox" name="medicine['qut'][]" value="" placeholder="Qut" style="width: 50px;color:#000; padding: 6px;"><a href="#" class="remove_field" style="text-decoration:none;font-weight:bold;">--</a></div>
-                            </div>
-                        </div>
-                        <div class="input_fields_wrap" id="input_fields_wrap_js">
-                        </div>
-                        <div class="pat_type">
-                            <select name="patient_type" class="pre" style="width: 100px!important; padding: 0!important;color:#000;" onchange="$('#advise').load('advise.php?id=' +$(this).val())" required>
-                                <option value="" selected="selected">Patient Type</option>
-
-                                <option>FISSURE</option>
-
-
-                                <option>PILES</option>
-
-
-                                <option>FISTULA</option>
-
-
-                                <option>SKIN</option>
-
-
-                                <option>ARTHRITIS_JOINT_BACKPAIN</option>
-
-
-                                <option>HAIR</option>
-
-
-                                <option>STREE ROG</option>
-
-
-                                <option>INFERTILITY</option>
-
-
-                                <option>PILONIDAL SINUS</option>
-
-
-                                <option>DIGESTION</option>
-
-
-                                <option>WEIGHT</option>
-
-
-                                <option>STONE_URINARY SYSTEM</option>
-
-
-                                <option>BALROG</option>
-
-
-                                <option>SIROROG(SINUS,MIGRAIN ,ANINDRA,RHINITIS)</option>
-
-
-                                <option>DIABETES</option>
-
-
-                                <option>HYPERTENTION</option>
-
-
-                                <option>SWAS_RESPIRATORY</option>
-
-                            </select>
-                            <input type="hidden" name="other" value="" placeholder="Other Disease" style="width: 120px; height: 30px; padding-left: 10px; padding-bottom: 12px; float: left;color:#000;">
-                            <select name="instructions" class="pre" style="width: 90px!important; padding: 0!important; margin-left: 10px;color:#000;" onchange="$('#instructions').load('instructions.php?id=' +$(this).val())" required>
-                                <option>Instructions</option>
-                            </select>
-                            <input type="date" name="follow_date" value="" placeholder="MM/DD/YYYY" style="width: 140px; height: 25px; padding-left: 10px; padding-bottom: 0px; float: left; text-aligm:center;color:#000;" required>
-
-                            <div id="advise">
-                            </div>
-                            <div id="instructions">
-                            </div>
-                        </div>
-
-                        <h3 class="fs-subtitle"></h3> <div width="92%" style="position:absolute;
-bottom:0;" class="pmtype_div">
-
-                            <tr>
-
-                                <input style="width:20px!important; padding: 0!important;" value="1" type="checkbox" name="pm_type[]" id="pmtype_1" class="pmtype" />
-                                <b style="width:10px!important; padding: 0!important;">N</b> &nbsp;
-
-                                <input type=hidden id="pmcharges_1" value="200" />
-
-                                <input style="width:20px!important; padding: 0!important;" value="2" type="checkbox" name="pm_type[]" id="pmtype_2" class="pmtype" />
-                                <b style="width:10px!important; padding: 0!important;">O</b> &nbsp;
-
-                                <input type=hidden id="pmcharges_2" value="150" />
-
-                                <input style="width:20px!important; padding: 0!important;" value="3" type="checkbox" name="pm_type[]" id="pmtype_3" class="pmtype" />
-                                <b style="width:10px!important; padding: 0!important;">P</b> &nbsp;
-
-                                <input type=hidden id="pmcharges_3" value="90" />
-
-                                <input style="width:20px!important; padding: 0!important;" value="4" type="checkbox" name="pm_type[]" id="pmtype_4" class="pmtype" />
-                                <b style="width:10px!important; padding: 0!important;">D</b> &nbsp;
-
-                                <input type=hidden id="pmcharges_4" value="60" />
-
-                                <input style="width:20px!important; padding: 0!important;" value="5" type="checkbox" name="pm_type[]" id="pmtype_5" class="pmtype" />
-                                <b style="width:10px!important; padding: 0!important;">KS</b> &nbsp;
-
-                                <input type=hidden id="pmcharges_5" value="110" />
-                                <input type="number" name="pm_madicine" placeholder=" M" style="width:60px!important; padding: 0!important; height:25px;" onkeyup="cal_charges(event);" />
-                                <input type="number" name="pm_less_perc" placeholder=" %" style="width:60px!important; padding: 0!important; height:25px;" onkeyup="cal_charges(event);" />
-                                <input type="number" name="pm_less_net" placeholder=" Less net" style="width:60px!important; padding: 0!important; height:25px;" onkeyup="less_net_changed(event);" />
-
-
-                                <input type="number" name="pm_rupees" placeholder=" Rs.0" style="width:60px!important; padding: 0!important; height:25px;" id="pm_rupees" />
-
-                        </div><br />
-                    </fieldset>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Patient.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Patient.Address, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Patient.Address, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Patient.ReferredBy, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.Patient.ReferredBy, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Patient.ReferredBy, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Patient.DepartmentID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.Patient.DepartmentID, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Patient.DepartmentID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Patient.DOB, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Patient.DOB, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Patient.DOB, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Patient.Contact, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Patient.Contact, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Patient.Contact, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Patient.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Patient.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Patient.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Patient.Occupation, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Patient.Occupation, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Patient.Occupation, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Patient.Habit, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.Patient.Habit, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Patient.Habit, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Patient.FoodPreference, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.Patient.FoodPreference, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Patient.FoodPreference, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Patient.RemindMeAbout, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Patient.RemindMeAbout, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Patient.RemindMeAbout, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Patient.DoctorID, "DoctorID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("DoctorID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Patient.DoctorID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <h4>PatientHistory</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientHistory.RP, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PatientHistory.RP, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PatientHistory.RP, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientHistory.KCO, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PatientHistory.KCO, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PatientHistory.KCO, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientHistory.CO, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PatientHistory.CO, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PatientHistory.CO, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientHistory.ComplainForm, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PatientHistory.ComplainForm, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PatientHistory.ComplainForm, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientHistory.Constipation, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PatientHistory.Constipation, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PatientHistory.Constipation, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientHistory.ConstipationMore, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PatientHistory.ConstipationMore, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PatientHistory.ConstipationMore, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientHistory.Pain, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PatientHistory.Pain, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PatientHistory.Pain, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientHistory.PainMore, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PatientHistory.PainMore, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PatientHistory.PainMore, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientHistory.Burning, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PatientHistory.Burning, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PatientHistory.Burning, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientHistory.BurningMore, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PatientHistory.BurningMore, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PatientHistory.BurningMore, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientHistory.Bleeding, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PatientHistory.Bleeding, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PatientHistory.Bleeding, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientHistory.BleedingMore, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.PatientHistory.BleedingMore, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PatientHistory.BleedingMore, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientHistory.Itching, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PatientHistory.Itching, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PatientHistory.Itching, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientHistory.ItchingMore, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PatientHistory.ItchingMore, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PatientHistory.ItchingMore, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientHistory.PusDrainage, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PatientHistory.PusDrainage, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PatientHistory.PusDrainage, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientHistory.PusDrainageMore, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PatientHistory.PusDrainageMore, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PatientHistory.PusDrainageMore, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientHistory.Swelling, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PatientHistory.Swelling, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PatientHistory.Swelling, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientHistory.SwellingMore, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PatientHistory.SwellingMore, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PatientHistory.SwellingMore, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientHistory.SCO, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PatientHistory.SCO, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PatientHistory.SCO, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientHistory.ACO, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PatientHistory.ACO, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PatientHistory.ACO, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientHistory.Allergy, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PatientHistory.Allergy, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PatientHistory.Allergy, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientHistory.History, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PatientHistory.History, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PatientHistory.History, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientHistory.Weight, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PatientHistory.Weight, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PatientHistory.Weight, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientHistory.Height, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PatientHistory.Height, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PatientHistory.Height, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientHistory.T, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PatientHistory.T, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PatientHistory.T, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientHistory.PR, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PatientHistory.PR, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PatientHistory.PR, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientHistory.BP, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PatientHistory.BP, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PatientHistory.BP, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientHistory.SPO2, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PatientHistory.SPO2, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PatientHistory.SPO2, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientHistory.PRR, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PatientHistory.PRR, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PatientHistory.PRR, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientHistory.Proctoscopy, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PatientHistory.Proctoscopy, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PatientHistory.Proctoscopy, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientHistory.LightOnOff, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.PatientHistory.LightOnOff)
+                    @Html.ValidationMessageFor(model => model.PatientHistory.LightOnOff, "", new { @class = "text-danger" })
                 </div>
             </div>
-
-            <script>
-                $(document).ready(function () {
-                    $(".pmtype_div .pmtype").click(function () {
-
-                        var total_charges = 0;
-                        $(".pmtype").each(function (index, element) {
-                            var a = this.id;
-                            if ($("#" + a).is(':checked')) {
-                                a = a.split("_");
-                                total_charges = total_charges + parseInt($("#pmcharges_" + a[1]).val());
-                            }
-                        });//each pmtype
-
-                        //add madicine charges to totalcharges
-
-                        if ($.isNumeric($("input[name=pm_madicine]").val()))
-                            total_charges = total_charges + parseInt($("input[name=pm_madicine]").val());
-
-                        var less_perc = 0;
-                        if ($.isNumeric($("input[name=pm_less_perc]").val()))
-                            less_perc = parseInt($("input[name=pm_less_perc]").val());
-
-                        var less_net = total_charges * less_perc / 100;
-
-
-                        $("input[name=pm_less_net]").val(less_net);
-                        total_charges = total_charges - less_net;
-                        $("#pm_rupees").val(total_charges);
-
-                    });//on click pmtype class
-                });
-
-                function cal_charges(event) {
-                    if (event.keyCode == 9 || event.keyCode == 16)
-                        return false;
-
-                    if ($.isNumeric($("input[name=pm_less_perc]").val()) || $.isNumeric($("input[name=pm_madicine]").val())) {
-                    }
-                    else {
-                        return false;
-                    }
-                    var total_charges = 0;
-                    $(".pmtype").each(function (index, element) {
-                        var a = this.id;
-                        if ($("#" + a).is(':checked')) {
-                            a = a.split("_");
-                            total_charges = total_charges + parseInt($("#pmcharges_" + a[1]).val());
-                        }
-                    });//each pmtype
-
-                    //add madicine charges to totalcharges
-
-                    if ($.isNumeric($("input[name=pm_madicine]").val()))
-                        total_charges = total_charges + parseInt($("input[name=pm_madicine]").val());
-
-                    var less_perc = 0;
-                    if ($.isNumeric($("input[name=pm_less_perc]").val()))
-                        less_perc = parseInt($("input[name=pm_less_perc]").val());
-
-                    var less_net = total_charges * less_perc / 100;
-                    $("input[name=pm_less_net]").val(less_net);
-                    total_charges = total_charges - less_net;
-                    $("#pm_rupees").val(total_charges);
-
-
-
-
-
-
-                }
-
-                function less_net_changed(event) {
-                    if (event.keyCode == 9 || event.keyCode == 16)
-                        return false;
-
-                    if ($.isNumeric($("input[name=pm_less_net]").val())) {
-                    }
-                    else {
-                        return false;
-                    }
-
-                    var total_charges = 0;
-                    $(".pmtype").each(function (index, element) {
-                        var a = this.id;
-                        if ($("#" + a).is(':checked')) {
-                            a = a.split("_");
-                            total_charges = total_charges + parseInt($("#pmcharges_" + a[1]).val());
-                        }
-                    });//each pmtype
-
-                    //add madicine charges to totalcharges
-
-                    if ($.isNumeric($("input[name=pm_madicine]").val()))
-                        total_charges = total_charges + parseInt($("input[name=pm_madicine]").val());
-
-                    if ($.isNumeric($("input[name=pm_less_net]").val()))
-                        less_net = parseInt($("input[name=pm_less_net]").val());
-
-
-                    total_charges = total_charges - less_net;
-                    $("#pm_rupees").val(total_charges);
-                }
-                $(document).ready(function () {
-                    var max_fields = 30; //maximum input boxes allowed
-                    var wrapper = $(".input_fields_wrap"); //Fields wrapper
-                    var add_button = $(".add_field_button"); //Add button ID
-
-                    //var x = $(".toatalrowcou").val(); //initlal text box count
-                    $(add_button).click(function (e) { //on add input button click
-                        e.preventDefault();
-                        var x = $(".divnamepresc").length;
-                        if (x < max_fields) { //max input box allowed
-                            x++; //text box increment
-                            var inc = x;
-                            inc--;
-                            var IDName = x;
-                            $(wrapper).append('<div id="divname_' + IDName + '" class="divnamepresc"><select name="medicine[\'medicine_type\'][]" class="pre tabname" id="tabname_' + IDName + '" style="width: 85px!important; padding: 0!important;"><option value="OINT">OINT</option><option value="Tab">Tab</option><option value="Syp">Syp</option><option value="Cap">Cap</option></select><input style="width:120px;" class="pre" type="textbox" name="medicine[\'medicine_nm\'][]" value="OINTOINT" placeholder="" style="width: 150px; padding: 6px;"><select name="medicine[\'medicine_morning\'][]" class="pre svar" style="width: 40px!important; padding: 0!important;"><option value="0">0</option>medicine_night<option value="1/2">1/2</option>medicine_night<option value="1">1</option>medicine_night<option value="2">2</option>medicine_night<option value="3">3</option>medicine_night<option value="4">4</option>medicine_night<option>5ml</option>medicine_night<option>10ml</option>medicine_night<option>15ml</option>medicine_night<option>20ml</option></select><select name="medicine[\'medicine_after\'][]" class="pre bpor" style="width: 40px!important; padding: 0!important;"><option value="0">0</option>medicine_night<option value="1/2">1/2</option>medicine_night<option value="1">1</option>medicine_night<option value="2">2</option>medicine_night<option value="3">3</option>medicine_night<option value="4">4</option>medicine_night<option>5ml</option>medicine_night<option>10ml</option>medicine_night<option>15ml</option>medicine_night<option>20ml</option></select><select name="medicine[\'medicine_night\'][]" class="pre sanj" style="width: 40px!important; padding: 0!important;"><option value="0">0</option>medicine_night<option value="1/2">1/2</option>medicine_night<option value="1">1</option>medicine_night<option value="2">2</option>medicine_night<option value="3">3</option>medicine_night<option value="4">4</option>medicine_night<option>5ml</option>medicine_night<option>10ml</option>medicine_night<option>15ml</option>medicine_night<option>20ml</option></select><select name="medicine[\'medicine_time\'][]" class="pre" style="width: 90px!important; padding: 0!important;"><option>After Food</option><option>Before Food</option></select><input id="qut_' + IDName + '" class="pre qut" type="textbox" name="medicine[\'qut\'][]" value="" placeholder="Qut" style="width: 50px;color:#000; padding: 6px;"><a  href="#" class="remove_field" style="text-decoration:none;font-weight:bold;">--</a></div>'); //add input box
-                        }
-                    });
-
-                    $(wrapper).on("click", ".remove_field", function (e) { //user click on remove text
-                        e.preventDefault(); $(this).parent('div').remove(); x--;
-                    });
-
-
-                });
-            </script>
-            <script type="text/javascript">
-
-                $(document).ready(function () {
-                    $('#btReload').click(function () {
-                        setInterval('refreshPage()', 5000);
-                    });    // RELOAD PAGE ON BUTTON CLICK EVENT.
-
-                    // SET AUTOMATIC PAGE RELOAD TIME TO 5000 MILISECONDS (5 SECONDS).
-                    $(".a").click(function () {
-                        var id = $(this).val();
-                        $("#div1").load("http://doctorweb.esy.es/medicine_list.php?id=" + id);
-                        //$("#div1").load("http://127.0.0.1/doctor/medicine_list.php?id="+id);
-                    });
-                });
-
-                function refreshPage() { location.reload(); }
-
-            </script>
-
-            </form>
-            </fieldset>
-
         </div>
 
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientHistory.Other, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PatientHistory.Other, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PatientHistory.Other, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
-        <div class="popup" data-popup="popup-1" id="search">
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientHistory.PatientID, "PatientID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("PatientID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PatientHistory.PatientID, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
         </div>
     </div>
-    <script src='js/easing.js'></script>
-    <!-- library for making tables responsive -->
-    <script src="js/responsive-tables.js"></script>
-    <!-- data table plugin -->
-    <script src='js/jquery.dataTables.min.js'></script>
-
-    <script src="js/index.js"></script>
-    <script type="text/javascript" src="js/picedit.js"></script>
-    <script type="text/javascript" src="js/jquery-mask.js"></script>
-
-    <script type="text/javascript">
-        $(function () {
-            $('.picedit_box').picEdit({
-
-                imageUpdated: function (img) {
-                },
-                formSubmitted: function () {
-                },
-                redirectUrl: "print_save.php",
-                defaultImage: "Images/1456172680_image.png",
-            });
-        });
-
-
-
-    </script>
-    <script>
-        $(document).ready(function () {
-            $("#search_btn").click(function (e) {
-                if ($('#in_search').val() == "") {
-                    alert("enter a something...");
-                    $("#search").empty();
-                    setInterval(location.reload(), 1000);
-                }
-                else {
-                    $('#search').load('http://doctorweb.esy.es/search.php?id=' + $('#in_search').val());
-                    //$('#search').load('http://127.0.0.1/doctor/search.php?id=' +$('#in_search').val());
-                }
-            });
-
-        });
-
-    </script>
-
-    <style>
-        .ex_form_input_label_width {
-            float: left;
-            width: 40%;
-            text-align: left;
-            padding: 5px 0px 0px;
-            margin-bottom: 10px;
-            font-size: 90%;
-        }
-
-        .ex_form_input_width {
-            float: right;
-            width: 45%;
-        }
-
-        .input_fields_wrap {
-            float: left;
-            //border:1px solid;
-        }
-
-        .tabname {
-            max-width: 65px;
-            // background-color:#000;
-        }
-
-        .remove_field {
-            border: 1px solid;
-            margin-top: 5px;
-            float: right;
-            border-radius: 100%;
-            box-sizing: border-box;
-        }
-
-        .step2_label {
-            float: left;
-            width: 35%;
-            font-size: 90%;
-            text-align: left;
-            padding: 10px 0;
-        }
-
-        .my_rate {
-            float: left;
-            width: 40px;
-            margin-right: 5px;
-        }
-
-        .block {
-            width: 44%;
-            float: left;
-        }
-
-            .block input, .block select {
-                float: right;
-                width: 100%;
-            }
-
-        .my-mdform {
-            float: left;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-            .my-mdform .mystep2all {
-                float: left;
-                width: 100%;
-                margin-bottom: 3px;
-            }
-
-                .my-mdform .mystep2all .mylabels {
-                    padding-top: 5px;
-                    font-size: 90%;
-                    width: 38%;
-                    float: left;
-                }
-
-                .my-mdform .mystep2all .my-rating {
-                    width: 15%;
-                    float: left;
-                    margin-right: 4px;
-                }
-
-                .my-mdform .mystep2all .my-input {
-                    max-width: 40%;
-                    float: left;
-                    // background-color:#333;
-                    text-align: left;
-                    float: right;
-                    font-size: 90%;
-                    font-weight: 100;
-                }
-    </style>
-
-</body>
-</html>
+}

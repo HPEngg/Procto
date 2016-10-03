@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DoctorWeb.Models;
+using DoctorWeb.Models.CustomModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +10,53 @@ namespace DoctorWeb.Controllers
 {
     public class HomeController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
+
+        public ActionResult Search(String PatientName)
+        {
+            var patient = db.Patients.Where(p => p.Name == PatientName).First();
+
+            var model = new PatientHome();
+            model.Patient = patient;
+
+            ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name");
+            ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name");
+
+            return View("Index", model);
+        }
+
         public ActionResult Index()
         {
+            ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name");
+            ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name");
+
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Index(PatientHome model)
+        {
+            var patient = model.Patient;
+            if (ModelState.IsValid)
+            {
+                db.Patients.Add(patient);
+                db.SaveChanges();
+                //return RedirectToAction("Index");
+            }
+
+            ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name", patient.DoctorID);
+
+            var patientHistory = model.PatientHistory;
+            if (ModelState.IsValid)
+            {
+                db.PatientHistories.Add(patientHistory);
+                db.SaveChanges();
+                //return RedirectToAction("Index");
+            }
+
+            ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name", patientHistory.PatientID);
+
+            return RedirectToAction("Index");
         }
 
         public ActionResult About()

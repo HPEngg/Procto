@@ -31,11 +31,11 @@ namespace DoctorWeb.Models.Tools
                 query = query.Replace(p.ParameterName, value);
             }
 
-            using (var db = new ApplicationDbContext())
-            {
-                db.OfflineRecords.Add(new Models.Offline() { Query = query, ExecutedAt = DateTime.Now, IsExecuted = false });
-                db.SaveChanges();
-            }
+            //using (var db = new ApplicationDbContext())
+            //{
+            //    db.OfflineRecords.Add(new Models.Offline() { Query = query, ExecutedAt = DateTime.Now, IsExecuted = false });
+            //    db.SaveChanges();
+            //}
         }
 
         public void NonQueryExecuting(DbCommand command, DbCommandInterceptionContext<int> interceptionContext)

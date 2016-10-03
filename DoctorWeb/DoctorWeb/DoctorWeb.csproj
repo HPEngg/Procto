@@ -213,6 +213,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Charge.cs" />
+    <Compile Include="Models\CustomModels\PatientHome.cs" />
     <Compile Include="Models\CustomModels\Prescription.cs" />
     <Compile Include="Models\Doctor.cs" />
     <Compile Include="Models\Enums\Bleeding.cs" />
@@ -450,7 +451,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -527,6 +527,7 @@
     <Content Include="Views\PrescriptionMedicine\Details.cshtml" />
     <Content Include="Views\PrescriptionMedicine\Edit.cshtml" />
     <Content Include="Views\PrescriptionMedicine\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

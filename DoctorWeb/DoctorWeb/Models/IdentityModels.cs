@@ -56,5 +56,7 @@ namespace DoctorWeb.Models
         public DbSet<Picture> Pictures { get; set; }
         public DbSet<Charge> Charges { get; set; }
         public DbSet<PrescriptionCategory> PrescriptionCategories { get; set; }
+
+        public System.Data.Entity.DbSet<DoctorWeb.Models.PatientHistory> PatientHistories { get; set; }
     }
 }

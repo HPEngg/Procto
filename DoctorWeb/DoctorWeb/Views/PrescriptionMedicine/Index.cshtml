@@ -1,0 +1,76 @@
+﻿@model IEnumerable<DoctorWeb.Models.PrescriptionMedicine>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Prescription.Diagnosis)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OINT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OINTMore)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Morning)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Noon)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Night)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DozTiming)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Prescription.Diagnosis)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OINT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OINTMore)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Morning)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Noon)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Night)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DozTiming)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

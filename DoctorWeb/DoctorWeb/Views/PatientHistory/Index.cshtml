@@ -1,0 +1,226 @@
+﻿@model IEnumerable<DoctorWeb.Models.PatientHistory>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Patient.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KCO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ComplainForm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Constipation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ConstipationMore)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pain)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PainMore)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Burning)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BurningMore)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bleeding)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BleedingMore)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Itching)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ItchingMore)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PusDrainage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PusDrainageMore)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Swelling)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SwellingMore)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SCO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ACO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Allergy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.History)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Weight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Height)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.T)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PR)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SPO2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PRR)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Proctoscopy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LightOnOff)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Other)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Patient.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KCO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ComplainForm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Constipation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ConstipationMore)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pain)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PainMore)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Burning)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BurningMore)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bleeding)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BleedingMore)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Itching)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ItchingMore)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PusDrainage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PusDrainageMore)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Swelling)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SwellingMore)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SCO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ACO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Allergy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.History)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Weight)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Height)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.T)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PR)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SPO2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRR)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Proctoscopy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LightOnOff)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Other)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

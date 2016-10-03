@@ -5,9 +5,9 @@ using System.Web;
 
 namespace DoctorWeb.Models.CustomModels
 {
-    public class Prescription
-    {
-        public Prescription PrescriptionMaster { get; set; }
-        public List<PrescriptionMedicine> Medicines { get; set; }
-    }
+    //public class Prescription
+    //{
+    //    public Prescription PrescriptionMaster { get; set; }
+    //    public List<PrescriptionMedicine> Medicines { get; set; }
+    //}
 }

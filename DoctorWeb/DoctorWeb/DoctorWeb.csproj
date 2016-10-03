@@ -196,10 +196,18 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DoctorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InstructionController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MedicineController.cs" />
+    <Compile Include="Controllers\PatientController.cs" />
+    <Compile Include="Controllers\PatientHistoryController.cs" />
+    <Compile Include="Controllers\PatientTypeController.cs" />
     <Compile Include="Controllers\PicturesController.cs" />
     <Compile Include="Controllers\PrescriptionCategoryController.cs" />
+    <Compile Include="Controllers\PrescriptionController.cs" />
+    <Compile Include="Controllers\PrescriptionMedicineController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -479,6 +487,46 @@
     <Content Include="Views\PrescriptionCategory\Details.cshtml" />
     <Content Include="Views\PrescriptionCategory\Edit.cshtml" />
     <Content Include="Views\PrescriptionCategory\Index.cshtml" />
+    <Content Include="Views\Medicine\Create.cshtml" />
+    <Content Include="Views\Medicine\Delete.cshtml" />
+    <Content Include="Views\Medicine\Details.cshtml" />
+    <Content Include="Views\Medicine\Edit.cshtml" />
+    <Content Include="Views\Medicine\Index.cshtml" />
+    <Content Include="Views\Doctor\Create.cshtml" />
+    <Content Include="Views\Doctor\Delete.cshtml" />
+    <Content Include="Views\Doctor\Details.cshtml" />
+    <Content Include="Views\Doctor\Edit.cshtml" />
+    <Content Include="Views\Doctor\Index.cshtml" />
+    <Content Include="Views\Instruction\Create.cshtml" />
+    <Content Include="Views\Instruction\Delete.cshtml" />
+    <Content Include="Views\Instruction\Details.cshtml" />
+    <Content Include="Views\Instruction\Edit.cshtml" />
+    <Content Include="Views\Instruction\Index.cshtml" />
+    <Content Include="Views\Patient\Create.cshtml" />
+    <Content Include="Views\Patient\Delete.cshtml" />
+    <Content Include="Views\Patient\Details.cshtml" />
+    <Content Include="Views\Patient\Edit.cshtml" />
+    <Content Include="Views\Patient\Index.cshtml" />
+    <Content Include="Views\PatientHistory\Create.cshtml" />
+    <Content Include="Views\PatientHistory\Delete.cshtml" />
+    <Content Include="Views\PatientHistory\Details.cshtml" />
+    <Content Include="Views\PatientHistory\Edit.cshtml" />
+    <Content Include="Views\PatientHistory\Index.cshtml" />
+    <Content Include="Views\PatientType\Create.cshtml" />
+    <Content Include="Views\PatientType\Delete.cshtml" />
+    <Content Include="Views\PatientType\Details.cshtml" />
+    <Content Include="Views\PatientType\Edit.cshtml" />
+    <Content Include="Views\PatientType\Index.cshtml" />
+    <Content Include="Views\Prescription\Create.cshtml" />
+    <Content Include="Views\Prescription\Delete.cshtml" />
+    <Content Include="Views\Prescription\Details.cshtml" />
+    <Content Include="Views\Prescription\Edit.cshtml" />
+    <Content Include="Views\Prescription\Index.cshtml" />
+    <Content Include="Views\PrescriptionMedicine\Create.cshtml" />
+    <Content Include="Views\PrescriptionMedicine\Delete.cshtml" />
+    <Content Include="Views\PrescriptionMedicine\Details.cshtml" />
+    <Content Include="Views\PrescriptionMedicine\Edit.cshtml" />
+    <Content Include="Views\PrescriptionMedicine\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

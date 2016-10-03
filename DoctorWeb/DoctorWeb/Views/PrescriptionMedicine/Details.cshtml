@@ -1,0 +1,83 @@
+﻿@model DoctorWeb.Models.PrescriptionMedicine
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PrescriptionMedicine</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Prescription.Diagnosis)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Prescription.Diagnosis)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OINT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OINT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OINTMore)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OINTMore)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Morning)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Morning)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Noon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Noon)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Night)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Night)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DozTiming)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DozTiming)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

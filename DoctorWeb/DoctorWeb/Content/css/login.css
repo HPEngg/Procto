@@ -242,6 +242,12 @@ h4 {
         background: #f7f7f7 url(../images/gray_jean.png);
     }
 
+    .leftmenu .nav-tabs ul > .active {
+        margin-right: 0;
+        font-weight: bold;
+        background: #f7f7f7 url(../images/gray_jean.png);
+    }
+
     .leftmenu .nav-tabs.nav-stacked > li > a:hover {
         background: #eee;
     }

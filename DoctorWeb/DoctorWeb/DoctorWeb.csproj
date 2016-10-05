@@ -213,6 +213,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Charge.cs" />
+    <Compile Include="Models\CustomModels\PatientHome.cs" />
     <Compile Include="Models\CustomModels\Prescription.cs" />
     <Compile Include="Models\Doctor.cs" />
     <Compile Include="Models\Enums\Bleeding.cs" />

@@ -48,7 +48,7 @@ namespace DoctorWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,OINT,OINTMore,Morning,Noon,Night,DozTiming,Quantity,PrescriptionCategoryID")] Medicine medicine)
+        public ActionResult Create(/*[Bind(Include = "ID,OINT,OINTMore,Morning,Noon,Night,DozTiming,Quantity,PrescriptionCategoryID")]*/ Medicine medicine)
         {
             if (ModelState.IsValid)
             {

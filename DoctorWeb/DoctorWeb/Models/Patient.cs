@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace DoctorWeb.Models
 {
@@ -22,6 +23,8 @@ namespace DoctorWeb.Models
         public string Occupation { get; set; }
         public Habit Habit { get; set; }
         public FoodPreference FoodPreference { get; set; }
+
+        [DataType(DataType.MultilineText)]
         public string RemindMeAbout { get; set; }
 
         public int DoctorID { get; set; }

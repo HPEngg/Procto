@@ -43,6 +43,12 @@ namespace DoctorWeb.Models
         public bool LightOnOff { get; set; }
         public string Other { get; set; }
 
+        public DateTime DOA { get; set; }
+        public DateTime DOD { get; set; }
+        public string Dignosis { get; set; }
+        public string Procedure { get; set; }
+        public string Comment { get; set; }
+
         public int PatientID { get; set; }
         public virtual Patient Patient { get; set; }
     }

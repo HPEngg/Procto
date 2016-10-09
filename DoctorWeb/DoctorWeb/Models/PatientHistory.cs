@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using DoctorWeb.Models.Enums;
@@ -42,13 +43,12 @@ namespace DoctorWeb.Models
         public string Proctoscopy { get; set; }
         public bool LightOnOff { get; set; }
         public string Other { get; set; }
-
-        public DateTime DOA { get; set; }
-        public DateTime DOD { get; set; }
+        public DateTime? DOA { get; set; }
+        public DateTime? DOD { get; set; }
         public string Dignosis { get; set; }
         public string Procedure { get; set; }
+        [DataType(DataType.MultilineText)]
         public string Comment { get; set; }
-
         public int PatientID { get; set; }
         public virtual Patient Patient { get; set; }
     }

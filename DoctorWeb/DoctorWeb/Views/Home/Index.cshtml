@@ -24,16 +24,16 @@
                         <div class="menu">
                             @Html.LabelFor(model => model.Patient.Status, htmlAttributes: new { @class = "menu_label" })
                             <div class="roundedOne">
-                                @Html.RadioButtonFor(model => model.Patient.Status, DoctorWeb.Models.Enums.PatientStatus.Green, new { @checked = true, @class = "roundedOne", @style = "margin-top:0px;" })
+                                @Html.RadioButtonFor(model => model.Patient.Status, DoctorWeb.Models.Enums.PatientStatus.Green, new { @checked = true, @id = "green" })
                                 <label for="roundedOne"></label>
                             </div>
 
                             <div class="red">
-                                @Html.RadioButtonFor(model => model.Patient.Status, DoctorWeb.Models.Enums.PatientStatus.Red)
+                                @Html.RadioButtonFor(model => model.Patient.Status, DoctorWeb.Models.Enums.PatientStatus.Red, new { @checked = true, @id = "red" })
                                 <label for="red"></label>
                             </div>
                             <div class="yellow">
-                                @Html.RadioButtonFor(model => model.Patient.Status, DoctorWeb.Models.Enums.PatientStatus.Yellow)
+                                @Html.RadioButtonFor(model => model.Patient.Status, DoctorWeb.Models.Enums.PatientStatus.Yellow, new { @checked = true, @id = "yellow" })
                                 @*@Html.EnumDropDownListFor(model => model.Patient.StatusColor, htmlAttributes: new { @class = "form-control" })*@
                                 @Html.ValidationMessageFor(model => model.Patient.Status, "", new { @class = "text-danger" })
                                 <label for="yellow"></label>
@@ -85,15 +85,22 @@
                         <div class="form-group">
                             @*@Html.LabelFor(model => model.Patient.ReferredBy, htmlAttributes: new { @class = "control-label col-md-2" })*@
                             @*<div class="col-md-10">*@
-                            @Html.EnumDropDownListFor(model => model.Patient.ReferredBy, "--Referred By--", htmlAttributes: new { @class = "form-control" })
+                            @Html.EnumDropDownListFor(model => model.Patient.ReferredBy, "--Referred By--", htmlAttributes: new { @class = "form-control", id = "ReferredBy", value = "0" })
                             @Html.ValidationMessageFor(model => model.Patient.ReferredBy, "", new { @class = "text-danger" })
                             @*</div>*@
                         </div>
 
                         <div class="form-group">
+                            @Html.EditorFor(model => model.Patient.Relative, new { htmlAttributes = new { @class = "form-control", placeholder = @Html.DisplayNameFor(model => model.Patient.Relative), id = "Referred_Relative", style = "display:none;" } })
+                            @Html.ValidationMessageFor(model => model.Patient.Relative, "", new { @class = "text-danger" })
+
+                        </div>
+
+
+                        <div class="form-group">
                             @*@Html.LabelFor(model => model.Patient.DoctorID, "DoctorID", htmlAttributes: new { @class = "control-label col-md-2" })*@
                             @*<div class="col-md-10">*@
-                            @Html.DropDownList("DoctorID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.DropDownList("DoctorID", null, htmlAttributes: new { @class = "form-control", id = "Referred_Doctor", style = "display:none;" })
                             @Html.ValidationMessageFor(model => model.Patient.DoctorID, "", new { @class = "text-danger" })
                             @*</div>*@
                         </div>
@@ -109,8 +116,8 @@
                         <div class="mystep2all">
                             @Html.LabelFor(model => model.Patient.DOB, htmlAttributes: new { @class = "control-label col-md-2", @style = "padding-left:0px;" })
                             @*<div class="col-md-10">*@
-                                @Html.EditorFor(model => model.Patient.DOB, new { htmlAttributes = new { @class = "my-input", style = "min-width:75%;", placeholder = "DD/MM/YYYY" } })
-                                @Html.ValidationMessageFor(model => model.Patient.DOB, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.Patient.DOB, new { htmlAttributes = new { @class = "my-input", style = "min-width:75%;", placeholder = "DD/MM/YYYY" } })
+                            @Html.ValidationMessageFor(model => model.Patient.DOB, "", new { @class = "text-danger" })
                             @*</div>*@
                         </div>
 
@@ -162,6 +169,42 @@
                             @*</div>*@
                         </div>
                     </div>
+
+                    <section id="step4" style="display: none;">
+                        <h2 class="fs-title fs-title_cmplnfrm cmplain_title_color" style="color:blue;">Discharge Card</h2>
+                        <div class="mystep2all">
+                            @Html.LabelFor(model => model.PatientHistory.DOA, htmlAttributes: new { @class = "mylabels date_label doa_label", style = "padding-right:5px; width:auto;" })
+                            @Html.EditorFor(model => model.PatientHistory.DOA, new { htmlAttributes = new { @class = "form-control", placeholder = "MM/DD/YYYY HH:MM:SS", style = "width: 80%; height: 25px; padding-left: 3px; padding-bottom: -1px; float: left; text-aligm:center;color:#000;" } })
+                            @Html.ValidationMessageFor(model => model.PatientHistory.DOA, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="mystep2all">
+                            @Html.LabelFor(model => model.PatientHistory.DOD, htmlAttributes: new { @class = "mylabels date_label doa_label", style = "padding-right:5px; width:auto;" })
+                            @Html.EditorFor(model => model.PatientHistory.DOD, new { htmlAttributes = new { @class = "form-control", placeholder = "MM/DD/YYYY HH:MM:SS", style = "width: 80%; height: 25px; padding-left: 3px; padding-bottom: -1px; float: left; text-aligm:center;color:#000;" } })
+                            @Html.ValidationMessageFor(model => model.PatientHistory.DOD, "", new { @class = "text-danger" })
+                        </div>
+                        @*<div class="mdform my-mdform">*@
+                        <div class="mystep2all">
+                            @Html.LabelFor(model => model.PatientHistory.Dignosis, htmlAttributes: new { @class = "mylabels" })
+                            @Html.EditorFor(model => model.PatientHistory.Dignosis, new { htmlAttributes = new { @class = "my-input", placeholder = "Diagnosis", name = "patient_alergy", style = "min-width:60%;" } })
+                            @Html.ValidationMessageFor(model => model.PatientHistory.Dignosis, "", new { @class = "text-danger" })
+                        </div>
+                        @*</div>
+                            <div class="mdform my-mdform">*@
+                        <div class="mystep2all">
+                            @Html.LabelFor(model => model.PatientHistory.Procedure, htmlAttributes: new { @class = "mylabels" })
+                            @Html.EditorFor(model => model.PatientHistory.Procedure, new { htmlAttributes = new { @class = "my-input", placeholder = "Procedure", name = "patient_alergy", style = "min-width:60%;" } })
+                            @Html.ValidationMessageFor(model => model.PatientHistory.Procedure, "", new { @class = "text-danger" })
+                        </div>
+                        @*</div>
+                            <div class="mdform my-mdform">*@
+                        <div class="mystep2all">
+                            @Html.LabelFor(model => model.PatientHistory.Comment, htmlAttributes: new { @class = "mylabels" })
+                            @Html.EditorFor(model => model.PatientHistory.Comment, new { htmlAttributes = new { @class = "discharge_comment", placeholder = "Comments", name = "comment_for_patient" } })
+                            @Html.ValidationMessageFor(model => model.PatientHistory.Comment, "", new { @class = "text-danger" })
+                        </div>
+                        @*</div>*@
+                    </section>
+
                 </div>
             </fieldset>
 
@@ -250,7 +293,7 @@
                         <div class="mystep2all">
                             @Html.LabelFor(model => model.PatientHistory.Burning, htmlAttributes: new { @class = "mylabels" })
                             <div class="my-rating">
-                                @Html.EditorFor(model => model.PatientHistory.Burning, new { htmlAttributes = new { @class = "form-control", @min = "1", @max = "5", @step = "1" } })                               
+                                @Html.EditorFor(model => model.PatientHistory.Burning, new { htmlAttributes = new { @class = "form-control", @min = "1", @max = "5", @step = "1" } })
                             </div>
                             <div>
                                 @Html.EditorFor(model => model.PatientHistory.BurningMore, new { htmlAttributes = new { @class = "my-input", placeholder = "Burning" } })
@@ -441,7 +484,7 @@
 
                         <div class="mystep2all">
                             <div>
-                                @Html.LabelFor(model => model.PatientHistory.Proctoscopy, htmlAttributes: new { @class = "mylabels label_res", style="width:auto !important; padding-right:10px; " })
+                                @Html.LabelFor(model => model.PatientHistory.Proctoscopy, htmlAttributes: new { @class = "mylabels label_res", style = "width:auto !important; padding-right:10px; " })
                                 @Html.EditorFor(model => model.PatientHistory.LightOnOff, new { htmlAttributes = new { @style = "width:auto;" } })
                                 <label style="width">L</label>
                                 @Html.EditorFor(model => model.PatientHistory.Proctoscopy, new { htmlAttributes = new { @class = "my-input", style = "min-width:50%;", placeholder = "Proctoscopy" } })
@@ -467,7 +510,7 @@
                         </div>
                         @*@Html.HiddenFor(model => model.PatientHistory.PatientID)*@
 
-                           <input type="submit" value="Submit Query" class="next action-button" />
+                        <input type="submit" value="Submit Query" class="next action-button" />
                     </div>
                 </div>
             </fieldset>
@@ -478,6 +521,28 @@
 <div id="msform_right">
 </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+<script type="text/javascript">
+    $("#ReferredBy").change(function () {
+        if (jQuery("#ReferredBy").val() == "1") {
+            jQuery("#Referred_Doctor").css("display", "block");
+            jQuery("#Referred_Relative").css("display", "none");
+        }
+        else if (jQuery("#ReferredBy").val() == "3") {
+            jQuery("#Referred_Relative").css("display", "block");
+            jQuery("#Referred_Doctor").css("display", "none");
+        }
+        else {
+            jQuery("#Referred_Doctor").css("display", "none");
+            jQuery("#Referred_Relative").css("display", "none");
+        }
+    })
+        jQuery("#red").click(function () {
+            jQuery("#step4").css("display", "block");
+        });
+        jQuery("#green").click(function () {
+            jQuery("#step4").css("display", "none");
+        });
+        jQuery("#yellow").click(function () {
+            jQuery("#step4").css("display", "none");
+        });
+</script>

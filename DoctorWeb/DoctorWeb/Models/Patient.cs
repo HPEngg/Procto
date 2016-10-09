@@ -16,6 +16,7 @@ namespace DoctorWeb.Models
         public Gender Gender { get; set; }
         public string Address { get; set; }
         public ReferredBy ReferredBy { get; set; }
+        public string Relative { get; set; }
         public Department DepartmentID { get; set; }
         public DateTime DOB { get; set; }
         public string Contact { get; set; }

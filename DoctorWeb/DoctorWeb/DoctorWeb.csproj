@@ -216,6 +216,7 @@
     <Compile Include="Models\Charge.cs" />
     <Compile Include="Models\CustomModels\PatientHome.cs" />
     <Compile Include="Models\CustomModels\Prescription.cs" />
+    <Compile Include="Models\CustomModels\PrescriptionHome.cs" />
     <Compile Include="Models\Doctor.cs" />
     <Compile Include="Models\Enums\Bleeding.cs" />
     <Compile Include="Models\Enums\Department.cs" />
@@ -534,6 +535,7 @@
     <Content Include="Views\PaymentType\Details.cshtml" />
     <Content Include="Views\PaymentType\Edit.cshtml" />
     <Content Include="Views\PaymentType\Index.cshtml" />
+    <Content Include="Views\Home\Prescription.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

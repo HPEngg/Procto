@@ -64,6 +64,13 @@ namespace DoctorWeb.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult Prescription()
+        {
+            ViewBag.Message = "Your application description page.";
+
+            return View();
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

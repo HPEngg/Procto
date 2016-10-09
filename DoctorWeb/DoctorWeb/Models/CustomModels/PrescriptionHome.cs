@@ -26,9 +26,11 @@ namespace DoctorWeb.Models.CustomModels
         public Decimal Received { get; set; }
         public Decimal Pending { get; set; }
 
-        public IEnumerable<PatientType> PaymentTypes { get; set; }
+        public IEnumerable<PaymentType> PaymentTypes { get; set; }
 
         public IEnumerable<PrescriptionCategory> Categories { get; set; }
-        public IEnumerable<Medicine> Medicines { get; set; }
+        //public IEnumerable<Medicine> Medicines { get; set; }
+        public Medicine Medicine { get; set; }
+
     }
 }

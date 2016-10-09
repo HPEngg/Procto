@@ -68,7 +68,16 @@ namespace DoctorWeb.Controllers
         {
             ViewBag.Message = "Your application description page.";
 
-            return View();
+            var model = new PrescriptionHome();
+            model.Categories = db.PrescriptionCategories;
+            model.PaymentTypes = db.PaymentTypes;
+
+            ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name");
+            ViewBag.InstructionID = new SelectList(db.Instructions, "ID", "Name");
+            ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name");
+            ViewBag.PatientTypeID = new SelectList(db.PatientTypes, "ID", "PatientTypeName");
+
+            return View(model);
         }
 
         public ActionResult About()

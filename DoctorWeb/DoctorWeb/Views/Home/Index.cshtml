@@ -519,6 +519,8 @@
 }
 
 <div id="msform_right">
+    @*@{ Html.Partial("Prescription"); }*@
+    <iframe src='@Url.Action("Prescription", "Home")' width="500" height="1000" frameborder="0"></iframe>
 </div>
 
 <script type="text/javascript">

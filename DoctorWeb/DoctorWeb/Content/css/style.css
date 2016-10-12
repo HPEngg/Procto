@@ -139,13 +139,13 @@ input[name=Age], select[name=Gender] {
     box-sizing: border-box;
     font-family: montserrat;
     color: #2C3E50;
-    float:left;
+    float: left;
     font-size: 12px;
 }
 
 select[name=Gender] {
-    margin-right:0px;
-    width:48% !important;
+    margin-right: 0px;
+    width: 48% !important;
 }
 
 #msform select {
@@ -642,7 +642,7 @@ select.pre1 {
     }
 
     #msform_right {
-        width: 55% !important;
+        width: 100% !important;
     }
 
     .left_part_form1 {
@@ -854,32 +854,60 @@ td {
 .webcam_img {
     float: left;
     display: block;
-    width: 50px;
-    height: 50px;
+    width: 35px;
+    height: 35px;
 }
 
 .profile_pic_img {
     float: left;
     display: block;
-    width: 50px;
-    height: 50px;
+    width: 35px;
+    height: 35px;
     margin-left: 10px;
 }
 
 
 .co_from_main {
-  float: left;
-  margin-right: 5px;
-  width: 48%;
+    float: left;
+    margin-right: 5px;
+    width: 48%;
 }
 
 .my-mdform .mystep2all .label_res {
-  float: left;
-  text-align: left;
-  width: 100% !important;
+    float: left;
+    text-align: left;
+    width: 100% !important;
 }
 
 .widthheight {
-    max-width:100% !important;
-    float:left !important;
+    max-width: 100% !important;
+    float: left !important;
+}
+
+
+/*PRESCRIPTION PAGE CSS*/
+
+#msform_right .top {
+    display: none;
+}
+
+#msform_right_main {
+    float: left;
+    width: 55%;
+}
+
+
+#payment_types {
+    float: left;
+    padding-right: 20px;
+}
+
+#FollowDate {
+    width: 150px !important;
+    height: 25px;
+    padding-left: 10px;
+    padding-bottom: 0px;
+    float: left;
+    text-align: center;
+    color: #000;
 }

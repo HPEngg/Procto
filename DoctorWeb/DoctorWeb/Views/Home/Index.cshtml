@@ -5,11 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Patient</h2>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
     <div id="msform">
         <div class="form_fieldset_div">
             <!-- fieldsets -- one-->
@@ -518,13 +516,17 @@
     </div>
 }
 
-<div id="msform_right">
-    @*@{ Html.Partial("Prescription"); }*@
-    <iframe src='@Url.Action("Prescription", "Home")' width="500" height="1000" frameborder="0"></iframe>
+<div id="msform_right_main">
+    @*@Html.Partial("Prescription", Model)*@
+    <iframe src='@Url.Action("Prescription", "Home")' id="my-iframe" width="100%" height="2000" frameborder="0"></iframe>
+
+    @*<iframe name="ifr"></iframe>
+    @Html.ActionLink("Prescription", "Home", null, new { target = "ifr" })*@
+
 </div>
 
 <script type="text/javascript">
-    $("#ReferredBy").change(function () {
+    jQuery("#ReferredBy").change(function () {
         if (jQuery("#ReferredBy").val() == "1") {
             jQuery("#Referred_Doctor").css("display", "block");
             jQuery("#Referred_Relative").css("display", "none");

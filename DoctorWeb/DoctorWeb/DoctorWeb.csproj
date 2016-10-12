@@ -545,6 +545,7 @@
     <Content Include="Views\PaymentType\Edit.cshtml" />
     <Content Include="Views\PaymentType\Index.cshtml" />
     <Content Include="Views\Home\Prescription.cshtml" />
+    <Content Include="Views\Shared\_PrescriptionLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

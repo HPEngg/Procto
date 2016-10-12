@@ -27,7 +27,6 @@ namespace DoctorWeb.Models
 
         [DataType(DataType.MultilineText)]
         public string RemindMeAbout { get; set; }
-
         public int DoctorID { get; set; }
         public virtual Doctor Doctor { get; set; }
 

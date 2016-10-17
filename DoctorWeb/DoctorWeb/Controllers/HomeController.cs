@@ -80,6 +80,43 @@ namespace DoctorWeb.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Prescription(PrescriptionHome model)
+        {
+            var prescription = new Prescription()
+            {
+                Date = DateTime.Now,
+                Diagnosis = model.Diagnosis,
+                Procedure = model.Procedure,
+                Days = model.Days,
+                DoctorID = model.DoctorID,
+                InstructionID = model.InstructionID,
+                PatientID = model.PatientID,
+                PatientTypeID = model.PatientTypeID,
+                FollowDate = model.FollowDate,
+                Less = model.Less,
+                Pending = model.Pending,
+                Percent = model.Percent,
+                Received = model.Received,
+                Rs = model.Rs,
+                M = model.M,
+            };
+            if (ModelState.IsValid)
+            {
+                db.Prescriptions.Add(prescription);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name", prescription.DoctorID);
+            ViewBag.InstructionID = new SelectList(db.Instructions, "ID", "Name", prescription.InstructionID);
+            ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name", prescription.PatientID);
+            ViewBag.PatientTypeID = new SelectList(db.PatientTypes, "ID", "PatientTypeName", prescription.PatientTypeID);
+
+            return RedirectToAction("Prescription");
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

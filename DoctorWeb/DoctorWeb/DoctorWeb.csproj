@@ -199,6 +199,7 @@
     <Compile Include="Controllers\DoctorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstructionController.cs" />
+    <Compile Include="Controllers\InvoiceController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MedicineController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
@@ -546,6 +547,13 @@
     <Content Include="Views\PaymentType\Index.cshtml" />
     <Content Include="Views\Home\Prescription.cshtml" />
     <Content Include="Views\Shared\_PrescriptionLayout.cshtml" />
+    <Content Include="Views\Invoice\Create.cshtml" />
+    <Content Include="Views\Invoice\Delete.cshtml" />
+    <Content Include="Views\Invoice\Details.cshtml" />
+    <Content Include="Views\Invoice\Edit.cshtml" />
+    <Content Include="Views\Invoice\Daily.cshtml" />
+    <Content Include="Views\Invoice\Weekly.cshtml" />
+    <Content Include="Views\Invoice\Monthly.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

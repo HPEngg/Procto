@@ -62,10 +62,10 @@
                     @*<li class="active"><div id="icondiv"><span class="icon-align-justify"></span></div><div id="icontitlediv">@Html.ActionLink("Add Image", "Index", "Pictures")</div></li>*@
                     <li class="dropdown">
                         <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Invoice List</div></a>
-                        <ul @if (ctrName == "Prescription" && actnName == "Index") { <text> style="display:block;" </text>  }>
-                            <li @if (ctrName == "Prescription" && actnName == "Index") { <text> class="active" </text>  }><div id="icontitlediv">@Html.ActionLink("Daily List", "Index", "Prescription")</div></li>
-                            <li @if (ctrName == "Prescription" && actnName == "Create") { <text> class="active" </text>  }><div id="icontitlediv">@Html.ActionLink("Weekly List", "Index", "Prescription")</div></li>
-                            <li @if (ctrName == "Prescription" && actnName == "Delete") { <text> class="active" </text>  }><div id="icontitlediv">@Html.ActionLink("Monthly List", "Index", "Prescription")</div></li>
+                        <ul @if (ctrName == "Invoice" && actnName == "Index") { <text> style="display:block;" </text>  }>
+                            <li @if (ctrName == "Invoice" && actnName == "Daily") { <text> class="active" </text>  }><div id="icontitlediv">@Html.ActionLink("Daily List", "Daily", "Invoice")</div></li>
+                            <li @if (ctrName == "Invoice" && actnName == "Weekly") { <text> class="active" </text>  }><div id="icontitlediv">@Html.ActionLink("Weekly List", "Weekly", "Invoice")</div></li>
+                            <li @if (ctrName == "Invoice" && actnName == "Monthly") { <text> class="active" </text>  }><div id="icontitlediv">@Html.ActionLink("Monthly List", "Monthly", "Invoice")</div></li>
                         </ul>
                     </li>
                     @* MEDICINE *@

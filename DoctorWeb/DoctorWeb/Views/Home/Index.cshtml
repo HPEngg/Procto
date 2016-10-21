@@ -499,13 +499,13 @@
                             </div>
                         </div>
 
-                        <div class="mystep2all">
+                        @*<div class="mystep2all">
                             @Html.LabelFor(model => model.PatientHistory.PatientID, "PatientID", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
                                 @Html.DropDownList("PatientID", null, htmlAttributes: new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.PatientHistory.PatientID, "", new { @class = "text-danger" })
                             </div>
-                        </div>
+                        </div>*@
                         @*@Html.HiddenFor(model => model.PatientHistory.PatientID)*@
 
                         <input type="submit" value="Submit Query" class="next action-button" />

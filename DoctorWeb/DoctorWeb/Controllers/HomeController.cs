@@ -106,7 +106,7 @@ namespace DoctorWeb.Controllers
             {
                 db.Prescriptions.Add(prescription);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Prescription");
             }
 
             ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name", prescription.DoctorID);

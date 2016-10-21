@@ -19,7 +19,8 @@
     <script type="text/javascript" src="~/Content/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="~/Content/js/jquery.cookie.js"></script>
     <script type="text/javascript" src="~/Content/js/custom.js"></script>
-    @Styles.Render("~/Content/css")
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
@@ -179,9 +180,9 @@
             </div>
             <!--headerpanel-->
 
-            <div class="pagetitle">
+            @*<div class="pagetitle">
                 <h1>@ViewBag.Title</h1>
-            </div>
+            </div>*@
             <!--pagetitle-->
             <div class="maincontent">
 

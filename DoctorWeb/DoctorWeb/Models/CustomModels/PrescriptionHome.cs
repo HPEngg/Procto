@@ -12,7 +12,7 @@ namespace DoctorWeb.Models.CustomModels
         public string Diagnosis { get; set; }
         public string Procedure { get; set; }
         public DateTime DateCreated { get; set; }
-        public DateTime FollowDate { get; set; }
+        public DateTime? FollowDate { get; set; }
 
         public int DoctorID { get; set; }
         public int PatientID { get; set; }

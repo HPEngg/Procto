@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 
 namespace DoctorWeb.Controllers
 {
@@ -46,6 +47,7 @@ namespace DoctorWeb.Controllers
                 p = db.Patients.Add(patient);
                 db.SaveChanges();
                 //return RedirectToAction("Index");
+                ViewBag.Message = "Patient Added Successfully";
             }
 
             ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name", patient.DoctorID);
@@ -56,12 +58,12 @@ namespace DoctorWeb.Controllers
             {
                 db.PatientHistories.Add(patientHistory);
                 db.SaveChanges();
-                //return RedirectToAction("Index");
+                //return RedirectToAction("Index");              
             }
 
             ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name", patientHistory.PatientID);
-
-            return RedirectToAction("Index");
+            return View();
+            //return RedirectToAction("Index");
         }
 
         public ActionResult Prescription()
@@ -94,7 +96,7 @@ namespace DoctorWeb.Controllers
                 InstructionID = model.InstructionID,
                 PatientID = model.PatientID,
                 PatientTypeID = model.PatientTypeID,
-                FollowDate = model.FollowDate,
+                FollowDate = (DateTime) model.FollowDate,
                 Less = model.Less,
                 Pending = model.Pending,
                 Percent = model.Percent,
@@ -106,6 +108,7 @@ namespace DoctorWeb.Controllers
             {
                 db.Prescriptions.Add(prescription);
                 db.SaveChanges();
+                ViewBag.Message = "Patient Prescription Created Successfully";
                 return RedirectToAction("Prescription");
             }
 

@@ -114,7 +114,7 @@ namespace DoctorWeb.Controllers
             {
                 db.Entry(prescription).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Daily");
             }
             ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name", prescription.DoctorID);
             ViewBag.InstructionID = new SelectList(db.Instructions, "ID", "Name", prescription.InstructionID);

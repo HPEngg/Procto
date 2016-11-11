@@ -15,15 +15,9 @@ namespace DoctorWeb.Controllers
 
         public ActionResult Search(String PatientName)
         {
-            var patient = db.Patients.Where(p => p.Name == PatientName).First();
+            var model = db.Patients.Where(p => p.Name.Contains(PatientName)).Select(p => new PatientSearch() { DepartmentName = p.DepartmentID.ToString(), Name = p.Name, No = p.ID, RefferalName = "test" });
 
-            var model = new PatientHome();
-            model.Patient = patient;
-
-            ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name");
-            ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name");
-
-            return View("Index", model);
+            return View(model.ToList());
         }
 
         public ActionResult Index()

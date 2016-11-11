@@ -225,6 +225,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Charge.cs" />
     <Compile Include="Models\CustomModels\PatientHome.cs" />
+    <Compile Include="Models\CustomModels\PatientSearch.cs" />
     <Compile Include="Models\CustomModels\Prescription.cs" />
     <Compile Include="Models\CustomModels\PrescriptionHome.cs" />
     <Compile Include="Models\Doctor.cs" />
@@ -713,6 +714,8 @@
     <Content Include="Views\Invoice\Daily.cshtml" />
     <Content Include="Views\Invoice\Weekly.cshtml" />
     <Content Include="Views\Invoice\Monthly.cshtml" />
+    <Content Include="Views\Shared\_LightBoxLayout.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

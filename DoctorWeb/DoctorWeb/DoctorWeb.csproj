@@ -716,6 +716,7 @@
     <Content Include="Views\Invoice\Monthly.cshtml" />
     <Content Include="Views\Shared\_LightBoxLayout.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Home\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

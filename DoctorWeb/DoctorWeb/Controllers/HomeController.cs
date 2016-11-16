@@ -127,5 +127,14 @@ namespace DoctorWeb.Controllers
 
             return View();
         }
+
+        public ActionResult Edit(int id)
+        {
+            var model = new PatientHome();
+            model.Patient = db.Patients.Find(id);
+            ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name");
+            ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name");
+            return View(model);
+        }
     }
 }

@@ -1,12 +1,19 @@
 ﻿@model IEnumerable<DoctorWeb.Models.CustomModels.PatientSearch>
 @{
     ViewBag.Title = "Search";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
     Layout = "~/Views/Shared/_LightBoxLayout.cshtml";
 }
 
-<h2>Search</h2>
+<script src="~/Content/js/jquery-1.11.1.min.js"></script>
+        
+<script src="~/Content/js/jquery-ui.min.js"></script>
 
-<table class="table">
+<link rel="stylesheet" href="~/Content/css/jquery-ui.css" />
+
+@*<h2>Search</h2>*@
+
+<table class="table" id="SearchRecords">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.No)
@@ -43,3 +50,15 @@
         </tr>
     }
 </table>
+
+<script type="text/javascript">
+    $(function () {
+        $("#SearchRecords").dialog({
+            autoOpen: true
+        });
+
+        //$("#search_btn").click(function () {
+        //    $("#SearchRecords").dialog('open');
+        //});
+    });
+</script>

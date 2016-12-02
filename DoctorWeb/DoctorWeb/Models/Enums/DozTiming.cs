@@ -5,8 +5,8 @@ using System.Web;
 
 namespace DoctorWeb.Models.Enums
 {
-    public enum DozTiming
-    {
-        AfterFood, BeforeFood
-    }
+    //public enum DozTiming
+    //{
+    //    AfterFood, BeforeFood
+    //}
 }

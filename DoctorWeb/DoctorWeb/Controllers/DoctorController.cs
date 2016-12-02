@@ -46,7 +46,7 @@ namespace DoctorWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name,Email,Contact,DoctorType")] Doctor doctor)
+        public ActionResult Create([Bind(Include = "ID,Name,Address,Contact,Email,DoctorType")] Doctor doctor)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace DoctorWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,Email,Contact,DoctorType")] Doctor doctor)
+        public ActionResult Edit([Bind(Include = "ID,Name,Address,Contact,Email,DoctorType")] Doctor doctor)
         {
             if (ModelState.IsValid)
             {

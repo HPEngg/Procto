@@ -139,7 +139,8 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            @*@Html.ActionLink("Back to List", "Index")*@
+            <a href="javascript:void(0);" onclick="history.go(-1);">Back to Details</a>
         </div>
     }
 </div>

@@ -17,10 +17,10 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.OINT, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.OINTTypeID, "OINTTypeID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.OINT, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.OINT, "", new { @class = "text-danger" })
+                @Html.DropDownList("OINTTypeID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.OINTTypeID, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -33,34 +33,44 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Morning, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.MorningDozID, "MorningDozID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.Morning, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Morning, "", new { @class = "text-danger" })
+                @Html.DropDownList("MorningDozID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MorningDozID, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Noon, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.NoonDozID, "NoonDozID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.Noon, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Noon, "", new { @class = "text-danger" })
+                @Html.DropDownList("NoonDozID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.NoonDozID, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Night, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.NightDozID, "NightDozID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.Night, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Night, "", new { @class = "text-danger" })
+                @Html.DropDownList("NightDozID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.NightDozID, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.DozTiming, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.DosageID, "DosageID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.DozTiming, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.DozTiming, "", new { @class = "text-danger" })
+                @Html.DropDownList("DosageID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DosageID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsDayAffected, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.IsDayAffected)
+                    @Html.ValidationMessageFor(model => model.IsDayAffected, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
 

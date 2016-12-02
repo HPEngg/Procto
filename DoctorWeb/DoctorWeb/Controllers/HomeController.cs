@@ -37,7 +37,7 @@ namespace DoctorWeb.Controllers
             //This line is temporary fix
             Patient p = new Patient();
             patient.DoctorID = 1;
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) 
             {
                 p = db.Patients.Add(patient);
                 db.SaveChanges();

@@ -43,6 +43,25 @@ namespace DoctorWeb.Models
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+
+            //modelBuilder.Entity<Medicine>()
+            //        .HasRequired(m => m.Morning)
+            //        .WithMany(t => t.MorningMedicines)
+            //        .HasForeignKey(m => m.MorningDozID)
+            //        .WillCascadeOnDelete(false);
+
+            //modelBuilder.Entity<Medicine>()
+            //        .HasRequired(m => m.Noon)
+            //        .WithMany(t => t.NoonMedicines)
+            //        .HasForeignKey(m => m.NoonDozID)
+            //        .WillCascadeOnDelete(false);
+
+            //modelBuilder.Entity<Medicine>()
+            //        .HasRequired(m => m.Night)
+            //        .WithMany(t => t.NightMedicines)
+            //        .HasForeignKey(m => m.NightDozID)
+            //        .WillCascadeOnDelete(false);
+
         }
 
         public DbSet<Doctor> Doctors { get; set; }
@@ -57,6 +76,10 @@ namespace DoctorWeb.Models
         public DbSet<Picture> Pictures { get; set; }
         public DbSet<Charge> Charges { get; set; }
         public DbSet<PrescriptionCategory> PrescriptionCategories { get; set; }
+        public DbSet<OINTType> OINTTypes { get; set; }
+        public DbSet<Dosage> Dosages { get; set; }
+        public DbSet<Doz> Dozes { get; set; }
+
 
         public System.Data.Entity.DbSet<DoctorWeb.Models.PatientHistory> PatientHistories { get; set; }
     }

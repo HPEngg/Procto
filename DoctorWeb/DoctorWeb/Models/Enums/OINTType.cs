@@ -5,8 +5,8 @@ using System.Web;
 
 namespace DoctorWeb.Models.Enums
 {
-    public enum OINTType
-    {
-        Tab, Syp, Cap
-    }
+    //public enum OINTType
+    //{
+    //    Tab, Syp, Cap
+    //}
 }

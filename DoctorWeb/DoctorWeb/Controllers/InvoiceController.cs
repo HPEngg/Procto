@@ -54,35 +54,35 @@ namespace DoctorWeb.Controllers
         }
 
         // GET: Invoice/Create
-        public ActionResult Create()
-        {
-            ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name");
-            ViewBag.InstructionID = new SelectList(db.Instructions, "ID", "Name");
-            ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name");
-            ViewBag.PatientTypeID = new SelectList(db.PatientTypes, "ID", "PatientTypeName");
-            return View();
-        }
+        //public ActionResult Create()
+        //{
+        //    ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name");
+        //    ViewBag.InstructionID = new SelectList(db.Instructions, "ID", "Name");
+        //    ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name");
+        //    ViewBag.PatientTypeID = new SelectList(db.PatientTypes, "ID", "PatientTypeName");
+        //    return View();
+        //}
 
         // POST: Invoice/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Days,Diagnosis,Procedure,Date,FollowDate,M,Percent,Less,Rs,Received,Pending,DoctorID,PatientID,InstructionID,PatientTypeID")] Prescription prescription)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Prescriptions.Add(prescription);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "ID,Days,Diagnosis,Procedure,Date,FollowDate,M,Percent,Less,Rs,Received,Pending,DoctorID,PatientID,InstructionID,PatientTypeID")] Prescription prescription)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Prescriptions.Add(prescription);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
 
-            ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name", prescription.DoctorID);
-            ViewBag.InstructionID = new SelectList(db.Instructions, "ID", "Name", prescription.InstructionID);
-            ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name", prescription.PatientID);
-            ViewBag.PatientTypeID = new SelectList(db.PatientTypes, "ID", "PatientTypeName", prescription.PatientTypeID);
-            return View(prescription);
-        }
+        //    ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name", prescription.DoctorID);
+        //    ViewBag.InstructionID = new SelectList(db.Instructions, "ID", "Name", prescription.InstructionID);
+        //    ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name", prescription.PatientID);
+        //    ViewBag.PatientTypeID = new SelectList(db.PatientTypes, "ID", "PatientTypeName", prescription.PatientTypeID);
+        //    return View(prescription);
+        //}
 
         // GET: Invoice/Edit/5
         public ActionResult Edit(int? id)
@@ -146,7 +146,7 @@ namespace DoctorWeb.Controllers
             Prescription prescription = db.Prescriptions.Find(id);
             db.Prescriptions.Remove(prescription);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("/Daily");
         }
 
         protected override void Dispose(bool disposing)

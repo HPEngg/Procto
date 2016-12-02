@@ -216,29 +216,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201610091052137_InitialCreate.cs" />
-    <Compile Include="Migrations\201610091052137_InitialCreate.Designer.cs">
-      <DependentUpon>201610091052137_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610091136341_DOA_DOD_Now_nullable.cs" />
-    <Compile Include="Migrations\201610091136341_DOA_DOD_Now_nullable.Designer.cs">
-      <DependentUpon>201610091136341_DOA_DOD_Now_nullable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612011306056_AddressCOlumnAdded.cs" />
-    <Compile Include="Migrations\201612011306056_AddressCOlumnAdded.Designer.cs">
-      <DependentUpon>201612011306056_AddressCOlumnAdded.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612020810009_NewEnumTablesAdded.cs" />
-    <Compile Include="Migrations\201612020810009_NewEnumTablesAdded.Designer.cs">
-      <DependentUpon>201612020810009_NewEnumTablesAdded.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612021050553_NewEnumTablesAdded1.cs" />
-    <Compile Include="Migrations\201612021050553_NewEnumTablesAdded1.Designer.cs">
-      <DependentUpon>201612021050553_NewEnumTablesAdded1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612021125429_NewEnumTablesAdded2.cs" />
-    <Compile Include="Migrations\201612021125429_NewEnumTablesAdded2.Designer.cs">
-      <DependentUpon>201612021125429_NewEnumTablesAdded2.cs</DependentUpon>
+    <Compile Include="Migrations\201612021210429_Initial.cs" />
+    <Compile Include="Migrations\201612021210429_Initial.Designer.cs">
+      <DependentUpon>201612021210429_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -767,23 +747,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201610091052137_InitialCreate.resx">
-      <DependentUpon>201610091052137_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610091136341_DOA_DOD_Now_nullable.resx">
-      <DependentUpon>201610091136341_DOA_DOD_Now_nullable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612011306056_AddressCOlumnAdded.resx">
-      <DependentUpon>201612011306056_AddressCOlumnAdded.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612020810009_NewEnumTablesAdded.resx">
-      <DependentUpon>201612020810009_NewEnumTablesAdded.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612021050553_NewEnumTablesAdded1.resx">
-      <DependentUpon>201612021050553_NewEnumTablesAdded1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612021125429_NewEnumTablesAdded2.resx">
-      <DependentUpon>201612021125429_NewEnumTablesAdded2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612021210429_Initial.resx">
+      <DependentUpon>201612021210429_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -9,8 +9,7 @@ namespace DoctorWeb.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
-            ContextKey = "DoctorWeb.Models.ApplicationDbContext";
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(DoctorWeb.Models.ApplicationDbContext context)

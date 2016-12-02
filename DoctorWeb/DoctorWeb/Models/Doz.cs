@@ -10,8 +10,10 @@ namespace DoctorWeb.Models
         public int ID { get; set; }
         public string Name { get; set; }
 
-        public ICollection<Medicine> MorningMedicines { get; set; }
-        public ICollection<Medicine> NoonMedicines { get; set; }
-        public ICollection<Medicine> NightMedicines { get; set; }
+        public IEnumerable<Medicine> MorningMedicines { get; set; }
+        public IEnumerable<Medicine> NoonMedicines { get; set; }
+        public IEnumerable<Medicine> NightMedicines { get; set; }
+
+        //public IEnumerable<Medicine> Medicines { get; set; }
     }
 }

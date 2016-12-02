@@ -3,7 +3,7 @@ namespace DoctorWeb.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class Initial : DbMigration
     {
         public override void Up()
         {
@@ -68,6 +68,7 @@ namespace DoctorWeb.Migrations
                     {
                         ID = c.Int(nullable: false, identity: true),
                         Name = c.String(),
+                        Address = c.String(),
                         Email = c.String(),
                         Contact = c.String(),
                         DoctorType = c.String(),
@@ -120,22 +121,60 @@ namespace DoctorWeb.Migrations
                 .PrimaryKey(t => t.ID);
             
             CreateTable(
+                "dbo.Dosages",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                    })
+                .PrimaryKey(t => t.ID);
+            
+            CreateTable(
+                "dbo.Dozs",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                    })
+                .PrimaryKey(t => t.ID);
+            
+            CreateTable(
                 "dbo.Medicines",
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
-                        OINT = c.Int(nullable: false),
+                        OINTTypeID = c.Int(nullable: false),
                         OINTMore = c.String(),
-                        Morning = c.Int(nullable: false),
-                        Noon = c.Int(nullable: false),
-                        Night = c.Int(nullable: false),
-                        DozTiming = c.Int(nullable: false),
+                        MorningDozID = c.Int(nullable: false),
+                        NoonDozID = c.Int(nullable: false),
+                        NightDozID = c.Int(nullable: false),
+                        DosageID = c.Int(nullable: false),
+                        IsDayAffected = c.Boolean(nullable: false),
                         Quantity = c.Single(nullable: false),
                         PrescriptionCategoryID = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.Dosages", t => t.DosageID)
+                .ForeignKey("dbo.Dozs", t => t.MorningDozID)
+                .ForeignKey("dbo.Dozs", t => t.NightDozID)
+                .ForeignKey("dbo.Dozs", t => t.NoonDozID)
+                .ForeignKey("dbo.OINTTypes", t => t.OINTTypeID)
                 .ForeignKey("dbo.PrescriptionCategories", t => t.PrescriptionCategoryID)
+                .Index(t => t.OINTTypeID)
+                .Index(t => t.MorningDozID)
+                .Index(t => t.NoonDozID)
+                .Index(t => t.NightDozID)
+                .Index(t => t.DosageID)
                 .Index(t => t.PrescriptionCategoryID);
+            
+            CreateTable(
+                "dbo.OINTTypes",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                    })
+                .PrimaryKey(t => t.ID);
             
             CreateTable(
                 "dbo.PrescriptionCategories",
@@ -194,8 +233,8 @@ namespace DoctorWeb.Migrations
                         Proctoscopy = c.String(),
                         LightOnOff = c.Boolean(nullable: false),
                         Other = c.String(),
-                        DOA = c.DateTime(nullable: false),
-                        DOD = c.DateTime(nullable: false),
+                        DOA = c.DateTime(),
+                        DOD = c.DateTime(),
                         Dignosis = c.String(),
                         Procedure = c.String(),
                         Comment = c.String(),
@@ -220,18 +259,31 @@ namespace DoctorWeb.Migrations
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
-                        OINT = c.Int(nullable: false),
+                        OINTTypeID = c.Int(nullable: false),
                         OINTMore = c.String(),
-                        Morning = c.Int(nullable: false),
-                        Noon = c.Int(nullable: false),
-                        Night = c.Int(nullable: false),
-                        DozTiming = c.Int(nullable: false),
+                        MorningDozID = c.Int(nullable: false),
+                        NoonDozID = c.Int(nullable: false),
+                        NightDozID = c.Int(nullable: false),
+                        DosageID = c.Int(nullable: false),
                         Quantity = c.Single(nullable: false),
                         PrescriptionID = c.Int(nullable: false),
+                        Morning_ID = c.Int(),
+                        Night_ID = c.Int(),
+                        Noon_ID = c.Int(),
                     })
                 .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.Dosages", t => t.DosageID)
+                .ForeignKey("dbo.Dozs", t => t.Morning_ID)
+                .ForeignKey("dbo.Dozs", t => t.Night_ID)
+                .ForeignKey("dbo.Dozs", t => t.Noon_ID)
+                .ForeignKey("dbo.OINTTypes", t => t.OINTTypeID)
                 .ForeignKey("dbo.Prescriptions", t => t.PrescriptionID)
-                .Index(t => t.PrescriptionID);
+                .Index(t => t.OINTTypeID)
+                .Index(t => t.DosageID)
+                .Index(t => t.PrescriptionID)
+                .Index(t => t.Morning_ID)
+                .Index(t => t.Night_ID)
+                .Index(t => t.Noon_ID);
             
             CreateTable(
                 "dbo.AspNetRoles",
@@ -310,8 +362,18 @@ namespace DoctorWeb.Migrations
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.PrescriptionMedicines", "PrescriptionID", "dbo.Prescriptions");
+            DropForeignKey("dbo.PrescriptionMedicines", "OINTTypeID", "dbo.OINTTypes");
+            DropForeignKey("dbo.PrescriptionMedicines", "Noon_ID", "dbo.Dozs");
+            DropForeignKey("dbo.PrescriptionMedicines", "Night_ID", "dbo.Dozs");
+            DropForeignKey("dbo.PrescriptionMedicines", "Morning_ID", "dbo.Dozs");
+            DropForeignKey("dbo.PrescriptionMedicines", "DosageID", "dbo.Dosages");
             DropForeignKey("dbo.PatientHistories", "PatientID", "dbo.Patients");
             DropForeignKey("dbo.Medicines", "PrescriptionCategoryID", "dbo.PrescriptionCategories");
+            DropForeignKey("dbo.Medicines", "OINTTypeID", "dbo.OINTTypes");
+            DropForeignKey("dbo.Medicines", "NoonDozID", "dbo.Dozs");
+            DropForeignKey("dbo.Medicines", "NightDozID", "dbo.Dozs");
+            DropForeignKey("dbo.Medicines", "MorningDozID", "dbo.Dozs");
+            DropForeignKey("dbo.Medicines", "DosageID", "dbo.Dosages");
             DropForeignKey("dbo.Charges", "PrescriptionID", "dbo.Prescriptions");
             DropForeignKey("dbo.Prescriptions", "PatientTypeID", "dbo.PatientTypes");
             DropForeignKey("dbo.Prescriptions", "PatientID", "dbo.Patients");
@@ -325,9 +387,19 @@ namespace DoctorWeb.Migrations
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.PrescriptionMedicines", new[] { "Noon_ID" });
+            DropIndex("dbo.PrescriptionMedicines", new[] { "Night_ID" });
+            DropIndex("dbo.PrescriptionMedicines", new[] { "Morning_ID" });
             DropIndex("dbo.PrescriptionMedicines", new[] { "PrescriptionID" });
+            DropIndex("dbo.PrescriptionMedicines", new[] { "DosageID" });
+            DropIndex("dbo.PrescriptionMedicines", new[] { "OINTTypeID" });
             DropIndex("dbo.PatientHistories", new[] { "PatientID" });
             DropIndex("dbo.Medicines", new[] { "PrescriptionCategoryID" });
+            DropIndex("dbo.Medicines", new[] { "DosageID" });
+            DropIndex("dbo.Medicines", new[] { "NightDozID" });
+            DropIndex("dbo.Medicines", new[] { "NoonDozID" });
+            DropIndex("dbo.Medicines", new[] { "MorningDozID" });
+            DropIndex("dbo.Medicines", new[] { "OINTTypeID" });
             DropIndex("dbo.Patients", new[] { "DoctorID" });
             DropIndex("dbo.Prescriptions", new[] { "PatientTypeID" });
             DropIndex("dbo.Prescriptions", new[] { "InstructionID" });
@@ -345,7 +417,10 @@ namespace DoctorWeb.Migrations
             DropTable("dbo.PatientHistories");
             DropTable("dbo.Offlines");
             DropTable("dbo.PrescriptionCategories");
+            DropTable("dbo.OINTTypes");
             DropTable("dbo.Medicines");
+            DropTable("dbo.Dozs");
+            DropTable("dbo.Dosages");
             DropTable("dbo.PatientTypes");
             DropTable("dbo.Patients");
             DropTable("dbo.Instructions");

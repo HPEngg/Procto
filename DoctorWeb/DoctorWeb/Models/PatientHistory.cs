@@ -12,7 +12,10 @@ namespace DoctorWeb.Models
         public int ID { get; set; }
         public string RP { get; set; }
         public string KCO { get; set; }
+
+        [Display(Name = "C / O")]
         public string CO { get; set; }
+        [Display(Name = "Complain")]
         public string ComplainForm { get; set; }
         public int Constipation { get; set; }
         public string ConstipationMore { get; set; }
@@ -24,11 +27,13 @@ namespace DoctorWeb.Models
         public Bleeding BleedingMore { get; set; }
         public int Itching { get; set; }
         public string ItchingMore { get; set; }
+        [Display(Name = "Pus Drainage")]
         public int PusDrainage { get; set; }
         public string PusDrainageMore { get; set; }
         public int Swelling { get; set; }
         public string SwellingMore { get; set; }
         public string SCO { get; set; }
+        [Display(Name = "A/C/O")]
         public string ACO { get; set; }
         public string Allergy { get; set; }
         public string History { get; set; }

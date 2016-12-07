@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -14,6 +15,7 @@ namespace DoctorWeb.Models
 
         public DateTime Date { get; set; }
 
+        [Display(Name = "Follow Date")]
         public DateTime FollowDate { get; set; }
 
         //List of payment type will be added here dynamically
@@ -22,6 +24,8 @@ namespace DoctorWeb.Models
         public string M { get; set; }
         public int Percent { get; set; }
         public string Less { get; set; }
+
+        [Display(Name = "Invoiced Rs.")]
         public string Rs { get; set; }
         public Decimal Received { get; set; }
         public Decimal Pending{ get; set; }

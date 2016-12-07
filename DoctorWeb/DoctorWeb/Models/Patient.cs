@@ -11,10 +11,18 @@ namespace DoctorWeb.Models
     {
         public int ID { get; set; }
         public PatientStatus Status { get; set; }
+
+        [Display(Name = "Patient's Name")]
         public string Name { get; set; }
         public int Age { get; set; }
+
+        [Display(Name = "Sex")]
         public Gender Gender { get; set; }
+
+        [Display(Name = "Address")]
         public string Address { get; set; }
+
+        [Display(Name = "Referred by")]
         public ReferredBy ReferredBy { get; set; }
         public string Relative { get; set; }
         public Department DepartmentID { get; set; }

@@ -9,6 +9,8 @@ namespace DoctorWeb.Models
     public class Doctor
     {
         public int ID { get; set; }
+
+        [Display(Name = "Doctor’s Name")]
         public string Name { get; set; }
 
         [DataType(DataType.MultilineText)]
@@ -16,6 +18,8 @@ namespace DoctorWeb.Models
 
         public string Email { get; set; }
         public string Contact { get; set; }
+
+        [Display(Name = "Type")]
         public string DoctorType { get; set; }
 
         public IEnumerable<Patient> Patients { get; set; }

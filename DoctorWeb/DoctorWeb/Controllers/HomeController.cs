@@ -30,6 +30,13 @@ namespace DoctorWeb.Controllers
         }
 
         [HttpPost]
+        public JsonResult AutoComplete(string MedicineName)
+        {
+            var model = db.Medicines.Where(m => m.OINTMore.Contains(MedicineName));
+            return Json(model.ToList());
+        }
+
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Index(PatientHome model)
         {
@@ -57,22 +64,33 @@ namespace DoctorWeb.Controllers
             }
 
             ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name", patientHistory.PatientID);
-            return View();
+            return RedirectToAction("Edit", new { id = p.ID });
             //return RedirectToAction("Index");
         }
 
-        public ActionResult Prescription()
+        static int prescr_success = 0;
+        public ActionResult Prescription(int patientID)
         {
-            ViewBag.Message = "Your application description page.";
-
+            //ViewBag.Message = "Your application description page.";
+            if (prescr_success == 1) {
+                ViewBag.Message = "Patient Prescription Created Successfully";
+                prescr_success = 0;
+            }
             var model = new PrescriptionHome();
             model.Categories = db.PrescriptionCategories;
             model.PaymentTypes = db.PaymentTypes;
 
             ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name");
             ViewBag.InstructionID = new SelectList(db.Instructions, "ID", "Name");
-            ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name");
+            ViewBag.PatientID = patientID;
             ViewBag.PatientTypeID = new SelectList(db.PatientTypes, "ID", "PatientTypeName");
+
+            ViewBag.DosageID = new SelectList(db.Dosages, "ID", "Name");
+            ViewBag.MorningDozID = new SelectList(db.Dozes, "ID", "Name");
+            ViewBag.NightDozID = new SelectList(db.Dozes, "ID", "Name");
+            ViewBag.NoonDozID = new SelectList(db.Dozes, "ID", "Name");
+            ViewBag.OINTTypeID = new SelectList(db.OINTTypes, "ID", "Name");
+            ViewBag.PrescriptionCategoryID = new SelectList(db.PrescriptionCategories, "ID", "Name");
 
             return View(model);
         }
@@ -103,8 +121,9 @@ namespace DoctorWeb.Controllers
             {
                 db.Prescriptions.Add(prescription);
                 db.SaveChanges();
-                ViewBag.Message = "Patient Prescription Created Successfully";
-                return RedirectToAction("Prescription");
+              //  ViewBag.Message = "Patient Prescription Created Successfully";
+                prescr_success = 1;
+                return RedirectToAction("Prescription", new { patientID = model.PatientID });
             }
 
             ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name", prescription.DoctorID);
@@ -112,7 +131,7 @@ namespace DoctorWeb.Controllers
             ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name", prescription.PatientID);
             ViewBag.PatientTypeID = new SelectList(db.PatientTypes, "ID", "PatientTypeName", prescription.PatientTypeID);
 
-            return RedirectToAction("Prescription");
+            return RedirectToAction("Prescription", new { patientID = model.PatientID });
         }
 
         public ActionResult About()

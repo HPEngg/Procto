@@ -19,29 +19,34 @@ namespace DoctorWeb.Models
         [Display(Name = "Name")]
         public string OINTMore { get; set; }
 
-
+        [Display(Name = "Morning")]
         public int MorningDozID { get; set; }
 
         [ForeignKey("MorningDozID")]
         public virtual Doz Morning { get; set; }
 
+        [Display(Name = "Afternoon")]
         public int NoonDozID { get; set; }
 
         [ForeignKey("NoonDozID")]
         public virtual Doz Noon { get; set; }
 
+        [Display(Name = "Night")]
         public int NightDozID { get; set; }
 
         [ForeignKey("NightDozID")]
         public virtual Doz Night { get; set; }
 
+        [Display(Name = "Dosage")]
         public int DosageID { get; set; }
         public virtual Dosage Dosage { get; set; }
 
+        [Display(Name = "Affect to Qty.")]
         public bool IsDayAffected { get; set; }
 
         public float Quantity { get; set; }
 
+        [Display(Name = "Category")]
         public int PrescriptionCategoryID { get; set; }
         public virtual PrescriptionCategory  PrescriptionCategory { get; set; }
     }

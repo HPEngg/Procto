@@ -507,6 +507,23 @@ select.pre1 {
     background: #eee;
 }
 
+.plusbutton {
+  background: transparent none repeat scroll 0 0;
+  border: 1px solid #428bca !important;
+  border-radius: 100% !important;
+  color: #428bca !important;
+  font-size: 14px !important;
+  height: 20px;
+  margin: 4px 0 0 5px !important;
+  padding: 3px !important;
+  width: 20px !important;
+}
+
+.divnamepresc {
+  clear: both;
+  display: block;
+}
+
 @media screen and (max-width: 350px) {
     body {
         width: 98%;

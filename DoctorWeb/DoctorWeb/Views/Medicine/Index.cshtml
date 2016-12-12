@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>List of Medicines</h2>
+<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -13,25 +13,22 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.Dosage.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Morning.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Night.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Noon.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OINT.Name)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.OINTMore)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OINTTypeID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PrescriptionCategoryID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MorningDozID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NoonDozID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NightDozID)
-        </th>      
-        <th>
-            @Html.DisplayNameFor(model => model.DosageID)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.IsDayAffected)
@@ -39,19 +36,13 @@
         <th>
             @Html.DisplayNameFor(model => model.Quantity)
         </th>
-        <th>Action</th>
+        <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.OINTMore)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OINT.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PrescriptionCategory.Name)
+            @Html.DisplayFor(modelItem => item.Dosage.Name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Morning.Name)
@@ -63,9 +54,11 @@
             @Html.DisplayFor(modelItem => item.Noon.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Dosage.Name)
+            @Html.DisplayFor(modelItem => item.OINT.Name)
         </td>
-        
+        <td>
+            @Html.DisplayFor(modelItem => item.OINTMore)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.IsDayAffected)
         </td>

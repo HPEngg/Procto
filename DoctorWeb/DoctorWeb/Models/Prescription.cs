@@ -13,8 +13,10 @@ namespace DoctorWeb.Models
         public string Diagnosis { get; set; }
         public string Procedure { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime Date { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         [Display(Name = "Follow Date")]
         public DateTime FollowDate { get; set; }
 

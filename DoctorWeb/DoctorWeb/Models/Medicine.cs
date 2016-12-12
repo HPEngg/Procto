@@ -46,8 +46,10 @@ namespace DoctorWeb.Models
 
         public float Quantity { get; set; }
 
-        [Display(Name = "Category")]
-        public int PrescriptionCategoryID { get; set; }
-        public virtual PrescriptionCategory  PrescriptionCategory { get; set; }
+        //[Display(Name = "Category")]
+        //public int PrescriptionCategoryID { get; set; }
+        //public virtual PrescriptionCategory  PrescriptionCategory { get; set; }
+
+        public ICollection<PrescriptionCategory> PrescriptionCategories { get; set; }
     }
 }

@@ -10,6 +10,16 @@
 @*<p>
     @Html.ActionLink("Create New", "Create")
 </p>*@
+
+
+@{
+    int[] months = Enumerable.Range(1, 12).ToArray();
+    int curMonth = DateTime.Today.Month;
+}
+
+Month: @Html.DropDownList("Month", Enumerable.Range(1, 12).Select(x => new SelectListItem { Text = x.ToString(), Selected = (x == DateTime.Today.Month) }), "Month", new { @onchange = "showVal()" })
+Year: @Html.DropDownList("Year", Enumerable.Range(DateTime.Now.Year - 25, 26).Select(x => new SelectListItem { Text = x.ToString(), Selected = (x == DateTime.Today.Year) }), "Year", new { @onchange = "showVal()" })
+
 <table class="table">
     <tr>
         <th>Invoice No</th>
@@ -79,3 +89,11 @@
     }
 
 </table>
+
+<script src="Content/Script/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+
+    function showVal() {
+        window.location = "/Invoice/Monthly?Month=" + $("#Month").val() + "&Year=" + $("#Year").val();
+    }
+</script>

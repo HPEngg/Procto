@@ -36,6 +36,7 @@ namespace DoctorWeb.Controllers
             return Json(model.ToList());
         }
 
+        static int patient_success = 0;
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Index(PatientHome model)
@@ -43,13 +44,12 @@ namespace DoctorWeb.Controllers
             var patient = model.Patient;
             //This line is temporary fix
             Patient p = new Patient();
-            patient.DoctorID = 1;
+            patient.DoctorID = model.DoctorID;
             if (ModelState.IsValid) 
             {
                 p = db.Patients.Add(patient);
                 db.SaveChanges();
                 //return RedirectToAction("Index");
-                ViewBag.Message = "Patient Added Successfully";
             }
 
             ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name", patient.DoctorID);
@@ -64,6 +64,7 @@ namespace DoctorWeb.Controllers
             }
 
             ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name", patientHistory.PatientID);
+            patient_success = 1;
             return RedirectToAction("Edit", new { id = p.ID });
             //return RedirectToAction("Index");
         }
@@ -150,6 +151,11 @@ namespace DoctorWeb.Controllers
 
         public ActionResult Edit(int id)
         {
+            if (patient_success == 1)
+            {
+                ViewBag.Message = "Patient Added Successfully";
+                patient_success = 0;
+            }
             var model = new PatientHome();
             model.Patient = db.Patients.Find(id);
             ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name");

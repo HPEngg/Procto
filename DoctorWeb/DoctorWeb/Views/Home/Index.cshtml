@@ -559,18 +559,6 @@
 
 </div>
 
-@if (ViewBag.Message != null)
-{
-<script type="text/javascript">
-    jQuery.noConflict();
-    document.addEventListener('DOMContentLoaded', function () {
-        alert('@ViewBag.Message');
-    });
-
-</script>
-
-}
-
 <script type="text/javascript">
     jQuery("#ReferredBy").change(function () {
         if (jQuery("#ReferredBy").val() == "1") {

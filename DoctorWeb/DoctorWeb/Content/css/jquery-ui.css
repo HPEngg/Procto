@@ -1227,7 +1227,23 @@ body .ui-tooltip {
 /* CSS WRITTEN BY ABHAY */
 
 .ui-dialog {
-  width: 40% !important;
-  left: 30% !important;
+  width: 50% !important;
+  left: 25% !important;
   top:  25% !important;
+}
+
+#SearchRecords tr {
+    line-height:2;
+}
+
+#SearchRecords th{
+    font-weight:600;
+}
+#SearchRecords th, #SearchRecords td {
+  font-family: montserrat, arial, verdana;
+  font-size:15px;
+  padding-right: 50px;
+  text-align: left;
+  white-space: nowrap;
+  width: auto !important;
 }

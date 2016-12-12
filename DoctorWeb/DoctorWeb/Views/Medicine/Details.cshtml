@@ -11,6 +11,45 @@
     @*<h4>Medicine</h4>*@
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Dosage.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dosage.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Morning.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Morning.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Night.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Night.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Noon.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Noon.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OINT.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OINT.Name)
+        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.OINTMore)
@@ -20,55 +59,6 @@
             @Html.DisplayFor(model => model.OINTMore)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.OINTTypeID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.OINT.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PrescriptionCategoryID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PrescriptionCategory.Name)
-        </dd>
-
-       
-        <dt>
-            @Html.DisplayNameFor(model => model.MorningDozID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Morning.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NoonDozID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Noon.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NightDozID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Night.Name)
-        </dd>
-
-        
-        <dt>
-            @Html.DisplayNameFor(model => model.DosageID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Dosage.Name)
-        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.IsDayAffected)
         </dt>

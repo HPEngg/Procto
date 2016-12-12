@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DoctorWeb.Models;
+using DoctorWeb.Models.CustomModels;
 
 namespace DoctorWeb.Controllers
 {
@@ -17,7 +18,7 @@ namespace DoctorWeb.Controllers
         // GET: Medicine
         public ActionResult Index()
         {
-            var medicines = db.Medicines.Include(m => m.Dosage).Include(m => m.Morning).Include(m => m.Night).Include(m => m.Noon).Include(m => m.OINT).Include(m => m.PrescriptionCategory);
+            var medicines = db.Medicines.Include(m => m.Dosage).Include(m => m.Morning).Include(m => m.Night).Include(m => m.Noon).Include(m => m.OINT);
             return View(medicines.ToList());
         }
 
@@ -44,8 +45,11 @@ namespace DoctorWeb.Controllers
             ViewBag.NightDozID = new SelectList(db.Dozes, "ID", "Name");
             ViewBag.NoonDozID = new SelectList(db.Dozes, "ID", "Name");
             ViewBag.OINTTypeID = new SelectList(db.OINTTypes, "ID", "Name");
-            ViewBag.PrescriptionCategoryID = new SelectList(db.PrescriptionCategories, "ID", "Name");
-            return View();
+
+            var model = new MedicineViewModel() { };
+            var allCategories = db.PrescriptionCategories.ToList();
+            model.PrescriptionsCategories = allCategories.Select(o => new SelectListItem() { Text = o.Name, Value = o.ID.ToString(), Selected = false });
+            return View(model);
         }
 
         // POST: Medicine/Create
@@ -53,22 +57,27 @@ namespace DoctorWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,OINTTypeID,OINTMore,MorningDozID,NoonDozID,NightDozID,DosageID,IsDayAffected,Quantity,PrescriptionCategoryID")] Medicine medicine)
+        public ActionResult Create(MedicineViewModel model)//[Bind(Include = "ID,OINTTypeID,OINTMore,MorningDozID,NoonDozID,NightDozID,DosageID,IsDayAffected,Quantity")] Medicine medicine)
         {
+            model.Medicine.OINTTypeID = model.OINTTypeID;
+            model.Medicine.MorningDozID = model.MorningDozID;
+            model.Medicine.NoonDozID = model.NoonDozID;
+            model.Medicine.NightDozID = model.NightDozID;
+            model.Medicine.DosageID = model.DosageID;
             if (ModelState.IsValid)
             {
-                db.Medicines.Add(medicine);
+                model.Medicine.PrescriptionCategories = db.PrescriptionCategories.Where(m => model.SelectedPrescriptionCategories.Contains(m.ID)).ToList();
+                db.Entry(model.Medicine).State = EntityState.Added;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.DosageID = new SelectList(db.Dosages, "ID", "Name", medicine.DosageID);
-            ViewBag.MorningDozID = new SelectList(db.Dozes, "ID", "Name", medicine.MorningDozID);
-            ViewBag.NightDozID = new SelectList(db.Dozes, "ID", "Name", medicine.NightDozID);
-            ViewBag.NoonDozID = new SelectList(db.Dozes, "ID", "Name", medicine.NoonDozID);
-            ViewBag.OINTTypeID = new SelectList(db.OINTTypes, "ID", "Name", medicine.OINTTypeID);
-            ViewBag.PrescriptionCategoryID = new SelectList(db.PrescriptionCategories, "ID", "Name", medicine.PrescriptionCategoryID);
-            return View(medicine);
+            ViewBag.DosageID = new SelectList(db.Dosages, "ID", "Name", model.Medicine.DosageID);
+            ViewBag.MorningDozID = new SelectList(db.Dozes, "ID", "Name", model.Medicine.MorningDozID);
+            ViewBag.NightDozID = new SelectList(db.Dozes, "ID", "Name", model.Medicine.NightDozID);
+            ViewBag.NoonDozID = new SelectList(db.Dozes, "ID", "Name", model.Medicine.NoonDozID);
+            ViewBag.OINTTypeID = new SelectList(db.OINTTypes, "ID", "Name", model.Medicine.OINTTypeID);
+            return View(model.Medicine);
         }
 
         // GET: Medicine/Edit/5
@@ -78,18 +87,21 @@ namespace DoctorWeb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Medicine medicine = db.Medicines.Find(id);
-            if (medicine == null)
-            {
+            var model = new MedicineViewModel() { Medicine = db.Medicines.Include(i => i.PrescriptionCategories).First(i => i.ID == id) };
+
+            if (model.Medicine == null)
                 return HttpNotFound();
-            }
-            ViewBag.DosageID = new SelectList(db.Dosages, "ID", "Name", medicine.DosageID);
-            ViewBag.MorningDozID = new SelectList(db.Dozes, "ID", "Name", medicine.MorningDozID);
-            ViewBag.NightDozID = new SelectList(db.Dozes, "ID", "Name", medicine.NightDozID);
-            ViewBag.NoonDozID = new SelectList(db.Dozes, "ID", "Name", medicine.NoonDozID);
-            ViewBag.OINTTypeID = new SelectList(db.OINTTypes, "ID", "Name", medicine.OINTTypeID);
-            ViewBag.PrescriptionCategoryID = new SelectList(db.PrescriptionCategories, "ID", "Name", medicine.PrescriptionCategoryID);
-            return View(medicine);
+
+            var allCategories = db.PrescriptionCategories.ToList();
+
+            model.PrescriptionsCategories = allCategories.Select(o => new SelectListItem() { Text = o.Name, Value = o.ID.ToString(), Selected = model.Medicine.PrescriptionCategories.Contains(o) });
+
+            ViewBag.DosageID = new SelectList(db.Dosages, "ID", "Name", model.Medicine.DosageID);
+            ViewBag.MorningDozID = new SelectList(db.Dozes, "ID", "Name", model.Medicine.MorningDozID);
+            ViewBag.NightDozID = new SelectList(db.Dozes, "ID", "Name", model.Medicine.NightDozID);
+            ViewBag.NoonDozID = new SelectList(db.Dozes, "ID", "Name", model.Medicine.NoonDozID);
+            ViewBag.OINTTypeID = new SelectList(db.OINTTypes, "ID", "Name", model.Medicine.OINTTypeID);
+            return View(model);
         }
 
         // POST: Medicine/Edit/5
@@ -97,21 +109,38 @@ namespace DoctorWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,OINTTypeID,OINTMore,MorningDozID,NoonDozID,NightDozID,DosageID,IsDayAffected,Quantity,PrescriptionCategoryID")] Medicine medicine)
+        public ActionResult Edit(MedicineViewModel model)//[Bind(Include = "ID,OINTTypeID,OINTMore,MorningDozID,NoonDozID,NightDozID,DosageID,IsDayAffected,Quantity")] Medicine medicine)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(medicine).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var medicineToUpdate = db.Medicines.Include(i => i.PrescriptionCategories).First(i => i.ID == model.Medicine.ID);
+
+                if (TryUpdateModel(medicineToUpdate, "Medicine", new string[] { "ID", "OINTMore", "IsDayAffected", "Quantity" })) ;
+                {
+                    var newCategories = db.PrescriptionCategories.Where(m => model.SelectedPrescriptionCategories.Contains(m.ID)).ToList();
+                    var updatedCategories = new HashSet<int>(model.SelectedPrescriptionCategories);
+                    foreach (PrescriptionCategory cat in db.PrescriptionCategories)
+                    {
+                        if (!updatedCategories.Contains(cat.ID))
+                        {
+                            medicineToUpdate.PrescriptionCategories.Remove(cat);
+                        }
+                        else
+                        {
+                            medicineToUpdate.PrescriptionCategories.Add(cat);
+                        }
+                    }
+                    db.Entry(medicineToUpdate).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
-            ViewBag.DosageID = new SelectList(db.Dosages, "ID", "Name", medicine.DosageID);
-            ViewBag.MorningDozID = new SelectList(db.Dozes, "ID", "Name", medicine.MorningDozID);
-            ViewBag.NightDozID = new SelectList(db.Dozes, "ID", "Name", medicine.NightDozID);
-            ViewBag.NoonDozID = new SelectList(db.Dozes, "ID", "Name", medicine.NoonDozID);
-            ViewBag.OINTTypeID = new SelectList(db.OINTTypes, "ID", "Name", medicine.OINTTypeID);
-            ViewBag.PrescriptionCategoryID = new SelectList(db.PrescriptionCategories, "ID", "Name", medicine.PrescriptionCategoryID);
-            return View(medicine);
+            ViewBag.DosageID = new SelectList(db.Dosages, "ID", "Name", model.Medicine.DosageID);
+            ViewBag.MorningDozID = new SelectList(db.Dozes, "ID", "Name", model.Medicine.MorningDozID);
+            ViewBag.NightDozID = new SelectList(db.Dozes, "ID", "Name", model.Medicine.NightDozID);
+            ViewBag.NoonDozID = new SelectList(db.Dozes, "ID", "Name", model.Medicine.NoonDozID);
+            ViewBag.OINTTypeID = new SelectList(db.OINTTypes, "ID", "Name", model.Medicine.OINTTypeID);
+            return View(model);
         }
 
         // GET: Medicine/Delete/5

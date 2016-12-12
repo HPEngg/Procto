@@ -15,14 +15,14 @@ namespace DoctorWeb.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Invoice
+        // GET: Invoice Daily
         public ActionResult Daily()
         {
             var prescriptions = db.Prescriptions.Where(p => DbFunctions.TruncateTime(p.Date) == DateTime.Today.Date).Include(p => p.Doctor).Include(p => p.Instruction).Include(p => p.Patient).Include(p => p.PatientType);
             return View(prescriptions.ToList());
         }
 
-        // GET: Invoice
+        // GET: Invoice Weekly
         public ActionResult Weekly()
         {
             var dateBefore7days = DateTime.Today.AddDays(-7).Date;
@@ -30,13 +30,23 @@ namespace DoctorWeb.Controllers
             return View(prescriptions.ToList());
         }
 
-        // GET: Invoice
-        public ActionResult Monthly()
+
+        // GET: Invoice Monthly
+        public ActionResult Monthly(int month, int year)
         {
-            var dateBefore30Days = DateTime.Today.AddDays(-30).Date;
-            var prescriptions = db.Prescriptions.Include(p => p.Doctor).Where(p => DbFunctions.TruncateTime(p.Date) >= dateBefore30Days).Include(p => p.Instruction).Include(p => p.Patient).Include(p => p.PatientType);
+            //var dateBefore30Days = DateTime.Today.AddDays(-30).Date;
+            var prescriptions = db.Prescriptions.Include(p => p.Doctor).Where(p => p.Date.Year == year && p.Date.Month == month).Include(p => p.Instruction).Include(p => p.Patient).Include(p => p.PatientType);
             return View(prescriptions.ToList());
         }
+
+
+        //// GET: Invoice
+        //public ActionResult Monthly()
+        //{
+        //    var dateBefore30Days = DateTime.Today.AddDays(-30).Date;
+        //    var prescriptions = db.Prescriptions.Include(p => p.Doctor).Where(p => DbFunctions.TruncateTime(p.Date) >= dateBefore30Days).Include(p => p.Instruction).Include(p => p.Patient).Include(p => p.PatientType);
+        //    return View(prescriptions.ToList());
+        //}
 
         // GET: Invoice/Details/5
         public ActionResult Details(int? id)

@@ -2,7 +2,9 @@
 using DoctorWeb.Models.CustomModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
@@ -160,6 +162,23 @@ namespace DoctorWeb.Controllers
             model.Patient = db.Patients.Find(id);
             ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name");
             ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name");
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(PatientHome model)
+        {
+            model.PatientHistory.PatientID = model.Patient.ID;
+            model.Patient.DoctorID = model.DoctorID;
+            if (ModelState.IsValid)
+            {
+                db.Entry(model.Patient).State = EntityState.Modified;
+                db.PatientHistories.Add(model.PatientHistory);
+                db.SaveChanges();
+                return RedirectToAction("Edit", new { id = model.Patient.ID });
+            }
+            ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name", model.Patient.DoctorID);
             return View(model);
         }
     }

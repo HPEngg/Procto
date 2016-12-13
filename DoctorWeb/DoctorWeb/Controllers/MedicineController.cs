@@ -115,7 +115,13 @@ namespace DoctorWeb.Controllers
             {
                 var medicineToUpdate = db.Medicines.Include(i => i.PrescriptionCategories).First(i => i.ID == model.Medicine.ID);
 
-                if (TryUpdateModel(medicineToUpdate, "Medicine", new string[] { "ID", "OINTMore", "IsDayAffected", "Quantity" })) ;
+                medicineToUpdate.OINTTypeID = model.OINTTypeID;
+                medicineToUpdate.MorningDozID = model.MorningDozID;
+                medicineToUpdate.NoonDozID = model.NoonDozID;
+                medicineToUpdate.NightDozID = model.NightDozID;
+                medicineToUpdate.DosageID = model.DosageID;
+
+                if (TryUpdateModel(medicineToUpdate, "Medicine", new string[] { "ID", "OINTMore", "IsDayAffected", "Quantity" }))
                 {
                     var newCategories = db.PrescriptionCategories.Where(m => model.SelectedPrescriptionCategories.Contains(m.ID)).ToList();
                     var updatedCategories = new HashSet<int>(model.SelectedPrescriptionCategories);

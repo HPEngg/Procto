@@ -10,6 +10,6 @@ namespace DoctorWeb.Models.CustomModels
         public Patient Patient { get; set; }
         public PatientHistory PatientHistory { get; set; }
 
-        public int DoctorID { get; set; }
+        public int? DoctorID { get; set; }
     }
 }

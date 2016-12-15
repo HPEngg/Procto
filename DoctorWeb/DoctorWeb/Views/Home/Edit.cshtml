@@ -518,9 +518,9 @@
                         <div class="mystep2all">
                             <div>
                                 @Html.LabelFor(model => model.PatientHistory.Proctoscopy, htmlAttributes: new { @class = "mylabels label_res", style = "width:auto !important; padding-right:10px; " })
-                                @Html.EditorFor(model => model.PatientHistory.LightOnOff, new { htmlAttributes = new { @style = "width:auto;" } })
+                                @Html.EditorFor(model => model.PatientHistory.LightOnOff, new { htmlAttributes = new { @id = "prostocheck", @style = "width:auto;" } })
                                 <label style="width">L</label>
-                                @Html.EditorFor(model => model.PatientHistory.Proctoscopy, new { htmlAttributes = new { @class = "my-input", style = "min-width:50%;", placeholder = "Proctoscopy" } })
+                                @Html.EditorFor(model => model.PatientHistory.Proctoscopy, new { htmlAttributes = new { @id = "prostotext", @class = "my-input", style = "min-width:50%;", @disabled = "disabled", placeholder = "Proctoscopy" } })
                                 @Html.ValidationMessageFor(model => model.PatientHistory.Proctoscopy, "", new { @class = "text-danger" })
                                 @Html.ValidationMessageFor(model => model.PatientHistory.LightOnOff, "", new { @class = "text-danger" })
                             </div>
@@ -595,4 +595,9 @@
     jQuery("#yellow").click(function () {
         jQuery("#step4").css("display", "none");
     });
+
+    jQuery('#prostocheck').change(function () {
+        jQuery("#prostotext").prop("disabled", !$(this).is(':checked'));
+    });
+
 </script>

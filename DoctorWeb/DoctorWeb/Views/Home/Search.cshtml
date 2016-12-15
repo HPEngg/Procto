@@ -5,11 +5,11 @@
     Layout = "~/Views/Shared/_LightBoxLayout.cshtml";
 }
 
-<script src="~/Content/js/jquery-1.11.1.min.js"></script>
+@*<script src="~/Content/js/jquery-1.11.1.min.js"></script>
         
 <script src="~/Content/js/jquery-ui.min.js"></script>
 
-<link rel="stylesheet" href="~/Content/css/jquery-ui.css" />
+*@
 
 @*<h2>Search</h2>*@
 
@@ -51,14 +51,16 @@
     }
 </table>
 
-<script type="text/javascript">
+@*<script type="text/javascript">
     $(function () {
         $("#SearchRecords").dialog({
-            autoOpen: true
+            autoOpen: true,
+            title: 'Add User Form',
+            modal: true,
+            open: function () {
+                var patientname = document.getElementById("PatientName").value;
+                abhay(this).load('@Url.Action("Search", "Home", new { PatientName = "ID"})'.replace("ID", patientname));
+            },
         });
-
-        //$("#search_btn").click(function () {
-        //    $("#SearchRecords").dialog('open');
-        //});
     });
-</script>
+</script>*@

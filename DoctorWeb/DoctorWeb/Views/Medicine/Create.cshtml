@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Create</h2>
+<h2>Add Medicine</h2>
 
 
 @using (Html.BeginForm()) 
@@ -13,7 +13,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Medicine</h4>
+        @*<h4>Medicine</h4>*@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -86,7 +86,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.PrescriptionsCategories, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.ListBoxFor(model => model.SelectedPrescriptionCategories, Model.PrescriptionsCategories, new { htmlAttributes = new { @class = "form-control", @Multiple = "multiple", @Size = 5, @style = "width: 100%; height:100px;" } })
+                @Html.ListBoxFor(model => model.SelectedPrescriptionCategories, Model.PrescriptionsCategories, new { htmlAttributes = new { @size=5, @class = "form-control", @Multiple = "multiple", @style="height:50px !important; width:100% !important;" } })
                 @Html.ValidationMessageFor(model => model.Medicine.PrescriptionCategories, "", new { @class = "text-danger" })
             </div>
         </div>

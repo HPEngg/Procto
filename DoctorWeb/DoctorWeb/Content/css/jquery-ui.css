@@ -408,13 +408,16 @@ button.ui-button::-moz-focus-inner {
 	text-overflow: ellipsis;
 }
 .ui-dialog .ui-dialog-titlebar-close {
-	position: absolute;
+	background:none;
+    position: absolute;
 	right: .3em;
-	top: 50%;
-	width: 20px;
-	margin: -10px 0 0 0;
-	padding: 1px;
+	/*top: 50%;*/
+	/*margin: -10px 0 0 0;*/
+    margin: 0px 0 0 0;
+	/*padding: 1px;*/
 	height: 20px;
+    /*width: 20px;*/
+    width: auto;
 }
 .ui-dialog .ui-dialog-content {
 	position: relative;
@@ -867,7 +870,7 @@ body .ui-tooltip {
 .ui-widget-content .ui-state-default,
 .ui-widget-header .ui-state-default {
 	border: 1px solid #d3d3d3;
-	background: #e6e6e6 url("images/ui-bg_glass_75_e6e6e6_1x400.png") 50% 50% repeat-x;
+	background: #e6e6e6 url("../Images/ui-bg_glass_75_e6e6e6_1x400.png") 40% 58% repeat-x;
 	font-weight: normal;
 	color: #555555;
 }
@@ -884,7 +887,7 @@ body .ui-tooltip {
 .ui-widget-content .ui-state-focus,
 .ui-widget-header .ui-state-focus {
 	border: 1px solid #999999;
-	background: #dadada url("images/ui-bg_glass_75_dadada_1x400.png") 50% 50% repeat-x;
+	background: #dadada url("../Images/ui-bg_glass_75_e6e6e6_1x400.png") 40% 58% repeat-x;
 	font-weight: normal;
 	color: #212121;
 }
@@ -1230,6 +1233,7 @@ body .ui-tooltip {
   width: 50% !important;
   left: 25% !important;
   top:  25% !important;
+  position: absolute !important;
 }
 
 #SearchRecords tr {
@@ -1239,11 +1243,16 @@ body .ui-tooltip {
 #SearchRecords th{
     font-weight:600;
 }
+
 #SearchRecords th, #SearchRecords td {
   font-family: montserrat, arial, verdana;
   font-size:15px;
-  padding-right: 50px;
+  padding-right: 40px;
   text-align: left;
   white-space: nowrap;
   width: auto !important;
+}
+
+.searchdialog {
+    position:absolute;
 }

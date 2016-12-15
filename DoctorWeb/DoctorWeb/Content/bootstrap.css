@@ -7113,3 +7113,10 @@ td.visible-print {
   line-height: 30px;
   height:30px;
 }
+
+/*MEDICINE CREATE PAGE LISTBOX CSS*/
+
+#SelectedPrescriptionCategories {
+  height: 100px;
+  width: 100%;
+}

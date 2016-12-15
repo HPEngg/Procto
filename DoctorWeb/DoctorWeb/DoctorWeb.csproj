@@ -265,6 +265,10 @@
     <Content Include="Content\ajax\image_files\image.png" />
     <Content Include="Content\ajax\video.html" />
     <Content Include="Content\ajax\video_files\video.png" />
+    <Content Include="Content\autocomplete\jquery-1.12.0.js" />
+    <Content Include="Content\autocomplete\jquery-1.12.4.js" />
+    <Content Include="Content\autocomplete\jquery-ui.css" />
+    <Content Include="Content\autocomplete\jquery-ui.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\animate.delay.css" />
@@ -474,6 +478,7 @@
     <Content Include="Content\Images\thumbs\thumb9.png" />
     <Content Include="Content\Images\thumbs\video.png" />
     <Content Include="Content\Images\titlebg.png" />
+    <Content Include="Content\Images\ui-bg_glass_75_e6e6e6_1x400.png" />
     <Content Include="Content\Images\uniform\bg-input-focus.png" />
     <Content Include="Content\Images\uniform\bg-input.png" />
     <Content Include="Content\Images\uniform\sprite.png" />
@@ -601,9 +606,11 @@
     <Content Include="Content\fonts\Roboto-ThinItalic-webfont.woff" />
     <None Include="Properties\PublishProfiles\pubish.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
+    <None Include="Scripts\jquery-1.10.2.js1" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.12.0.js" />
+    <Content Include="Scripts\jquery-1.12.0.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />

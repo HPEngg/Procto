@@ -26,6 +26,8 @@ namespace DoctorWeb.Models
         public ReferredBy ReferredBy { get; set; }
         public string Relative { get; set; }
         public Department DepartmentID { get; set; }
+
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yy}")]
         public DateTime DOB { get; set; }
         public string Contact { get; set; }
         public string Email { get; set; }

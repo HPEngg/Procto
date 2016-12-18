@@ -21,21 +21,6 @@ namespace DoctorWeb.Controllers
             return View(db.Pictures.ToList());
         }
 
-        // GET: Pictures/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Picture picture = db.Pictures.Find(id);
-            if (picture == null)
-            {
-                return HttpNotFound();
-            }
-            return View(picture);
-        }
-
         // GET: Pictures/Create
         public ActionResult Create()
         {
@@ -51,59 +36,53 @@ namespace DoctorWeb.Controllers
         {
             if (ModelState.IsValid)
             {
+                Picture current = db.Pictures.FirstOrDefault();
 
-                if (hed != null && hed.ContentLength > 0)
+                if(current == null)
                 {
-                    using (var reader = new System.IO.BinaryReader(hed.InputStream))
+                    if (hed != null && hed.ContentLength > 0)
                     {
-                        picture.Header = reader.ReadBytes(hed.ContentLength);
+                        using (var reader = new System.IO.BinaryReader(hed.InputStream))
+                        {
+                            picture.Header = reader.ReadBytes(hed.ContentLength);
+                        }
                     }
+
+                    if (fot != null && fot.ContentLength > 0)
+                    {
+                        using (var reader = new System.IO.BinaryReader(fot.InputStream))
+                        {
+                            picture.Footer = reader.ReadBytes(fot.ContentLength);
+                        }
+                    }
+
+                    db.Pictures.Add(picture);
+                }
+                else
+                {
+                    if (hed != null && hed.ContentLength > 0)
+                    {
+                        using (var reader = new System.IO.BinaryReader(hed.InputStream))
+                        {
+                            current.Header = reader.ReadBytes(hed.ContentLength);
+                        }
+                    }
+
+                    if (fot != null && fot.ContentLength > 0)
+                    {
+                        using (var reader = new System.IO.BinaryReader(fot.InputStream))
+                        {
+                            current.Footer = reader.ReadBytes(fot.ContentLength);
+                        }
+                    }
+
+                    db.Entry(current).State = EntityState.Modified;
                 }
 
-                if (fot != null && fot.ContentLength > 0)
-                {
-                    using (var reader = new System.IO.BinaryReader(fot.InputStream))
-                    {
-                        picture.Footer = reader.ReadBytes(fot.ContentLength);
-                    }
-                }
-
-                db.Pictures.Add(picture);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(picture);
-        }
-
-        // GET: Pictures/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Picture picture = db.Pictures.Find(id);
-            if (picture == null)
-            {
-                return HttpNotFound();
-            }
-            return View(picture);
-        }
-
-        // POST: Pictures/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Header")] Picture picture)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(picture).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
             return View(picture);
         }
 

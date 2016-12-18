@@ -658,7 +658,6 @@
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Pictures\Create.cshtml" />
     <Content Include="Views\Pictures\Delete.cshtml" />
-    <Content Include="Views\Pictures\Details.cshtml" />
     <Content Include="Views\Pictures\Edit.cshtml" />
     <Content Include="Views\Pictures\Index.cshtml" />
     <Content Include="Views\Doctor\Create.cshtml" />

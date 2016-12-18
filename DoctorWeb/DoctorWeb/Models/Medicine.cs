@@ -16,7 +16,7 @@ namespace DoctorWeb.Models
         public int OINTTypeID { get; set; }
         public virtual OINTType OINT { get; set; }
 
-        [Display(Name = "Name")]
+        [Display(Name = "Medicine Name")]
         public string OINTMore { get; set; }
 
         [Display(Name = "Morning")]

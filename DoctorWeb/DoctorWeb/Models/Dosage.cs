@@ -10,7 +10,7 @@ namespace DoctorWeb.Models
     {
         public int ID { get; set; }
 
-        [Display(Name = "Name")]
+        [Display(Name = "Dosage")]
         public string Name { get; set; }
 
         public IEnumerable<Medicine> Medicines { get; set; }

@@ -210,6 +210,7 @@
     <Compile Include="Controllers\PatientTypeController.cs" />
     <Compile Include="Controllers\PaymentTypeController.cs" />
     <Compile Include="Controllers\PicturesController.cs" />
+    <Compile Include="Controllers\PreImageController.cs" />
     <Compile Include="Controllers\PrescriptionCategoryController.cs" />
     <Compile Include="Controllers\PrescriptionController.cs" />
     <Compile Include="Controllers\PrescriptionMedicineController.cs" />
@@ -253,6 +254,7 @@
     <Compile Include="Models\PatientType.cs" />
     <Compile Include="Models\PaymentType.cs" />
     <Compile Include="Models\Picture.cs" />
+    <Compile Include="Models\PreImage.cs" />
     <Compile Include="Models\Prescription.cs" />
     <Compile Include="Models\PrescriptionCategory.cs" />
     <Compile Include="Models\PrescriptionMedicine.cs" />
@@ -742,6 +744,10 @@
     <Content Include="Views\PrescriptionCategory\Edit.cshtml" />
     <Content Include="Views\PrescriptionCategory\Index.cshtml" />
     <Content Include="Views\Patient\Refered.cshtml" />
+    <Content Include="Views\PreImage\Create.cshtml" />
+    <Content Include="Views\PreImage\Delete.cshtml" />
+    <Content Include="Views\PreImage\Index.cshtml" />
+    <Content Include="Views\PreImage\Select.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

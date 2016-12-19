@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace DoctorWeb.Models.CustomModels
 {
@@ -31,6 +32,10 @@ namespace DoctorWeb.Models.CustomModels
         public IEnumerable<PrescriptionCategory> Categories { get; set; }
         //public IEnumerable<Medicine> Medicines { get; set; }
         public Medicine Medicine { get; set; }
+
+        public IEnumerable<SelectListItem> PrescriptionImages { get; set; }
+
+        public List<int> SelectedPrescriptionImages { get; set; }
 
     }
 }

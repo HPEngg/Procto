@@ -267,6 +267,9 @@
                                 @Html.EditorFor(model => model.Pending, new { htmlAttributes = new { name = "pm_rupees", placeholder = "Pending", style = "width:60px!important; padding: 0!important; height:25px;" } })
                                 @Html.ValidationMessageFor(model => model.Pending, "", new { @class = "text-danger" })
                             </div>
+
+                            @Html.ListBoxFor(model => model.SelectedPrescriptionImages, Model.PrescriptionImages, new { htmlAttributes = new { @size = 5, @class = "form-control", @Multiple = "multiple", @style = "height:50px !important; width:100% !important;" } })
+
                             <div id="prescription_submit" style="width:100%; clear:both;">
                                 <input type="submit" value="Create" class="next action-button" />
                             </div>

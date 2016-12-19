@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using DoctorWeb.Models;
 using DoctorWeb.Models.CustomModels;
+using System.Data.Entity.Infrastructure;
 
 namespace DoctorWeb.Controllers
 {
@@ -18,6 +19,9 @@ namespace DoctorWeb.Controllers
         // GET: Medicine
         public ActionResult Index()
         {
+            if (TempData["ErrorMessage"] != null)
+                ViewBag.ErrorMessage = TempData["ErrorMessage"].ToString();
+
             var medicines = db.Medicines.Include(m => m.Dosage).Include(m => m.Morning).Include(m => m.Night).Include(m => m.Noon).Include(m => m.OINT);
             return View(medicines.ToList());
         }
@@ -180,10 +184,18 @@ namespace DoctorWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Medicine medicine = db.Medicines.Find(id);
-            db.Medicines.Remove(medicine);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                Medicine medicine = db.Medicines.Find(id);
+                db.Medicines.Remove(medicine);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (DbUpdateException ex)
+            {
+                TempData["ErrorMessage"] = "Remove this medicine from all category before delete";
+                return RedirectToAction("Index");
+            }
         }
 
         protected override void Dispose(bool disposing)

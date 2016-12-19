@@ -46,6 +46,6 @@ namespace DoctorWeb.Models
 
         public IEnumerable<PrescriptionMedicine> Medicines { get; set; }
 
-
+        public ICollection<PreImage> PreImages { get; set; }
     }
 }

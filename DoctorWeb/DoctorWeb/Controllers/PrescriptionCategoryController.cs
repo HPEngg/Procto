@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DoctorWeb.Models;
+using System.Data.Entity.Infrastructure;
 
 namespace DoctorWeb.Controllers
 {
@@ -17,6 +18,9 @@ namespace DoctorWeb.Controllers
         // GET: PrescriptionCategory
         public ActionResult Index()
         {
+            if (TempData["ErrorMessage"] != null)
+                ViewBag.ErrorMessage = TempData["ErrorMessage"].ToString();
+
             return View(db.PrescriptionCategories.ToList());
         }
 
@@ -109,10 +113,18 @@ namespace DoctorWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            PrescriptionCategory prescriptionCategory = db.PrescriptionCategories.Find(id);
-            db.PrescriptionCategories.Remove(prescriptionCategory);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                PrescriptionCategory prescriptionCategory = db.PrescriptionCategories.Find(id);
+                db.PrescriptionCategories.Remove(prescriptionCategory);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (DbUpdateException ex)
+            {
+                TempData["ErrorMessage"] = "This category contains medicines, please delete medicines first.";
+                return RedirectToAction("Index");
+            }
         }
 
         protected override void Dispose(bool disposing)

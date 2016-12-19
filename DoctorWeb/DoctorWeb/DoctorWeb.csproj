@@ -742,6 +742,7 @@
     <Content Include="Views\PrescriptionCategory\Edit.cshtml" />
     <Content Include="Views\PrescriptionCategory\Index.cshtml" />
     <Content Include="Views\Patient\Refered.cshtml" />
+    <Content Include="Views\Home\DrawImage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

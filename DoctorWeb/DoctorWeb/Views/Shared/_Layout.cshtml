@@ -39,7 +39,6 @@
         <script type="text/javascript" src="/Content/js/jquery-1.12.0.min.js"></script>
         <script src="~/Content/autocomplete/jquery-ui.js"></script>
 
-
         <script type="text/javascript" src="/Content/js/html-table-search.js"></script>
         <script src="/Content/js/jquery.barrating.js"></script>
         <script src="/Content/js/examples.js"></script>
@@ -100,7 +99,7 @@
                     </footer>*@
             </div>
 
-            @Scripts.Render("~/bundles/jquery")
+            @*@Scripts.Render("~/bundles/jquery")*@
             @*@Scripts.Render("~/bundles/bootstrap")*@
             @RenderSection("scripts", required: false)
     </body>
@@ -110,8 +109,8 @@
 
     function patientsearch() {
         //window.location = "/Home/Search?PatientName=" + document.getElementById("PatientName").value;
-        var abhay = $.noConflict(true);
-        abhay("#SearchRecords").dialog({
+        var searchpatient = $.noConflict(true);
+        searchpatient("#SearchRecords").dialog({
             autoOpen: true,
             position: { my: "center", at: "top", of: window },
             width: 1200,
@@ -121,12 +120,12 @@
             classname: 'searchdialog',
             open: function () {
                 var patientname = document.getElementById("PatientName").value;
-                abhay(this).load('@Url.Action("Search", "Home", new { PatientName = "ID"})'.replace("ID", patientname));
-                abhay('#SearchRecords').focus();
+                searchpatient(this).load('@Url.Action("Search", "Home", new { PatientName = "ID"})'.replace("ID", patientname));
+                searchpatient('#SearchRecords').focus();
             },
             close: function () {
-                javascript:location.reload(true);
-                @*abhay(this).load('@Url.Action("Index", "Home")');*@
+                javascript: location.reload(true);
+                @*searchpatient(this).load('@Url.Action("Index", "Home")');*@
             },
         });
         return false;
@@ -168,5 +167,5 @@
     //});
 
 
-    
+
 </script>

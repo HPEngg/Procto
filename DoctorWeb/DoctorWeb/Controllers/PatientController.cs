@@ -120,6 +120,19 @@ namespace DoctorWeb.Controllers
             return RedirectToAction("Index");
         }
 
+        // GET: Patient
+        public ActionResult Refered(int? id)
+        {
+            IEnumerable<Patient> patients = null;
+            ViewBag.Values = new SelectList(db.Doctors, "ID", "Name");
+            if (id == null)
+                patients = db.Patients.Where(p => p.ReferredBy == Models.Enums.ReferredBy.Doctor).Include(p => p.Doctor);
+            else
+                patients = db.Patients.Where(p => p.ReferredBy == Models.Enums.ReferredBy.Doctor && p.DoctorID == id).Include(p => p.Doctor);
+
+            return View(patients.ToList());
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

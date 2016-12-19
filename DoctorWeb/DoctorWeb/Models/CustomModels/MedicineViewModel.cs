@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -10,6 +11,7 @@ namespace DoctorWeb.Models.CustomModels
     {
         public Medicine Medicine { get; set; }
 
+        [Display(Name = "Prescription Categories")]
         public IEnumerable<SelectListItem> PrescriptionsCategories { get; set; }
 
         private List<int> selectedPrescriptionCategories;

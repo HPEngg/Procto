@@ -43,6 +43,9 @@ namespace DoctorWeb.Models
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+
+            //modelBuilder.Entity<PrescriptionCategory>()..WillCascadeOnDelete(false);
         }
 
         public DbSet<Doctor> Doctors { get; set; }
@@ -60,7 +63,7 @@ namespace DoctorWeb.Models
         public DbSet<OINTType> OINTTypes { get; set; }
         public DbSet<Dosage> Dosages { get; set; }
         public DbSet<Doz> Dozes { get; set; }
-
+        public DbSet<PreImage> PreImages { get; set; }
 
         public System.Data.Entity.DbSet<DoctorWeb.Models.PatientHistory> PatientHistories { get; set; }
     }

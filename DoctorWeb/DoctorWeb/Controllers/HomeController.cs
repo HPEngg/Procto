@@ -95,6 +95,8 @@ namespace DoctorWeb.Controllers
             ViewBag.OINTTypeID = new SelectList(db.OINTTypes, "ID", "Name");
             ViewBag.PrescriptionCategoryID = new SelectList(db.PrescriptionCategories, "ID", "Name");
 
+            model.PrescriptionImages = db.PreImages.Select(o => new SelectListItem() { Text = o.ID.ToString(), Value = o.ID.ToString(), Selected = false });
+
             return View(model);
         }
 
@@ -122,6 +124,9 @@ namespace DoctorWeb.Controllers
             };
             if (ModelState.IsValid)
             {
+                if (model.SelectedPrescriptionImages != null)
+                    prescription.PreImages = db.PreImages.Where(m => model.SelectedPrescriptionImages.Contains(m.ID)).ToList();
+
                 db.Prescriptions.Add(prescription);
                 db.SaveChanges();
               //  ViewBag.Message = "Patient Prescription Created Successfully";

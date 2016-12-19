@@ -1,25 +1,19 @@
-﻿@model IEnumerable<DoctorWeb.Models.PrescriptionCategory>
+﻿@model IEnumerable<DoctorWeb.Models.PreImage>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Select";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Prescription Category List</h2>
+<h2>Select</h2>
 
-@if (TempData["ErrorMessage"] != null)
-{
-    <p style="color:red; font-size:16px;">Error: @TempData["ErrorMessage"]</p>
-}
 <p>
     @Html.ActionLink("Create New", "Create")
-    
 </p>
-
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.Image)
         </th>
         <th></th>
     </tr>
@@ -27,7 +21,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
+            @Html.DisplayFor(modelItem => item.Image)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |

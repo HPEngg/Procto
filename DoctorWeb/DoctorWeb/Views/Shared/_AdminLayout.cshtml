@@ -59,8 +59,19 @@
             <div class="leftmenu">
                 <ul class="nav nav-tabs nav-stacked">
                     <li class="nav-header" style="padding-left:20px;">Main Navigation</li>
-                    <li @if (ctrName == "Pictures" && actnName == "Index") { <text> class="active" </text> }><div id="icondiv"><span class="icon-align-justify"></span></div><div id="icontitlediv">@Html.ActionLink("Add Image", "Index", "Pictures")</div></li>
+                    <li @if (ctrName == "Pictures" && actnName == "Index") { <text> class="active" </text> }><div id="icondiv"><span class="icon-align-justify"></span></div><div id="icontitlediv">@Html.ActionLink("Header & Footer images", "Index", "Pictures")</div></li>
+
+                    <li class="dropdown">
+                        <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Prescription Images</div></a>
+                        <ul @if (ctrName == "PreImage" && actnName == "Index") { <text> style="display:block;" </text>    }>
+                            <li @if (ctrName == "PreImage" && actnName == "Create") { <text> class="active" </text>    }><div id="icontitlediv">@Html.ActionLink("Add Image", "Create", "PreImage")</div></li>
+                            <li @if (ctrName == "PreImage" && actnName == "Index") { <text> class="active" </text>    }><div id="icontitlediv">@Html.ActionLink("List all", "Index", "PreImage")</div></li>
+                        </ul>
+                    </li>
+
+                    <li @if (ctrName == "Patient" && actnName == "Refered") { <text> class="active" </text>  }><div id="icondiv"><span class="icon-align-justify"></span></div><div id="icontitlediv">@Html.ActionLink("List of Patients", "Refered", "Patient")</div></li>
                     @*<li class="active"><div id="icondiv"><span class="icon-align-justify"></span></div><div id="icontitlediv">@Html.ActionLink("Add Image", "Index", "Pictures")</div></li>*@
+                    @*Prescription Image*@
                     <li class="dropdown">
                         <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Invoice List</div></a>
                         <ul @if (ctrName == "Invoice" && actnName == "Index") { <text> style="display:block;" </text>  }>

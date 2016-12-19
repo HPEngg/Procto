@@ -27,7 +27,7 @@ namespace DoctorWeb.Controllers
         {
             ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name");
             ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name");
-
+            ViewBag.PatientCount = db.Patients.Count() + 1;
             return View();
         }
 

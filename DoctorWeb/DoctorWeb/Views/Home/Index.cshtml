@@ -15,7 +15,7 @@
             <div class="form-horizontal mdform my-mdform">
                 @*<h4>Patient</h4>*@
                 <h2 class="fs-title">Patient Details</h2>
-                <label style='width:100%;text-align:left; color:blue;display:block;'>Patient No. 11</label>
+                <label style='width:100%;text-align:left; color:blue;display:block;'>Patient No. @ViewBag.PatientCount</label>
                 <div class="mdform my-mdform">
                     @*<hr />*@
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })

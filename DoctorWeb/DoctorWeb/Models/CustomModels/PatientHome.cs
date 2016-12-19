@@ -11,5 +11,7 @@ namespace DoctorWeb.Models.CustomModels
         public PatientHistory PatientHistory { get; set; }
 
         public int? DoctorID { get; set; }
+
+        public int PatientCount { get; set; }
     }
 }

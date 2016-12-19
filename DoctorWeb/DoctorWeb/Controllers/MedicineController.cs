@@ -66,7 +66,8 @@ namespace DoctorWeb.Controllers
             model.Medicine.DosageID = model.DosageID;
             if (ModelState.IsValid)
             {
-                model.Medicine.PrescriptionCategories = db.PrescriptionCategories.Where(m => model.SelectedPrescriptionCategories.Contains(m.ID)).ToList();
+                if(model.SelectedPrescriptionCategories != null)
+                    model.Medicine.PrescriptionCategories = db.PrescriptionCategories.Where(m => model.SelectedPrescriptionCategories.Contains(m.ID)).ToList();
                 db.Entry(model.Medicine).State = EntityState.Added;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -123,19 +124,29 @@ namespace DoctorWeb.Controllers
 
                 if (TryUpdateModel(medicineToUpdate, "Medicine", new string[] { "ID", "OINTMore", "IsDayAffected", "Quantity" }))
                 {
-                    var newCategories = db.PrescriptionCategories.Where(m => model.SelectedPrescriptionCategories.Contains(m.ID)).ToList();
-                    var updatedCategories = new HashSet<int>(model.SelectedPrescriptionCategories);
-                    foreach (PrescriptionCategory cat in db.PrescriptionCategories)
+                    if(model.SelectedPrescriptionCategories != null)
                     {
-                        if (!updatedCategories.Contains(cat.ID))
+                        var updatedCategories = new HashSet<int>(model.SelectedPrescriptionCategories);
+                        foreach (PrescriptionCategory cat in db.PrescriptionCategories)
+                        {
+                            if (!updatedCategories.Contains(cat.ID))
+                            {
+                                medicineToUpdate.PrescriptionCategories.Remove(cat);
+                            }
+                            else
+                            {
+                                medicineToUpdate.PrescriptionCategories.Add(cat);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        foreach (PrescriptionCategory cat in db.PrescriptionCategories)
                         {
                             medicineToUpdate.PrescriptionCategories.Remove(cat);
                         }
-                        else
-                        {
-                            medicineToUpdate.PrescriptionCategories.Add(cat);
-                        }
                     }
+                    
                     db.Entry(medicineToUpdate).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Index");

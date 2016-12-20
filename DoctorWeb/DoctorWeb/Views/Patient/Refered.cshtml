@@ -10,7 +10,7 @@
 @using (Html.BeginForm("Refered", "Patient"))
 {
     @Html.DisplayNameFor(model => model.ReferredBy) 
-    @Html.DropDownList("ID", (SelectList)ViewBag.Values, new { onchange = "this.form.submit();" })
+    @Html.DropDownList("ID", (SelectList)ViewBag.Values, "Select Doctor", new { onchange = "this.form.submit();" })
 }
 </br>
 <table class="table">

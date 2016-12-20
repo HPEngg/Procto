@@ -457,7 +457,8 @@ cite {
 .text-danger {
     color: red;
     font-size:12px;
-    float:left;
+    /*float:left;*/
+    float:none;
 }
 
 .text-success {

@@ -71,6 +71,7 @@
     float: right;
     border-radius: 100%;
     box-sizing: border-box;
+    color: #428bca !important;
 }
 
 .step2_label {

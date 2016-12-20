@@ -94,6 +94,8 @@ Year: @Html.DropDownList("Year", Enumerable.Range(DateTime.Now.Year - 25, 26).Se
 <script type="text/javascript">
 
     function showVal() {
+        $("#Month").find("option").eq(0).remove();
+        $("#Year").find("option").eq(0).remove();
         window.location = "/Invoice/Monthly?Month=" + $("#Month").val() + "&Year=" + $("#Year").val();
     }
 </script>

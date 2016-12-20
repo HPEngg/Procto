@@ -9,6 +9,8 @@ namespace DoctorWeb.Models
     public class Instruction
     {
         public int ID { get; set; }
+
+        [Display(Name = "Instruction Name")]
         public string Name { get; set; }
 
         [DataType(DataType.MultilineText)]

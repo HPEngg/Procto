@@ -10,6 +10,7 @@ namespace DoctorWeb.Models
     {
         public int ID { get; set; }
 
+        [Required]
         [Display(Name = "Patient Type")]
         public string PatientTypeName { get; set; }
 

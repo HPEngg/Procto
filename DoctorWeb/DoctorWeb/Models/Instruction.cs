@@ -11,6 +11,7 @@ namespace DoctorWeb.Models
         public int ID { get; set; }
 
         [Display(Name = "Instruction Name")]
+        [Required]
         public string Name { get; set; }
 
         [DataType(DataType.MultilineText)]

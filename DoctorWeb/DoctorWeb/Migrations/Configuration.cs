@@ -14,19 +14,6 @@ namespace DoctorWeb.Migrations
 
         protected override void Seed(DoctorWeb.Models.ApplicationDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
-
             context.PrescriptionCategories.AddOrUpdate(
                     new Models.PrescriptionCategory() { Name = "P1" },
                     new Models.PrescriptionCategory() { Name = "P2" });
@@ -46,27 +33,28 @@ namespace DoctorWeb.Migrations
                 );
 
             context.Instructions.AddOrUpdate(
-                new Models.Instruction() { Name = "Normal", Description = "Take medicine regularly"},
+                new Models.Instruction() { Name = "Normal", Description = "Take medicine regularly" },
                 new Models.Instruction() { Name = "Critical", Description = "Go to hell" }
                 );
 
             context.OINTTypes.AddOrUpdate(
-                new Models.OINTType() { Name = "Syrup"},
+                new Models.OINTType() { Name = "Syrup" },
                 new Models.OINTType() { Name = "Tablet" },
                 new Models.OINTType() { Name = "Capsule" }
                 );
 
             context.Dosages.AddOrUpdate(
-                new Models.Dosage() { Name = "Before food"},
+                new Models.Dosage() { Name = "Before food" },
                 new Models.Dosage() { Name = "After food" }
                 );
 
             context.Dozes.AddOrUpdate(
-                new Models.Doz() { Name = "1"},
+                new Models.Doz() { Name = "1" },
                 new Models.Doz() { Name = "2" },
                 new Models.Doz() { Name = "3" },
                 new Models.Doz() { Name = "1/2" }
                 );
+
         }
     }
 }

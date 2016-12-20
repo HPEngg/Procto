@@ -9,6 +9,8 @@ namespace DoctorWeb.Models
     public class OINTType
     {
         public int ID { get; set; }
+
+        [Required]
         public string Name { get; set; }
 
         public IEnumerable<Medicine> Medicines { get; set; }

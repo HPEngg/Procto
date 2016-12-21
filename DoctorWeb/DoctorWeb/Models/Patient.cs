@@ -30,6 +30,7 @@ namespace DoctorWeb.Models
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yy}")]
         public DateTime DOB { get; set; }
         public string Contact { get; set; }
+        [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string Email { get; set; }
         public string Occupation { get; set; }
         public Habit Habit { get; set; }

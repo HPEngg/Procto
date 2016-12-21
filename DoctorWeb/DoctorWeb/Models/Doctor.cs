@@ -16,7 +16,7 @@ namespace DoctorWeb.Models
 
         [DataType(DataType.MultilineText)]
         public string Address { get; set; }
-
+        [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string Email { get; set; }
         public string Contact { get; set; }
 

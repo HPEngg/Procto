@@ -16,10 +16,12 @@ namespace DoctorWeb.Models
 
         [DataType(DataType.MultilineText)]
         public string Address { get; set; }
-
+        [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string Email { get; set; }
+        [Required]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Contact number must be numeric")]
         public string Contact { get; set; }
-
+        [Required]
         [Display(Name = "Type")]
         public string DoctorType { get; set; }
 

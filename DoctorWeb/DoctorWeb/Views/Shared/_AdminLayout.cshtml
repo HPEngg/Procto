@@ -69,7 +69,7 @@
                         </ul>
                     </li>
 
-                    <li @if (ctrName == "Patient" && actnName == "Refered") { <text> class="active" </text>  }><div id="icondiv"><span class="icon-align-justify"></span></div><div id="icontitlediv">@Html.ActionLink("List of Patients", "Refered", "Patient")</div></li>
+                    <li @if (ctrName == "Patient" && actnName == "Refered") { <text> class="active" </text>  }><div id="icondiv"><span class="icon-align-justify"></span></div><div id="icontitlediv">@Html.ActionLink("Patients reffered by Doctor", "Refered", "Patient")</div></li>
                     @*<li class="active"><div id="icondiv"><span class="icon-align-justify"></span></div><div id="icontitlediv">@Html.ActionLink("Add Image", "Index", "Pictures")</div></li>*@
                     @*Prescription Image*@
                     <li class="dropdown">

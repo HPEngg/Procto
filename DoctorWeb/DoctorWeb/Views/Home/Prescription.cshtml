@@ -38,7 +38,7 @@
                                 {
                                     <input type="button" id="btnp1" readonly style="border: 1px solid rgb(69,117,212);color:rgb(69,117,212)" class="btn_p a" value="@Html.DisplayFor(modelItem => item.Name)" content="0;U">
                                 }
-                                <input style="height:25px !important; width:25px !important; float:right; margin-left:5px !important;" value="+" class="plusbutton" type="button" required>
+                                <input style="height:25px !important; width:25px !important; float:right; margin-left:5px !important; padding-top:3px !important;" value="+" class="plusbutton" type="button" required>
 
                             </div>
 
@@ -54,7 +54,7 @@
 
                         @*DRAW IMAGES*@
 
-                        <canvas id="canvasss"></canvas>
+                        @*<canvas id="canvasss"></canvas>*@
 
                         @*Medicine*@
 
@@ -432,7 +432,7 @@
                 classname: 'searchdialog',
                 open: function () {
                     imgdrawing(this).load('@Url.Action("DrawImage", "Home")');
-                    imgdrawing('#canvas').focus();
+                    imgdrawing('#canvasss').focus();
                 },
                 close: function () {
                     javascript: location.reload(true);

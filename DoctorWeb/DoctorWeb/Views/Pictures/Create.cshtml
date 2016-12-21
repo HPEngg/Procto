@@ -1,17 +1,14 @@
 ﻿@model DoctorWeb.Models.Picture
-
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
 <h2>Add Images</h2>
-
 
 @using (Html.BeginForm("Create", "Pictures", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         @*<h4>Picture</h4>*@
         <hr />
@@ -24,7 +21,6 @@
                 @Html.ValidationMessageFor(model => model.Header, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             @Html.LabelFor(model => model.Footer, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -33,19 +29,26 @@
                 @Html.ValidationMessageFor(model => model.Footer, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" id="uploadheafoot" value="Create" class="btn btn-default" onclick="imgvalidation();" />
             </div>
         </div>
     </div>
 }
-
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+<script type="text/javascript">
+    function imgvalidation() {
+        var headerimage = $('#Header').val();
+        var footerimage = $('#Footer').val();
+        if (headerimage == '' || footerimage == '') {
+            alert("Please select Header & Footer Images");
+            return false;
+        }
+    }
+</script>

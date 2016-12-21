@@ -82,8 +82,8 @@ Year: @Html.DropDownList("Year", Enumerable.Range(DateTime.Now.Year - 25, 26).Se
             </td>
             <td>
                 @*@Html.ActionLink("Edit", "Edit", new { id = item.ID }) |*@
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                @Html.ActionLink("Details", "Details", new { id = item.ID })
+                @*@Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
             </td>
         </tr>
     }

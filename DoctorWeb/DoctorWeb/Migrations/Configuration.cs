@@ -55,6 +55,12 @@ namespace DoctorWeb.Migrations
                 new Models.Doz() { Name = "1/2" }
                 );
 
+            context.Doctors.AddOrUpdate(
+                new Models.Doctor() { Name = "Dr.Andy", Address="Kalanala, Bhavnagar", Email="andy@dr.com", Contact="1234567890", DoctorType="M.S."},
+                new Models.Doctor() { Name = "Dr.Trivedi", Address = "Kamatibaug, Baroda", Email = "trivedi@dr.com", Contact = "1010101010", DoctorType = "Physician" },
+                new Models.Doctor() { Name = "Dr.Shah", Address = "Vastrapur, Ahmedabad", Email = "shah@dr.com", Contact = "2020202020", DoctorType = "Surgen" }
+                );
+
         }
     }
 }

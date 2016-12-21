@@ -142,3 +142,10 @@
 #msform .form-control {
     height:auto;
 }
+
+.text-danger {
+    color: red;
+    font-size:12px;
+    /*float:left;*/
+    float:none;
+}

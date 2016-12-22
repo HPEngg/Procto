@@ -1,14 +1,25 @@
-﻿<canvas id="canvasss"></canvas>
+﻿
+@{
+    ViewBag.Title = "Search";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LightBoxLayout.cshtml";
+}
+<script type="text/javascript" src="/Content/js/jquery-1.12.0.min.js"></script>
+<script src="~/Content/autocomplete/jquery-ui.js"></script>
+<script src="~/Content/js/jquery-ui.min.js"></script>
+<canvas id="canvasss"></canvas>
+   <button style="display:block;" type="submit" onclick="saveimage();">Save</button>
+    <img src="@ViewBag.Logo" alt="Image" />
 
 <script type="text/javascript">
-    var canvas = document.getElementById("canvas"),
+    var canvas = document.getElementById("canvasss"),
         ctx = canvas.getContext("2d"),
         painting = false,
         lastX = 0,
         lastY = 0,
         lineThickness = 1;
-
-    canvas.width = canvas.height = 600;
+    alert("Calling");
+    canvas.width = canvas.height = 200;
     ctx.fillRect(0, 0, 200, 200);
 
     canvas.onmousedown = function (e) {
@@ -90,6 +101,23 @@
             lastY = mouseY;
 
         }
+        
     }
+    var dataURL = canvas.toDataURL();
+    function saveimage() {
+        $.ajax({
+            type: "POST",
+            url: "/Home/DrawImage/?data="+dataURL.toString(),
+            data: {
+                imgBase64: dataURL
+            }
+        }).done(function (o) {
+            alert("Saved");
+            // If you want the file to be visible in the browser 
+            // - please modify the callback in javascript. All you
+            // need is to return the url to the file, you just saved 
+            // and than put the image in your browser.
+        });
 
+    }
 </script>

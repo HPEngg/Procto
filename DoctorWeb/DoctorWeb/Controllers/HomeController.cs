@@ -8,6 +8,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
+using System.Drawing;
+using System.IO;
 
 namespace DoctorWeb.Controllers
 {
@@ -23,6 +25,27 @@ namespace DoctorWeb.Controllers
             //return View(model.ToList());
         }
 
+        public ActionResult DrawImage()
+        {
+            return PartialView();
+            //return View(model.ToList());
+        }
+
+        [HttpPost]
+        public ActionResult DrawImage(string data)
+        {
+            byte[] imgarr = Convert.FromBase64String(data);
+            Image image;
+            using (MemoryStream ms = new MemoryStream(imgarr))
+            {
+                image = Image.FromStream(ms);
+            }
+            image.Save("~/Content/Images/PatientImage.png");
+            ViewBag.Logo = Server.MapPath("~") + @"Content\Images\PatientImage.png";
+            return PartialView();
+            //return View(model.ToList());
+        }
+
         public ActionResult Index()
         {
             ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name");
@@ -34,7 +57,7 @@ namespace DoctorWeb.Controllers
         [HttpPost]
         public JsonResult AutoComplete(string MedicineName)
         {
-            var model = db.Medicines.Where(m => m.OINTMore.Contains(MedicineName));
+            var model = db.Medicines.Where(m => m.OINTMore.Contains(MedicineName)).Select(m => m.OINTMore);
             return Json(model.ToList());
         }
 

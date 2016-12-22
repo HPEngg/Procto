@@ -13,7 +13,7 @@
     @Html.DropDownList("ID", (SelectList)ViewBag.Values, "Select Doctor", new { onchange = "this.form.submit();" })
 }
 </br>
-<table class="table">
+<table class="table table-bordered">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Doctor.Name)

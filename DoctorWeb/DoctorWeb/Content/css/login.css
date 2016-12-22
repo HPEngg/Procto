@@ -469,6 +469,7 @@ h4 {
 
 .maincontent {
     position: relative;
+    overflow: scroll;
 }
 
 .contentinner {

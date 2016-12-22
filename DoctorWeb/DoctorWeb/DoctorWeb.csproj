@@ -498,6 +498,7 @@
     <Content Include="Content\js\chosen.jquery.min.js" />
     <Content Include="Content\js\colorpicker.js" />
     <Content Include="Content\js\custom.js" />
+    <Content Include="Content\js\drawpatientimage.js" />
     <Content Include="Content\js\examples.js" />
     <Content Include="Content\js\excanvas.min.js" />
     <Content Include="Content\js\forms.js" />
@@ -744,6 +745,7 @@
     <Content Include="Views\PreImage\Delete.cshtml" />
     <Content Include="Views\PreImage\Index.cshtml" />
     <Content Include="Views\PreImage\Select.cshtml" />
+    <Content Include="Views\Home\DrawImage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

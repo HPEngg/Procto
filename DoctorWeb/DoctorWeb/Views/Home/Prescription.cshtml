@@ -30,7 +30,7 @@
             <div class="form_fieldset_div">
                 <div id="testDiv1">
                     <fieldset style="height: 100%">
-                        <h2 class="fs-title" style="text-align:center;"><a href="#" class="webcam_img"><img src="/Content/Images/webcam.png" /></a><a href="#" class="profile_pic_img" onclick="patientimage();"><img src="/Content/Images/profilepic.png" /></a><a href="#" class="profile_pic_img"><img src="/Content/Images/print_icon.png" /></a>Prescription Form</h2>
+                        <h2 class="fs-title" style="text-align:center;"><a href="#" class="webcam_img"><img src="/Content/Images/webcam.png" /></a><a href="#" class="profile_pic_img"><img src="/Content/Images/profilepic.png" /></a><a href="#" class="profile_pic_img"><img src="/Content/Images/print_icon.png" /></a>Prescription Form</h2>
                         <div style="width:100%; clear:both;">
                             <label title="Rx" class="rx_label rx_label_right">Rx</label>
                             <div style="width: auto; padding-top:10px; padding-right: 8px; float:left;" class="btn_box">
@@ -54,8 +54,7 @@
 
                         @*DRAW IMAGES*@
 
-                        @*<canvas id="canvasss"></canvas>*@
-                        <div id="DrawImage"></div>
+                        @*<div id="DrawImage"></div>*@
 
                         @*Medicine*@
 
@@ -79,7 +78,9 @@
                                     *@
                                     @Html.EditorFor(model => model.Medicine.OINTMore, new { htmlAttributes = new { @style = "width:110px;", @class = "pre autocomplete", @type = "textbox", @value = "OINTOINT", @placeholder = "Medicine Name" } })
                                     @Html.ValidationMessageFor(model => model.Medicine.OINTMore, "", new { @class = "text-danger" })
-                                    <input type="hidden" id="hfPatient" name="PatientID" />
+                                    <input type="hidden" id="hfPatient" name="Pat_ID" />
+
+                                    @Html.HiddenFor(model => model.PatientID, new { value = @ViewBag.PatientID })
                                     @*
                                             </div>
                                         </div>*@
@@ -209,7 +210,7 @@
                         </div>
 
 
-                        <div style=" width:92%; position:absolute; clear:both; bottom:0;" class="pmtype_div">
+                        <div style=" width:92%; position:relative; margin-top:200px; clear:both; bottom:0;" class="pmtype_div">
                             <div id="payment_types">
                                 @foreach (var item in Model.PaymentTypes)
                                 {
@@ -236,14 +237,21 @@
 
                                 @Html.EditorFor(model => model.Pending, new { htmlAttributes = new { name = "pm_rupees", placeholder = "Pending", style = "width:60px!important; padding: 0!important; height:25px;" } })
                                 @Html.ValidationMessageFor(model => model.Pending, "", new { @class = "text-danger" })
-                            </div>
 
-                            @Html.ListBoxFor(model => model.SelectedPrescriptionImages, Model.PrescriptionImages, new { htmlAttributes = new { @size = 5, @class = "form-control", @Multiple = "multiple", @style = "height:50px !important; width:100% !important;" } })
-
-                            <div id="prescription_submit" style="width:100%; clear:both;">
-                                <input type="submit" value="Create" class="next action-button" />
+                                @Html.HiddenFor(model => model.PatientImage)
                             </div>
                         </div>
+                        <div id="patient_image">
+                            <div id="draw_image" style="float: left; width:30%;">
+                                <canvas id="canvasss"></canvas>
+                            </div>
+                            <div id="draw_image" style="float: right; width:65%;">
+                                @Html.ListBoxFor(model => model.SelectedPrescriptionImages, Model.PrescriptionImages, new { htmlAttributes = new { @size = 5, @class = "form-control", @Multiple = "multiple", @style = "height:50px !important; width:100% !important;" } })
+                            </div>
+
+                            <div id="prescription_submit" style="width:100%; clear:both;">
+                                <input type="submit" value="Create" class="next action-button" onclick="saveimage()" />
+                            </div>
 
                     </fieldset>
                 </div>
@@ -284,7 +292,7 @@
                     //jQuery(wrapper).append('<div id="divname"' + IDName + '" class="divnamepresc"> <select class="pre tabname" data-val="true" data-val-required="The OINT field is required." id="tabname_1" name="Medicine.OINT" style="width: 85px!important; padding: 0!important;"><option selected="selected" value="0">Tab</option> <option value="1">Syp</option> <option value="2">Cap</option> </select> <span class="field-validation-valid text-danger" data-valmsg-for="Medicine.OINT" data-valmsg-replace="true"></span><input class="pre text-box single-line" id="Medicine_OINTMore" name="Medicine.OINTMore" placeholder="OINT" style="width:120px;" type="textbox" value="" /><span class="field-validation-valid text-danger" data-valmsg-for="Medicine.OINTMore" data-valmsg-replace="true"></span><select class="pre svar" data-val="true" data-val-required="The Morning field is required." id="Medicine_Morning" name="Medicine.Morning" style="width: 40px!important; padding: 0!important;"><option selected="selected" value="0">Zero</option><option value="1">Half</option><option value="2">One</option><option value="3">Two</option><option value="4">Three</option><option value="5">Four</option><option value="6">FiveMl</option><option value="7">TenMl</option><option value="8">FifteenMl</option><option value="9">TwentyMl</option></select><select class="pre bpor" data-val="true" data-val-required="The Noon field is required." id="Medicine_Noon" name="Medicine.Noon" style="width: 40px!important; padding: 0!important;"><option selected="selected" value="0">Zero</option><option value="1">Half</option><option value="2">One</option><option value="3">Two</option><option value="4">Three</option><option value="5">Four</option><option value="6">FiveMl</option><option value="7">TenMl</option><option value="8">FifteenMl</option><option value="9">TwentyMl</option></select><select class="pre sanj" data-val="true" data-val-required="The Night field is required." id="Medicine_Night" name="Medicine.Night" style="width: 40px!important; padding: 0!important;"><option selected="selected" value="0">Zero</option><option value="1">Half</option><option value="2">One</option><option value="3">Two</option><option value="4">Three</option><option value="5">Four</option><option value="6">FiveMl</option><option value="7">TenMl</option><option value="8">FifteenMl</option><option value="9">TwentyMl</option></select><select class="pre" data-val="true" data-val-required="The DozTiming field is required." id="Medicine_DozTiming" name="Medicine.DozTiming" style="width: 90px!important; padding: 0!important;"><option selected="selected" value="0">AfterFood</option><option value="1">BeforeFood</option></select>                                    <span class="field-validation-valid text-danger" data-valmsg-for="Medicine.DozTiming" data-valmsg-replace="true"></span><input class="pre qut text-box single-line" data-val="true" data-val-number="The field Quantity must be a number." data-val-required="The Quantity field is required." id="qut_1" name="Medicine.Quantity" placeholder="Qty" style="width: 50px;color:#000; padding: 6px;" type="text" value="" /><a href="#" class="remove_field" style="text-decoration:none;font-weight:bold; float:left;">--</a></div>'); //add input box
                     //jQuery(wrapper).append('<div id="divname"' + IDName + '" class="divnamepresc"> <select class="pre tabname" data-val="true" data-val-required="The OINT field is required." id="tabname_1" name="Medicine.OINT" style="width: 85px!important; padding: 0!important;"><option selected="selected" value="0">Tab</option> <option value="1">Syp</option> <option value="2">Cap</option> </select> <input class="pre text-box single-line" id="Medicine_OINTMore" name="Medicine.OINTMore" placeholder="Medicine Name" style="width:110px;" type="textbox" value="" /> <span class="field-validation-valid text-danger" data-valmsg-for="Medicine.OINTMore" data-valmsg-replace="true"></span><select class="pre svar" data-val="true" data-val-required="The Morning field is required." id="Medicine_Morning" name="Medicine.Morning" style="width: 60px!important; padding: 0!important;"><option selected="selected" value="0">0</option><option value="1">1/2</option><option value="2">1</option><option value="3">2</option><option value="4">3</option><option value="5">4</option><option value="6">5ml</option><option value="7">10ml</option><option value="8">15ml</option><option value="9">20ml</option></select><select class="pre bpor" data-val="true" data-val-required="The Noon field is required." id="Medicine_Noon" name="Medicine.Noon" style="width: 60px!important; padding: 0!important;"><option selected="selected" value="0">0</option><option value="1">1/2</option><option value="2">1</option><option value="3">2</option><option value="4">3</option><option value="5">4</option><option value="6">5ml</option><option value="7">10ml</option><option value="8">15ml</option><option value="9">20ml</option></select><select class="pre sanj" data-val="true" data-val-required="The Night field is required." id="Medicine_Night" name="Medicine.Night" style="width: 60px!important; padding: 0!important;"><option selected="selected" value="0">0</option><option value="1">1/2</option><option value="2">1</option><option value="3">2</option><option value="4">3</option><option value="5">4</option><option value="6">5ml</option><option value="7">10ml</option><option value="8">15ml</option><option value="9">20ml</option></select><select class="pre" data-val="true" data-val-required="The DozTiming field is required." id="Medicine_DozTiming" name="Medicine.DozTiming" style="width: 120px!important; padding: 0!important;"><option selected="selected" value="0">AfterFood</option><option value="1">BeforeFood</option></select><input class="pre qut text-box single-line" data-val="true" data-val-number="The field Quantity must be a number." data-val-required="The Quantity field is required." id="qut_1" name="Medicine.Quantity" placeholder="Qty" style="width: 50px;color:#000; padding: 6px;" type="text" value="" /><span class="field-validation-valid text-danger" data-valmsg-for="Medicine.Quantity" data-valmsg-replace="true"></span><input value="+" class="add_field_button plusbutton" type="button" required><a href="#" class="remove_field" style="text-decoration:none;font-weight:bold; float:left;">--</a></div>');
                     //var htmlString = $("#divname_1").html();
-                    jQuery(wrapper).append('<div id="abhay">' + htmlString + '</div>');
+                    jQuery(wrapper).append('<div>' + htmlString + '</div>');
                 }
             });
 
@@ -420,56 +428,33 @@
             jQuery("#pm_rupees").val(total_charges);
         }
 
-
-        function drawimage() {
-            var imgdrawing = $.noConflict(true);
-            imgdrawing("#canvasss").dialog({
-                autoOpen: true,
-                position: { my: "center", at: "top", of: window },
-                width: 1200,
-                //resizable: false,
-                title: 'Search Result',
-                modal: true,
-                classname: 'searchdialog',
-                open: function () {
-                    imgdrawing(this).load('@Url.Action("DrawImage", "Home")');
-                    imgdrawing('#canvasss').focus();
-                },
-                close: function () {
-                    javascript: location.reload(true);
-                    @*imgdrawing(this).load('@Url.Action("Index", "Home")');*@
-                },
-            });
-            return false;
-        }
-
-    </script>
+      </script>
 
 
     <script type="text/javascript">
 
 
-        function patientimage() {
-            //window.location = "/Home/Search?PatientName=" + document.getElementById("PatientName").value;
-            jQuery("#DrawImage").dialog({
+        //function patientimage() {
+
+            @*jQuery("#DrawImage").dialog({
                 autoOpen: true,
-                position: { my: "center", at: "top", of: window },
+                position: { my: "top", at: "top", of: window },
                 //width: 1200,
                 //resizable: false,
                 title: 'Draw Iamge',
                 modal: true,
                 classname: 'searchdialog',
                 open: function () {
-                    jQuery(this).load('@Url.Action("DrawImage", "Home")');
+                    jQuery(this).load('@Url.Action("Prescription", "Home")');
                     jQuery('#DrawImage').focus();
                 },
                 close: function () {
                     //javascript: location.reload(true);
                     @*searchpatient(this).load('@Url.Action("Index", "Home")');*@
-                    },
-            });
-            return false;
-        }
+        //},
+        //});
+        //    return false;
+        //}
 
         jQuery(function () {
             jQuery(".autocomplete").autocomplete({
@@ -500,6 +485,116 @@
             });
         });
 
+    </script>
+
+
+    <script type="text/javascript">
+        var canvas = document.getElementById("canvasss"),
+            ctx = canvas.getContext("2d"),
+            painting = false,
+            lastX = 0,
+            lastY = 0,
+            lineThickness = 1;
+        canvas.width = canvas.height = 300;
+        ctx.fillRect(0, 0, 200, 200);
+
+        canvas.onmousedown = function (e) {
+            painting = true;
+            ctx.fillStyle = "#ffffff";
+            lastX = e.pageX - this.offsetLeft;
+            lastY = e.pageY - this.offsetTop;
+        };
+
+        canvas.onmouseup = function (e) {
+            painting = false;
+            ctx.save();
+        }
+
+        canvas.onmousemove = function (e) {
+            if (painting) {
+                mouseX = e.pageX - this.offsetLeft;
+                mouseY = e.pageY - this.offsetTop;
+
+                // find all points between
+                var x1 = mouseX,
+                    x2 = lastX,
+                    y1 = mouseY,
+                    y2 = lastY;
+
+
+                var steep = (Math.abs(y2 - y1) > Math.abs(x2 - x1));
+                if (steep) {
+                    var x = x1;
+                    x1 = y1;
+                    y1 = x;
+
+                    var y = y2;
+                    y2 = x2;
+                    x2 = y;
+                }
+                if (x1 > x2) {
+                    var x = x1;
+                    x1 = x2;
+                    x2 = x;
+
+                    var y = y1;
+                    y1 = y2;
+                    y2 = y;
+                }
+
+                var dx = x2 - x1,
+                    dy = Math.abs(y2 - y1),
+                    error = 0,
+                    de = dy / dx,
+                    yStep = -1,
+                    y = y1;
+
+                if (y1 < y2) {
+                    yStep = 1;
+                }
+
+                lineThickness = 5 - Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)) / 10;
+                if (lineThickness < 1) {
+                    lineThickness = 1;
+                }
+
+                for (var x = x1; x < x2; x++) {
+                    if (steep) {
+                        ctx.fillRect(y, x, lineThickness, lineThickness);
+                    } else {
+                        ctx.fillRect(x, y, lineThickness, lineThickness);
+                    }
+
+                    error += de;
+                    if (error >= 0.5) {
+                        y += yStep;
+                        error -= 1.0;
+                    }
+                }
+
+                lastX = mouseX;
+                lastY = mouseY;
+
+            }
+
+        }
+        var dataURL = canvas.toDataURL();
+        function saveimage() {
+            document.getElementById("PatientImage").value = dataURL;
+            //$.ajax({
+            //    type: "POST",
+            //    url: "/Home/DrawImage/?data="+dataURL.toString(),
+            //    data: {
+            //        imgBase64: dataURL
+            //    }
+            //}).done(function (o) {
+            //    alert("Saved");
+            //    // If you want the file to be visible in the browser
+            //    // - please modify the callback in javascript. All you
+            //    // need is to return the url to the file, you just saved
+            //    // and than put the image in your browser.
+            //});
+        }
     </script>
 
 

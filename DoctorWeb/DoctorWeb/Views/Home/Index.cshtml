@@ -29,12 +29,12 @@
 
                         <div class="red">
                             <label>R</label>
-                            @Html.RadioButtonFor(model => model.Patient.Status, DoctorWeb.Models.Enums.PatientStatus.Red, new { @checked = true, @id = "red" })
+                            @Html.RadioButtonFor(model => model.Patient.Status, DoctorWeb.Models.Enums.PatientStatus.Red, new { @id = "red" })
                             @*<label for="red"></label>*@
                         </div>
                         <div class="yellow">
                             <label>Y</label>
-                            @Html.RadioButtonFor(model => model.Patient.Status, DoctorWeb.Models.Enums.PatientStatus.Yellow, new { @checked = true, @id = "yellow" })
+                            @Html.RadioButtonFor(model => model.Patient.Status, DoctorWeb.Models.Enums.PatientStatus.Yellow, new {  @id = "yellow" })
                             @*@Html.EnumDropDownListFor(model => model.Patient.StatusColor, htmlAttributes: new { @class = "form-control" })*@
                             @Html.ValidationMessageFor(model => model.Patient.Status, "", new { @class = "text-danger" })
                             @*<label for="yellow"></label>*@

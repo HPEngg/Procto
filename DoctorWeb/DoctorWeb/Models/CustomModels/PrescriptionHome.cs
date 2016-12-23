@@ -37,5 +37,7 @@ namespace DoctorWeb.Models.CustomModels
 
         public List<int> SelectedPrescriptionImages { get; set; }
 
+        public string PatientImage { get; set; }
+
     }
 }

@@ -9,7 +9,6 @@
 <script src="~/Content/js/jquery-ui.min.js"></script>
 <canvas id="canvasss"></canvas>
    <button style="display:block;" type="submit" onclick="saveimage();">Save</button>
-    <img src="@ViewBag.Logo" alt="Image" />
 
 <script type="text/javascript">
     var canvas = document.getElementById("canvasss"),
@@ -18,7 +17,6 @@
         lastX = 0,
         lastY = 0,
         lineThickness = 1;
-    alert("Calling");
     canvas.width = canvas.height = 200;
     ctx.fillRect(0, 0, 200, 200);
 
@@ -95,13 +93,11 @@
                 }
             }
 
-
-
             lastX = mouseX;
             lastY = mouseY;
 
         }
-        
+        ctx.save();
     }
     var dataURL = canvas.toDataURL();
     function saveimage() {

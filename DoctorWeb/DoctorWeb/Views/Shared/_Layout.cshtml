@@ -63,9 +63,7 @@
                     <input class="search_text" type="textbox" name="PatientName" ID="PatientName">
                     <button style="float: left;" class="okok" data-popup-open="popup-1" href="#" id="search_btn" onclick="patientsearch();">Search</button>
                     <a class="okok" href="/Doctor/Index" style="float: right;"><button>Admin</button></a>
-
                     <div id="SearchRecords"></div>
-
                 </div>
             </div><!---- top part End --->
             <div style="clear:both"></div>
@@ -130,42 +128,4 @@
         });
         return false;
     }
-
-
-    //$("#PatientName").keypress(function () {
-    //    var ashish = $.noConflict(true);
-    //    var medicinename = document.getElementById("PatientName").value;
-    //    ashish("#PatientName").autocomplete({
-    //        source: function (request, response) {
-    //            ashish.ajax({
-    //                url: "/Home/AutoComplete?MedicineName=" + medicinename,
-    //                data: "{ 'prefix': '" + request.term + "'}",
-    //                dataType: "json",
-    //                type: "POST",
-    //                contentType: "application/json; charset=utf-8",
-    //                success: function (data) {
-    //                    response(ashish.map(data.d, function (item) {
-    //                        return {
-    //                            label: item.split('-')[0],
-    //                            val: item.split('-')[1]
-    //                        }
-    //                    }))
-    //                },
-    //                error: function (response) {
-    //                    alert(response.responseText);
-    //                },
-    //                failure: function (response) {
-    //                    alert(response.responseText);
-    //                }
-    //            });
-    //        },
-    //        //select: function (e, i) {
-    //        //    abhay("[idabhay=hfCustomerId]").val(i.item.val);
-    //        //},
-    //        minLength: 1
-    //    });
-    //});
-
-
-
 </script>

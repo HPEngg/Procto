@@ -22,19 +22,22 @@
                     <div class="menu">
                         @Html.LabelFor(model => model.Patient.Status, htmlAttributes: new { @class = "menu_label" })
                         <div class="roundedOne">
+                            <label>G</label>
                             @Html.RadioButtonFor(model => model.Patient.Status, DoctorWeb.Models.Enums.PatientStatus.Green, new { @checked = true, @id = "green" })
-                            <label for="roundedOne"></label>
+                            @*<label for="roundedOne"></label>*@
                         </div>
 
                         <div class="red">
+                            <label>R</label>
                             @Html.RadioButtonFor(model => model.Patient.Status, DoctorWeb.Models.Enums.PatientStatus.Red, new { @checked = true, @id = "red" })
-                            <label for="red"></label>
+                            @*<label for="red"></label>*@
                         </div>
                         <div class="yellow">
+                            <label>Y</label>
                             @Html.RadioButtonFor(model => model.Patient.Status, DoctorWeb.Models.Enums.PatientStatus.Yellow, new { @checked = true, @id = "yellow" })
                             @*@Html.EnumDropDownListFor(model => model.Patient.StatusColor, htmlAttributes: new { @class = "form-control" })*@
                             @Html.ValidationMessageFor(model => model.Patient.Status, "", new { @class = "text-danger" })
-                            <label for="yellow"></label>
+                            @*<label for="yellow"></label>*@
                         </div>
                     </div>
                     @*<div class="form-group">

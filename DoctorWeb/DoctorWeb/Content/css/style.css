@@ -327,9 +327,10 @@ select.pre1 {
 
 .roundedOne {
     float: left;
-    width: 28px;
+    width: 50px;
     height: 28px;
-    background: #00bf00;
+    padding: 20px 0px 10px 10px;
+    /*background: #00bf00;
     background: -webkit-linear-gradient(top, #00bf00 0%, #00bf00 40%, #00bf00 100%);
     background: -moz-linear-gradient(top, #00bf00 0%, #00bf00 40%, #00bf00 100%);
     background: -o-linear-gradient(top, #00bf00 0%, #00bf00 40%, #00bf00 100%);
@@ -343,14 +344,19 @@ select.pre1 {
     -webkit-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
     -moz-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
     box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
-    position: relative;
+    position: relative;*/
+}
+
+#green, #red, #yellow {
+    width:50% !important;
 }
 
 .red {
     float: left;
-    width: 28px;
+    width: 50px;
     height: 28px;
-    background: red;
+    padding: 20px 0px 10px 0px;
+    /*background: red;
     background: -webkit-linear-gradient(top, red 0%, red 40%, red 100%);
     background: -moz-linear-gradient(top, red 0%, red 40%, red 100%);
     background: -o-linear-gradient(top, red 0%, red 40%, red 100%);
@@ -364,14 +370,15 @@ select.pre1 {
     -webkit-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
     -moz-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
     box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
-    position: relative;
+    position: relative;*/
 }
 
 .yellow {
     float: left;
-    width: 28px;
+    width: 50px;
     height: 28px;
-    background: yellow;
+    padding: 20px 0px 10px 0px;
+    /*background: yellow;
     background: -webkit-linear-gradient(top, yellow 0%, yellow 40%, yellow 100%);
     background: -moz-linear-gradient(top, yellow 0%, yellow 40%, yellow 100%);
     background: -o-linear-gradient(top, yellow 0%, yellow 40%, yellow 100%);
@@ -385,11 +392,11 @@ select.pre1 {
     -webkit-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
     -moz-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
     box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
-    position: relative;
+    position: relative;*/
 }
 
     .roundedOne label, .red label, .yellow label {
-        cursor: pointer;
+        /*cursor: pointer;
         position: absolute;
         width: 20px;
         height: 20px;
@@ -406,7 +413,7 @@ select.pre1 {
         background: -o-linear-gradient(top, #222 0%, #45484d 100%);
         background: -ms-linear-gradient(top, #222 0%, #45484d 100%);
         background: linear-gradient(top, #222 0%, #45484d 100%);
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222', endColorstr='#45484d',GradientType=0 );
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222', endColorstr='#45484d',GradientType=0 );*/
     }
 
         .roundedOne label:after {

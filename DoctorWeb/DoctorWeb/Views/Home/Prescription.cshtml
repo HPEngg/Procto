@@ -243,7 +243,7 @@
                         </div>
                         <div id="patient_image">
                             <div id="draw_image" style="float: left; width:30%;">
-                                <canvas id="canvasss"></canvas>
+                                <canvas id="canvasss" width="200" height="200" style="position:relative;top:10%;left:10%;border:2px solid;"></canvas>
                             </div>
                             <div id="draw_image" style="float: right; width:65%;">
                                 @Html.ListBoxFor(model => model.SelectedPrescriptionImages, Model.PrescriptionImages, new { htmlAttributes = new { @size = 5, @class = "form-control", @Multiple = "multiple", @style = "height:50px !important; width:100% !important;" } })
@@ -489,97 +489,129 @@
 
 
     <script type="text/javascript">
-        var canvas = document.getElementById("canvasss"),
-            ctx = canvas.getContext("2d"),
-            painting = false,
-            lastX = 0,
-            lastY = 0,
-            lineThickness = 1;
-        canvas.width = canvas.height = 300;
-        ctx.fillRect(0, 0, 200, 200);
+        document.addEventListener('DOMContentLoaded', function () {
+            init();
+        });
+        var canvas, ctx, flag = false,
+        prevX = 0,
+        currX = 0,
+        prevY = 0,
+        currY = 0,
+        dot_flag = false;
 
-        canvas.onmousedown = function (e) {
-            painting = true;
-            ctx.fillStyle = "#ffffff";
-            lastX = e.pageX - this.offsetLeft;
-            lastY = e.pageY - this.offsetTop;
-        };
+        var x = "black",
+            y = 2;
 
-        canvas.onmouseup = function (e) {
-            painting = false;
-            ctx.save();
+        function init() {
+            canvas = document.getElementById('canvasss');
+            ctx = canvas.getContext("2d");
+            w = canvas.width;
+            h = canvas.height;
+
+            canvas.addEventListener("mousemove", function (e) {
+                findxy('move', e)
+            }, false);
+            canvas.addEventListener("mousedown", function (e) {
+                findxy('down', e)
+            }, false);
+            canvas.addEventListener("mouseup", function (e) {
+                findxy('up', e)
+            }, false);
+            canvas.addEventListener("mouseout", function (e) {
+                findxy('out', e)
+            }, false);
         }
 
-        canvas.onmousemove = function (e) {
-            if (painting) {
-                mouseX = e.pageX - this.offsetLeft;
-                mouseY = e.pageY - this.offsetTop;
-
-                // find all points between
-                var x1 = mouseX,
-                    x2 = lastX,
-                    y1 = mouseY,
-                    y2 = lastY;
-
-
-                var steep = (Math.abs(y2 - y1) > Math.abs(x2 - x1));
-                if (steep) {
-                    var x = x1;
-                    x1 = y1;
-                    y1 = x;
-
-                    var y = y2;
-                    y2 = x2;
-                    x2 = y;
-                }
-                if (x1 > x2) {
-                    var x = x1;
-                    x1 = x2;
-                    x2 = x;
-
-                    var y = y1;
-                    y1 = y2;
-                    y2 = y;
-                }
-
-                var dx = x2 - x1,
-                    dy = Math.abs(y2 - y1),
-                    error = 0,
-                    de = dy / dx,
-                    yStep = -1,
-                    y = y1;
-
-                if (y1 < y2) {
-                    yStep = 1;
-                }
-
-                lineThickness = 5 - Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)) / 10;
-                if (lineThickness < 1) {
-                    lineThickness = 1;
-                }
-
-                for (var x = x1; x < x2; x++) {
-                    if (steep) {
-                        ctx.fillRect(y, x, lineThickness, lineThickness);
-                    } else {
-                        ctx.fillRect(x, y, lineThickness, lineThickness);
-                    }
-
-                    error += de;
-                    if (error >= 0.5) {
-                        y += yStep;
-                        error -= 1.0;
-                    }
-                }
-
-                lastX = mouseX;
-                lastY = mouseY;
-
+        function color(obj) {
+            switch (obj.id) {
+                case "green":
+                    x = "green";
+                    break;
+                case "blue":
+                    x = "blue";
+                    break;
+                case "red":
+                    x = "red";
+                    break;
+                case "yellow":
+                    x = "yellow";
+                    break;
+                case "orange":
+                    x = "orange";
+                    break;
+                case "black":
+                    x = "black";
+                    break;
+                case "white":
+                    x = "white";
+                    break;
             }
+            if (x == "white") y = 14;
+            else y = 2;
 
         }
-        var dataURL = canvas.toDataURL();
+
+        function draw() {
+            ctx.beginPath();
+            ctx.moveTo(prevX, prevY);
+            ctx.lineTo(currX, currY);
+            ctx.strokeStyle = x;
+            ctx.lineWidth = y;
+            ctx.stroke();
+            ctx.closePath();
+        }
+
+        function erase() {
+            var m = confirm("Want to clear");
+            if (m) {
+                ctx.clearRect(0, 0, w, h);
+                document.getElementById("canvasimg").style.display = "none";
+            }
+        }
+
+        function save() {
+            document.getElementById("canvasimg").style.border = "2px solid";
+            var dataURL = canvas.toDataURL();
+            document.getElementById("canvasimg").src = dataURL;
+            //document.getElementById("canvasimg").style.display = "inline";
+        }
+
+        function findxy(res, e) {
+            if (res == 'down') {
+                prevX = currX;
+                prevY = currY;
+                currX = e.clientX - canvas.offsetLeft;
+                currY = e.clientY - canvas.offsetTop;
+
+                flag = true;
+                dot_flag = true;
+                if (dot_flag) {
+                    ctx.beginPath();
+                    ctx.fillStyle = x;
+                    ctx.fillRect(currX, currY, 2, 2);
+                    ctx.closePath();
+                    dot_flag = false;
+                }
+            }
+            if (res == 'up' || res == "out") {
+                flag = false;
+            }
+            if (res == 'move') {
+                if (flag) {
+                    prevX = currX;
+                    prevY = currY;
+                    currX = e.clientX - canvas.offsetLeft;
+                    currY = e.clientY - canvas.offsetTop;
+                    draw();
+                }
+            }
+        }
+        //var dataURL = canvas.toDataURL();
         function saveimage() {
+            document.getElementById("PatientImage").value = dataURL;
+            document.getElementById("PatientImage").style.border = "2px solid";
+            var dataURL = canvas.toDataURL();
+            //document.getElementById("PatientImage").src = dataURL;
             document.getElementById("PatientImage").value = dataURL;
             //$.ajax({
             //    type: "POST",

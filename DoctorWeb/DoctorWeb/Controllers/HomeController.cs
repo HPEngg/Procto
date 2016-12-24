@@ -137,13 +137,14 @@ namespace DoctorWeb.Controllers
                 InstructionID = model.InstructionID,
                 PatientID = model.PatientID,
                 PatientTypeID = model.PatientTypeID,
-                FollowDate = (DateTime) model.FollowDate,
+                FollowDate = (DateTime)model.FollowDate,
                 Less = model.Less,
                 Pending = model.Pending,
                 Percent = model.Percent,
                 Received = model.Received,
                 Rs = model.Rs,
                 M = model.M,
+                PrescriptionImage = Convert.FromBase64String(model.PatientImage.Remove(0,22))
             };
             if (ModelState.IsValid)
             {

@@ -438,6 +438,7 @@
     <Content Include="Content\Images\mainbg2.png" />
     <Content Include="Content\Images\menu.png" />
     <Content Include="Content\Images\password.png" />
+    <Content Include="Content\Images\patient_drawing_image_bg.png" />
     <Content Include="Content\Images\preview\audio.png" />
     <Content Include="Content\Images\preview\comlogo.png" />
     <Content Include="Content\Images\preview\image.png" />

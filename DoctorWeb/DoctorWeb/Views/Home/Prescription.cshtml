@@ -243,9 +243,10 @@
                         </div>
                         <div id="patient_image">
                             <div id="draw_image" style="float: left; width:30%;">
-                                <canvas id="canvasss" width="200" height="200" style="position:relative;top:10%;left:10%;border:2px solid;"></canvas>
+                                <img id="canvac_background" width="235" height="235" src="~/Content/Images/patient_drawing_image_bg.png" alt="Canvas background" style="display:none;">
+                                <canvas id="canvasss" width="235" height="235" style=" position:relative;top:10%;left:10%;border:2px solid;"></canvas>
                             </div>
-                            <div id="draw_image" style="float: right; width:65%;">
+                            <div id="draw_image" style="float: right; width:60%;">
                                 @Html.ListBoxFor(model => model.SelectedPrescriptionImages, Model.PrescriptionImages, new { htmlAttributes = new { @size = 5, @class = "form-control", @Multiple = "multiple", @style = "height:50px !important; width:100% !important;" } })
                             </div>
 
@@ -428,7 +429,7 @@
             jQuery("#pm_rupees").val(total_charges);
         }
 
-      </script>
+    </script>
 
 
     <script type="text/javascript">
@@ -491,6 +492,8 @@
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             init();
+            
+
         });
         var canvas, ctx, flag = false,
         prevX = 0,
@@ -499,14 +502,17 @@
         currY = 0,
         dot_flag = false;
 
-        var x = "black",
-            y = 2;
+        var x = "red",
+            y = 5;
 
         function init() {
             canvas = document.getElementById('canvasss');
             ctx = canvas.getContext("2d");
             w = canvas.width;
             h = canvas.height;
+
+            var img = document.getElementById("canvac_background");
+            ctx.drawImage(img, 0, 0);
 
             canvas.addEventListener("mousemove", function (e) {
                 findxy('move', e)

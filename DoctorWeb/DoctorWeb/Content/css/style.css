@@ -59,12 +59,12 @@ body {
     text-align: center;
     position: relative;
     float: left;
-    min-height:1000px;
+    min-height: 1000px;
 }
 
 iframe {
-  height: 100%;
-  min-height: 1030px;
+    height: 100%;
+    min-height: 1030px;
 }
 
 .mdform {
@@ -348,7 +348,7 @@ select.pre1 {
 }
 
 #green, #red, #yellow {
-    width:50% !important;
+    width: 50% !important;
 }
 
 .red {
@@ -515,22 +515,21 @@ select.pre1 {
 }
 
 .plusbutton {
-  background: transparent none repeat scroll 0 0;
-  border: 1px solid #428bca !important;
-  border-radius: 100% !important;
-  color: #428bca !important;
-  font-size: 14px !important;
-  float:left;
-  height: 20px;
-  margin: 4px 5px 0 0px !important;
-  padding: 0px 3px 3px 3px !important;
-  width: 20px !important;
-  
+    background: transparent none repeat scroll 0 0;
+    border: 1px solid #428bca !important;
+    border-radius: 100% !important;
+    color: #428bca !important;
+    font-size: 14px !important;
+    float: left;
+    height: 20px;
+    margin: 4px 5px 0 0px !important;
+    padding: 0px 3px 3px 3px !important;
+    width: 20px !important;
 }
 
 .divnamepresc {
-  clear: both;
-  display: block;
+    clear: both;
+    display: block;
 }
 
 @media screen and (max-width: 350px) {
@@ -945,5 +944,31 @@ td {
 }
 
 .autocomplete {
+}
 
+#imagecolor {
+  float: left;
+  width: 80%;
+}
+
+#imagecolor .margin-right {
+    margin-right: 10px;
+    width: 10% !important;
+    top: 15%;
+    height: 15px;
+    float: left;
+}
+
+#eraser {
+    display: block;
+    float: left;
+    width:20%;
+}
+
+#eraser #white {
+    background: white none repeat scroll 0 0;
+    border: 2px solid;
+    height: 13px;
+    position: relative;
+    width: 30%;
 }

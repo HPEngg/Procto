@@ -242,9 +242,22 @@
                             </div>
                         </div>
                         <div id="patient_image">
-                            <div id="draw_image" style="float: left; width:30%;">
+                            <div id="draw_image" style="float: left; width:35%;">
                                 <img id="canvac_background" width="235" height="235" src="~/Content/Images/patient_drawing_image_bg.png" alt="Canvas background" style="display:none;">
-                                <canvas id="canvasss" width="235" height="235" style=" position:relative;top:10%;left:10%;border:2px solid;"></canvas>
+                                <canvas id="canvasss" width="235" height="235" style=" position:relative;border:2px solid;"></canvas>
+                                <div id="imagecolor">
+                                    <div style="position:relative;top:12%;text-align:left;margin-bottom:5px;">Choose Color</div>
+                                    <div class="margin-right" style="position:relative;background:green;" id="green" onclick="color(this)"></div>
+                                    <div class="margin-right" style="position:relative;background:blue;" id="blue" onclick="color(this)"></div>
+                                    <div class="margin-right" style="position:relative;float:left;background:red;" id="red" onclick="color(this)"></div>
+                                    <div class="margin-right" style="position:relative;float:left;background:yellow;" id="yellow" onclick="color(this)"></div>
+                                    <div class="margin-right" style="position:relative;float:left;background:orange;" id="orange" onclick="color(this)"></div>
+                                    <div class="margin-right" style="position:relative;float:left;background:black;" id="black" onclick="color(this)"></div>
+                                </div>
+                                <div id="eraser">
+                                    <div style="position:relative;top:20%; margin-bottom:5px;">Eraser</div>
+                                    <div id="white" onclick="color(this)"></div>
+                                </div>
                             </div>
                             <div id="draw_image" style="float: right; width:60%;">
                                 @Html.ListBoxFor(model => model.SelectedPrescriptionImages, Model.PrescriptionImages, new { htmlAttributes = new { @size = 5, @class = "form-control", @Multiple = "multiple", @style = "height:50px !important; width:100% !important;" } })
@@ -492,7 +505,7 @@
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             init();
-            
+
 
         });
         var canvas, ctx, flag = false,

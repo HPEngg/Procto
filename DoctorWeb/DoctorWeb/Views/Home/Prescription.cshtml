@@ -30,7 +30,7 @@
             <div class="form_fieldset_div">
                 <div id="testDiv1">
                     <fieldset style="height: 100%">
-                        <h2 class="fs-title" style="text-align:center;"><a href="#" class="webcam_img"><img src="/Content/Images/webcam.png" /></a><a href="#" class="profile_pic_img"><img src="/Content/Images/profilepic.png" /></a><a href="#" class="profile_pic_img"><img src="/Content/Images/print_icon.png" /></a>Prescription Form</h2>
+                        <h2 class="fs-title" style="text-align:center;"><a href="#" class="webcam_img" onclick="patientimage();"><img src="/Content/Images/webcam.png" /></a><a href="#" class="profile_pic_img"><img src="/Content/Images/profilepic.png" /></a><a href="#" class="profile_pic_img"><img src="/Content/Images/print_icon.png" /></a>Prescription Form</h2>
                         <div style="width:100%; clear:both;">
                             <label title="Rx" class="rx_label rx_label_right">Rx</label>
                             <div style="width: auto; padding-top:10px; padding-right: 8px; float:left;" class="btn_box">
@@ -54,7 +54,7 @@
 
                         @*DRAW IMAGES*@
 
-                        @*<div id="DrawImage"></div>*@
+                        <div id="DrawImage"></div>
 
                         @*Medicine*@
 
@@ -262,10 +262,10 @@
                             <div id="draw_image" style="float: right; width:60%;">
                                 @Html.ListBoxFor(model => model.SelectedPrescriptionImages, Model.PrescriptionImages, new { htmlAttributes = new { @size = 5, @class = "form-control", @Multiple = "multiple", @style = "height:50px !important; width:100% !important;" } })
                             </div>
-
-                            <div id="prescription_submit" style="width:100%; clear:both;">
-                                <input type="submit" value="Create" class="next action-button" onclick="saveimage()" />
-                            </div>
+                        </div>
+                        <div id="prescription_submit" style="width:100%; clear:both;">
+                            <input type="submit" value="Create" class="next action-button" onclick="saveimage()" />
+                        </div>
 
                     </fieldset>
                 </div>
@@ -448,27 +448,27 @@
     <script type="text/javascript">
 
 
-        //function patientimage() {
+        function patientimage() {
 
-            @*jQuery("#DrawImage").dialog({
+            jQuery("#DrawImage").dialog({
                 autoOpen: true,
                 position: { my: "top", at: "top", of: window },
                 //width: 1200,
                 //resizable: false,
-                title: 'Draw Iamge',
+                title: 'Patient Image',
                 modal: true,
                 classname: 'searchdialog',
                 open: function () {
-                    jQuery(this).load('@Url.Action("Prescription", "Home")');
+                    jQuery(this).load('@Url.Action("Webcam", "Home")');
                     jQuery('#DrawImage').focus();
                 },
                 close: function () {
-                    //javascript: location.reload(true);
+                    javascript: location.reload(true);
                     @*searchpatient(this).load('@Url.Action("Index", "Home")');*@
-        //},
-        //});
-        //    return false;
-        //}
+        },
+        });
+            return false;
+        }
 
         jQuery(function () {
             jQuery(".autocomplete").autocomplete({
@@ -505,8 +505,6 @@
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             init();
-
-
         });
         var canvas, ctx, flag = false,
         prevX = 0,
@@ -544,10 +542,10 @@
         function color(obj) {
             switch (obj.id) {
                 case "green":
-                    x = "green";
+                    x = "green";                  
                     break;
                 case "blue":
-                    x = "blue";
+                    x = "blue";                
                     break;
                 case "red":
                     x = "red";
@@ -566,7 +564,7 @@
                     break;
             }
             if (x == "white") y = 14;
-            else y = 2;
+            else y = 5;
 
         }
 

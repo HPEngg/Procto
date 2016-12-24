@@ -46,6 +46,13 @@ namespace DoctorWeb.Controllers
             //return View(model.ToList());
         }
 
+
+        public ActionResult Webcam()
+        {
+            return PartialView();
+            //return View(model.ToList());
+        }
+
         public ActionResult Index()
         {
             ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name");

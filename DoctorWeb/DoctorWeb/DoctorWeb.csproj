@@ -528,13 +528,17 @@
     <Content Include="Content\js\jquery.flot.pie.resize_update.js" />
     <Content Include="Content\js\jquery.flot.resize.min.js" />
     <Content Include="Content\js\jquery.jgrowl.js" />
+    <Content Include="Content\js\jquery.min.js" />
     <Content Include="Content\js\jquery.smartWizard.min.js" />
     <Content Include="Content\js\jquery.tagsinput.min.js" />
     <Content Include="Content\js\jquery.uniform.min.js" />
     <Content Include="Content\js\jquery.validate.min.js" />
+    <Content Include="Content\js\jquery.webcam.js" />
     <Content Include="Content\js\media.js" />
     <Content Include="Content\js\prettify.js" />
     <Content Include="Content\js\slider.js" />
+    <Content Include="Content\js\swf\jscam.swf" />
+    <Content Include="Content\js\swf\jscam_canvas_only.swf" />
     <Content Include="Content\js\tinymce\jquery.tinymce.js" />
     <Content Include="Content\js\tinymce\langs\en.js" />
     <Content Include="Content\js\tinymce\tiny_mce_popup.js" />
@@ -747,6 +751,7 @@
     <Content Include="Views\PreImage\Index.cshtml" />
     <Content Include="Views\PreImage\Select.cshtml" />
     <Content Include="Views\Home\DrawImage.cshtml" />
+    <Content Include="Views\Home\Webcam.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

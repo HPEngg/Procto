@@ -627,6 +627,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\Home\Webcam.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -751,7 +752,6 @@
     <Content Include="Views\PreImage\Index.cshtml" />
     <Content Include="Views\PreImage\Select.cshtml" />
     <Content Include="Views\Home\DrawImage.cshtml" />
-    <Content Include="Views\Home\Webcam.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

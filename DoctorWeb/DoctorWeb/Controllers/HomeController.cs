@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using System.Web.UI;
 using System.Drawing;
 using System.IO;
+using System.Web.Services;
 
 namespace DoctorWeb.Controllers
 {
@@ -53,12 +54,47 @@ namespace DoctorWeb.Controllers
             //return View(model.ToList());
         }
 
-        [HttpPost]
-        public ActionResult Webcam(string data)
+        private byte[] String_To_Bytes2(string strInput)
+        {
+            int numBytes = (strInput.Length) / 2;
+            byte[] bytes = new byte[numBytes];
+            for (int x = 0; x < numBytes; ++x)
+            {
+                bytes[x] = Convert.ToByte(strInput.Substring(x * 2, 2), 16);
+            }
+            return bytes;
+        }
+        public ActionResult CaptureImage()
         {
             var stream = Request.InputStream;
-            return PartialView();
-            //return View(model.ToList());
+            string dump;
+
+            using (var reader = new StreamReader(stream))
+            {
+                dump = reader.ReadToEnd();
+
+                //DateTime nm = DateTime.Now;
+
+                //string date = nm.ToString("yyyymmddMMss");
+
+                var path = Server.MapPath("~/Content/PatientImages/test.png");
+
+                System.IO.File.WriteAllBytes(path, String_To_Bytes2(dump));
+
+                //ViewData["path"] = date + "test.jpg";
+
+                //Session["val"] = date + "test.jpg";
+            }
+            //string url = Session["val"].ToString();
+            //Session["val"] = null;
+            return PartialView("Webcam");
+        }
+
+
+        public JsonResult Rebind()
+        {
+            string path = "http://localhost:50409/Content/PatientImages/test.png";
+            return Json(path, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Index()
@@ -85,7 +121,7 @@ namespace DoctorWeb.Controllers
             //This line is temporary fix
             Patient p = new Patient();
             patient.DoctorID = model.DoctorID == 0 ? null : model.DoctorID;
-            if (ModelState.IsValid) 
+            if (ModelState.IsValid)
             {
                 p = db.Patients.Add(patient);
                 db.SaveChanges();
@@ -113,7 +149,8 @@ namespace DoctorWeb.Controllers
         public ActionResult Prescription(int patientID)
         {
             //ViewBag.Message = "Your application description page.";
-            if (prescr_success == 1) {
+            if (prescr_success == 1)
+            {
                 ViewBag.Message = "Patient Prescription Created Successfully";
                 prescr_success = 0;
             }
@@ -159,7 +196,7 @@ namespace DoctorWeb.Controllers
                 Received = model.Received,
                 Rs = model.Rs,
                 M = model.M,
-                PrescriptionImage = Convert.FromBase64String(model.PatientImage.Remove(0,22))
+                PrescriptionImage = Convert.FromBase64String(model.PatientImage.Remove(0, 22))
             };
             if (ModelState.IsValid)
             {
@@ -168,7 +205,7 @@ namespace DoctorWeb.Controllers
 
                 db.Prescriptions.Add(prescription);
                 db.SaveChanges();
-              //  ViewBag.Message = "Patient Prescription Created Successfully";
+                //  ViewBag.Message = "Patient Prescription Created Successfully";
                 prescr_success = 1;
                 return RedirectToAction("Prescription", new { patientID = model.PatientID });
             }

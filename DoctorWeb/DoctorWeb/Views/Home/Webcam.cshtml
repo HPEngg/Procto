@@ -9,7 +9,7 @@
         }
     </style>
 </head>
-<body>  
+<body>
     <script src="~/Content/js/jquery.min.js"></script>
     <script src="~/Content/js/jquery.webcam.js"></script>
 
@@ -17,69 +17,65 @@
         //var pageUrl = 'http://localhost:50409/Home/Webcam';
         var pageUrl = document.location.hostname;
         $(function () {
-    jQuery("#webcam").webcam({
-        width: 320,
-        height: 240,
-        mode: "save",
-        swffile: '../../Content/js//swf/jscam.swf',
-        debug: function (type, status) {
-            $('#camStatus').append(type + ": " + status + '<br /><br />');
-        },
-        onSave: function (data) {
-            $.ajax({
-                type: "POST",
-                url: pageUrl + "/Home/Webcam",
-                data: '',
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (r) {
-                    alert("Image Save success");
-                    //$("[id*=imgCapture]").css("visibility", "visible");
-                    $("[id*=imgCapture]").attr("src", r.d);
-
-                    //canvas = document.getElementById('capturedimage');
-                    //ctx = canvas.getContext("2d");
-                    //var img = document.getElementById("imgCapture");
-                    //ctx.drawImage(img, 0, 0);
-                    //var dataURL = canvas.toDataURL();
+            jQuery("#webcam").webcam({
+                width: 320,
+                height: 240,
+                mode: "save",
+                swffile: '../../Content/js/swf/jscam.swf',
+                debug: function (type, status) {
+                    $('#camStatus').append(type + ": " + status + '<br /><br />');
                 },
-                failure: function (response) {
-                    alert(response.d);
+                onSave: function (data) {
+                    UploadPic();
+                },
+                onCapture: function () {
+                    webcam.save("@Url.Content("~/Home/CaptureImage")/");
                 }
             });
-        },
-        onCapture: function () {
-            webcam.save(pageUrl);
+        });
+
+        function UploadPic() {  
+            $.ajax({  
+                type: 'POST',  
+                url: ("@Url.Content("~/Home/Rebind")/"),  
+            dataType: 'json',  
+            success: function (data) {  
+                $("#imgCapture").attr("src", data);
+                //$("#imgCapture").css("visibility", "visible");
+                alert("Photo Capture successfully!");  
+            }  
+        });  
+        } 
+
+        function Capture() {
+            webcam.capture();
+            return false;
         }
-    });
-});
-function Capture() {
-    webcam.capture();
-    return true;
-}
+
     </script>
+
     <form id="form1">
         <table border="0" cellpadding="0" cellspacing="0">
             @*<tr>
-                <td align="center">
-                    <u>Live Camera</u>
-                </td>
-                <td></td>
-                <td align="center">
-                    <u>Captured Picture</u>
-                </td>
-            </tr>*@
+                    <td align="center">
+                        <u>Live Camera</u>
+                    </td>
+                    <td></td>
+                    <td align="center">
+                        <u>Captured Picture</u>
+                    </td>
+                </tr>*@
             <tr>
                 <td>
                     <div id="webcam">
                     </div>
                 </td>
                 @*<td>
-                    &nbsp;
-                </td>*@
+                        &nbsp;
+                    </td>*@
                 @*<td>*@
-                    <img id="imgCapture" style="visibility:hidden; width:320px; height:240px;" />
-                <canvas id="capturedimage"></canvas>
+                @*<img id="imgCapture" style="visibility:hidden; width:320px; height:240px;" />*@
+                @*<canvas id="capturedimage"></canvas>*@
                 @*</td>*@
             </tr>
         </table>
@@ -90,5 +86,3 @@ function Capture() {
     </form>
 </body>
 </html>
-
-

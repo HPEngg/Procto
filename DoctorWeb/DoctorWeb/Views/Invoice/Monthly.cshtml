@@ -30,14 +30,23 @@ Year: @Html.DropDownList("Year", Enumerable.Range(DateTime.Now.Year - 25, 26).Se
             @Html.DisplayNameFor(model => model.Patient.Name)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.Patient.Age)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Patient.Gender)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Patient.Address)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Patient.ReferredBy)
+            @Html.DisplayNameFor(model => model.Patient.DepartmentID)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Patient.Status)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Patient.ReferredBy)
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.Doctor.Name)
         </th>
@@ -63,14 +72,23 @@ Year: @Html.DropDownList("Year", Enumerable.Range(DateTime.Now.Year - 25, 26).Se
                 @Html.DisplayFor(modelItem => item.Patient.Name)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Patient.Age)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Patient.Gender)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Patient.Address)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Patient.ReferredBy)
+                @Html.DisplayFor(modelItem => item.Patient.DepartmentID)
             </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Patient.Status)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Patient.ReferredBy)
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Doctor.Name)
             </td>

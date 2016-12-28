@@ -11,7 +11,7 @@ namespace DoctorWeb.Models
         public int ID { get; set; }
 
         [Required]
-        [Display(Name = "Payment type name")]
+        [Display(Name = "Charge type name")]
         public string PaymentTypeName { get; set; }
 
         [Required]

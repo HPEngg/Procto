@@ -16,27 +16,27 @@
 <table class="table">
     <tr>
         <th>
-            @*@Html.DisplayNameFor(model => model.Dosage.Name)*@
-            Dosage
+            @*@Html.DisplayNameFor(model => model.OINT.Name)*@
+            Type
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OINTMore)
         </th>
         <th>
             @*@Html.DisplayNameFor(model => model.Morning.Name)*@
             Morning
         </th>
         <th>
-            @*@Html.DisplayNameFor(model => model.Night.Name)*@
-            Night
-        </th>
-        <th>
             @*@Html.DisplayNameFor(model => model.Noon.Name)*@
             Noon
         </th>
         <th>
-            @*@Html.DisplayNameFor(model => model.OINT.Name)*@
-            Type
+            @*@Html.DisplayNameFor(model => model.Night.Name)*@
+            Night
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.OINTMore)
+            @*@Html.DisplayNameFor(model => model.Dosage.Name)*@
+            Dosage
         </th>
         <th>
             @Html.DisplayNameFor(model => model.IsDayAffected)
@@ -50,22 +50,22 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Dosage.Name)
+            @Html.DisplayFor(modelItem => item.OINT.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OINTMore)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Morning.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Night.Name)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Noon.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.OINT.Name)
-        </td>
+            @Html.DisplayFor(modelItem => item.Night.Name)
+        </td>        
         <td>
-            @Html.DisplayFor(modelItem => item.OINTMore)
+            @Html.DisplayFor(modelItem => item.Dosage.Name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.IsDayAffected)

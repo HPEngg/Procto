@@ -1366,6 +1366,7 @@ pre {
     .container {
         max-width: 1170px;
         margin:0px;
+        width:auto;
     }
 
     .col-lg-1,
@@ -7108,7 +7109,7 @@ td.visible-print {
 }
 
 .rightpanel .col-md-offset-2 {
-  margin-left: 13%;
+  margin-left: 15%;
 }
 
 .rightpanel select, .rightpanel textarea, .rightpanel input[type="text"], .rightpanel input[type="password"], .rightpanel input[type="datetime"], .rightpanel input[type="datetime-local"], .rightpanel input[type="date"], .rightpanel input[type="month"], .rightpanel input[type="time"], .rightpanel input[type="week"], .rightpanel input[type="number"], .rightpanel input[type="email"], .rightpanel input[type="url"], .rightpanel input[type="search"], .rightpanel input[type="tel"], .rightpanel input[type="color"], .rightpanel .uneditable-input {

@@ -155,7 +155,7 @@
                                 @Html.LabelFor(model => model.DoctorID, "DoctorID", htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
                             *@
-                            @Html.DropDownList("DoctorID", null, htmlAttributes: new { @class = "pre", @style = "width: 120px!important; padding: 0!important; color:#000;" })
+                            @Html.DropDownList("DoctorID", null, htmlAttributes: new { @class = "pre", @style = "width: 120px!important; padding: 0!important; color:#000; display:none;" })
                             @Html.ValidationMessageFor(model => model.DoctorID, "", new { @class = "text-danger" })
                             @*
                                     </div>
@@ -210,7 +210,7 @@
                         </div>
 
 
-                        <div style=" width:92%; position:relative; margin-top:200px; clear:both; bottom:0;" class="pmtype_div">
+                        <div style=" width:92%; position:relative; clear:both; bottom:0;" class="pmtype_div">
                             <div id="payment_types">
                                 @foreach (var item in Model.PaymentTypes)
                                 {
@@ -449,7 +449,6 @@
 
 
         function patientimage() {
-
             jQuery("#DrawImage").dialog({
                 autoOpen: true,
                 position: { my: "top", at: "top", of: window },

@@ -1,0 +1,152 @@
+﻿@model DoctorWeb.Models.CustomModels.PatientPhoto
+@{
+    ViewBag.Title = "PatietPhoto";
+    Layout = "~/Views/Shared/_LightBoxLayout.cshtml";
+}
+
+<h2>PatietPhoto</h2>
+<script src="~/Content/js/jquery.webcam.min.js"></script>
+<script src="~/Content/js/jquery.min.js"></script>
+<script src="~/Content/js/jquery.webcam.js"></script>
+<script type="text/javascript">
+
+    $(function() {
+
+        var pos = 0, ctx = null, saveCB, image = [];
+
+        var canvas = document.createElement("patientimage");
+        canvas.setAttribute('width', 320);
+        canvas.setAttribute('height', 240);
+	
+        if (canvas.toDataURL) {
+
+            ctx = canvas.getContext("2d");
+		
+            image = ctx.getImageData(0, 0, 320, 240);
+	
+            saveCB = function(data) {
+			
+                var col = data.split(";");
+                var img = image;
+
+                for(var i = 0; i < 320; i++) {
+                    var tmp = parseInt(col[i]);
+                    img.data[pos + 0] = (tmp > 16) & 0xff;
+                    img.data[pos + 1] = (tmp > 8) & 0xff;
+                    img.data[pos + 2] = tmp & 0xff;
+                    img.data[pos + 3] = 0xff;
+                    pos+= 4;
+                }
+
+                if (pos >= 4 * 320 * 240) {
+                    ctx.putImageData(img, 0, 0);
+                    //$.post("/upload.php", { type: "data", image: canvas.toDataURL("image/png") });
+                    alert("IF");
+                    pos = 0;
+                }
+            };
+
+        } else {
+
+            saveCB = function(data) {
+                image.push(data);
+			
+                pos+= 4 * 320;
+			
+                if (pos >= 4 * 320 * 240) {
+                    //$.post("/upload.php", {type: "pixel", image: image.join('|')});
+                    alert("Else");
+                    pos = 0;
+                }
+            };
+        }
+
+        $("#webcam").webcam({
+
+            width: 320,
+            height: 240,
+            mode: "callback",
+            swffile: "../../Content/js/swf/jscam.swf",
+
+            onSave: saveCB,
+
+            onCapture: function () {
+                webcam.save();
+            },
+
+            debug: function (type, string) {
+                console.log(type + ": " + string);
+            }
+        });
+
+    });
+
+
+
+
+
+
+    //$(function () {
+    //    jQuery("#webcam").webcam({
+    //        width: 320,
+    //        height: 240,
+    //        mode: "callback",
+    //        swffile: "../../Content/js/swf/jscam.swf",
+    //        onTick: function () { },
+    //        onSave: function (data) {
+    //            canvas = document.getElementById('patientimage');
+    //            ctx = canvas.getContext("2d");
+    //            var col = data.split(";");
+    //            var img = document.getElementById('Photo');
+
+    //            for (var i = 0; i < 320; i++) {
+    //                var tmp = parseInt(col[i]);
+    //                img.data[pos + 0] = (tmp >> 16) & 0xff;
+    //                img.data[pos + 1] = (tmp >> 8) & 0xff;
+    //                img.data[pos + 2] = tmp & 0xff;
+    //                img.data[pos + 3] = 0xff;
+    //                pos += 4;
+    //            }
+
+    //            if (pos >= 4 * 320 * 240) {
+    //                ctx.putImageData(img, 0, 0);
+    //                pos = 0;
+    //            }
+
+    //        },
+    //        onCapture: function () {
+    //            webcam.save();
+    //        },
+    //        debug: function () { },
+    //        onLoad: function () { }
+    //    });
+    //});
+
+    function Capture() {
+        webcam.capture();
+        changefilter();
+        return false;
+    }
+</script>
+
+@using (Html.BeginForm("PatietPhoto", "Home", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @Html.HiddenFor(Model => Model.PatientID)
+
+        <img id="Photo" name="Photo" style="visibility:visible; width:320px; height:240px;" />
+        <div id="webcam">
+        </div>
+        <canvas id="patientimage" height="240" width="320"></canvas>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" value="Create" class="btn btn-default" onclick="Capture();" />
+            </div>
+        </div>
+    </div>
+}

@@ -50,5 +50,7 @@ namespace DoctorWeb.Models
 
         public IEnumerable<Prescription> Prescriptions { get; set; }
         public IEnumerable<PatientHistory> PatientHistories { get; set; }
+
+        public byte[] Photo { get; set; }
     }
 }

@@ -48,8 +48,9 @@ namespace DoctorWeb.Controllers
         }
 
 
-        public ActionResult Webcam()
+        public ActionResult Webcam(int id)
         {
+            ViewBag.PatientID = id;
             return PartialView();
             //return View(model.ToList());
         }
@@ -64,27 +65,38 @@ namespace DoctorWeb.Controllers
             }
             return bytes;
         }
-        public ActionResult CaptureImage()
+        public ActionResult CaptureImage(int id)
         {
             var stream = Request.InputStream;
             string dump;
 
-            using (var reader = new StreamReader(stream))
+            if (ModelState.IsValid)
             {
-                dump = reader.ReadToEnd();
+                var patient = db.Patients.Find(id);
+                using (var reader = new StreamReader(stream))
+                {
+                    dump = reader.ReadToEnd();
+                    patient.Photo = String_To_Bytes2(dump);
 
-                //DateTime nm = DateTime.Now;
+                    ////DateTime nm = DateTime.Now;
 
-                //string date = nm.ToString("yyyymmddMMss");
+                    ////string date = nm.ToString("yyyymmddMMss");
 
-                var path = Server.MapPath("~/Content/PatientImages/test.png");
+                    //var path = Server.MapPath("~/Content/PatientImages/test.png");
 
-                System.IO.File.WriteAllBytes(path, String_To_Bytes2(dump));
+                    //System.IO.File.WriteAllBytes(path, String_To_Bytes2(dump));
 
-                //ViewData["path"] = date + "test.jpg";
+                    ////ViewData["path"] = date + "test.jpg";
 
-                //Session["val"] = date + "test.jpg";
+                    ////Session["val"] = date + "test.jpg";
+                }
+                db.Entry(patient).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
+
+
+            
             //string url = Session["val"].ToString();
             //Session["val"] = null;
             return PartialView("Webcam");
@@ -170,7 +182,7 @@ namespace DoctorWeb.Controllers
             ViewBag.OINTTypeID = new SelectList(db.OINTTypes, "ID", "Name");
             ViewBag.PrescriptionCategoryID = new SelectList(db.PrescriptionCategories, "ID", "Name");
 
-            model.PrescriptionImages = db.PreImages.Select(o => new SelectListItem() { Text = o.ID.ToString(), Value = o.ID.ToString(), Selected = false });
+            model.PrescriptionImages = db.PreImages.Select(o => new SelectListItem() { Text = o.Label, Value = o.ID.ToString(), Selected = false });
 
             return View(model);
         }
@@ -196,7 +208,8 @@ namespace DoctorWeb.Controllers
                 Received = model.Received,
                 Rs = model.Rs,
                 M = model.M,
-                PrescriptionImage = Convert.FromBase64String(model.PatientImage.Remove(0, 22))
+                PrescriptionImage = Convert.FromBase64String(model.PatientImage.Remove(0, 22)),
+                Investigation = model.Investigation
             };
             if (ModelState.IsValid)
             {

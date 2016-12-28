@@ -13,9 +13,17 @@
         <dt>
             @Html.DisplayNameFor(model => model.Image)
         </dt>
-
+        
         <dd>
             @Html.Raw("<img src=\"data:image/jpeg;base64," + Convert.ToBase64String(Model.Image) + "\" width=100 height=100/>")
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Label)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Label)
         </dd>
 
     </dl>

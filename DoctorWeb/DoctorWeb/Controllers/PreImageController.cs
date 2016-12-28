@@ -51,7 +51,7 @@ namespace DoctorWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID")] PreImage preImg, HttpPostedFileBase preImage)
+        public ActionResult Create([Bind(Include = "ID,Label")] PreImage preImg, HttpPostedFileBase preImage)
         {
             if (ModelState.IsValid)
             {

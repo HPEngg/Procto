@@ -50,5 +50,6 @@ namespace DoctorWeb.Models
 
         public byte[] PrescriptionImage { get; set; }
 
+        public string Investigation { get; set; }
     }
 }

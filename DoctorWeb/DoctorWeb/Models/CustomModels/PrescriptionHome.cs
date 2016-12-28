@@ -39,5 +39,7 @@ namespace DoctorWeb.Models.CustomModels
 
         public string PatientImage { get; set; }
 
+        public string Investigation { get; set; }
+
     }
 }

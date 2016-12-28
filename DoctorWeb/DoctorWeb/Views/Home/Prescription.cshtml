@@ -80,7 +80,7 @@
                                     @Html.ValidationMessageFor(model => model.Medicine.OINTMore, "", new { @class = "text-danger" })
                                     <input type="hidden" id="hfPatient" name="Pat_ID" />
 
-                                    @Html.HiddenFor(model => model.PatientID, new { value = @ViewBag.PatientID })
+                                    @Html.HiddenFor(model => model.PatientID, new { id = @ViewBag.PatientID })
                                     @*
                                             </div>
                                         </div>*@
@@ -209,6 +209,8 @@
                             @Html.ValidationMessageFor(model => model.FollowDate, "", new { @class = "text-danger" })
                         </div>
 
+                        @Html.EditorFor(model => model.Investigation)
+                        @Html.ValidationMessageFor(model => model.Investigation, "", new { @class = "text-danger" })
 
                         <div style=" width:92%; position:relative; margin-top:200px; clear:both; bottom:0;" class="pmtype_div">
                             <div id="payment_types">
@@ -459,7 +461,7 @@
                 modal: true,
                 classname: 'searchdialog',
                 open: function () {
-                    jQuery(this).load('@Url.Action("Webcam", "Home")');
+                    jQuery(this).load('@Url.Action("Webcam", "Home", new { id = @ViewBag.PatientID })');
                     jQuery('#DrawImage').focus();
                 },
                 close: function () {

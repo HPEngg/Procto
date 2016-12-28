@@ -29,7 +29,7 @@
                     UploadPic();
                 },
                 onCapture: function () {
-                    webcam.save("@Url.Content("~/Home/CaptureImage")/");
+                    webcam.save("@Url.Content("~/Home/CaptureImage")/" + @ViewBag.PatientID);
                 }
             });
         });

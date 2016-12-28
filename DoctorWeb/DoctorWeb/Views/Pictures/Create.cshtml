@@ -5,6 +5,11 @@
 }
 <h2>Add Images</h2>
 
+@if (ViewBag.ErrorMessage != null)
+{
+    <p style="color:red; font-size:16px;">Error: @ViewBag.ErrorMessage</p>
+}
+
 @using (Html.BeginForm("Create", "Pictures", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()

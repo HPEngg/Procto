@@ -40,23 +40,27 @@ namespace DoctorWeb.Controllers
 
                 if(current == null)
                 {
-                    if (hed != null && hed.ContentLength > 0)
+                    if (hed != null && hed.ContentLength > 0 && fot != null && fot.ContentLength > 0)
                     {
                         using (var reader = new System.IO.BinaryReader(hed.InputStream))
                         {
                             picture.Header = reader.ReadBytes(hed.ContentLength);
                         }
-                    }
-
-                    if (fot != null && fot.ContentLength > 0)
-                    {
                         using (var reader = new System.IO.BinaryReader(fot.InputStream))
                         {
                             picture.Footer = reader.ReadBytes(fot.ContentLength);
                         }
-                    }
 
-                    db.Pictures.Add(picture);
+                        db.Pictures.Add(picture);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+
+                    }
+                    else
+                    {
+                        ViewBag.ErrorMessage = "Select images to upload";
+                        return View(picture);
+                    }
                 }
                 else
                 {
@@ -77,10 +81,9 @@ namespace DoctorWeb.Controllers
                     }
 
                     db.Entry(current).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
                 }
-
-                db.SaveChanges();
-                return RedirectToAction("Index");
             }
 
             return View(picture);

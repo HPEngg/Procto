@@ -61,11 +61,14 @@ namespace DoctorWeb.Controllers
                     {
                         preImg.Image = reader.ReadBytes(preImage.ContentLength);
                     }
+                    db.PreImages.Add(preImg);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
                 }
-
-                db.PreImages.Add(preImg);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                else
+                {
+                    ViewBag.ErrorMessage = "Please select image to upload";
+                }
             }
 
             return View(preImg);

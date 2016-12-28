@@ -6,6 +6,10 @@
 }
 
 <h2>Add Prescription Image</h2>
+@if (ViewBag.ErrorMessage != null)
+{
+    <p style="color:red; font-size:16px;">Error: @ViewBag.ErrorMessage</p>
+}
 
 
 @using (Html.BeginForm("Create", "PreImage", null, FormMethod.Post, new { enctype = "multipart/form-data" }))

@@ -25,7 +25,7 @@
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div id="msform_right" onload="init();">
+    <div id="msform_right">
         <div class="form-horizontal">
             <div class="form_fieldset_div">
                 <div id="testDiv1">
@@ -209,8 +209,12 @@
                             @Html.ValidationMessageFor(model => model.FollowDate, "", new { @class = "text-danger" })
                         </div>
 
-                        @Html.EditorFor(model => model.Investigation)
-                        @Html.ValidationMessageFor(model => model.Investigation, "", new { @class = "text-danger" })
+                        <div style="clear:both; display:block; width:100%; float:left;">
+                            @*@Html.LabelFor(model => model.FollowDate, htmlAttributes: new { @class = "control-label col-md-2", style="float:left; padding-left:0"})*@
+                            @Html.EditorFor(model => model.Investigation, new { htmlAttributes = new { @placeholder = "Investigation" } })
+                            @Html.ValidationMessageFor(model => model.Investigation, "", new { @class = "text-danger" })
+                        </div>
+                        
 
                         <div style=" width:92%; position:relative; clear:both; bottom:0;" class="pmtype_div">
                             <div id="payment_types">

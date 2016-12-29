@@ -177,7 +177,7 @@ namespace DoctorWeb.Controllers
                 patients = db.Patients.Where(p => p.ReferredBy == Models.Enums.ReferredBy.Doctor && p.DoctorID == id).Select(o => new PatientRefByDoctor() { ID = o.ID, Name = o.Name, Age = o.Age.ToString(), Address = o.Address, Sex = o.Gender.ToString(), Status = o.Status.ToString(), Department = o.DepartmentID.ToString(), Ammount = db.Prescriptions.Where(p => p.PatientID == o.ID).Sum(s => s.Rs) });
 
             Response.ClearContent();
-            Response.AddHeader("content-disposition", "attachment;filename=Contact.xls");
+            Response.AddHeader("content-disposition", "attachment;filename=Patients.xls");
             Response.AddHeader("Content-Type", "application/vnd.ms-excel");
             WriteTsv(patients, Response.Output);
             Response.End();

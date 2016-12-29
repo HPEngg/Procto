@@ -214,7 +214,7 @@
                             @Html.EditorFor(model => model.Investigation, new { htmlAttributes = new { @placeholder = "Investigation" } })
                             @Html.ValidationMessageFor(model => model.Investigation, "", new { @class = "text-danger" })
                         </div>
-                        
+
 
                         <div style=" width:92%; position:relative; clear:both; bottom:0;" class="pmtype_div">
                             <div id="payment_types">
@@ -238,10 +238,10 @@
                                 @Html.EditorFor(model => model.Rs, new { htmlAttributes = new { name = "pm_rupees", placeholder = " Rs.0", style = "width:60px!important; padding: 0!important; height:25px;", id = "pm_rupees" } })
                                 @Html.ValidationMessageFor(model => model.Rs, "", new { @class = "text-danger" })
 
-                                @Html.EditorFor(model => model.Received, new { htmlAttributes = new { name = "pm_rupees", placeholder = "Recieved", style = "width:60px!important; padding: 0!important; height:25px;" } })
+                                @Html.EditorFor(model => model.Received, new { htmlAttributes = new { name = "pm_rupees", placeholder = "Recieved", style = "width:60px!important; padding: 0!important; height:25px;", id = "pm_received", onkeyup = "cal_pending(event);" } })
                                 @Html.ValidationMessageFor(model => model.Received, "", new { @class = "text-danger" })
 
-                                @Html.EditorFor(model => model.Pending, new { htmlAttributes = new { name = "pm_rupees", placeholder = "Pending", style = "width:60px!important; padding: 0!important; height:25px;" } })
+                                @Html.EditorFor(model => model.Pending, new { htmlAttributes = new { name = "pm_rupees", placeholder = "Pending", style = "width:60px!important; padding: 0!important; height:25px;", disabled = "disabled", id = "pm_pending" } })
                                 @Html.ValidationMessageFor(model => model.Pending, "", new { @class = "text-danger" })
 
                                 @Html.HiddenFor(model => model.PatientImage)
@@ -377,7 +377,6 @@
 
                 var less_net = total_charges * less_perc / 100;
 
-
                 jQuery("input[name=pm_less_net]").val(less_net);
                 total_charges = total_charges - less_net;
                 jQuery("#pm_rupees").val(total_charges);
@@ -403,6 +402,12 @@
                 }
             });//each pmtype
 
+            // Calculate Pending Amount
+
+            //jQuery("#Received").on('change keyup paste', function () {
+            //    alert("Change detected!");
+            //});
+
             //add madicine charges to totalcharges
 
             if (jQuery.isNumeric(jQuery("input[id=pm_madicine]").val()))
@@ -413,9 +418,21 @@
                 less_perc = parseInt(jQuery("input[id=pm_less_perc]").val());
 
             var less_net = total_charges * less_perc / 100;
+
             jQuery("input[id=pm_less_net]").val(less_net);
             total_charges = total_charges - less_net;
             jQuery("#pm_rupees").val(total_charges);
+        }
+
+        function cal_pending(event) {
+            if (event.keyCode == 9 || event.keyCode == 16)
+                return false;
+            var pendng_amt = 0;
+            if (jQuery.isNumeric(jQuery("#pm_received").val())) {
+                pending_amt = jQuery("input[id=pm_rupees]").val() - jQuery("input[id=pm_received]").val();
+                jQuery("input[id=pm_pending]").val(pending_amt);
+            }
+
         }
 
         function less_net_changed(event) {
@@ -470,8 +487,8 @@
                 close: function () {
                     //javascript: location.reload(true);
                     @*searchpatient(this).load('@Url.Action("Index", "Home")');*@
-        },
-        });
+                },
+            });
             return false;
         }
 
@@ -508,7 +525,7 @@
 
 
     <script type="text/javascript">
-            
+
         document.addEventListener('DOMContentLoaded', function () {
             init();
         });
@@ -548,10 +565,10 @@
         function color(obj) {
             switch (obj.id) {
                 case "green":
-                    x = "green";                  
+                    x = "green";
                     break;
                 case "blue":
-                    x = "blue";                
+                    x = "blue";
                     break;
                 case "red":
                     x = "red";

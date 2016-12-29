@@ -975,6 +975,7 @@ td {
 
 #SelectedPrescriptionImages {
     height: 280px !important;
+    color:#000 !important;
 }
 
 #Description {

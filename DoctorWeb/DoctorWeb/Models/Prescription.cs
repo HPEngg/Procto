@@ -28,7 +28,7 @@ namespace DoctorWeb.Models
         public string Less { get; set; }
 
         [Display(Name = "Invoiced Rs.")]
-        public string Rs { get; set; }
+        public Decimal Rs { get; set; }
         public Decimal Received { get; set; }
         public Decimal Pending{ get; set; }
 

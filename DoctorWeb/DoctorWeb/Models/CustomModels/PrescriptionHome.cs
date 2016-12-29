@@ -23,7 +23,7 @@ namespace DoctorWeb.Models.CustomModels
         public string M { get; set; }
         public int Percent { get; set; }
         public string Less { get; set; }
-        public string Rs { get; set; }
+        public Decimal Rs { get; set; }
         public Decimal Received { get; set; }
         public Decimal Pending { get; set; }
 

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DoctorWeb.Models;
+using DoctorWeb.Models.CustomModels;
 
 namespace DoctorWeb.Controllers
 {
@@ -123,12 +124,12 @@ namespace DoctorWeb.Controllers
         // GET: Patient
         public ActionResult Refered(int? id)
         {
-            IEnumerable<Patient> patients = null;
+            IEnumerable<PatientRefByDoctor> patients = null;
             ViewBag.Values = new SelectList(db.Doctors, "ID", "Name");
             if (id == null)
-                patients = db.Patients.Where(p => p.ReferredBy == Models.Enums.ReferredBy.Doctor).Include(p => p.Doctor);
+                patients = db.Patients.Where(p => p.ReferredBy == Models.Enums.ReferredBy.Doctor).Select(o =>  new PatientRefByDoctor() { ID = o.ID, Name = o.Name, Age = o.Age.ToString(), Address = o.Address, Sex = o.Gender.ToString(), Status = o.Status.ToString(), Department = o.DepartmentID.ToString(), Ammount = db.Prescriptions.Where(p => p.PatientID == o.ID).Sum(s => s.Rs) });
             else
-                patients = db.Patients.Where(p => p.ReferredBy == Models.Enums.ReferredBy.Doctor && p.DoctorID == id).Include(p => p.Doctor);
+                patients = db.Patients.Where(p => p.ReferredBy == Models.Enums.ReferredBy.Doctor && p.DoctorID == id).Select(o => new PatientRefByDoctor() { ID = o.ID, Name = o.Name, Age = o.Age.ToString(), Address = o.Address, Sex = o.Gender.ToString(), Status = o.Status.ToString(), Department = o.DepartmentID.ToString(), Ammount = db.Prescriptions.Where(p => p.PatientID == o.ID).Sum(s => s.Rs) });
 
             return View(patients.ToList());
         }

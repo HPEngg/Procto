@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DoctorWeb.Models.Patient>
+﻿@model IEnumerable<DoctorWeb.Models.CustomModels.PatientRefByDoctor>
 
 @{
     ViewBag.Title = "Refered";
@@ -9,7 +9,7 @@
 
 @using (Html.BeginForm("Refered", "Patient"))
 {
-    @Html.DisplayNameFor(model => model.ReferredBy)<span> </span>
+    <p>ReferredBy</p> <span> </span>
     @Html.DropDownList("ID", (SelectList)ViewBag.Values, "Select Doctor", new { onchange = "this.form.submit();" })
 }
 </br>
@@ -22,18 +22,20 @@
             @Html.DisplayNameFor(model => model.Age)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Gender)
+            @Html.DisplayNameFor(model => model.Sex)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Address)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DepartmentID)
+            @Html.DisplayNameFor(model => model.Department)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Status)
         </th>
-        
+        <th>
+            @Html.DisplayNameFor(model => model.Ammount)
+        </th>
        
       
         @*<th>
@@ -78,18 +80,20 @@
             @Html.DisplayFor(modelItem => item.Age)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Gender)
+            @Html.DisplayFor(modelItem => item.Sex)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Address)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.DepartmentID)
+            @Html.DisplayFor(modelItem => item.Department)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Status)
         </td>
-        
+        <td>
+            @Html.DisplayFor(modelItem => item.Ammount)
+        </td>
 
         @*<td>
             @Html.DisplayFor(modelItem => item.Doctor.Name)

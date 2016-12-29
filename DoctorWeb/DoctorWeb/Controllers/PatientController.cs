@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using DoctorWeb.Models;
 using DoctorWeb.Models.CustomModels;
+using System.IO;
+using System.ComponentModel;
 
 namespace DoctorWeb.Controllers
 {
@@ -131,6 +133,7 @@ namespace DoctorWeb.Controllers
             else
                 patients = db.Patients.Where(p => p.ReferredBy == Models.Enums.ReferredBy.Doctor && p.DoctorID == id).Select(o => new PatientRefByDoctor() { ID = o.ID, Name = o.Name, Age = o.Age.ToString(), Address = o.Address, Sex = o.Gender.ToString(), Status = o.Status.ToString(), Department = o.DepartmentID.ToString(), Ammount = db.Prescriptions.Where(p => p.PatientID == o.ID).Sum(s => s.Rs) });
 
+            ViewBag.DoctorID = id;
             return View(patients.ToList());
         }
 
@@ -141,6 +144,43 @@ namespace DoctorWeb.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public void WriteTsv<T>(IEnumerable<T> data, TextWriter output)
+        {
+            PropertyDescriptorCollection props = TypeDescriptor.GetProperties(typeof(T));
+            foreach (PropertyDescriptor prop in props)
+            {
+                output.Write(prop.DisplayName); // header
+                output.Write("\t");
+            }
+            output.WriteLine();
+            foreach (T item in data)
+            {
+                foreach (PropertyDescriptor prop in props)
+                {
+                    output.Write(prop.Converter.ConvertToString(
+                         prop.GetValue(item)));
+                    output.Write("\t");
+                }
+                output.WriteLine();
+            }
+        }
+
+        public void ExportListFromTsv(int? id)
+        {
+            IEnumerable<PatientRefByDoctor> patients = null;
+            ViewBag.Values = new SelectList(db.Doctors, "ID", "Name");
+            if (id == null)
+                patients = db.Patients.Where(p => p.ReferredBy == Models.Enums.ReferredBy.Doctor).Select(o => new PatientRefByDoctor() { ID = o.ID, Name = o.Name, Age = o.Age.ToString(), Address = o.Address, Sex = o.Gender.ToString(), Status = o.Status.ToString(), Department = o.DepartmentID.ToString(), Ammount = db.Prescriptions.Where(p => p.PatientID == o.ID).Sum(s => s.Rs) });
+            else
+                patients = db.Patients.Where(p => p.ReferredBy == Models.Enums.ReferredBy.Doctor && p.DoctorID == id).Select(o => new PatientRefByDoctor() { ID = o.ID, Name = o.Name, Age = o.Age.ToString(), Address = o.Address, Sex = o.Gender.ToString(), Status = o.Status.ToString(), Department = o.DepartmentID.ToString(), Ammount = db.Prescriptions.Where(p => p.PatientID == o.ID).Sum(s => s.Rs) });
+
+            Response.ClearContent();
+            Response.AddHeader("content-disposition", "attachment;filename=Contact.xls");
+            Response.AddHeader("Content-Type", "application/vnd.ms-excel");
+            WriteTsv(patients, Response.Output);
+            Response.End();
         }
     }
 }

@@ -500,11 +500,14 @@
                         data: "{ 'MedicineName': '" + request.term + "'}",
                         dataType: "json",
                         type: "POST",
-                        value:1,
                         contentType: "application/json; charset=utf-8",
                         success: function (data) {
                             response(jQuery.map(data, function (item) {
-                                return item;
+                                return {
+                                    label: item.OINTMore,
+                                    value: item.OINTMore,
+                                    term: item.Quantity
+                                }
                             }))
                         },
                         error: function (response) {
@@ -516,7 +519,7 @@
                     });
                 },
                 select: function (e, i) {
-                    jQuery("#hfPatient").val(i.item.val);
+                    jQuery("#qut_1").val(i.item.term);
                 },
                 minLength: 1
             });
@@ -533,7 +536,11 @@
                         contentType: "application/json; charset=utf-8",
                         success: function (data) {
                             response(jQuery.map(data, function (item) {
-                                return item;
+                                return {
+                                    label: item.OINTMore,
+                                    value: item.OINTMore,
+                                    term: item.Quantity
+                                }
                             }))
                         },
                         error: function (response) {
@@ -545,7 +552,7 @@
                     });
                 },
                 select: function (e, i) {
-                    jQuery("#hfPatient").val(i.item.val);
+                    jQuery("#qut_1").val(i.item.term);
                 },
                 minLength: 1
             });

@@ -500,6 +500,7 @@
                         data: "{ 'MedicineName': '" + request.term + "'}",
                         dataType: "json",
                         type: "POST",
+                        value:1,
                         contentType: "application/json; charset=utf-8",
                         success: function (data) {
                             response(jQuery.map(data, function (item) {

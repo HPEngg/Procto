@@ -9,10 +9,16 @@
 
 @using (Html.BeginForm("Refered", "Patient"))
 {
-    <p>ReferredBy</p> <span> </span>
-    @Html.DropDownList("ID", (SelectList)ViewBag.Values, "Select Doctor", new { onchange = "this.form.submit();" })
+    
+    <div style="float:left;">
+        <label style="float:left;padding-right:5px;">ReferredBy</label>
+        @Html.DropDownList("ID", (SelectList)ViewBag.Values, "Select Doctor", new { onchange = "this.form.submit();" })
+    </div>
+    <div style="float:right;">
+        @Html.ActionLink("Export to Excel", "ExportListFromTsv", new { id = ViewBag.DoctorID })
+    </div>
 }
-</br>
+</br></br>
 <table class="table table-bordered">
     <tr>
         <th>
@@ -130,5 +136,3 @@
 }
 
 </table>
-
-@Html.ActionLink("Export to Excel", "ExportListFromTsv", new { id = ViewBag.DoctorID })

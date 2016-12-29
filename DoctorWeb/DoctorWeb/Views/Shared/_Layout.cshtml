@@ -62,7 +62,7 @@
                         </form>*@
                     <input class="search_text" type="textbox" name="PatientName" ID="PatientName">
                     <button style="float: left;" class="okok" data-popup-open="popup-1" href="#" id="search_btn" onclick="patientsearch();">Search</button>
-                    <a class="okok" href="/Doctor/Index" style="float: right;"><button>Admin</button></a>
+                    <a class="okok" href="/Doctor/Index" style="float: left; margin-left:10px;"><button>Admin</button></a>
                     <div id="SearchRecords"></div>
                 </div>
             </div><!---- top part End --->
@@ -122,7 +122,7 @@
                 searchpatient('#SearchRecords').focus();
             },
             close: function () {
-                //javascript: location.reload(true);
+                javascript: location.reload(true);
                 @*searchpatient(this).load('@Url.Action("Index", "Home")');*@
             },
         });

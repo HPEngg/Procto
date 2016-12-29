@@ -521,6 +521,35 @@
             });
         });
 
+        $(document).on('click', '.plusbutton', function (event) {
+            jQuery(".autocomplete").autocomplete({
+                source: function (request, response) {
+                    jQuery.ajax({
+                        url: '/Home/AutoComplete/',
+                        data: "{ 'MedicineName': '" + request.term + "'}",
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            response(jQuery.map(data, function (item) {
+                                return item;
+                            }))
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                },
+                select: function (e, i) {
+                    jQuery("#hfPatient").val(i.item.val);
+                },
+                minLength: 1
+            });
+        });
+
     </script>
 
 

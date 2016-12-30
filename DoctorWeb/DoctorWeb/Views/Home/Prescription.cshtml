@@ -282,6 +282,19 @@
     <script type="text/javascript">
         //jQuery.noConflict();
         document.addEventListener('DOMContentLoaded', function () {
+            var i = 1;
+            function dynamichtmlstring(newhtmlstring, id)
+            {
+                newhtmlstring = newhtmlstring.replace("tabname_1", "tabname_1" + id);
+                newhtmlstring = newhtmlstring.replace("Medicine_OINTMore", "Medicine_OINTMore" + id);
+                newhtmlstring = newhtmlstring.replace("MorningDozID", "MorningDozID" + id);
+                newhtmlstring = newhtmlstring.replace("NoonDozID", "NoonDozID" + id);
+                newhtmlstring = newhtmlstring.replace("NightDozID", "NightDozID" + id);
+                newhtmlstring = newhtmlstring.replace("DosageID", "DosageID" + id);
+                newhtmlstring = newhtmlstring.replace("qut_1", "qut_1" + id);
+                return newhtmlstring;
+            }
+
             var wrapper = jQuery(".input_fields_wrap");
             //jQuery(".add_field_button").click(function () {
             var max_fields = 30; //maximum input boxes allowed
@@ -289,6 +302,10 @@
             //var add_button = jQuery(".add_field_button"); //Add button ID
             var x = jQuery(".toatalrowcou").val(); //initlal text box count
             var htmlString = $("#divname_1").html();
+
+            
+           
+
             //jQuery(add_button).click(function (e) { //on add input button click
             //    e.preventDefault();
             //    var x = jQuery(".divnamepresc").length;
@@ -301,8 +318,10 @@
             //        jQuery(wrapper).append('<div id="divname"' + IDName + '" class="divnamepresc"> <select class="pre tabname" data-val="true" data-val-required="The OINT field is required." id="tabname_1" name="Medicine.OINT" style="width: 85px!important; padding: 0!important;"><option selected="selected" value="0">Tab</option> <option value="1">Syp</option> <option value="2">Cap</option> </select> <input class="pre text-box single-line" id="Medicine_OINTMore" name="Medicine.OINTMore" placeholder="Medicine Name" style="width:110px;" type="textbox" value="" /> <span class="field-validation-valid text-danger" data-valmsg-for="Medicine.OINTMore" data-valmsg-replace="true"></span><select class="pre svar" data-val="true" data-val-required="The Morning field is required." id="Medicine_Morning" name="Medicine.Morning" style="width: 60px!important; padding: 0!important;"><option selected="selected" value="0">0</option><option value="1">1/2</option><option value="2">1</option><option value="3">2</option><option value="4">3</option><option value="5">4</option><option value="6">5ml</option><option value="7">10ml</option><option value="8">15ml</option><option value="9">20ml</option></select><select class="pre bpor" data-val="true" data-val-required="The Noon field is required." id="Medicine_Noon" name="Medicine.Noon" style="width: 60px!important; padding: 0!important;"><option selected="selected" value="0">0</option><option value="1">1/2</option><option value="2">1</option><option value="3">2</option><option value="4">3</option><option value="5">4</option><option value="6">5ml</option><option value="7">10ml</option><option value="8">15ml</option><option value="9">20ml</option></select><select class="pre sanj" data-val="true" data-val-required="The Night field is required." id="Medicine_Night" name="Medicine.Night" style="width: 60px!important; padding: 0!important;"><option selected="selected" value="0">0</option><option value="1">1/2</option><option value="2">1</option><option value="3">2</option><option value="4">3</option><option value="5">4</option><option value="6">5ml</option><option value="7">10ml</option><option value="8">15ml</option><option value="9">20ml</option></select><select class="pre" data-val="true" data-val-required="The DozTiming field is required." id="Medicine_DozTiming" name="Medicine.DozTiming" style="width: 120px!important; padding: 0!important;"><option selected="selected" value="0">AfterFood</option><option value="1">BeforeFood</option></select><input class="pre qut text-box single-line" data-val="true" data-val-number="The field Quantity must be a number." data-val-required="The Quantity field is required." id="qut_1" name="Medicine.Quantity" placeholder="Qty" style="width: 50px;color:#000; padding: 6px;" type="text" value="" /><span class="field-validation-valid text-danger" data-valmsg-for="Medicine.Quantity" data-valmsg-replace="true"></span><input value="+" class="add_field_button plusbutton" type="button" required><a href="#" class="remove_field" style="text-decoration:none;font-weight:bold; float:left;">--</a></div>');
             //    }
             //});
+
             var mainwrapper = jQuery(".btn_box");
             jQuery(mainwrapper).on("click", ".plusbutton", function (e) { //user click on remove text
+                 var htmlString = $("#divname_1").html();
                 e.preventDefault();
                 var x = jQuery(".divnamepresc").length;
                 if (x < max_fields) { //max input box allowed
@@ -312,11 +331,16 @@
                     //jQuery(wrapper).append('<div id="divname"' + IDName + '" class="divnamepresc"> <select class="pre tabname" data-val="true" data-val-required="The OINT field is required." id="tabname_1" name="Medicine.OINT" style="width: 85px!important; padding: 0!important;"><option selected="selected" value="0">Tab</option> <option value="1">Syp</option> <option value="2">Cap</option> </select> <span class="field-validation-valid text-danger" data-valmsg-for="Medicine.OINT" data-valmsg-replace="true"></span><input class="pre text-box single-line" id="Medicine_OINTMore" name="Medicine.OINTMore" placeholder="OINT" style="width:120px;" type="textbox" value="" /><span class="field-validation-valid text-danger" data-valmsg-for="Medicine.OINTMore" data-valmsg-replace="true"></span><select class="pre svar" data-val="true" data-val-required="The Morning field is required." id="Medicine_Morning" name="Medicine.Morning" style="width: 40px!important; padding: 0!important;"><option selected="selected" value="0">Zero</option><option value="1">Half</option><option value="2">One</option><option value="3">Two</option><option value="4">Three</option><option value="5">Four</option><option value="6">FiveMl</option><option value="7">TenMl</option><option value="8">FifteenMl</option><option value="9">TwentyMl</option></select><select class="pre bpor" data-val="true" data-val-required="The Noon field is required." id="Medicine_Noon" name="Medicine.Noon" style="width: 40px!important; padding: 0!important;"><option selected="selected" value="0">Zero</option><option value="1">Half</option><option value="2">One</option><option value="3">Two</option><option value="4">Three</option><option value="5">Four</option><option value="6">FiveMl</option><option value="7">TenMl</option><option value="8">FifteenMl</option><option value="9">TwentyMl</option></select><select class="pre sanj" data-val="true" data-val-required="The Night field is required." id="Medicine_Night" name="Medicine.Night" style="width: 40px!important; padding: 0!important;"><option selected="selected" value="0">Zero</option><option value="1">Half</option><option value="2">One</option><option value="3">Two</option><option value="4">Three</option><option value="5">Four</option><option value="6">FiveMl</option><option value="7">TenMl</option><option value="8">FifteenMl</option><option value="9">TwentyMl</option></select><select class="pre" data-val="true" data-val-required="The DozTiming field is required." id="Medicine_DozTiming" name="Medicine.DozTiming" style="width: 90px!important; padding: 0!important;"><option selected="selected" value="0">AfterFood</option><option value="1">BeforeFood</option></select>                                    <span class="field-validation-valid text-danger" data-valmsg-for="Medicine.DozTiming" data-valmsg-replace="true"></span><input class="pre qut text-box single-line" data-val="true" data-val-number="The field Quantity must be a number." data-val-required="The Quantity field is required." id="qut_1" name="Medicine.Quantity" placeholder="Qty" style="width: 50px;color:#000; padding: 6px;" type="text" value="" /><a href="#" class="remove_field" style="text-decoration:none;font-weight:bold; float:left;">--</a></div>'); //add input box
                     //jQuery(wrapper).append('<div id="divname"' + IDName + '" class="divnamepresc"> <select class="pre tabname" data-val="true" data-val-required="The OINT field is required." id="tabname_1" name="Medicine.OINT" style="width: 85px!important; padding: 0!important;"><option selected="selected" value="0">Tab</option> <option value="1">Syp</option> <option value="2">Cap</option> </select> <input class="pre text-box single-line" id="Medicine_OINTMore" name="Medicine.OINTMore" placeholder="Medicine Name" style="width:110px;" type="textbox" value="" /> <span class="field-validation-valid text-danger" data-valmsg-for="Medicine.OINTMore" data-valmsg-replace="true"></span><select class="pre svar" data-val="true" data-val-required="The Morning field is required." id="Medicine_Morning" name="Medicine.Morning" style="width: 60px!important; padding: 0!important;"><option selected="selected" value="0">0</option><option value="1">1/2</option><option value="2">1</option><option value="3">2</option><option value="4">3</option><option value="5">4</option><option value="6">5ml</option><option value="7">10ml</option><option value="8">15ml</option><option value="9">20ml</option></select><select class="pre bpor" data-val="true" data-val-required="The Noon field is required." id="Medicine_Noon" name="Medicine.Noon" style="width: 60px!important; padding: 0!important;"><option selected="selected" value="0">0</option><option value="1">1/2</option><option value="2">1</option><option value="3">2</option><option value="4">3</option><option value="5">4</option><option value="6">5ml</option><option value="7">10ml</option><option value="8">15ml</option><option value="9">20ml</option></select><select class="pre sanj" data-val="true" data-val-required="The Night field is required." id="Medicine_Night" name="Medicine.Night" style="width: 60px!important; padding: 0!important;"><option selected="selected" value="0">0</option><option value="1">1/2</option><option value="2">1</option><option value="3">2</option><option value="4">3</option><option value="5">4</option><option value="6">5ml</option><option value="7">10ml</option><option value="8">15ml</option><option value="9">20ml</option></select><select class="pre" data-val="true" data-val-required="The DozTiming field is required." id="Medicine_DozTiming" name="Medicine.DozTiming" style="width: 120px!important; padding: 0!important;"><option selected="selected" value="0">AfterFood</option><option value="1">BeforeFood</option></select><input class="pre qut text-box single-line" data-val="true" data-val-number="The field Quantity must be a number." data-val-required="The Quantity field is required." id="qut_1" name="Medicine.Quantity" placeholder="Qty" style="width: 50px;color:#000; padding: 6px;" type="text" value="" /><span class="field-validation-valid text-danger" data-valmsg-for="Medicine.Quantity" data-valmsg-replace="true"></span><input value="+" class="add_field_button plusbutton" type="button" required><a href="#" class="remove_field" style="text-decoration:none;font-weight:bold; float:left;">--</a></div>');
                     //var htmlString = $("#divname_1").html();
+                    htmlString = dynamichtmlstring(htmlString, i);
+                    i++;
+
+                    //alert(htmlString);
                     jQuery(wrapper).append('<div>' + htmlString + '</div>');
                 }
             });
 
             jQuery(wrapper).on("click", ".plusbutton", function (e) { //user click on remove text
+                var htmlString = $("#divname_1").html();
                 e.preventDefault();
                 var x = jQuery(".divnamepresc").length;
                 if (x < max_fields) { //max input box allowed
@@ -326,6 +350,10 @@
                     //jQuery(wrapper).append('<div id="divname"' + IDName + '" class="divnamepresc"> <select class="pre tabname" data-val="true" data-val-required="The OINT field is required." id="tabname_1" name="Medicine.OINT" style="width: 85px!important; padding: 0!important;"><option selected="selected" value="0">Tab</option> <option value="1">Syp</option> <option value="2">Cap</option> </select> <span class="field-validation-valid text-danger" data-valmsg-for="Medicine.OINT" data-valmsg-replace="true"></span><input class="pre text-box single-line" id="Medicine_OINTMore" name="Medicine.OINTMore" placeholder="OINT" style="width:120px;" type="textbox" value="" /><span class="field-validation-valid text-danger" data-valmsg-for="Medicine.OINTMore" data-valmsg-replace="true"></span><select class="pre svar" data-val="true" data-val-required="The Morning field is required." id="Medicine_Morning" name="Medicine.Morning" style="width: 40px!important; padding: 0!important;"><option selected="selected" value="0">Zero</option><option value="1">Half</option><option value="2">One</option><option value="3">Two</option><option value="4">Three</option><option value="5">Four</option><option value="6">FiveMl</option><option value="7">TenMl</option><option value="8">FifteenMl</option><option value="9">TwentyMl</option></select><select class="pre bpor" data-val="true" data-val-required="The Noon field is required." id="Medicine_Noon" name="Medicine.Noon" style="width: 40px!important; padding: 0!important;"><option selected="selected" value="0">Zero</option><option value="1">Half</option><option value="2">One</option><option value="3">Two</option><option value="4">Three</option><option value="5">Four</option><option value="6">FiveMl</option><option value="7">TenMl</option><option value="8">FifteenMl</option><option value="9">TwentyMl</option></select><select class="pre sanj" data-val="true" data-val-required="The Night field is required." id="Medicine_Night" name="Medicine.Night" style="width: 40px!important; padding: 0!important;"><option selected="selected" value="0">Zero</option><option value="1">Half</option><option value="2">One</option><option value="3">Two</option><option value="4">Three</option><option value="5">Four</option><option value="6">FiveMl</option><option value="7">TenMl</option><option value="8">FifteenMl</option><option value="9">TwentyMl</option></select><select class="pre" data-val="true" data-val-required="The DozTiming field is required." id="Medicine_DozTiming" name="Medicine.DozTiming" style="width: 90px!important; padding: 0!important;"><option selected="selected" value="0">AfterFood</option><option value="1">BeforeFood</option></select>                                    <span class="field-validation-valid text-danger" data-valmsg-for="Medicine.DozTiming" data-valmsg-replace="true"></span><input class="pre qut text-box single-line" data-val="true" data-val-number="The field Quantity must be a number." data-val-required="The Quantity field is required." id="qut_1" name="Medicine.Quantity" placeholder="Qty" style="width: 50px;color:#000; padding: 6px;" type="text" value="" /><a href="#" class="remove_field" style="text-decoration:none;font-weight:bold; float:left;">--</a></div>'); //add input box
                     //jQuery(wrapper).append('<div id="divname"' + IDName + '" class="divnamepresc"> <select class="pre tabname" data-val="true" data-val-required="The OINT field is required." id="tabname_1" name="Medicine.OINT" style="width: 85px!important; padding: 0!important;"><option selected="selected" value="0">Tab</option> <option value="1">Syp</option> <option value="2">Cap</option> </select> <input class="pre text-box single-line" id="Medicine_OINTMore" name="Medicine.OINTMore" placeholder="Medicine Name" style="width:110px;" type="textbox" value="" /> <span class="field-validation-valid text-danger" data-valmsg-for="Medicine.OINTMore" data-valmsg-replace="true"></span><select class="pre svar" data-val="true" data-val-required="The Morning field is required." id="Medicine_Morning" name="Medicine.Morning" style="width: 60px!important; padding: 0!important;"><option selected="selected" value="0">0</option><option value="1">1/2</option><option value="2">1</option><option value="3">2</option><option value="4">3</option><option value="5">4</option><option value="6">5ml</option><option value="7">10ml</option><option value="8">15ml</option><option value="9">20ml</option></select><select class="pre bpor" data-val="true" data-val-required="The Noon field is required." id="Medicine_Noon" name="Medicine.Noon" style="width: 60px!important; padding: 0!important;"><option selected="selected" value="0">0</option><option value="1">1/2</option><option value="2">1</option><option value="3">2</option><option value="4">3</option><option value="5">4</option><option value="6">5ml</option><option value="7">10ml</option><option value="8">15ml</option><option value="9">20ml</option></select><select class="pre sanj" data-val="true" data-val-required="The Night field is required." id="Medicine_Night" name="Medicine.Night" style="width: 60px!important; padding: 0!important;"><option selected="selected" value="0">0</option><option value="1">1/2</option><option value="2">1</option><option value="3">2</option><option value="4">3</option><option value="5">4</option><option value="6">5ml</option><option value="7">10ml</option><option value="8">15ml</option><option value="9">20ml</option></select><select class="pre" data-val="true" data-val-required="The DozTiming field is required." id="Medicine_DozTiming" name="Medicine.DozTiming" style="width: 120px!important; padding: 0!important;"><option selected="selected" value="0">AfterFood</option><option value="1">BeforeFood</option></select><input class="pre qut text-box single-line" data-val="true" data-val-number="The field Quantity must be a number." data-val-required="The Quantity field is required." id="qut_1" name="Medicine.Quantity" placeholder="Qty" style="width: 50px;color:#000; padding: 6px;" type="text" value="" /><span class="field-validation-valid text-danger" data-valmsg-for="Medicine.Quantity" data-valmsg-replace="true"></span><input value="+" class="add_field_button plusbutton" type="button" required><a href="#" class="remove_field" style="text-decoration:none;font-weight:bold; float:left;">--</a></div>');
                     //var htmlString = $("#divname_1").html();
+                    htmlString = dynamichtmlstring(htmlString, i);
+                    i++;
+
+                    //alert(htmlString);
                     jQuery(wrapper).append('<div>' + htmlString + '</div>');
                 }
             });
@@ -491,6 +519,34 @@
             });
             return false;
         }
+        var isdayaffected = true;
+        function calc_qty() {
+            if (isdayaffected == true) {
+                var mor, noon, night;
+                var days = document.getElementById("patient_days_presc").value;
+                if ($('option:selected', $("#MorningDozID")).text() == "1/2") {
+                    mor = parseFloat(0.5);
+                }
+                else {
+                    mor = $('option:selected', $("#MorningDozID")).text();
+                }
+                if ($('option:selected', $("#NoonDozID")).text() == "1/2") {
+                    noon = parseFloat(0.5);
+                }
+                else {
+                    noon = $('option:selected', $("#NoonDozID")).text();
+                }
+                if ($('option:selected', $("#NightDozID")).text() == "1/2") {
+                    night = parseFloat(0.5);
+                }
+                else {
+                    night = $('option:selected', $("#NightDozID")).text();
+                }
+                //alert("Days : " + days + ", Morning : " + mor + ", Noon : " + noon + ", Night : " + night);
+                var qty = (parseFloat(mor) + parseFloat(noon) + parseFloat(night)) * parseFloat(days);
+                jQuery("#qut_1").val(qty);
+            }
+        }
 
         jQuery(function () {
             jQuery(".autocomplete").autocomplete({
@@ -506,7 +562,7 @@
                                 return {
                                     label: item.OINTMore,
                                     value: item.OINTMore,
-                                    term: item.Quantity
+                                    term: item.IsDayAffected
                                 }
                             }))
                         },
@@ -519,10 +575,28 @@
                     });
                 },
                 select: function (e, i) {
-                    jQuery("#qut_1").val(i.item.term);
+                    if (i.item.term == true) {
+                        calc_qty();
+                        //var isdayaffected = false;
+                    }
+                    else {
+                        jQuery("#qut_1").val(0);
+                    }
                 },
                 minLength: 1
             });
+        });
+
+        $("#MorningDozID").change(function () {
+            calc_qty();
+        });
+
+        $("#NoonDozID").change(function () {
+            calc_qty();
+        });
+
+        $("#NightDozID").change(function () {
+            calc_qty();
         });
 
         $(document).on('click', '.plusbutton', function (event) {
@@ -539,7 +613,7 @@
                                 return {
                                     label: item.OINTMore,
                                     value: item.OINTMore,
-                                    term: item.Quantity
+                                    term: item.IsDayAffected
                                 }
                             }))
                         },
@@ -552,7 +626,12 @@
                     });
                 },
                 select: function (e, i) {
-                    jQuery("#qut_1").val(i.item.term);
+                    if (i.item.term == true) {
+                        calc_qty();
+                    }
+                    else {
+                        jQuery("#qut_1").val(0);
+                    }
                 },
                 minLength: 1
             });

@@ -14,8 +14,11 @@ namespace DoctorWeb.Models.CustomModels
         public string PatientName { get; set; }
         public int Age { get; set; }
         public string Gender { get; set; }
+        public string Address { get; set; }
+        public string Occuption { get; set; }
         public string Habbits { get; set; }
         public string RefBy { get; set; }
+        public string RefDoctorName { get; set; }
 
         public byte[] PrescriptionImage { get; set; }
         public string KCO { get; set; }

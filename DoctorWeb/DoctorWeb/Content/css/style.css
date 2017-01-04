@@ -981,3 +981,37 @@ td {
 #Description {
     max-width:600px !important;
 }
+
+.dl-horizontal dt {
+    float:left;
+    margin-right:10px;
+    min-width:120px;
+}
+
+.dl-horizontal dt:after
+{
+    content: " :";
+}
+
+.dl-horizontal #print_details {
+  float: left;
+  width: 50%;
+}
+
+.dl-horizontal #print_image {
+  float: left;
+}
+
+.ddfltleft{
+    float:left;
+    padding-right:10px;
+}
+
+.ddfltleft:after{
+    content: ", ";
+}
+
+.clear_display {
+  clear: both;
+  display: block;
+}

@@ -290,9 +290,15 @@ namespace DoctorWeb.Controllers
                 model.PatientName = patient.Name;
                 model.Age = patient.Age;
                 model.Gender = patient.Gender.ToString();
+                model.Address = patient.Address;
+                model.Occuption = patient.Occupation;
                 model.Habbits = patient.Habit.ToString();
                 model.RefBy = patient.ReferredBy.ToString();
                 model.DateToday = DateTime.Today.Date.ToShortDateString();
+                if(patient.Doctor != null)
+                {
+                    model.RefDoctorName = patient.Doctor.Name;
+                }
 
                 if (patientHistory != null)
                 {

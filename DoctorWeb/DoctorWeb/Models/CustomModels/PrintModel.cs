@@ -17,6 +17,7 @@ namespace DoctorWeb.Models.CustomModels
         public string Habbits { get; set; }
         public string RefBy { get; set; }
 
+        public byte[] PrescriptionImage { get; set; }
         public string KCO { get; set; }
         public string CO { get; set; }
         public int Constipation { get; set; }

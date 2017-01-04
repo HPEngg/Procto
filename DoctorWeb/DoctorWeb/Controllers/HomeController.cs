@@ -329,6 +329,7 @@ namespace DoctorWeb.Controllers
 
                 if(prescription != null)
                 {
+                    model.PrescriptionImage = prescription.PrescriptionImage;
                     model.Diagnosis = prescription.Diagnosis;
                     model.FollowDate = prescription.FollowDate.ToShortDateString();
                     model.Instruction = prescription.Instruction.Description;

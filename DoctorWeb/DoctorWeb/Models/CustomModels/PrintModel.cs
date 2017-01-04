@@ -9,15 +9,20 @@ namespace DoctorWeb.Models.CustomModels
 {
     public class PrintModel
     {
+        [Display(Name = "Date")]
         public string DateToday { get; set; }
+        [Display(Name = "OPD No")]
         public int PatientID { get; set; }
+        [Display(Name = "Name")]
         public string PatientName { get; set; }
         public int Age { get; set; }
         public string Gender { get; set; }
         public string Address { get; set; }
         public string Occuption { get; set; }
         public string Habbits { get; set; }
+        [Display(Name = "REF")]
         public string RefBy { get; set; }
+        [Display(Name = "REF by Doctor")]
         public string RefDoctorName { get; set; }
 
         public byte[] PrescriptionImage { get; set; }
@@ -57,6 +62,7 @@ namespace DoctorWeb.Models.CustomModels
         public string Other { get; set; }
 
         public string Diagnosis { get; set; }
+        [Display(Name = "Follow Date")]
         public string FollowDate { get; set; }
         public string Instruction { get; set; }
         public string Rs { get; set; }

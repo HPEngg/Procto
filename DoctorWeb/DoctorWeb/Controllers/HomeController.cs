@@ -276,5 +276,70 @@ namespace DoctorWeb.Controllers
             ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name", model.Patient.DoctorID);
             return View(model);
         }
+
+        public ActionResult Print(int id)
+        {
+            Patient patient = db.Patients.Find(id);
+            if (patient != null)
+            {
+                var patientHistory = db.PatientHistories.Where(p => p.PatientID == id).OrderByDescending(q => q.ID).FirstOrDefault();
+                var prescription = db.Prescriptions.Where(p => p.PatientID == id).OrderByDescending(q => q.ID).FirstOrDefault();
+
+                var model = new PrintModel();
+                model.PatientID = patient.ID;
+                model.PatientName = patient.Name;
+                model.Age = patient.Age;
+                model.Gender = patient.Gender.ToString();
+                model.Habbits = patient.Habit.ToString();
+                model.RefBy = patient.ReferredBy.ToString();
+                model.DateToday = DateTime.Today.Date.ToShortDateString();
+
+                if (patientHistory != null)
+                {
+                    model.KCO = patientHistory.KCO;
+                    model.CO = patientHistory.CO;
+                    model.Constipation = patientHistory.Constipation;
+                    model.ConstipationMore = patientHistory.ConstipationMore;
+                    model.Pain = patientHistory.Pain;
+                    model.PainMore = patientHistory.PainMore;
+                    model.Burning = patientHistory.Burning;
+                    model.BurningMore = patientHistory.BurningMore;
+                    model.Bleeding = patientHistory.Bleeding;
+                    model.BleedingMore = patientHistory.BleedingMore;
+                    model.Itching = patientHistory.Itching;
+                    model.ItchingMore = patientHistory.ItchingMore;
+                    model.PusDrainage = patientHistory.PusDrainage;
+                    model.PusDrainageMore = patientHistory.PusDrainageMore;
+                    model.Swelling = patientHistory.Swelling;
+                    model.SwellingMore = patientHistory.SwellingMore;
+                    model.SCO = patientHistory.SCO;
+                    model.ACO = patientHistory.ACO;
+                    model.Allergy = patientHistory.Allergy;
+                    model.History = patientHistory.History;
+                    model.Weight = patientHistory.Weight;
+                    model.Height = patientHistory.Height;
+                    model.T = patientHistory.T;
+                    model.PR = patientHistory.PR;
+                    model.BP = patientHistory.BP;
+                    model.SPO2 = patientHistory.SPO2;
+                    model.PRR = patientHistory.PRR;
+                    model.Proctoscopy = patientHistory.Proctoscopy;
+                    model.Other = patientHistory.Other;
+                }
+
+                if(prescription != null)
+                {
+                    model.Diagnosis = prescription.Diagnosis;
+                    model.FollowDate = prescription.FollowDate.ToShortDateString();
+                    model.Instruction = prescription.Instruction.Description;
+                    model.Rs = prescription.Rs.ToString();
+                    model.Less = prescription.Less;
+                    model.Total = Convert.ToString( prescription.Rs - Convert.ToDecimal(prescription.Less));
+                }
+
+                return View(model);
+            }
+            return View();
+        }
     }
 }

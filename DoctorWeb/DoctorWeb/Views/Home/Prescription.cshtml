@@ -30,7 +30,7 @@
             <div class="form_fieldset_div">
                 <div id="testDiv1">
                     <fieldset style="height: 100%">
-                        <h2 class="fs-title" style="text-align:center;"><a href="#" class="webcam_img" onclick="patientimage();"><img src="/Content/Images/webcam.png" /></a><a href="#" class="profile_pic_img"><img src="/Content/Images/profilepic.png" /></a><a href="#" class="profile_pic_img"><img src="/Content/Images/print_icon.png" /></a>Prescription Form</h2>
+                        <h2 class="fs-title" style="text-align:center;"><a href="#" class="webcam_img" onclick="patientimage();"><img src="/Content/Images/webcam.png" /></a><a href="#" class="profile_pic_img"><img src="/Content/Images/profilepic.png" /></a><a href="@Url.Action("Print", "Home", new { id = ViewBag.PatientID })" class="profile_pic_img"><img src="/Content/Images/print_icon.png" /></a>Prescription Form</h2>
                         <div style="width:100%; clear:both;">
                             <label title="Rx" class="rx_label rx_label_right">Rx</label>
                             <div style="width: auto; padding-top:10px; padding-right: 8px; float:left;" class="btn_box">

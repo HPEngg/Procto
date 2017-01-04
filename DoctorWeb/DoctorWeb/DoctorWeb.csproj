@@ -226,6 +226,7 @@
     <Compile Include="Models\CustomModels\PatientSearch.cs" />
     <Compile Include="Models\CustomModels\Prescription.cs" />
     <Compile Include="Models\CustomModels\PrescriptionHome.cs" />
+    <Compile Include="Models\CustomModels\PrintModel.cs" />
     <Compile Include="Models\Doctor.cs" />
     <Compile Include="Models\Dosage.cs" />
     <Compile Include="Models\Doz.cs" />
@@ -753,6 +754,7 @@
     <Content Include="Views\PreImage\Index.cshtml" />
     <Content Include="Views\PreImage\Select.cshtml" />
     <Content Include="Views\Home\DrawImage.cshtml" />
+    <Content Include="Views\Home\Print.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -69,5 +69,7 @@ namespace DoctorWeb.Models.CustomModels
         public string Less { get; set; }
         public string Total { get; set; }
 
+        public List<PrescriptionMedicine> Medicines { get; set; }
+
     }
 }

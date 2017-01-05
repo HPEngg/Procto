@@ -226,9 +226,12 @@ namespace DoctorWeb.Controllers
                     {
                         PrescriptionID = prescroptionObj.ID,
                         OINTMore = model.Medicine_OINTMore[i],
-                        MorningDozID = model.MorningDozID[i],
-                        NoonDozID = model.NoonDozID[i],
-                        NightDozID = model.NightDozID[i],
+                        //MorningDozID = model.MorningDozID[i],
+                        Morning = db.Dozes.Find(model.MorningDozID[i]),
+                        //NoonDozID = model.NoonDozID[i],
+                        Noon = db.Dozes.Find(model.NoonDozID[i]),
+                        //NightDozID = model.NightDozID[i],
+                        Night = db.Dozes.Find(model.NightDozID[i]),
                         DosageID = model.DosageID[i],
                         Quantity = model.Medicine_Quantity[i],
                         OINTTypeID = model.OINTTypeID[i]
@@ -361,6 +364,7 @@ namespace DoctorWeb.Controllers
                     model.Rs = prescription.Rs.ToString();
                     model.Less = prescription.Less;
                     model.Total = Convert.ToString( prescription.Rs - Convert.ToDecimal(prescription.Less));
+                    model.Medicines = db.PrescriptionMedicines.Where(p => p.PrescriptionID == prescription.ID).ToList();
                 }
 
                 return View(model);

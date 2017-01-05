@@ -217,7 +217,26 @@ namespace DoctorWeb.Controllers
                 if (model.SelectedPrescriptionImages != null)
                     prescription.PreImages = db.PreImages.Where(m => model.SelectedPrescriptionImages.Contains(m.ID)).ToList();
 
-                db.Prescriptions.Add(prescription);
+                var prescroptionObj = db.Prescriptions.Add(prescription);
+                db.SaveChanges();
+
+                for (int i = 0; i < model.OINTTypeID.Length; i++)
+                {
+                    var prescriptionMedicine = new PrescriptionMedicine()
+                    {
+                        PrescriptionID = prescroptionObj.ID,
+                        OINTMore = model.Medicine_OINTMore[i],
+                        MorningDozID = model.MorningDozID[i],
+                        NoonDozID = model.NoonDozID[i],
+                        NightDozID = model.NightDozID[i],
+                        DosageID = model.DosageID[i],
+                        Quantity = model.Medicine_Quantity[i],
+                        OINTTypeID = model.OINTTypeID[i]
+                    };
+
+                    db.PrescriptionMedicines.Add(prescriptionMedicine);
+                }
+
                 db.SaveChanges();
                 //  ViewBag.Message = "Patient Prescription Created Successfully";
                 prescr_success = 1;

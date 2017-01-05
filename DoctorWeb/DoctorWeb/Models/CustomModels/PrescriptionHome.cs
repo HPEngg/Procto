@@ -41,5 +41,13 @@ namespace DoctorWeb.Models.CustomModels
 
         public string Investigation { get; set; }
 
+        public int[] OINTTypeID { get; set; }
+        public string[] Medicine_OINTMore { get; set; }
+        public int[] MorningDozID { get; set; }
+        public int[] NoonDozID { get; set; }
+        public int[] NightDozID { get; set; }
+        public int[] DosageID { get; set; }
+        public int[] Medicine_Quantity { get; set; }
+
     }
 }

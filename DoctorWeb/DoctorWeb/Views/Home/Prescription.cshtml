@@ -78,7 +78,7 @@
                                         @Html.LabelFor(model => model.Medicine.OINTMore, htmlAttributes: new { @class = "control-label col-md-2" })*@
                                     @*<div class="col-md-10">
                                     *@
-                                    @Html.EditorFor(model => model.Medicine.OINTMore, new { htmlAttributes = new { @style = "width:110px;", @class = "pre autocomplete", @type = "textbox", @value = "OINTOINT", @placeholder = "Medicine Name" } })
+                                    @Html.EditorFor(model => model.Medicine.OINTMore, new { htmlAttributes = new { Name= "Medicine_OINTMore", @style = "width:110px;", @class = "pre autocomplete", @type = "textbox", @value = "OINTOINT", @placeholder = "Medicine Name" } })
                                     @Html.ValidationMessageFor(model => model.Medicine.OINTMore, "", new { @class = "text-danger" })
                                     <input type="hidden" id="hfPatient" name="Pat_ID" />
 
@@ -141,7 +141,7 @@
                                         @Html.LabelFor(model => model.Medicine.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-10">
                                     *@
-                                    @Html.EditorFor(model => model.Medicine.Quantity, new { htmlAttributes = new { @id = "qut_1", @class = "pre qut", @placeholder = "Qty", @style = "width: 50px;color:#000; padding: 6px;" } })
+                                    @Html.EditorFor(model => model.Medicine.Quantity, new { htmlAttributes = new { Name = "Medicine_Quantity", @id = "qut_1", @class = "pre qut", @placeholder = "Qty", @style = "width: 50px;color:#000; padding: 6px;" } })
                                     @Html.ValidationMessageFor(model => model.Medicine.Quantity, "", new { @class = "text-danger" })
                                     <input value="+" class="add_field_button plusbutton" type="button" required>
                                     <a href="#" class="remove_field" style="text-decoration:none;font-weight:bold; float:left;">--</a>

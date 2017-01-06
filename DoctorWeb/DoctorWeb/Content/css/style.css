@@ -988,6 +988,10 @@ td {
     min-width:120px;
 }
 
+.dl-horizontal dd {
+        margin-left: 0px !important;
+    }
+
 .dl-horizontal dt:after
 {
     content: " :";
@@ -995,7 +999,7 @@ td {
 
 .dl-horizontal #print_details {
   float: left;
-  width: 50%;
+  width: 75%;
 }
 
 .dl-horizontal #print_image {

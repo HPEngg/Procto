@@ -372,9 +372,9 @@ namespace DoctorWeb.Controllers
             return View();
         }
 
-        public ActionResult MedicineList(int id)
+        public ActionResult MedicineList(string id)
         {
-            var model = db.Medicines.Where(p => p.PrescriptionCategories.Any(q => q.ID == id)).ToList();
+            var model = db.Medicines.Where(p => p.PrescriptionCategories.Any(q => q.Name == id)).ToList();
             ViewBag.DosageID = new SelectList(db.Dosages, "ID", "Name");
             ViewBag.MorningDozID = new SelectList(db.Dozes, "ID", "Name");
             ViewBag.NightDozID = new SelectList(db.Dozes, "ID", "Name");

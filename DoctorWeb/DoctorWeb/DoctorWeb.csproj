@@ -755,6 +755,7 @@
     <Content Include="Views\PreImage\Select.cshtml" />
     <Content Include="Views\Home\DrawImage.cshtml" />
     <Content Include="Views\Home\Print.cshtml" />
+    <Content Include="Views\Home\MedicineList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

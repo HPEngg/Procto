@@ -284,6 +284,20 @@
     <script type="text/javascript">
         //jQuery.noConflict();
         document.addEventListener('DOMContentLoaded', function () {
+
+            $(".btn_p").click(function (event) {
+                $.ajax({
+                    url: '@Url.Action("MedicineList", "Home")',
+                    data: { id: $(this).val() /* add other additional parameters */ },
+                    cache: false,
+                    type: "POST",
+                    dataType: "html",
+                    success: function (data, textStatus, XMLHttpRequest) {
+                        $("#input_fields_wrap_js").html(data);
+                    }
+                });
+            });
+
             var i = 1;
             function dynamichtmlstring(newhtmlstring, id)
             {

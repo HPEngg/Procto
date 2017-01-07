@@ -835,7 +835,8 @@ body .ui-tooltip {
 /* Component containers
 ----------------------------------*/
 .ui-widget {
-	font-family: Verdana,Arial,sans-serif;
+	/*font-family: Verdana,Arial,sans-serif;*/
+    font-family: montserrat,arial,verdana;
 	font-size: 1.1em;
 }
 .ui-widget .ui-widget {
@@ -1256,5 +1257,6 @@ body .ui-tooltip {
 }
 
 .searchdialog {
-    position:absolute;
+    left:0% !important;
+    top:0% !important;
 }

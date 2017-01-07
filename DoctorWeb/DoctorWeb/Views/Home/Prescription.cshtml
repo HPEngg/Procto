@@ -514,7 +514,6 @@
 
     <script type="text/javascript">
 
-
         function patientimage() {
             jQuery("#DrawImage").dialog({
                 autoOpen: true,
@@ -523,20 +522,20 @@
                 //resizable: false,
                 title: 'Patient Image',
                 modal: true,
-                classname: 'searchdialog',
+                dialogClass: 'searchdialog',
                 open: function () {
                     jQuery(this).load('@Url.Action("Webcam", "Home", new { id = @ViewBag.PatientID })');
                     jQuery('#DrawImage').focus();
                 },
                 close: function () {
                     //javascript: location.reload(true);
-                    @*searchpatient(this).load('@Url.Action("Index", "Home")');*@
+                    jQuery(this).dialog("close");
                 },
             });
             return false;
         }
 
-        function printform() {
+        @*function printform() {
             jQuery("#PrintForm").dialog({
                 autoOpen: true,
                 position: { my: "top", at: "top", of: window },
@@ -551,11 +550,11 @@
                 },
                 close: function () {
                     //javascript: location.reload(true);
-                    @*searchpatient(this).load('@Url.Action("Index", "Home")');*@
+                    //searchpatient(this).load('@Url.Action("Index", "Home")');
                     },
             });
             return false;
-        }
+        }*@
         
         var isdayaffected = true;
         function calc_qty() {

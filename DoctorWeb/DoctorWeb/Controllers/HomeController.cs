@@ -202,7 +202,7 @@ namespace DoctorWeb.Controllers
                 InstructionID = model.InstructionID,
                 PatientID = model.PatientID,
                 PatientTypeID = model.PatientTypeID,
-                FollowDate = (DateTime)model.FollowDate,
+                FollowDate = model.FollowDate,
                 Less = model.Less,
                 Pending = model.Pending,
                 Percent = model.Percent,
@@ -359,7 +359,7 @@ namespace DoctorWeb.Controllers
                 {
                     model.PrescriptionImage = prescription.PrescriptionImage;
                     model.Diagnosis = prescription.Diagnosis;
-                    model.FollowDate = prescription.FollowDate.Value.ToShortDateString();
+                    model.FollowDate = prescription.FollowDate == null ? string.Empty : prescription.FollowDate.Value.ToShortDateString();
                     model.Instruction = prescription.Instruction.Description;
                     model.Rs = prescription.Rs.ToString();
                     model.Less = prescription.Less;

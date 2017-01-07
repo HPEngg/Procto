@@ -359,7 +359,7 @@ namespace DoctorWeb.Controllers
                 {
                     model.PrescriptionImage = prescription.PrescriptionImage;
                     model.Diagnosis = prescription.Diagnosis;
-                    model.FollowDate = prescription.FollowDate.ToShortDateString();
+                    model.FollowDate = prescription.FollowDate.Value.ToShortDateString();
                     model.Instruction = prescription.Instruction.Description;
                     model.Rs = prescription.Rs.ToString();
                     model.Less = prescription.Less;

@@ -18,7 +18,7 @@ namespace DoctorWeb.Models
 
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         [Display(Name = "Follow Date")]
-        public DateTime FollowDate { get; set; }
+        public DateTime? FollowDate { get; set; }
 
         //List of payment type will be added here dynamically
         public IEnumerable<Charge> Charges { get; set; }

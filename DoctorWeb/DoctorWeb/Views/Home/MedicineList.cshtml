@@ -8,7 +8,7 @@
                 @Html.LabelFor(model => model.Medicine.OINT, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
             *@
-            @Html.DropDownList("OINTTypeID", null, htmlAttributes: new { @class = "pre tabname", @id = "tabname_1", @style = "width: 85px!important; max-width: 85px!important; padding: 0!important;" })
+            @Html.DropDownList("OINTTypeID", new SelectList((SelectList)ViewBag.OINTTypeIDL, "Value", "Text", item.OINTTypeID), htmlAttributes: new { @class = "pre tabname", @id = "tabname_1", @style = "width: 85px!important; max-width: 85px!important; padding: 0!important;" })
             @*@Html.EnumDropDownListFor(model => model.Medicine.OINT, htmlAttributes: new { @class = "pre tabname", @id = "tabname_1", @style = "width: 85px!important; padding: 0!important;" })*@
             @Html.ValidationMessageFor(modelItem => item.OINTTypeID, "", new { @class = "text-danger" })
             @*
@@ -24,7 +24,8 @@
             <input type="hidden" id="hfPatient" name="Pat_ID" />
 
             
-            @Html.DropDownList("MorningDozID", null, htmlAttributes: new { @class = "pre svar", @style = "width: 60px!important; padding: 0!important;" })
+            @*@Html.DropDownList("MorningDozID", null, htmlAttributes: new { @class = "pre svar", @style = "width: 60px!important; padding: 0!important;" })*@
+            @Html.DropDownList("MorningDozID", new SelectList((SelectList)ViewBag.MorningDozIDL, "Value", "Text", item.MorningDozID), htmlAttributes: new { @class = "pre svar", @style = "width: 60px!important; padding: 0!important;" })
             @Html.ValidationMessageFor(modelItem => item.MorningDozID, "", new { @class = "text-danger" })
 
 
@@ -38,7 +39,7 @@
                 @Html.LabelFor(model => model.Medicine.Noon, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
             *@
-            @Html.DropDownList("NoonDozID", null, htmlAttributes: new { @class = "pre bpor", @style = "width: 60px!important; padding: 0!important;" })
+            @Html.DropDownList("NoonDozID", new SelectList((SelectList)ViewBag.NoonDozIDL, "Value", "Text", item.NoonDozID), htmlAttributes: new { @class = "pre bpor", @style = "width: 60px!important; padding: 0!important;" })
             @Html.ValidationMessageFor(modelItem => item.NoonDozID, "", new { @class = "text-danger" })
             @*@Html.EnumDropDownListFor(model => model.Medicine.Noon, htmlAttributes: new { @class = "pre bpor", @style = "width: 40px!important; padding: 0!important;" })
                 @Html.ValidationMessageFor(model => model.Medicine.Noon, "", new { @class = "text-danger" })*@
@@ -50,7 +51,7 @@
                 @Html.LabelFor(model => model.Medicine.Night, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
             *@
-            @Html.DropDownList("NightDozID", null, htmlAttributes: new { @class = "pre sanj", @style = "width: 60px!important; padding: 0!important;" })
+            @Html.DropDownList("NightDozID", new SelectList((SelectList)ViewBag.NightDozIDL, "Value", "Text", item.NightDozID), htmlAttributes: new { @class = "pre sanj", @style = "width: 60px!important; padding: 0!important;" })
             @Html.ValidationMessageFor(modelItem => item.NightDozID, "", new { @class = "text-danger" })
             @*@Html.EnumDropDownListFor(model => model.Medicine.Night, htmlAttributes: new { @class = "pre sanj", @style = "width: 40px!important; padding: 0!important;" })
                 @Html.ValidationMessageFor(model => model.Medicine.Night, "", new { @class = "text-danger" })*@
@@ -62,7 +63,7 @@
                 @Html.LabelFor(model => model.Medicine.DozTiming, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
             *@
-            @Html.DropDownList("DosageID", null, htmlAttributes: new { @class = "pre", style = "width: 120px!important; padding: 0!important;" })
+            @Html.DropDownList("DosageID", new SelectList((SelectList)ViewBag.DosageIDL, "Value", "Text", item.DosageID), htmlAttributes: new { @class = "pre", style = "width: 120px!important; padding: 0!important;" })
             @Html.ValidationMessageFor(modelItem => item.DosageID, "", new { @class = "text-danger" })
             @*@Html.EnumDropDownListFor(model => model.Medicine.Dosage, htmlAttributes: new { @class = "pre", style = "width: 90px!important; padding: 0!important;" })
                 @Html.ValidationMessageFor(model => model.Medicine.Dosage, "", new { @class = "text-danger" })*@

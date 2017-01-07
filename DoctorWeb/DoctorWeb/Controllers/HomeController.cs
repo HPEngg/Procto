@@ -375,12 +375,16 @@ namespace DoctorWeb.Controllers
         public ActionResult MedicineList(string id)
         {
             var model = db.Medicines.Where(p => p.PrescriptionCategories.Any(q => q.Name == id)).ToList();
-            ViewBag.DosageID = new SelectList(db.Dosages, "ID", "Name");
-            ViewBag.MorningDozID = new SelectList(db.Dozes, "ID", "Name");
-            ViewBag.NightDozID = new SelectList(db.Dozes, "ID", "Name");
-            ViewBag.NoonDozID = new SelectList(db.Dozes, "ID", "Name");
-            ViewBag.OINTTypeID = new SelectList(db.OINTTypes, "ID", "Name");
-            ViewBag.PrescriptionCategoryID = new SelectList(db.PrescriptionCategories, "ID", "Name");
+            foreach(var med in model)
+            {
+
+            }
+            ViewBag.DosageIDL = new SelectList(db.Dosages, "ID", "Name");
+            ViewBag.MorningDozIDL = new SelectList(db.Dozes, "ID", "Name");
+            ViewBag.NightDozIDL = new SelectList(db.Dozes, "ID", "Name");
+            ViewBag.NoonDozIDL = new SelectList(db.Dozes, "ID", "Name");
+            ViewBag.OINTTypeIDL = new SelectList(db.OINTTypes, "ID", "Name");
+            ViewBag.PrescriptionCategoryIDL = new SelectList(db.PrescriptionCategories, "ID", "Name");
             return PartialView(model);
         }
     }

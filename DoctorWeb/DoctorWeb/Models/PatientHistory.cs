@@ -15,34 +15,35 @@ namespace DoctorWeb.Models
 
         [Display(Name = "C / O")]
         public string CO { get; set; }
-        [Display(Name = "Complain")]
+        [Display(Name = "Complain Since")]
         public string ComplainForm { get; set; }
-        public int Constipation { get; set; }
+        public int? Constipation { get; set; }
         public string ConstipationMore { get; set; }
-        public int Pain { get; set; }
+        public int? Pain { get; set; }
         public string PainMore { get; set; }
-        public int Burning { get; set; }
+        public int? Burning { get; set; }
         public string BurningMore { get; set; }
-        public int Bleeding { get; set; }
+        public int? Bleeding { get; set; }
         public Bleeding BleedingMore { get; set; }
-        public int Itching { get; set; }
+        public int? Itching { get; set; }
         public string ItchingMore { get; set; }
         [Display(Name = "Pus Drainage")]
-        public int PusDrainage { get; set; }
+        public int? PusDrainage { get; set; }
         public string PusDrainageMore { get; set; }
-        public int Swelling { get; set; }
+        public int? Swelling { get; set; }
         public string SwellingMore { get; set; }
+        [Display(Name = "S/C/O")]
         public string SCO { get; set; }
-        [Display(Name = "A/C/O")]
+        [Display(Name = "Asso./C/O")]
         public string ACO { get; set; }
         public string Allergy { get; set; }
         public string History { get; set; }
 
-        public float Weight { get; set; }
-        public float Height { get; set; }
-        public int T { get; set; }
+        public float? Weight { get; set; }
+        public float? Height { get; set; }
+        public int? T { get; set; }
         public string PR { get; set; }
-        public int BP { get; set; }
+        public string BP { get; set; }
         public string SPO2 { get; set; }
         public string PRR { get; set; }
         public string Proctoscopy { get; set; }

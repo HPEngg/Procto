@@ -131,7 +131,7 @@
                             @Html.LabelFor(model => model.Patient.DOB, htmlAttributes: new { @class = "control-label col-md-2", @style = "padding-left:0px;" })
                             @*<div class="col-md-10">
                             *@
-                            @Html.EditorFor(model => model.Patient.DOB, new { htmlAttributes = new { @class = "my-input", style = "min-width:75%;", placeholder = "MM/DD/YYYY" } })
+                            @Html.EditorFor(model => model.Patient.DOB, new { htmlAttributes = new { @class = "my-input", style = "min-width:75%;", placeholder = "DD/MM/YYYY" } })
                             @Html.ValidationMessageFor(model => model.Patient.DOB, "", new { @class = "text-danger" })
                             @*
                                 </div>*@
@@ -249,7 +249,7 @@
                     <div class="mdform my-mdform">
                         <div class="mystep2all">
                             @*@Html.LabelFor(model => model.PatientHistory.RP, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                            <div class="mylabels" style="padding-top:0px;">
+                            <div class="mylabels" style="padding-top:0px; font-weight:bold;">
                                 @Html.RadioButtonFor(model => model.PatientHistory.PR, "R", htmlAttributes: new { style = "width:20px;", @checked = true })R
                                 @Html.RadioButtonFor(model => model.PatientHistory.PR, "P", htmlAttributes: new { style = "width:20px;" })P
                                 @Html.ValidationMessageFor(model => model.PatientHistory.RP, "", new { @class = "text-danger" })
@@ -277,9 +277,9 @@
                         </div>
 
                         <div class="mystep2all">
-                            @Html.LabelFor(model => model.PatientHistory.ComplainForm, htmlAttributes: new { @class = "mylabels" })
+                            @Html.LabelFor(model => model.PatientHistory.ComplainForm, htmlAttributes: new { @class = "mylabels", @style = "width:50%;" })
                             <div>
-                                @Html.EditorFor(model => model.PatientHistory.ComplainForm, new { htmlAttributes = new { @class = "my-input", style = "min-width:60%;" } })
+                                @Html.EditorFor(model => model.PatientHistory.ComplainForm, new { htmlAttributes = new { @class = "my-input", style = "min-width:50%;" } })
                                 @Html.ValidationMessageFor(model => model.PatientHistory.ComplainForm, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -427,7 +427,7 @@
                         <div class="mystep2all">
                             @Html.LabelFor(model => model.PatientHistory.SCO, htmlAttributes: new { @class = "mylabels" })
                             <div>
-                                @Html.RadioButtonFor(model => model.PatientHistory.SCO, "1", htmlAttributes: new { style = "width:20px;", @checked = true })1<sup style="font-size:11px;">o</sup>
+                                @Html.RadioButtonFor(model => model.PatientHistory.SCO, "1", htmlAttributes: new { style = "width:20px;" })1<sup style="font-size:11px;">o</sup>
                                 @Html.RadioButtonFor(model => model.PatientHistory.SCO, "2", htmlAttributes: new { style = "width:20px;" })2<sup style="font-size:11px;">o</sup>
                                 @Html.RadioButtonFor(model => model.PatientHistory.SCO, "3", htmlAttributes: new { style = "width:20px;" })3 <sup style="font-size:11px;">o</sup>
                                 @Html.RadioButtonFor(model => model.PatientHistory.SCO, "4", htmlAttributes: new { style = "width:20px;" })4<sup style="font-size:11px;">o</sup>
@@ -481,7 +481,7 @@
                             <div class="co_from_main">
                                 @*@Html.LabelFor(model => model.PatientHistory.T, htmlAttributes: new { @class = "mylabels label_res" })*@
                                 <label class="mylabels label_res">T-</label>
-                                @Html.EditorFor(model => model.PatientHistory.T, new { htmlAttributes = new { @class = "my-input", style = "float:left; min-width:100%;", placeholder = "°F" } })
+                                @Html.EditorFor(model => model.PatientHistory.T, new { htmlAttributes = new { @class = "my-input", style = "float:left; min-width:100%;", placeholder = "°F", Value = 98 } })
                                 @Html.ValidationMessageFor(model => model.PatientHistory.T, "", new { @class = "text-danger" })
                             </div>
                             <div class="co_from_main" style="margin-right:0px;margin-left:5px;">
@@ -523,7 +523,7 @@
                                 @Html.LabelFor(model => model.PatientHistory.Proctoscopy, htmlAttributes: new { @class = "mylabels label_res", style = "width:auto !important; padding-right:10px; " })
                                 @Html.EditorFor(model => model.PatientHistory.LightOnOff, new { htmlAttributes = new { @id = "prostocheck", @style = "width:auto;" } })
                                 <label style="width">L</label>
-                                @Html.EditorFor(model => model.PatientHistory.Proctoscopy, new { htmlAttributes = new { @id = "prostotext", @class = "my-input", style = "min-width:50%;", @disabled = "disabled", placeholder = "Proctoscopy" } })
+                                @Html.EditorFor(model => model.PatientHistory.Proctoscopy, new { htmlAttributes = new { @id = "prostotext", @class = "my-input", style = "min-width:50%;", placeholder = "Proctoscopy" } })
                                 @Html.ValidationMessageFor(model => model.PatientHistory.Proctoscopy, "", new { @class = "text-danger" })
                                 @Html.ValidationMessageFor(model => model.PatientHistory.LightOnOff, "", new { @class = "text-danger" })
                             </div>
@@ -580,10 +580,10 @@
             jQuery("#Referred_Doctor").css("display", "block");
             jQuery("#Referred_Relative").css("display", "none");
         }
-        else if (jQuery("#ReferredBy").val() == "3") {
-            jQuery("#Referred_Relative").css("display", "block");
-            jQuery("#Referred_Doctor").css("display", "none");
-        }
+        //else if (jQuery("#ReferredBy").val() == "3") {
+        //    jQuery("#Referred_Relative").css("display", "block");
+        //    jQuery("#Referred_Doctor").css("display", "none");
+        //}
         else {
             jQuery("#Referred_Doctor").css("display", "none");
             jQuery("#Referred_Relative").css("display", "none");
@@ -599,9 +599,18 @@
         jQuery("#step4").css("display", "none");
     });
 
-    jQuery('#prostocheck').change(function () {
-        jQuery("#prostotext").prop("disabled", !$(this).is(':checked'));
-    });
+    //jQuery('#prostocheck').change(function () {
+    //    jQuery("#prostotext").prop("disabled", !$(this).is(':checked'));
+    //});
+
+    var radios = document.getElementsByName('PatientHistory.SCO');
+    for (i = 0; i < radios.length; i++) {
+        radios[i].onclick = function (e) {
+            if (e.ctrlKey) {
+                this.checked = false;
+            }
+        }
+    }
 
 </script>
 

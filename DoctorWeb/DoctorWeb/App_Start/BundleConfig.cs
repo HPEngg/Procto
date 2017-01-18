@@ -23,9 +23,33 @@ namespace DoctorWeb
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/scripts").Include(
+                "~/Content/js/jquery-ui.min.js",
+                "~/Content/js/jquery-1.12.0.min.js",
+                "~/Content/autocomplete/jquery-ui.js",
+                "~/Content/js/html-table-search.js",
+                "~/Content/js/jquery.barrating.js",
+                "~/Content/js/examples.js",
+                "~/Content/js/webcam.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/css/reset.css",
+                      "~/Content/css/font.css",
+                      "~/Content/css/picedit.css",
+                      "~/Content/css/style.css",
+                      "~/Content/css/patient.css",
+                      "~/Content/css/responsive-tables.css",
+                      "~/Content/css/examples.css",
+                      "~/Content/css/fontawesome-stars.css",
+                      "~/Content/css/font-awesome.min.css",
+                      "~/Content/css/jquery-ui.css"
+                      ));
+
+            bundles.Add(new StyleBundle("~/Content/ourcss").Include(
+                     "~/Content/css/reset.css",
+                     "~/Content/site.css"));
         }
     }
 }

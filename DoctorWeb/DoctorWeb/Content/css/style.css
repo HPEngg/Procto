@@ -228,6 +228,7 @@ select.pre1 {
 /*headings*/
 .fs-title {
     font-size: 14px;
+    font-weight:bold;
     text-transform: uppercase;
     color: #2C3E50;
     margin-bottom: 10px;
@@ -917,6 +918,10 @@ td {
 
 
 /*PRESCRIPTION PAGE CSS*/
+#msform_right {
+    font-family:montserrat, arial, verdana;
+    font-size:14px;
+}
 
 #msform_right .top {
     display: none;

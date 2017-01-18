@@ -328,7 +328,8 @@ html {
 }
 
 body {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    /*font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;*/
+    font-family: montserrat,arial,verdana;
     font-size: 14px;
     line-height: 1.428571429;
     color: #333333;
@@ -1207,6 +1208,7 @@ pre {
 
     .col-md-10 {
         width: 83.33333333333334%;
+        max-width:600px;
     }
 
     .col-md-11 {

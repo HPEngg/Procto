@@ -326,6 +326,7 @@ namespace DoctorWeb.Controllers
                 {
                     model.KCO = patientHistory.KCO;
                     model.CO = patientHistory.CO;
+                    model.ComplainForm = patientHistory.ComplainForm;
                     model.Constipation = patientHistory.Constipation;
                     model.ConstipationMore = patientHistory.ConstipationMore;
                     model.Pain = patientHistory.Pain;

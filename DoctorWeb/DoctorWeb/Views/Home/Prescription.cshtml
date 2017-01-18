@@ -207,7 +207,7 @@
                         <div style="display:block; width:auto; float:left;">
                             @*@Html.LabelFor(model => model.FollowDate, htmlAttributes: new { @class = "control-label col-md-2", style="float:left; padding-left:0"})*@
                             <label class="control-label col-md-2" , style="float:left; font-size: 90%; padding:5px 5px 0 0;">Follow Date</label>
-                            @Html.EditorFor(model => model.FollowDate, new { htmlAttributes = new { @class = "form-control", name = "follow_datefollow_date", value = "", placeholder = "MM/DD/YYYY", style = "text-align:left;" } })
+                            @Html.EditorFor(model => model.FollowDate, new { htmlAttributes = new { @class = "form-control", name = "follow_datefollow_date", value = "", placeholder = "DD/MM/YYYY", style = "text-align:left;", type = "date" } })
                             @Html.ValidationMessageFor(model => model.FollowDate, "", new { @class = "text-danger" })
                         </div>
 
@@ -218,7 +218,7 @@
                         </div>
 
 
-                        <div style=" width:92%; position:relative; clear:both; bottom:0;" class="pmtype_div">
+                        <div style=" width:96%; position:relative; clear:both; bottom:0;" class="pmtype_div">
                             <div id="payment_types">
                                 @foreach (var item in Model.PaymentTypes)
                                 {
@@ -252,7 +252,10 @@
                         <div id="patient_image">
                             <div id="draw_image" style="float: left; width:35%;">
                                 <img id="canvac_background" width="235" height="235" src="~/Content/Images/patient_drawing_image_bg.png" alt="Canvas background" style="display:none;">
-                                <canvas id="canvasss" width="235" height="235" style=" position:relative;border:2px solid;"></canvas>
+                                @*<div style="background:url('/Content/Images/patient_drawing_image_bg.png') no-repeat;"></div>*@
+                                 <div style="background:url('/Content/Images/patient_drawing_image_bg.png') no-repeat;">
+                                    <canvas id="canvasss" width="235" height="235" style=" position:relative;border:2px solid;"></canvas>
+                                </div>
                                 <div id="imagecolor">
                                     <div style="position:relative;top:12%;text-align:left;margin-bottom:5px;">Choose Drawing Color</div>
                                     <div class="margin-right" style="position:relative;background:green;" id="green" onclick="color(this)"></div>
@@ -263,11 +266,12 @@
                                     <div class="margin-right" style="position:relative;float:left;background:black;" id="black" onclick="color(this)"></div>
                                 </div>
                                 <div id="eraser">
-                                    <div style="position:relative;top:20%; margin-bottom:5px;">Eraser</div>
-                                    <div id="white" onclick="color(this)"></div>
+                                    @*<div style="position:relative;top:20%; margin-bottom:5px;">Eraser</div>
+                                    <div id="white" onclick="color(this)"></div>*@
+                                    <input type="button" value="Clear" id="clr" size="23" onclick="erase()" style="position:relative;top:20%;left:0%;">
                                 </div>
                             </div>
-                            <div id="draw_image" style="float: right; width:60%;">
+                            <div id="select_image" style="float: right; width:60%;">
                                 @Html.ListBoxFor(model => model.SelectedPrescriptionImages, Model.PrescriptionImages, new { htmlAttributes = new { @size = 5, @class = "form-control", @Multiple = "multiple", @style = "height:50px !important; width:100% !important;" } })
                             </div>
                         </div>
@@ -690,7 +694,7 @@
                     jQuery.getScript('../Content/js/jquery-ui.min.js');
                     jQuery.getScript('../Content/js/jquery-1.12.0.min.js');
                     jQuery.getScript('../Content/autocomplete/jquery-ui.js');
-                    
+                    jQuery("#my-iframe").append("<link rel='stylesheet' type='text/css' href='../Content/css/style.css' />");
                 },
             });
             return false;
@@ -743,7 +747,7 @@
             h = canvas.height;
 
             var img = document.getElementById("canvac_background");
-            ctx.drawImage(img, 0, 0);
+            //ctx.drawImage(img, 0, 0);
 
             canvas.addEventListener("mousemove", function (e) {
                 findxy('move', e)

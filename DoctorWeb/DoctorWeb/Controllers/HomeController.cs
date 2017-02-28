@@ -92,14 +92,16 @@ namespace DoctorWeb.Controllers
                 }
                 db.Entry(patient).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                //return RedirectToAction("Prescription", new { id = id });
+                return View();
             }
 
 
             
             //string url = Session["val"].ToString();
             //Session["val"] = null;
-            return PartialView("Webcam");
+            //return PartialView("Webcam");
+            return View();
         }
 
 

@@ -52,7 +52,7 @@ namespace DoctorWeb.Models.CustomModels
 
         public float? Weight { get; set; }
         public float? Height { get; set; }
-        public int? T { get; set; }
+        public float? T { get; set; }
         public string PR { get; set; }
         public string BP { get; set; }
         public string SPO2 { get; set; }

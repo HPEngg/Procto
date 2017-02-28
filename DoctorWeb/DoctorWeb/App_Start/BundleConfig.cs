@@ -23,7 +23,7 @@ namespace DoctorWeb
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/scripts").Include(
+            bundles.Add(new ScriptBundle("~/bundles/myscripts").Include(
                 "~/Content/js/jquery-ui.min.js",
                 "~/Content/js/jquery-1.12.0.min.js",
                 "~/Content/autocomplete/jquery-ui.js",
@@ -32,7 +32,7 @@ namespace DoctorWeb
                 "~/Content/js/examples.js",
                 "~/Content/js/webcam.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
+            bundles.Add(new StyleBundle("~/bundles/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/css/reset.css",

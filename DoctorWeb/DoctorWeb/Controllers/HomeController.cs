@@ -115,6 +115,8 @@ namespace DoctorWeb.Controllers
         {
             ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name");
             ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name");
+            ViewBag.ReferredByID = new SelectList(db.ReferredBy, "ID", "Name");
+            ViewBag.DepartmentID = new SelectList(db.Departments, "ID", "Name");
             ViewBag.PatientCount = db.Patients.Count() + 1;
             return View();
         }
@@ -136,6 +138,8 @@ namespace DoctorWeb.Controllers
             //This line is temporary fix
             Patient p = new Patient();
             patient.DoctorID = model.DoctorID == 0 ? null : model.DoctorID;
+            patient.ReferredByID = model.ReferredByID;
+            patient.DepartmentID = model.DepartmentID;
             if (ModelState.IsValid)
             {
                 p = db.Patients.Add(patient);
@@ -144,6 +148,8 @@ namespace DoctorWeb.Controllers
             }
 
             ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name", patient.DoctorID);
+            ViewBag.ReferredByID = new SelectList(db.ReferredBy, "ID", "Name");
+            ViewBag.DepartmentID = new SelectList(db.Departments, "ID", "Name");
 
             var patientHistory = model.PatientHistory;
             patientHistory.PatientID = p.ID;
@@ -281,6 +287,8 @@ namespace DoctorWeb.Controllers
             model.Patient = db.Patients.Find(id);
             ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name");
             ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name");
+            ViewBag.ReferredByID = new SelectList(db.ReferredBy, "ID", "Name");
+            ViewBag.DepartmentID = new SelectList(db.Departments, "ID", "Name");
             return View(model);
         }
 
@@ -290,6 +298,8 @@ namespace DoctorWeb.Controllers
         {
             model.PatientHistory.PatientID = model.Patient.ID;
             model.Patient.DoctorID = model.DoctorID;
+            model.Patient.ReferredByID = model.ReferredByID;
+            model.Patient.DepartmentID = model.DepartmentID;
             if (ModelState.IsValid)
             {
                 db.Entry(model.Patient).State = EntityState.Modified;

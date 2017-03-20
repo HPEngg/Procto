@@ -23,12 +23,10 @@ namespace DoctorWeb.Models
         [Display(Name = "Address")]
         public string Address { get; set; }
 
-        [Display(Name = "Referred by")]
-        public ReferredBy ReferredBy { get; set; }
+        
         public string Relative { get; set; }
 
-        [Display(Name = "Department")]
-        public Department DepartmentID { get; set; }
+        
 
         [DataType(DataType.Date), DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? DOB { get; set; }
@@ -51,6 +49,14 @@ namespace DoctorWeb.Models
 
         public IEnumerable<Prescription> Prescriptions { get; set; }
         public IEnumerable<PatientHistory> PatientHistories { get; set; }
+
+        [Display(Name = "Department")]
+        public int DepartmentID { get; set; }
+        public virtual Department Department { get; set; }
+
+        [Display(Name = "Referred by")]
+        public int ReferredByID { get; set; }
+        public virtual ReferredBy ReferredBy { get; set; }
 
         public byte[] Photo { get; set; }
     }

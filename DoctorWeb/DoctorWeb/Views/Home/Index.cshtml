@@ -93,7 +93,8 @@
                             @*@Html.LabelFor(model => model.Patient.ReferredBy, htmlAttributes: new { @class = "control-label col-md-2" })*@
                             @*<div class="col-md-10">
                             *@
-                            @Html.EnumDropDownListFor(model => model.Patient.ReferredBy, "--Referred By--", htmlAttributes: new { @class = "form-control", id = "ReferredBy", value = "0" })
+                            @*@Html.EnumDropDownListFor(model => model.Patient.ReferredBy, "--Referred By--", htmlAttributes: new { @class = "form-control", id = "ReferredBy", value = "0" })*@
+                            @Html.DropDownList("ReferredByID", null, htmlAttributes: new { @class = "form-control", id = "ReferredBy", value = "0" })
                             @Html.ValidationMessageFor(model => model.Patient.ReferredBy, "", new { @class = "text-danger" })
                             @*
                                 </div>*@
@@ -120,7 +121,8 @@
                             @*@Html.LabelFor(model => model.Patient.DepartmentID, htmlAttributes: new { @class = "control-label col-md-2" })*@
                             @*<div class="col-md-10">
                             *@
-                            @Html.EnumDropDownListFor(model => model.Patient.DepartmentID, "--Department--", htmlAttributes: new { @class = "form-control" })
+                            @*@Html.EnumDropDownListFor(model => model.Patient.DepartmentID, "--Department--", htmlAttributes: new { @class = "form-control" })*@
+                            @Html.DropDownList("DepartmentID", null, htmlAttributes: new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.Patient.DepartmentID, "", new { @class = "text-danger" })
                             @*
                                 </div>*@
@@ -202,13 +204,13 @@
                         <div class="mystep2all">
                             @*@Html.LabelFor(model => model.PatientHistory.DOA, htmlAttributes: new { @class = "mylabels date_label doa_label", style = "padding-right:5px; width:auto;" })*@
                             <label class="mylabels date_label doa_label" , style="padding-right:5px; width:auto;">D.O.A.</label>
-                            @Html.EditorFor(model => model.PatientHistory.DOA, new { htmlAttributes = new { @class = "form-control", placeholder = "MM/DD/YYYY", style = "width: 80%; height: 25px; padding-left: 3px; padding-bottom: -1px; float: left; text-aligm:center;color:#000;", type = "date" } })
+                            @Html.EditorFor(model => model.PatientHistory.DOA, new { htmlAttributes = new { @class = "form-control", placeholder = "MM/DD/YYYY", style = "width: 80%; height: 25px; padding-left: 3px; padding-bottom: -1px; float: left; text-aligm:center;color:#000;", type = "datetime-local" } })
                             @Html.ValidationMessageFor(model => model.PatientHistory.DOA, "", new { @class = "text-danger" })
                         </div>
                         <div class="mystep2all">
                             @*@Html.LabelFor(model => model.PatientHistory.DOD, htmlAttributes: new { @class = "mylabels date_label doa_label", style = "padding-right:5px; width:auto;" })*@
                             <label class="mylabels date_label doa_label" , style="padding-right:5px; width:auto;">D.O.D.</label>
-                            @Html.EditorFor(model => model.PatientHistory.DOD, new { htmlAttributes = new { @class = "form-control", placeholder = "MM/DD/YYYY", style = "width: 80%; height: 25px; padding-left: 3px; padding-bottom: -1px; float: left; text-aligm:center;color:#000;", type = "date" } })
+                            @Html.EditorFor(model => model.PatientHistory.DOD, new { htmlAttributes = new { @class = "form-control", placeholder = "MM/DD/YYYY", style = "width: 80%; height: 25px; padding-left: 3px; padding-bottom: -1px; float: left; text-aligm:center;color:#000;", type = "datetime-local" } })
                             @Html.ValidationMessageFor(model => model.PatientHistory.DOD, "", new { @class = "text-danger" })
                         </div>
                         @*<div class="mdform my-mdform">
@@ -483,7 +485,7 @@
                             <div class="co_from_main">
                                 @*@Html.LabelFor(model => model.PatientHistory.T, htmlAttributes: new { @class = "mylabels label_res" })*@
                                 <label class="mylabels label_res">T-</label>
-                                @Html.EditorFor(model => model.PatientHistory.T, new { htmlAttributes = new { @class = "my-input", style = "float:left; min-width:100%;", placeholder = "°F", Value = 98.6 } })
+                                @Html.EditorFor(model => model.PatientHistory.T, new { htmlAttributes = new { @class = "my-input", style = "float:left; min-width:100%;", placeholder = "°F" } })
                                 @Html.ValidationMessageFor(model => model.PatientHistory.T, "", new { @class = "text-danger" })
                             </div>
                             <div class="co_from_main" style="margin-right:0px;margin-left:5px;">
@@ -498,7 +500,7 @@
                             @*@Html.LabelFor(model => model.PatientHistory.BP, htmlAttributes: new { @class = "control-label col-md-2" })*@
                             <div class="co_from_main">
                                 <label class="mylabels label_res">B.P.</label>
-                                @Html.EditorFor(model => model.PatientHistory.BP, new { htmlAttributes = new { @class = "my-input", style = "float:left; min-width:100%;", placeholder = "mmhg", Value = "120/80" } })
+                                @Html.EditorFor(model => model.PatientHistory.BP, new { htmlAttributes = new { @class = "my-input", style = "float:left; min-width:100%;", placeholder = "mmhg" } })
                                 @Html.ValidationMessageFor(model => model.PatientHistory.BP, "", new { @class = "text-danger" })
                             </div>
                             <div class="co_from_main" style="margin-right:0px;margin-left:5px;">

@@ -12,6 +12,9 @@ namespace DoctorWeb.Models.CustomModels
 
         public int? DoctorID { get; set; }
 
+        public int DepartmentID { get; set; }
+        public int ReferredByID { get; set; }
+
         public int PatientCount { get; set; }
     }
 }

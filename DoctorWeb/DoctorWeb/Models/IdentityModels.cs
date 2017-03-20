@@ -65,6 +65,10 @@ namespace DoctorWeb.Models
         public DbSet<Doz> Dozes { get; set; }
         public DbSet<PreImage> PreImages { get; set; }
 
+        public DbSet<Department> Departments { get; set; }
+
+        public DbSet<ReferredBy> ReferredBy { get; set; }
+
         public System.Data.Entity.DbSet<DoctorWeb.Models.PatientHistory> PatientHistories { get; set; }
     }
 }

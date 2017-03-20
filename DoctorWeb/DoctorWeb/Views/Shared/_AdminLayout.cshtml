@@ -159,6 +159,23 @@
                         </ul>
                     </li>
 
+                    @* Department *@
+                    <li class="dropdown">
+                        <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Department</div></a>
+                        <ul @if ((ctrName == "Department" && actnName == "Create") || (ctrName == "Department" && actnName == "Index")) { <text> style="display:block;" </text>   }>
+                            <li @if (ctrName == "Department" && actnName == "Create") { <text> class="active" </text>    }><div id="icontitlediv">@Html.ActionLink("Add Department", "Create", "Department")</div></li>
+                            <li @if (ctrName == "Department" && actnName == "Index") { <text> class="active" </text>    }><div id="icontitlediv">@Html.ActionLink("Department List", "Index", "Department")</div></li>
+                        </ul>
+                    </li>
+
+                    @* ReferredBy *@
+                    <li class="dropdown">
+                        <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">ReferredBy</div></a>
+                        <ul @if ((ctrName == "ReferredBy" && actnName == "Create") || (ctrName == "ReferredBy" && actnName == "Index")) { <text> style="display:block;" </text>    }>
+                            <li @if (ctrName == "ReferredBy" && actnName == "Create") { <text> class="active" </text>     }><div id="icontitlediv">@Html.ActionLink("Add ReferredBy", "Create", "ReferredBy")</div></li>
+                            <li @if (ctrName == "ReferredBy" && actnName == "Index") { <text> class="active" </text>     }><div id="icontitlediv">@Html.ActionLink("ReferredBy List", "Index", "ReferredBy")</div></li>
+                        </ul>
+                    </li>
                     
                     @*<li><div id="icondiv"><span class="icon-briefcase"></span></div><div id="icontitlediv">@Html.ActionLink("Referring By", "Index", "Doctor")</div></li>
 

@@ -64,7 +64,7 @@ namespace DoctorWeb.Models.CustomModels
         public string Diagnosis { get; set; }
         [Display(Name = "Follow Date")]
         public string FollowDate { get; set; }
-        public string Instruction { get; set; }
+        public List<Instruction> Instructions { get; set; }
         public string Rs { get; set; }
         public string Less { get; set; }
         public string Total { get; set; }

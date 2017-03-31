@@ -47,32 +47,32 @@ namespace DoctorWeb.Models.Tools
 
         public void ReaderExecuted(DbCommand command, DbCommandInterceptionContext<DbDataReader> interceptionContext)
         {
-            if (command.CommandText.StartsWith("INSERT") && !command.CommandText.Contains("[Offlines]"))
-            {
-                DbType[] quotedParameterTypes = new DbType[] {
-                DbType.AnsiString, DbType.Date,
-                DbType.DateTime, DbType.Guid, DbType.String,
-                DbType.AnsiStringFixedLength, DbType.StringFixedLength
-                };
-                string query = command.CommandText;
+            //if (command.CommandText.StartsWith("INSERT") && !command.CommandText.Contains("[Offlines]"))
+            //{
+            //    DbType[] quotedParameterTypes = new DbType[] {
+            //    DbType.AnsiString, DbType.Date,
+            //    DbType.DateTime, DbType.Guid, DbType.String,
+            //    DbType.AnsiStringFixedLength, DbType.StringFixedLength
+            //    };
+            //    string query = command.CommandText;
 
-                var arrParams = new SqlParameter[command.Parameters.Count];
-                command.Parameters.CopyTo(arrParams, 0);
+            //    var arrParams = new SqlParameter[command.Parameters.Count];
+            //    command.Parameters.CopyTo(arrParams, 0);
 
-                foreach (SqlParameter p in arrParams.OrderByDescending(p => p.ParameterName.Length))
-                {
-                    string value = p.Value.ToString();
-                    if (quotedParameterTypes.Contains(p.DbType))
-                        value = "'" + value + "'";
-                    query = query.Replace(p.ParameterName, value);
-                }
+            //    foreach (SqlParameter p in arrParams.OrderByDescending(p => p.ParameterName.Length))
+            //    {
+            //        string value = p.Value.ToString();
+            //        if (quotedParameterTypes.Contains(p.DbType))
+            //            value = "'" + value + "'";
+            //        query = query.Replace(p.ParameterName, value);
+            //    }
 
-                using (var db = new ApplicationDbContext())
-                {
-                    db.OfflineRecords.Add(new Models.Offline() { Query = query, ExecutedAt = DateTime.Now, IsExecuted = false });
-                    db.SaveChanges();
-                }
-            }
+            //    using (var db = new ApplicationDbContext())
+            //    {
+            //        db.OfflineRecords.Add(new Models.Offline() { Query = query, ExecutedAt = DateTime.Now, IsExecuted = false });
+            //        db.SaveChanges();
+            //    }
+            //}
         }
 
         public void ReaderExecuting(DbCommand command, DbCommandInterceptionContext<DbDataReader> interceptionContext)

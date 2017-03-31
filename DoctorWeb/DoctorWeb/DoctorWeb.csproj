@@ -196,6 +196,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\DoctorController.cs" />
     <Compile Include="Controllers\DosageController.cs" />
     <Compile Include="Controllers\DozController.cs" />
@@ -214,6 +215,7 @@
     <Compile Include="Controllers\PrescriptionCategoryController.cs" />
     <Compile Include="Controllers\PrescriptionController.cs" />
     <Compile Include="Controllers\PrescriptionMedicineController.cs" />
+    <Compile Include="Controllers\ReferredByController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -224,9 +226,9 @@
     <Compile Include="Models\CustomModels\PatientHome.cs" />
     <Compile Include="Models\CustomModels\PatientRefByDoctor.cs" />
     <Compile Include="Models\CustomModels\PatientSearch.cs" />
-    <Compile Include="Models\CustomModels\Prescription.cs" />
     <Compile Include="Models\CustomModels\PrescriptionHome.cs" />
     <Compile Include="Models\CustomModels\PrintModel.cs" />
+    <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Doctor.cs" />
     <Compile Include="Models\Dosage.cs" />
     <Compile Include="Models\Doz.cs" />
@@ -256,6 +258,7 @@
     <Compile Include="Models\Prescription.cs" />
     <Compile Include="Models\PrescriptionCategory.cs" />
     <Compile Include="Models\PrescriptionMedicine.cs" />
+    <Compile Include="Models\ReferredBy.cs" />
     <Compile Include="Models\Tools\Extentions.cs" />
     <Compile Include="Models\Tools\OfflineInterceptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -756,6 +759,16 @@
     <Content Include="Views\Home\DrawImage.cshtml" />
     <Content Include="Views\Home\Print.cshtml" />
     <Content Include="Views\Home\MedicineList.cshtml" />
+    <Content Include="Views\Department\Create.cshtml" />
+    <Content Include="Views\Department\Delete.cshtml" />
+    <Content Include="Views\Department\Details.cshtml" />
+    <Content Include="Views\Department\Edit.cshtml" />
+    <Content Include="Views\Department\Index.cshtml" />
+    <Content Include="Views\ReferredBy\Create.cshtml" />
+    <Content Include="Views\ReferredBy\Delete.cshtml" />
+    <Content Include="Views\ReferredBy\Details.cshtml" />
+    <Content Include="Views\ReferredBy\Edit.cshtml" />
+    <Content Include="Views\ReferredBy\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

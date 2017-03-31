@@ -190,8 +190,13 @@
                                 @Html.LabelFor(model => model.InstructionID, "InstructionID", htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
                             *@
-                            @Html.DropDownList("InstructionID", null, htmlAttributes: new { @name = "instructions", @class = "pre", @style = "width: 120px!important; padding: 0!important; margin-left: 10px;color:#000;" })
-                            @Html.ValidationMessageFor(model => model.InstructionID, "", new { @class = "text-danger" })
+
+                            @*@Html.DropDownList("InstructionID", null, htmlAttributes: new { @name = "instructions", @class = "pre", @style = "width: 120px!important; padding: 0!important; margin-left: 10px;color:#000;" })
+                            @Html.ValidationMessageFor(model => model.InstructionID, "", new { @class = "text-danger" })*@
+
+                            @Html.ListBoxFor(model => model.SelectedInstructionsIDs, Model.Instructions, new { htmlAttributes = new { @size = 5, @class = "form-control", @Multiple = "multiple", @style = "height:50px !important; width:100% !important;" } })
+                            @Html.ValidationMessageFor(model => model.Instructions, "", new { @class = "text-danger" })
+
                             @*
                                     </div>
                                 </div>*@

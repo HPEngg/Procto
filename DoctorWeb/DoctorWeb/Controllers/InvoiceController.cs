@@ -18,7 +18,7 @@ namespace DoctorWeb.Controllers
         // GET: Invoice Daily
         public ActionResult Daily()
         {
-            var prescriptions = db.Prescriptions.Where(p => DbFunctions.TruncateTime(p.Date) == DateTime.Today.Date).Include(p => p.Doctor).Include(p => p.Instruction).Include(p => p.Patient).Include(p => p.PatientType);
+            var prescriptions = db.Prescriptions.Where(p => DbFunctions.TruncateTime(p.Date) == DateTime.Today.Date).Include(p => p.Doctor).Include(p => p.Instructions).Include(p => p.Patient).Include(p => p.PatientType);
             return View(prescriptions.ToList());
         }
 
@@ -26,7 +26,7 @@ namespace DoctorWeb.Controllers
         public ActionResult Weekly()
         {
             var dateBefore7days = DateTime.Today.AddDays(-7).Date;
-            var prescriptions = db.Prescriptions.Where(p => DbFunctions.TruncateTime(p.Date) >= dateBefore7days).Include(p => p.Doctor).Include(p => p.Instruction).Include(p => p.Patient).Include(p => p.PatientType);
+            var prescriptions = db.Prescriptions.Where(p => DbFunctions.TruncateTime(p.Date) >= dateBefore7days).Include(p => p.Doctor).Include(p => p.Instructions).Include(p => p.Patient).Include(p => p.PatientType);
             return View(prescriptions.ToList());
         }
 
@@ -35,7 +35,7 @@ namespace DoctorWeb.Controllers
         public ActionResult Monthly(int month, int year)
         {
             //var dateBefore30Days = DateTime.Today.AddDays(-30).Date;
-            var prescriptions = db.Prescriptions.Include(p => p.Doctor).Where(p => p.Date.Year == year && p.Date.Month == month).Include(p => p.Instruction).Include(p => p.Patient).Include(p => p.PatientType);
+            var prescriptions = db.Prescriptions.Include(p => p.Doctor).Where(p => p.Date.Year == year && p.Date.Month == month).Include(p => p.Instructions).Include(p => p.Patient).Include(p => p.PatientType);
             return View(prescriptions.ToList());
         }
 
@@ -107,7 +107,7 @@ namespace DoctorWeb.Controllers
                 return HttpNotFound();
             }
             ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name", prescription.DoctorID);
-            ViewBag.InstructionID = new SelectList(db.Instructions, "ID", "Name", prescription.InstructionID);
+            //ViewBag.InstructionID = new SelectList(db.Instructions, "ID", "Name", prescription.InstructionID);
             ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name", prescription.PatientID);
             ViewBag.PatientTypeID = new SelectList(db.PatientTypes, "ID", "PatientTypeName", prescription.PatientTypeID);
             return View(prescription);
@@ -127,7 +127,7 @@ namespace DoctorWeb.Controllers
                 return RedirectToAction("Daily");
             }
             ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name", prescription.DoctorID);
-            ViewBag.InstructionID = new SelectList(db.Instructions, "ID", "Name", prescription.InstructionID);
+            //ViewBag.InstructionID = new SelectList(db.Instructions, "ID", "Name", prescription.InstructionID);
             ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name", prescription.PatientID);
             ViewBag.PatientTypeID = new SelectList(db.PatientTypes, "ID", "PatientTypeName", prescription.PatientTypeID);
             return View(prescription);

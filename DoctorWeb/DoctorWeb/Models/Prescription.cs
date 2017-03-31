@@ -38,8 +38,10 @@ namespace DoctorWeb.Models
         public int PatientID { get; set; }
         public virtual Patient Patient { get; set; }
 
-        public int InstructionID { get; set; }
-        public virtual Instruction Instruction { get; set; }
+        //public int InstructionID { get; set; }
+        //public virtual Instruction Instruction { get; set; }
+
+        public ICollection<Instruction> Instructions { get; set; }
 
         public int PatientTypeID { get; set; }
         public virtual PatientType PatientType { get; set; }

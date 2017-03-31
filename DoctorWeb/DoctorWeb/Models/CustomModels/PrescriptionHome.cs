@@ -44,7 +44,7 @@ namespace DoctorWeb.Models.CustomModels
 
         public string PatientImage { get; set; }
 
-        public string Investigation { get; set; }
+        public int InvestigationID { get; set; }
 
         public int[] OINTTypeID { get; set; }
         public string[] Medicine_OINTMore { get; set; }

@@ -202,6 +202,7 @@
     <Compile Include="Controllers\DozController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstructionController.cs" />
+    <Compile Include="Controllers\InvestigationController.cs" />
     <Compile Include="Controllers\InvoiceController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MedicineController.cs" />
@@ -245,6 +246,7 @@
     <Compile Include="Models\Enums\ReferredBy.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Instruction.cs" />
+    <Compile Include="Models\Investigation.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Medicine.cs" />
     <Compile Include="Models\Offline.cs" />
@@ -769,6 +771,11 @@
     <Content Include="Views\ReferredBy\Details.cshtml" />
     <Content Include="Views\ReferredBy\Edit.cshtml" />
     <Content Include="Views\ReferredBy\Index.cshtml" />
+    <Content Include="Views\Investigation\Create.cshtml" />
+    <Content Include="Views\Investigation\Delete.cshtml" />
+    <Content Include="Views\Investigation\Details.cshtml" />
+    <Content Include="Views\Investigation\Edit.cshtml" />
+    <Content Include="Views\Investigation\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -189,6 +189,8 @@ namespace DoctorWeb.Controllers
             ViewBag.NightDozID = new SelectList(db.Dozes, "ID", "Name");
             ViewBag.NoonDozID = new SelectList(db.Dozes, "ID", "Name");
             ViewBag.OINTTypeID = new SelectList(db.OINTTypes, "ID", "Name");
+            ViewBag.InvestigationID = new SelectList(db.Investigations, "ID", "Name");
+
             ViewBag.PrescriptionCategoryID = new SelectList(db.PrescriptionCategories, "ID", "Name");
 
             model.PrescriptionImages = db.PreImages.Select(o => new SelectListItem() { Text = o.Label, Value = o.ID.ToString(), Selected = false });
@@ -219,7 +221,8 @@ namespace DoctorWeb.Controllers
                 Rs = model.Rs,
                 M = model.M,
                 PrescriptionImage = Convert.FromBase64String(model.PatientImage.Remove(0, 22)),
-                Investigation = model.Investigation
+                //Investigation = model.Investigation
+                InvestigationID = model.InvestigationID
             };
             if (ModelState.IsValid)
             {
@@ -263,6 +266,7 @@ namespace DoctorWeb.Controllers
             //ViewBag.InstructionID = new SelectList(db.Instructions, "ID", "Name", prescription.InstructionID);
             ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name", prescription.PatientID);
             ViewBag.PatientTypeID = new SelectList(db.PatientTypes, "ID", "PatientTypeName", prescription.PatientTypeID);
+            ViewBag.InvestigationID = new SelectList(db.Investigations, "ID", "Name");
 
             return RedirectToAction("Prescription", new { patientID = model.PatientID });
         }
@@ -324,7 +328,7 @@ namespace DoctorWeb.Controllers
                 var patientHistory = db.PatientHistories.Where(p => p.PatientID == id).OrderByDescending(q => q.ID).FirstOrDefault();
                 var prescription = db.Prescriptions.Where(p => p.PatientID == id).OrderByDescending(q => q.ID).FirstOrDefault();
 
-                var model = new PrintModel();
+                var model = new PrintModel();   
                 model.PatientID = patient.ID;
                 model.PatientName = patient.Name;
                 model.Age = patient.Age;

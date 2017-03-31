@@ -176,6 +176,15 @@
                             <li @if (ctrName == "ReferredBy" && actnName == "Index") { <text> class="active" </text>     }><div id="icontitlediv">@Html.ActionLink("ReferredBy List", "Index", "ReferredBy")</div></li>
                         </ul>
                     </li>
+
+                    @* Investigation *@
+                    <li class="dropdown">
+                        <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Investigation</div></a>
+                        <ul @if ((ctrName == "Investigation" && actnName == "Create") || (ctrName == "Investigation" && actnName == "Index")) { <text> style="display:block;" </text>     }>
+                            <li @if (ctrName == "Investigation" && actnName == "Create") { <text> class="active" </text>      }><div id="icontitlediv">@Html.ActionLink("Add Investigation", "Create", "Investigation")</div></li>
+                            <li @if (ctrName == "Investigation" && actnName == "Index") { <text> class="active" </text>      }><div id="icontitlediv">@Html.ActionLink("Investigations List", "Index", "Investigation")</div></li>
+                        </ul>
+                    </li>
                     
                     @*<li><div id="icondiv"><span class="icon-briefcase"></span></div><div id="icontitlediv">@Html.ActionLink("Referring By", "Index", "Doctor")</div></li>
 

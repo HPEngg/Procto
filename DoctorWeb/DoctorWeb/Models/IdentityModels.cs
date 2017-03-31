@@ -69,6 +69,8 @@ namespace DoctorWeb.Models
 
         public DbSet<ReferredBy> ReferredBy { get; set; }
 
+        public DbSet<Investigation> Investigations { get; set; }
+
         public System.Data.Entity.DbSet<DoctorWeb.Models.PatientHistory> PatientHistories { get; set; }
     }
 }

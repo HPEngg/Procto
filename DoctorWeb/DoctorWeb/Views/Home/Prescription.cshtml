@@ -220,8 +220,10 @@
 
                         <div style="clear:both; display:block; width:100%; float:left;">
                             @*@Html.LabelFor(model => model.FollowDate, htmlAttributes: new { @class = "control-label col-md-2", style="float:left; padding-left:0"})*@
-                            @Html.EditorFor(model => model.Investigation, new { htmlAttributes = new { @placeholder = "Investigation" } })
-                            @Html.ValidationMessageFor(model => model.Investigation, "", new { @class = "text-danger" })
+                            @*@Html.EditorFor(model => model.Investigation, new { htmlAttributes = new { @placeholder = "Investigation" } })
+                            @Html.ValidationMessageFor(model => model.Investigation, "", new { @class = "text-danger" })*@
+                            @Html.DropDownList("InvestigationID", null, htmlAttributes: new { @name = "InvestigationID", @class = "pre", @style = "width: 120px!important; padding: 0!important;color:#000;" })
+                            @Html.ValidationMessageFor(model => model.InvestigationID, "", new { @class = "text-danger" })
                         </div>
 
 

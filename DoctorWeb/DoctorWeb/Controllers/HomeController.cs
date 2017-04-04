@@ -20,7 +20,7 @@ namespace DoctorWeb.Controllers
 
         public ActionResult Search(String PatientName)
         {
-            var model = db.Patients.Where(p => p.Name.Contains(PatientName)).Select(p => new PatientSearch() { DepartmentName = p.DepartmentID.ToString(), Name = p.Name, No = p.ID, RefferalName = "test" });
+            var model = db.Patients.Where(p => p.Name.Contains(PatientName) || p.Address.Contains(PatientName) || p.Contact.Contains("")).Select(p => new PatientSearch() { DepartmentName = p.DepartmentID.ToString(), Name = p.Name, No = p.ID, RefferalName = "test" });
 
             return PartialView(model.ToList());
             //return View(model.ToList());

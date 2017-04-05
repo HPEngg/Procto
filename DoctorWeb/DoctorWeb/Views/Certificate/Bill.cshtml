@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "Bill";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <script src="~/Content/js/certi_bootstrap.min.js"></script>
+    <script src="~/Content/js/certi_jquery.min.js"></script>
+    <script src="~/Content/js/editor.js"></script>
+    <script>
+
+            jQuery.noConflict();
+			jQuery(document).ready(function() {
+				jQuery("#txtEditor").Editor();
+			});
+    </script>
+    <link href="~/Content/css/certi_bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/css/certi_font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/css/editor.css" type="text/css" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 nopadding">
+                        <textarea id="txtEditor">
+                            MAIN BILL
+                            In the sum of rupees_________ INR(_____________________________________)Received with thanks from
+                            Mr/Mrs/Miss ______________________________,____YRS
+                            M/F for the procedure  of ________________________________
+                            at Krishna hospital on __/__/____.
+                        </textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid footer">
+        <p class="pull-right">
+            &copy; Suyati Technologies
+            <script>document.write(new Date().getFullYear())</script>. All rights reserved.
+        </p>
+    </div>
+</body>
+</html>
+
+
+

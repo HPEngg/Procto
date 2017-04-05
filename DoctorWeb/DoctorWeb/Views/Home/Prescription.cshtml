@@ -16,7 +16,6 @@
         document.addEventListener('DOMContentLoaded', function () {
             alert('@ViewBag.Message');
         });
-
     </script>
 
 }
@@ -30,7 +29,7 @@
             <div class="form_fieldset_div">
                 <div id="testDiv1">
                     <fieldset style="height: 100%">
-                        <h2 class="fs-title" style="text-align:center;"><a href="#" class="webcam_img" onclick="patientimage();"><img src="/Content/Images/webcam.png" /></a><a href="@Url.Action("Print", "Home", new { id = ViewBag.PatientID })" target="blank" class="profile_pic_img"><img src="/Content/Images/print_icon.png" /></a>Prescription Form</h2>
+                        <h2 class="fs-title" style="text-align:center;"><a href="#" class="webcam_img" onclick="imagelightbox();"><img src="/Content/Images/webcam.png" /></a><a href="#" class="webcam_img" onclick="patientimage();"><img src="/Content/Images/webcam.png" /></a><a href="@Url.Action("Print", "Home", new { id = ViewBag.PatientID })" target="blank" class="profile_pic_img"><img src="/Content/Images/print_icon.png" /></a>Prescription Form</h2>
                         @*<h2 class="fs-title" style="text-align:center;"><a href="#" class="webcam_img" onclick="patientimage();"><img src="/Content/Images/webcam.png" /></a><a href="#" class="profile_pic_img"><img src="/Content/Images/profilepic.png" /></a><a href="#" onclick="printform();" class="profile_pic_img"><img src="/Content/Images/print_icon.png" /></a>Prescription Form</h2>*@
                         <div style="width:100%; clear:both;">
                             <label title="Rx" class="rx_label rx_label_right">Rx</label>
@@ -42,7 +41,6 @@
                                 <input style="height:25px !important; width:25px !important; float:right; margin-left:5px !important; padding-top:3px !important;" value="+" class="plusbutton" type="button" required>
 
                             </div>
-
                             <label title="Rx" style="float:left; border:0px solid; padding-top:13px;">
                                 @Html.EditorFor(model => model.Days, new { htmlAttributes = new { name = "patient_days_presc", id = "patient_days_presc", placeholder = "Days", style = "width:70px;", @min = "1", @step = "1", Value = "" } })
                                 @Html.ValidationMessageFor(model => model.Days, "", new { @class = "text-danger" })
@@ -56,6 +54,7 @@
                         @*DRAW IMAGES*@
 
                         <div id="DrawImage"></div>
+                        <div id="ImageLightbox"></div>
                         <div id="PrintForm"></div>
 
                         @*Medicine*@
@@ -768,6 +767,31 @@
                 },
             });
             return false;
+        }
+
+        function imagelightbox() {
+            jQuery("#ImageLightbox").dialog({
+                autoOpen: true,
+                position: { my: "top", at: "top", of: window },
+//                width: 1200,
+                //resizable: false,
+                title: 'Image Lightbox',
+                modal: true,
+                dialogClass: 'searchdialog',
+                open: function () {
+                    jQuery(this).load('@Url.Action("ImageLightbox", "Home")');
+                    jQuery('#ImageLightbox').focus();
+                },
+                close: function () {
+                    jQuery.getScript('../Content/js/jquery-ui.min.js');
+                    jQuery.getScript('../Content/js/jquery-1.12.0.min.js');
+                    jQuery.getScript('../Content/autocomplete/jquery-ui.js');
+                    jQuery("#my-iframe").append("<link rel='stylesheet' type='text/css' href='../Content/css/style.css' />");
+                },
+            });
+            return false;
+
+            
         }
 
         @*function printform() {

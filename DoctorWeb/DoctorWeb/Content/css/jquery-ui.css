@@ -1233,9 +1233,9 @@ body .ui-tooltip {
 /* CSS WRITTEN BY ABHAY */
 
 .ui-dialog {
-  width: 50% !important;
-  left: 25% !important;
-  top:  25% !important;
+  width: 90% !important;
+  left: 5% !important;
+  top:  5% !important;
   position: absolute !important;
 }
 

@@ -26,6 +26,14 @@ namespace DoctorWeb.Controllers
             //return View(model.ToList());
         }
 
+        public ActionResult ImageLightbox()
+        {
+            return PartialView();
+            //return View(model.ToList());
+        }
+
+
+
         public ActionResult DrawImage()
         {
             return PartialView();
@@ -35,7 +43,7 @@ namespace DoctorWeb.Controllers
         [HttpPost]
         public ActionResult DrawImage(string data)
         {
-            byte[] imgarr = Convert.FromBase64String(data);
+            byte[] imgarr = Convert.FromBase64String(data.Remove(0, 22));
             Image image;
             using (MemoryStream ms = new MemoryStream(imgarr))
             {

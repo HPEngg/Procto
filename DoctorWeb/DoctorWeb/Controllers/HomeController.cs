@@ -20,8 +20,36 @@ namespace DoctorWeb.Controllers
 
         public ActionResult Search(String PatientName)
         {
-            var model = db.Patients.Where(p => p.Name.Contains(PatientName) || p.Address.Contains(PatientName) || p.Contact.Contains("")).Select(p => new PatientSearch() { DepartmentName = p.DepartmentID.ToString(), Name = p.Name, No = p.ID, RefferalName = "test" });
+            var model = db.Patients.Where(p => p.Name.Contains(PatientName) || p.Address.Contains(PatientName) || p.Contact.Contains("")).Select(p => new PatientSearch()
+            {
+                Status = p.Status.ToString(),
+                Name = p.Name,
+                MobileNo = p.Contact,
+                Address = p.Address,
+                DepartmentName = p.DepartmentID.ToString(),
+                Reference = p.ReferredBy.Name,
+                ID = p.ID,
+                RefferalName = "test"
+            }).ToList();
 
+            foreach(var patient in model)
+            {
+                var latestPrescription = db.Prescriptions.Where(p => p.PatientID == patient.ID).OrderByDescending(d => d.Date).FirstOrDefault();
+                if (latestPrescription != null)
+                {
+                    patient.InvoiceNo = latestPrescription.ID;
+                    patient.Date = latestPrescription.Date;
+                    patient.Diagnosis = latestPrescription.Diagnosis;
+                    patient.Procedure = latestPrescription.Procedure;
+                    patient.PatientType = latestPrescription.PatientType.PatientTypeName;
+                    patient.NewPatientOrFollowUp = "FollowUP";
+                    //patient.ChargesType = latestPrescription.Charges.FirstOrDefault();
+                }
+                else
+                {
+                    patient.NewPatientOrFollowUp = "New patient";
+                }
+            }
             return PartialView(model.ToList());
             //return View(model.ToList());
         }

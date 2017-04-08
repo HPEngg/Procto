@@ -189,6 +189,35 @@
                                 </div>*@
                         </div>
 
+                        <div class="mystep2all">
+                            @Html.LabelFor(model => model.PatientHistory.Allergy, htmlAttributes: new { @class = "mylabels" })
+                            <div>
+                                @Html.EditorFor(model => model.PatientHistory.Allergy, new { htmlAttributes = new { @class = "my-input", style = "min-width:60%;" } })
+                                @Html.ValidationMessageFor(model => model.PatientHistory.Allergy, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="mystep2all">
+                            @Html.LabelFor(model => model.PatientHistory.History, htmlAttributes: new { @class = "mylabels" })
+                            <div>
+                                @Html.EditorFor(model => model.PatientHistory.History, new { htmlAttributes = new { @class = "my-input", style = "min-width:60%;" } })
+                                @Html.ValidationMessageFor(model => model.PatientHistory.History, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="mystep2all">
+                            @*@Html.LabelFor(model => model.PatientHistory.RP, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                            <div class="mylabels" style="padding-top:0px; font-weight:bold;">
+                                @Html.RadioButtonFor(model => model.PatientHistory.PR, "R", htmlAttributes: new { style = "width:20px;", @checked = true })R
+                                @Html.RadioButtonFor(model => model.PatientHistory.PR, "P", htmlAttributes: new { style = "width:20px;" })P
+                                @Html.ValidationMessageFor(model => model.PatientHistory.RP, "", new { @class = "text-danger" })
+                            </div>
+                            <div>
+                                @Html.EditorFor(model => model.PatientHistory.KCO, new { htmlAttributes = new { @class = "my-input", style = "min-width:60%;", placeholder = "K/C/O" } })
+                                @Html.ValidationMessageFor(model => model.PatientHistory.KCO, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             @*@Html.LabelFor(model => model.Patient.RemindMeAbout, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
@@ -252,8 +281,7 @@
                 <div class="mdform my-mdform">
 
                     <div class="mdform my-mdform">
-                        <div class="mystep2all">
-                            @*@Html.LabelFor(model => model.PatientHistory.RP, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                        @*<div class="mystep2all">
                             <div class="mylabels" style="padding-top:0px; font-weight:bold;">
                                 @Html.RadioButtonFor(model => model.PatientHistory.PR, "R", htmlAttributes: new { style = "width:20px;", @checked = true })R
                                 @Html.RadioButtonFor(model => model.PatientHistory.PR, "P", htmlAttributes: new { style = "width:20px;" })P
@@ -263,7 +291,7 @@
                                 @Html.EditorFor(model => model.PatientHistory.KCO, new { htmlAttributes = new { @class = "my-input", style = "min-width:60%;", placeholder = "K/C/O" } })
                                 @Html.ValidationMessageFor(model => model.PatientHistory.KCO, "", new { @class = "text-danger" })
                             </div>
-                        </div>
+                        </div>*@
 
                         @*<div class="form-group">
                                 @Html.LabelFor(model => model.PatientHistory.KCO, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -308,6 +336,30 @@
                                     @Html.ValidationMessageFor(model => model.PatientHistory.ConstipationMore, "", new { @class = "text-danger" })
                                 </div>
                             </div>*@
+
+                        <div class="mystep2all">
+                            @Html.LabelFor(model => model.PatientHistory.Acidity, htmlAttributes: new { @class = "mylabels" })
+                            <div class="my-rating">
+                                @Html.EditorFor(model => model.PatientHistory.Acidity, new { htmlAttributes = new { @class = "form-control", @min = "1", @max = "5", @step = "1" } })
+                            </div>
+                            <div>
+                                @Html.EditorFor(model => model.PatientHistory.AcidityMore, new { htmlAttributes = new { @class = "my-input" } })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.PatientHistory.Acidity, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.PatientHistory.AcidityMore, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="mystep2all">
+                            @Html.LabelFor(model => model.PatientHistory.Gas, htmlAttributes: new { @class = "mylabels" })
+                            <div class="my-rating">
+                                @Html.EditorFor(model => model.PatientHistory.Gas, new { htmlAttributes = new { @class = "form-control", @min = "1", @max = "5", @step = "1" } })
+                            </div>
+                            <div>
+                                @Html.EditorFor(model => model.PatientHistory.GasMore, new { htmlAttributes = new { @class = "my-input" } })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.PatientHistory.Gas, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.PatientHistory.GasMore, "", new { @class = "text-danger" })
+                        </div>
 
                         <div class="mystep2all">
                             @Html.LabelFor(model => model.PatientHistory.Pain, htmlAttributes: new { @class = "mylabels" })
@@ -449,7 +501,7 @@
                             </div>
                         </div>
 
-                        <div class="mystep2all">
+                        @*<div class="mystep2all">
                             @Html.LabelFor(model => model.PatientHistory.Allergy, htmlAttributes: new { @class = "mylabels" })
                             <div>
                                 @Html.EditorFor(model => model.PatientHistory.Allergy, new { htmlAttributes = new { @class = "my-input", style = "min-width:60%;" } })
@@ -463,7 +515,7 @@
                                 @Html.EditorFor(model => model.PatientHistory.History, new { htmlAttributes = new { @class = "my-input", style = "min-width:60%;" } })
                                 @Html.ValidationMessageFor(model => model.PatientHistory.History, "", new { @class = "text-danger" })
                             </div>
-                        </div>
+                        </div>*@
 
                         <h2 class="fs-title fs-title_cmplnfrm cmplain_title_color" style="color:blue;">Examination</h2>
 

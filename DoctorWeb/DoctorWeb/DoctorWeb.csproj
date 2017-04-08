@@ -196,13 +196,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\CertificateController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
+    <Compile Include="Controllers\CertificateController.cs" />
     <Compile Include="Controllers\DoctorController.cs" />
     <Compile Include="Controllers\DosageController.cs" />
     <Compile Include="Controllers\DozController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstructionController.cs" />
+    <Compile Include="Controllers\InvestigationController.cs" />
     <Compile Include="Controllers\InvoiceController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MedicineController.cs" />
@@ -216,6 +217,7 @@
     <Compile Include="Controllers\PrescriptionCategoryController.cs" />
     <Compile Include="Controllers\PrescriptionController.cs" />
     <Compile Include="Controllers\PrescriptionMedicineController.cs" />
+    <Compile Include="Controllers\ReferredByController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -226,7 +228,6 @@
     <Compile Include="Models\CustomModels\PatientHome.cs" />
     <Compile Include="Models\CustomModels\PatientRefByDoctor.cs" />
     <Compile Include="Models\CustomModels\PatientSearch.cs" />
-    <Compile Include="Models\CustomModels\Prescription.cs" />
     <Compile Include="Models\CustomModels\PrescriptionHome.cs" />
     <Compile Include="Models\CustomModels\PrintModel.cs" />
     <Compile Include="Models\Department.cs" />
@@ -246,6 +247,7 @@
     <Compile Include="Models\Enums\ReferredBy.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Instruction.cs" />
+    <Compile Include="Models\Investigation.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Medicine.cs" />
     <Compile Include="Models\Offline.cs" />
@@ -470,6 +472,8 @@
     <Content Include="Content\Images\iconsweet-icons.png" />
     <Content Include="Content\Images\iconsweets-icons-white.png" />
     <Content Include="Content\Images\iconsweets-icons.png" />
+    <Content Include="Content\Images\imagedrawing.png" />
+    <Content Include="Content\Images\imageupload.png" />
     <Content Include="Content\Images\layout.png" />
     <Content Include="Content\Images\loaders\loader1.gif" />
     <Content Include="Content\Images\loaders\loader10.gif" />
@@ -509,6 +513,7 @@
     <Content Include="Content\Images\menu.png" />
     <Content Include="Content\Images\password.png" />
     <Content Include="Content\Images\patient_drawing_image_bg.png" />
+    <Content Include="Content\Images\patient_drawing_image_bg2.png" />
     <Content Include="Content\Images\preview\audio.png" />
     <Content Include="Content\Images\preview\comlogo.png" />
     <Content Include="Content\Images\preview\image.png" />
@@ -843,11 +848,17 @@
     <Content Include="Views\ReferredBy\Details.cshtml" />
     <Content Include="Views\ReferredBy\Edit.cshtml" />
     <Content Include="Views\ReferredBy\Index.cshtml" />
-    <Content Include="Views\Certificate\Blank.cshtml" />
-    <Content Include="Views\Certificate\Unfit.cshtml" />
-    <Content Include="Views\Certificate\Fit.cshtml" />
-    <Content Include="Views\Certificate\Discharge.cshtml" />
+    <Content Include="Views\Investigation\Create.cshtml" />
+    <Content Include="Views\Investigation\Delete.cshtml" />
+    <Content Include="Views\Investigation\Details.cshtml" />
+    <Content Include="Views\Investigation\Edit.cshtml" />
+    <Content Include="Views\Investigation\Index.cshtml" />
     <Content Include="Views\Certificate\Bill.cshtml" />
+    <Content Include="Views\Certificate\Blank.cshtml" />
+    <Content Include="Views\Certificate\Discharge.cshtml" />
+    <Content Include="Views\Certificate\Fit.cshtml" />
+    <Content Include="Views\Certificate\Unfit.cshtml" />
+    <Content Include="Views\Shared\_Certificate.cshtml" />
     <Content Include="Views\Home\ImageLightbox.cshtml" />
   </ItemGroup>
   <ItemGroup>

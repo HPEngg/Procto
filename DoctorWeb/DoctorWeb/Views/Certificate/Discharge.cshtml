@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "Discharge";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_Certificate.cshtml";
 }
 
 
@@ -12,10 +12,11 @@
     <script src="~/Content/js/certi_jquery.min.js"></script>
     <script src="~/Content/js/editor.js"></script>
     <script>
-
-            jQuery.noConflict();
+            //jQuery.noConflict();
 			jQuery(document).ready(function() {
-				jQuery("#txtEditor").Editor();
+			    jQuery("#txtEditor").Editor();
+			    var content = "DISCHARGE CERTFICATE			    This is to certify that Mr/Mrs/Miss__________________________________________, ______ YRS, M/F, had undergone operative procedure for ___________________________ on __/__/____, and got discharged on __/__/____, at Krishna Hospital.";
+			    jQuery('.Editor-editor').text(content);
 			});
     </script>
     <link href="~/Content/css/certi_bootstrap.min.css" rel="stylesheet" />
@@ -30,20 +31,16 @@
                 <div class="row">
                     <div class="col-lg-12 nopadding">
                         <textarea id="txtEditor">
-                            DISCHARGE CERTFICATE
-                            This is to certify that Mr/Mrs/Miss__________________________________________, ______ YRS, M/F, had undergone operative procedure for ___________________________ on __/__/____, and got discharged on __/__/____, at Krishna Hospital.
                         </textarea>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="container-fluid footer">
-        <p class="pull-right">
-            &copy; Suyati Technologies
-            <script>document.write(new Date().getFullYear())</script>. All rights reserved.
-        </p>
+    <div class="footer">
+        <span>&copy; Krishna Hospital</span>
     </div>
+    <!--footer-->
 </body>
 </html>
 

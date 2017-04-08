@@ -20,16 +20,25 @@ namespace DoctorWeb.Controllers
 
         public ActionResult Search(String PatientName)
         {
-            var model = db.Patients.Where(p => p.Name.Contains(PatientName)).Select(p => new PatientSearch() { DepartmentName = p.DepartmentID.ToString(), Name = p.Name, No = p.ID, RefferalName = "test" });
+            var model = db.Patients.Where(p => p.Name.Contains(PatientName) || p.Address.Contains(PatientName) || p.Contact.Contains("")).Select(p => new PatientSearch() { DepartmentName = p.DepartmentID.ToString(), Name = p.Name, No = p.ID, RefferalName = "test" });
 
             return PartialView(model.ToList());
             //return View(model.ToList());
         }
 
-        public ActionResult ImageLightbox()
+        public ActionResult ImageLightbox(string data, int id, int imageID)
         {
+            ViewBag.PatientID = id;
             return PartialView();
-            //return View(model.ToList());
+            //byte[] imgarr = Convert.FromBase64String(data.Remove(0, 22));
+            //Image image;
+            //using (MemoryStream ms = new MemoryStream(imgarr))
+            //{
+            //    image = Image.FromStream(ms);
+            //}
+            //image.Save("~/Content/Images/PatientImage.png");
+            //ViewBag.Logo = Server.MapPath("~") + @"Content\Images\PatientImage.png";
+            //return PartialView();
         }
 
 
@@ -188,7 +197,7 @@ namespace DoctorWeb.Controllers
             model.PaymentTypes = db.PaymentTypes;
 
             ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name");
-            ViewBag.InstructionID = new SelectList(db.Instructions, "ID", "Name");
+            //ViewBag.InstructionID = new SelectList(db.Instructions, "ID", "Name");
             ViewBag.PatientID = patientID;
             ViewBag.PatientTypeID = new SelectList(db.PatientTypes, "ID", "PatientTypeName");
 
@@ -197,9 +206,12 @@ namespace DoctorWeb.Controllers
             ViewBag.NightDozID = new SelectList(db.Dozes, "ID", "Name");
             ViewBag.NoonDozID = new SelectList(db.Dozes, "ID", "Name");
             ViewBag.OINTTypeID = new SelectList(db.OINTTypes, "ID", "Name");
+            ViewBag.InvestigationID = new SelectList(db.Investigations, "ID", "Name");
+
             ViewBag.PrescriptionCategoryID = new SelectList(db.PrescriptionCategories, "ID", "Name");
 
             model.PrescriptionImages = db.PreImages.Select(o => new SelectListItem() { Text = o.Label, Value = o.ID.ToString(), Selected = false });
+            model.Instructions = db.Instructions.Select(p => new SelectListItem() { Text = p.Description, Value = p.ID.ToString(), Selected = false });
 
             return View(model);
         }
@@ -215,7 +227,7 @@ namespace DoctorWeb.Controllers
                 Procedure = model.Procedure,
                 Days = model.Days,
                 DoctorID = model.DoctorID,
-                InstructionID = model.InstructionID,
+                //InstructionID = model.InstructionID,
                 PatientID = model.PatientID,
                 PatientTypeID = model.PatientTypeID,
                 FollowDate = model.FollowDate,
@@ -226,14 +238,19 @@ namespace DoctorWeb.Controllers
                 Rs = model.Rs,
                 M = model.M,
                 PrescriptionImage = Convert.FromBase64String(model.PatientImage.Remove(0, 22)),
-                Investigation = model.Investigation
+                //Investigation = model.Investigation
+                InvestigationID = model.InvestigationID
             };
             if (ModelState.IsValid)
             {
                 if (model.SelectedPrescriptionImages != null)
                     prescription.PreImages = db.PreImages.Where(m => model.SelectedPrescriptionImages.Contains(m.ID)).ToList();
 
+                if (model.SelectedInstructionsIDs != null)
+                    prescription.Instructions = db.Instructions.Where(m => model.SelectedInstructionsIDs.Contains(m.ID)).ToList();
+
                 var prescroptionObj = db.Prescriptions.Add(prescription);
+                // ReaderExecuted method code commented due to below line blocks exicution while adding prescription record
                 db.SaveChanges();
 
                 for (int i = 0; i < model.OINTTypeID.Length; i++)
@@ -263,9 +280,10 @@ namespace DoctorWeb.Controllers
             }
 
             ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name", prescription.DoctorID);
-            ViewBag.InstructionID = new SelectList(db.Instructions, "ID", "Name", prescription.InstructionID);
+            //ViewBag.InstructionID = new SelectList(db.Instructions, "ID", "Name", prescription.InstructionID);
             ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name", prescription.PatientID);
             ViewBag.PatientTypeID = new SelectList(db.PatientTypes, "ID", "PatientTypeName", prescription.PatientTypeID);
+            ViewBag.InvestigationID = new SelectList(db.Investigations, "ID", "Name");
 
             return RedirectToAction("Prescription", new { patientID = model.PatientID });
         }
@@ -327,7 +345,7 @@ namespace DoctorWeb.Controllers
                 var patientHistory = db.PatientHistories.Where(p => p.PatientID == id).OrderByDescending(q => q.ID).FirstOrDefault();
                 var prescription = db.Prescriptions.Where(p => p.PatientID == id).OrderByDescending(q => q.ID).FirstOrDefault();
 
-                var model = new PrintModel();
+                var model = new PrintModel();   
                 model.PatientID = patient.ID;
                 model.PatientName = patient.Name;
                 model.Age = patient.Age;
@@ -381,7 +399,8 @@ namespace DoctorWeb.Controllers
                     model.PrescriptionImage = prescription.PrescriptionImage;
                     model.Diagnosis = prescription.Diagnosis;
                     model.FollowDate = prescription.FollowDate == null ? string.Empty : prescription.FollowDate.Value.ToShortDateString();
-                    model.Instruction = prescription.Instruction.Description;
+                    //model.Instruction = prescription.Instruction.Description;
+                    model.Instructions = db.Instructions.Where(p => p.Prescriptions.Any(q => q.ID == prescription.ID)).ToList();
                     model.Rs = prescription.Rs.ToString();
                     model.Less = prescription.Less;
                     model.Total = Convert.ToString( prescription.Rs - Convert.ToDecimal(prescription.Less));

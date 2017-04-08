@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <style>
+    </style>
+    <meta charset="UTF-8">
+    <title>Dr.Software</title>
+
+    <script type="text/javascript" src="~/Content/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery-ui-1.9.2.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/bootstrap.min.js"></script>
+
+
+    <script type="text/javascript" src="~/Content/js/prettify.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery-migrate-1.1.1.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery.flot.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery.flot.resize.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="~/Content/js/custom.js"></script>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @*@RenderSection("scripts", required: false)*@
+
+   
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="top" style="padding-top:10px;">
+            <!---- top part start --->
+            <div class="logo">
+                <a href="/Home/Index"><img src="/Content/Images/logo.png"></a>
+            </div>
+        </div><!---- top part End --->
+        <div style="clear:both"></div>
+        <div>
+            <!-- multistep form -->
+            @RenderBody()
+        </div>
+    </div>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

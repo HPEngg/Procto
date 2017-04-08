@@ -73,6 +73,13 @@ namespace DoctorWeb.Migrations
                 new Models.ReferredBy() { Name = "Other" }
                 );
 
+            context.Investigations.AddOrUpdate(
+                new Models.Investigation() { Name = "Investigation1"},
+                new Models.Investigation() { Name = "Investigation2" },
+                new Models.Investigation() { Name = "Investigation3" },
+                new Models.Investigation() { Name = "Investigation4" }
+                );
+
         }
     }
 }

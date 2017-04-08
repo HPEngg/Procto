@@ -19,6 +19,10 @@ namespace DoctorWeb.Models
         public string ComplainForm { get; set; }
         public int? Constipation { get; set; }
         public string ConstipationMore { get; set; }
+        public int? Acidity { get; set; }
+        public string AcidityMore { get; set; }
+        public int? Gas { get; set; }
+        public string GasMore { get; set; }
         public int? Pain { get; set; }
         public string PainMore { get; set; }
         public int? Burning { get; set; }

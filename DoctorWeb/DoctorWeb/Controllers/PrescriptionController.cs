@@ -17,7 +17,7 @@ namespace DoctorWeb.Controllers
         // GET: Prescription
         public ActionResult Index()
         {
-            var prescriptions = db.Prescriptions.Include(p => p.Doctor).Include(p => p.Instruction).Include(p => p.Patient).Include(p => p.PatientType);
+            var prescriptions = db.Prescriptions.Include(p => p.Doctor).Include(p => p.Instructions).Include(p => p.Patient).Include(p => p.PatientType);
             return View(prescriptions.ToList());
         }
 
@@ -40,9 +40,13 @@ namespace DoctorWeb.Controllers
         public ActionResult Create()
         {
             ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name");
-            ViewBag.InstructionID = new SelectList(db.Instructions, "ID", "Name");
+            //ViewBag.InstructionID = new SelectList(db.Instructions, "ID", "Name");
             ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name");
             ViewBag.PatientTypeID = new SelectList(db.PatientTypes, "ID", "PatientTypeName");
+
+            var allCategories = db.PrescriptionCategories.ToList();
+            ViewBag.Instructions = allCategories.Select(o => new SelectListItem() { Text = o.Name, Value = o.ID.ToString(), Selected = false });
+
             return View();
         }
 
@@ -61,7 +65,7 @@ namespace DoctorWeb.Controllers
             }
 
             ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name", prescription.DoctorID);
-            ViewBag.InstructionID = new SelectList(db.Instructions, "ID", "Name", prescription.InstructionID);
+            //ViewBag.InstructionID = new SelectList(db.Instructions, "ID", "Name", prescription.InstructionID);
             ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name", prescription.PatientID);
             ViewBag.PatientTypeID = new SelectList(db.PatientTypes, "ID", "PatientTypeName", prescription.PatientTypeID);
             return View(prescription);
@@ -80,7 +84,7 @@ namespace DoctorWeb.Controllers
                 return HttpNotFound();
             }
             ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name", prescription.DoctorID);
-            ViewBag.InstructionID = new SelectList(db.Instructions, "ID", "Name", prescription.InstructionID);
+            //ViewBag.InstructionID = new SelectList(db.Instructions, "ID", "Name", prescription.InstructionID);
             ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name", prescription.PatientID);
             ViewBag.PatientTypeID = new SelectList(db.PatientTypes, "ID", "PatientTypeName", prescription.PatientTypeID);
             return View(prescription);
@@ -100,7 +104,7 @@ namespace DoctorWeb.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name", prescription.DoctorID);
-            ViewBag.InstructionID = new SelectList(db.Instructions, "ID", "Name", prescription.InstructionID);
+            //ViewBag.InstructionID = new SelectList(db.Instructions, "ID", "Name", prescription.InstructionID);
             ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name", prescription.PatientID);
             ViewBag.PatientTypeID = new SelectList(db.PatientTypes, "ID", "PatientTypeName", prescription.PatientTypeID);
             return View(prescription);

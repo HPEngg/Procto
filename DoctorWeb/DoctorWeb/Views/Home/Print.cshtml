@@ -392,11 +392,27 @@
         </div>
         <div id="Inst" class="clear_display" style="padding:10px 0px;">
             <dt>
-                @Html.DisplayNameFor(model => model.Instruction)
+                @*@Html.DisplayNameFor(model => model.Instruction)*@
+                Instructions
             </dt>
-            <dd>
+            <table class="table table-bordered" style="width:auto;">
+                <tr>
+                    <th>
+                        Instructions
+                    </th>
+                </tr>
+                @foreach (var item in Model.Instructions)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                    </tr>
+                }
+            </table>
+            @*<dd>
                 @Html.DisplayFor(model => model.Instruction)
-            </dd>
+            </dd>*@
         </div>
         <div style="padding:10px 0px;">
             <dt>

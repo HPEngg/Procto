@@ -179,16 +179,25 @@
                             <li @if (ctrName == "ReferredBy" && actnName == "Index") { <text> class="active" </text>     }><div id="icontitlediv">@Html.ActionLink("ReferredBy List", "Index", "ReferredBy")</div></li>
                         </ul>
                     </li>
+
+                    @* Investigation *@
+                    <li class="dropdown">
+                        <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Investigation</div></a>
+                        <ul @if ((ctrName == "Investigation" && actnName == "Create") || (ctrName == "Investigation" && actnName == "Index")) { <text> style="display:block;" </text>     }>
+                            <li @if (ctrName == "Investigation" && actnName == "Create") { <text> class="active" </text>      }><div id="icontitlediv">@Html.ActionLink("Add Investigation", "Create", "Investigation")</div></li>
+                            <li @if (ctrName == "Investigation" && actnName == "Index") { <text> class="active" </text>      }><div id="icontitlediv">@Html.ActionLink("Investigations List", "Index", "Investigation")</div></li>
+                        </ul>
+                    </li>
                     
                     @* Certificate *@
                     <li class="dropdown">
                         <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Certificates</div></a>
                             <ul @if ((ctrName == "Certificate" && actnName == "Blank") || (ctrName == "Certificate" && actnName == "Fit") || (ctrName == "Certificate" && actnName == "Unfit") || (ctrName == "Certificate" && actnName == "Discharge") || (ctrName == "Certificate" && actnName == "Bill")) { <text> style="display:block;" </text>     }>
-                                <li @if (ctrName == "Certificate" && actnName == "Blank") { <text> class="active" </text> }><div id="icontitlediv">@Html.ActionLink("Blank", "Blank", "Certificate")</div></li>
-                                <li @if (ctrName == "Certificate" && actnName == "Fit") { <text> class="active" </text>  }><div id="icontitlediv">@Html.ActionLink("Fit", "Fit", "Certificate")</div></li>
-                                <li @if (ctrName == "Certificate" && actnName == "Unfit") { <text> class="active" </text>  }><div id="icontitlediv">@Html.ActionLink("Unfit", "Unfit", "Certificate")</div></li>
-                                <li @if (ctrName == "Certificate" && actnName == "Discharge") { <text> class="active" </text>  }><div id="icontitlediv">@Html.ActionLink("Discharge", "Discharge", "Certificate")</div></li>
-                                <li @if (ctrName == "Certificate" && actnName == "Bill") { <text> class="active" </text>   }><div id="icontitlediv">@Html.ActionLink("Bill", "Bill", "Certificate")</div></li>
+                                <li @if (ctrName == "Certificate" && actnName == "Blank") { <text> class="active" </text> }><div id="icontitlediv">@Html.ActionLink("Blank", "Blank", new { controller = "Certificate" }, new { target = "_blank" })</div></li>
+                                <li @if (ctrName == "Certificate" && actnName == "Fit") { <text> class="active" </text>  }><div id="icontitlediv">@Html.ActionLink("Fit", "Fit", new { controller = "Certificate" }, new { target = "_blank" })</div></li>
+                                <li @if (ctrName == "Certificate" && actnName == "Unfit") { <text> class="active" </text>  }><div id="icontitlediv">@Html.ActionLink("Unfit", "Unfit", new { controller = "Certificate" }, new { target = "_blank" })</div></li>
+                                <li @if (ctrName == "Certificate" && actnName == "Discharge") { <text> class="active" </text>  }><div id="icontitlediv">@Html.ActionLink("Discharge", "Discharge", new { controller = "Certificate" }, new { target = "_blank" })</div></li>
+                                <li @if (ctrName == "Certificate" && actnName == "Bill") { <text> class="active" </text>   }><div id="icontitlediv">@Html.ActionLink("Bill", "Bill", new { controller = "Certificate" }, new { target = "_blank" })</div></li>
                             </ul>    
                     </li>
 

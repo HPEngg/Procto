@@ -883,12 +883,40 @@ td {
     margin-top: 20px;
 }
 
+.imgdrawing {
+    float: left;
+    display: block;
+    width: 40px;
+    height: 40px;
+}
+
 .webcam_img {
     float: left;
     display: block;
     width: 35px;
     height: 35px;
 }
+
+/* CSS FOR IMAGE UPLOAD BROWSE BUTTON STARTS */
+
+.image-upload {
+	float: left;
+	width: 35px;
+	height: 35px;
+    padding:0 5px 0 3px;
+}
+.image-upload > input
+{
+    display: none;
+}
+
+.image-upload img
+{
+    width: 40px;
+    cursor: pointer;
+}
+
+/* CSS FOR IMAGE UPLOAD BROWSE BUTTON ENDS */
 
 .profile_pic_img {
     float: left;

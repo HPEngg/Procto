@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "ImageLightbox";
     Layout = "~/Views/Shared/_LightBoxLayout.cshtml";
 }
@@ -15,7 +14,6 @@
     <link href="~/Content/drawimage/demo/demo.css" rel="stylesheet" />
     <script src="~/Content/drawimage/lib/jquery.1.10.2.min.js"></script>
     <!-- fileend -->
-
     <!-- SCRIPT FOR TABS STARTS -->
     <script src="~/Content/autocomplete/jquery-1.12.4.js"></script>
     <script src="~/Content/autocomplete/jquery-1.12.0.js"></script>
@@ -27,9 +25,7 @@
         } );
     </script>
     <!-- SCRIPT FOR TABS ENDS -->
-
     <!-- SCRIPT FOR IMAGE DRAWING STARTS -->
-
     <!-- jQuery UI -->
     <script src="~/Content/drawimage/lib/jquery.ui.core.1.10.3.min.js"></script>
 
@@ -54,100 +50,169 @@
     <script src="~/Content/drawimage/plugins/file/wPaint.menu.main.file.min.js"></script>
 
     <script type="text/javascript">
-                    var images = [
-                      './Content/drawimage/test/uploads/wPaint.png',
-                    ];
+        var images = [
+          'Content/drawimage/test/uploads/wPaint.png',
+        ];
 
-                    function saveImg(image) {
-                        var _this = this;
 
-                        var dataURL = $("#wPaint").wPaint("image");
-                        alert(dataURL);
-                        $.ajax({
-                            type: "POST",
-                            url: "/Home/DrawImage/?data=" + dataURL.toString(),
-                            data: {
-                                imgBase64: dataURL
-                            },
-                            success: function (resp) {
-                                // internal function for displaying status messages in the canvas
-                                _this._displayStatus('Image saved successfully');
+        function saveImg(image) {
+            var _this = this;
 
-                                // doesn't have to be json, can be anything
-                                // returned from server after upload as long
-                                // as it contains the path to the image url
-                                // or a base64 encoded png, either will work
-                                resp = $.parseJSON(resp);
-                                // update images array / object or whatever
-                                // is being used to keep track of the images
-                                // can store path or base64 here (but path is better since it's much smaller)
-                                images.push(resp.img);
-                                // do something with the image
-                                $('#wPaint-img').attr('src', image);
-                            }
-                        });
-                    }
-                    //  $.ajax({
-                    //    type: 'POST',
-                    //    url: './Content/drawimage/test/upload.php',
-                    //    data: {image: image},
-                    //    success: function (resp) {
+            var activeTabIdx = $('#tabs').tabs('option','active');
+            var selector = '#tabs > ul > li > a';
+            var activeTabID = $(selector).eq(activeTabIdx).attr('href');
+            activeTabID = activeTabID[activeTabID.length -1];
+            alert(activeTabID);
+            var dataURL = $("#wPaint").wPaint("image");
+            alert(dataURL);
+            $.ajax({
+                type: "POST",
+                url: "/Home/ImageLightbox/?data=" + dataURL.toString() + "&imageID=" + activeTabID,
+                data: {
+                    imgBase64: dataURL
+                },
+                success: function (resp) {
+                    // internal function for displaying status messages in the canvas
+                    _this._displayStatus('Image saved successfully');
 
-                    //      // internal function for displaying status messages in the canvas
-                    //      _this._displayStatus('Image saved successfully');
+                    // doesn't have to be json, can be anything
+                    // returned from server after upload as long
+                    // as it contains the path to the image url
+                    // or a base64 encoded png, either will work
+                    resp = $.parseJSON(resp);
+                    // update images array / object or whatever
+                    // is being used to keep track of the images
+                    // can store path or base64 here (but path is better since it's much smaller)
+                    images.push(resp.img);
+                    // do something with the image
+                    $('#wPaint-img').attr('src', image);
+                }
+            });
+        }
+        function secondimg(){
+            alert("Second Image");
+            var _this = this;
 
-                    //      // doesn't have to be json, can be anything
-                    //      // returned from server after upload as long
-                    //      // as it contains the path to the image url
-                    //      // or a base64 encoded png, either will work
-                    //      resp = $.parseJSON(resp);
+            var activeTabIdx = $('#tabs').tabs('option','active');
+            var selector = '#tabs > ul > li > a';
+            var activeTabID = $(selector).eq(activeTabIdx).attr('href');
+            activeTabID = activeTabID[activeTabID.length -1];
+            alert(activeTabID);
+            var dataURL = $("#wPaint2").wPaint("image");
+            alert(dataURL);
+            $.ajax({
+                type: "POST",
+                url: "/Home/ImageLightbox/?data=" + dataURL.toString() + "&imageID=" + activeTabID,
+                data: {
+                    imgBase64: dataURL
+                },
+                success: function (resp) {
+                    // internal function for displaying status messages in the canvas
+                    _this._displayStatus('Image saved successfully');
 
-                    //      // update images array / object or whatever
-                    //      // is being used to keep track of the images
-                    //      // can store path or base64 here (but path is better since it's much smaller)
-                    //      images.push(resp.img);
+                    // doesn't have to be json, can be anything
+                    // returned from server after upload as long
+                    // as it contains the path to the image url
+                    // or a base64 encoded png, either will work
+                    resp = $.parseJSON(resp);
+                    // update images array / object or whatever
+                    // is being used to keep track of the images
+                    // can store path or base64 here (but path is better since it's much smaller)
+                    images.push(resp.img);
+                    // do something with the image
+                    $('#wPaint-img').attr('src', image);
+                }
+            });
+        }
+        //  $.ajax({
+        //    type: 'POST',
+        //    url: './Content/drawimage/test/upload.php',
+        //    data: {image: image},
+        //    success: function (resp) {
 
-                    //      // do something with the image
-                    //      $('#wPaint-img').attr('src', image);
-                    //    }
-                    //  });
-                    //}
+        //      // internal function for displaying status messages in the canvas
+        //      _this._displayStatus('Image saved successfully');
 
-                    function loadImgBg() {
+        //      // doesn't have to be json, can be anything
+        //      // returned from server after upload as long
+        //      // as it contains the path to the image url
+        //      // or a base64 encoded png, either will work
+        //      resp = $.parseJSON(resp);
 
-                        // internal function for displaying background images modal
-                        // where images is an array of images (base64 or url path)
-                        // NOTE: that if you can't see the bg image changing it's probably
-                        // becasue the foregroud image is not transparent.
-                        this._showFileModal('bg', images);
-                    }
+        //      // update images array / object or whatever
+        //      // is being used to keep track of the images
+        //      // can store path or base64 here (but path is better since it's much smaller)
+        //      images.push(resp.img);
 
-                    function loadImgFg() {
+        //      // do something with the image
+        //      $('#wPaint-img').attr('src', image);
+        //    }
+        //  });
+        //}
 
-                        // internal function for displaying foreground images modal
-                        // where images is an array of images (base64 or url path)
-                        this._showFileModal('fg', images);
-                    }
+        function loadImgBg() {
 
-                    // init wPaint
-                    $('#wPaint').wPaint({
-                        menuOffsetLeft: -35,
-                        menuOffsetTop: -50,
-                        saveImg: saveImg,
-                        loadImgBg: loadImgBg,
-                        loadImgFg: loadImgFg
-                    });
+            // internal function for displaying background images modal
+            // where images is an array of images (base64 or url path)
+            // NOTE: that if you can't see the bg image changing it's probably
+            // becasue the foregroud image is not transparent.
+            this._showFileModal('bg', images);
+        }
 
-                    $('#wPaint2').wPaint({
-                        menuOffsetLeft: -35,
-                        menuOffsetTop: -50,
-                        saveImg: saveImg,
-                        loadImgBg: loadImgBg,
-                        loadImgFg: loadImgFg
-                    });
+        function loadImgFg() {
+
+            // internal function for displaying foreground images modal
+            // where images is an array of images (base64 or url path)
+            this._showFileModal('fg', images);
+        }
+
+        // init wPaint
+        $('#wPaint').wPaint({
+            menuOffsetLeft: -35,
+            menuOffsetTop: -50,
+            saveImg: saveImg,
+            loadImgBg: loadImgBg,
+            loadImgFg: loadImgFg
+        });
+
+        $('#wPaint2').wPaint({
+            menuOffsetLeft: -35,
+            menuOffsetTop: -50,
+            saveImg: secondimg,
+            loadImgBg: loadImgBg,
+            loadImgFg: loadImgFg
+        });
     </script>
 
     <!-- SCRIPT FOR IMAGE DRAWING ENDS -->
+    @*CSS ADDED BY ME*@
+    <style type="text/css">
+        #tabs #content {
+            padding-top: 0px;
+        }
+
+        .wPaint-canvas {
+            background: url("/Content/Images/patient_drawing_image_bg.png") no-repeat;
+            text-align: center;
+            background-color: #fff;
+            background-position: center;
+            border: 2px solid #000;
+            min-height: 250px;
+            margin: 0 auto;
+            padding: 0;
+            width: 100%;
+        }
+        #wPaint .wPaint-canvas {
+            background: url("/Content/Images/patient_drawing_image_bg.png") no-repeat;
+            background-color: #fff;
+            background-position: center;
+        }
+        #wPaint2 .wPaint-canvas {
+            background: url("/Content/Images/patient_drawing_image_bg2.png") no-repeat;
+            background-color: #fff;
+            background-position: center;
+        }
+    </style>
 </head>
 <body>
     <div id="tabs">
@@ -155,6 +220,7 @@
             <li><a href="#tabs-1">First Image</a></li>
             <li><a href="#tabs-2">Second Image</a></li>
         </ul>
+        <span id="current"></span>
         <div id="tabs-1">
             <div id="content">
                 <div class="content-box">
@@ -171,26 +237,26 @@
                 <div class="content-box">
                     <div id="wPaint2" style="position:relative; width:500px; height:200px; background-color:#7a7a7a; margin:70px auto 20px auto;"></div>
                     @*<center style="margin-bottom: 50px;">
-                        <input type="button" value="toggle menu" onclick="console.log($('#wPaint').wPaint('menuOrientation')); $('#wPaint').wPaint('menuOrientation', $('#wPaint').wPaint('menuOrientation') === 'vertical' ? 'horizontal' : 'vertical');" />
+                        <input type="button" value="toggle menu" onclick="console.log($('#wPaint2').wPaint('menuOrientation')); $('#wPaint2').wPaint('menuOrientation', $('#wPaint2').wPaint('menuOrientation') === 'vertical' ? 'horizontal' : 'vertical');" />
                     </center>*@
                     <center id="wPaint-img"></center>
                 </div>
             </div>
         </div>
     </div>
-       
-        <!-- headstart -->
-        @*<header>
-                <a id="header-logo" href="http://websanova.com"></a>
-                <div id="header-links">
-                    <a href="http://websanova.com">Blog</a>
-                    <a href="http://websanova.com/plugins">Plugins</a>
-                    <a href="http://websanova.com/extensions">Extensions</a>
-                    <a href="http://websanova.com/services">Services</a>
-                </div>
-            </header>*@
-        <!-- headend -->
-        @*<div id="content">
+
+    <!-- headstart -->
+    @*<header>
+        <a id="header-logo" href="http://websanova.com"></a>
+        <div id="header-links">
+            <a href="http://websanova.com">Blog</a>
+            <a href="http://websanova.com/plugins">Plugins</a>
+            <a href="http://websanova.com/extensions">Extensions</a>
+            <a href="http://websanova.com/services">Services</a>
+        </div>
+    </header>*@
+    <!-- headend -->
+    @*<div id="content">
         <div class="content-box">
             <!-- jQuery UI -->
             <script src="~/Content/drawimage/lib/jquery.ui.core.1.10.3.min.js"></script>
@@ -230,13 +296,13 @@
                 ];
 
                 function saveImg(image) {
-                    var _this = this;
 
+                    var _this = this;
                     var dataURL = $("#wPaint").wPaint("image");
                     alert(dataURL);
                     $.ajax({
                         type: "POST",
-                        url: "/Home/DrawImage/?data=" + dataURL.toString(),
+                        url: "/Home/DrawImage/?data=" + dataURL.toString() + "&imgID=" + @ViewBag.imgID,
                         data: {
                             imgBase64: dataURL
                         },
@@ -258,6 +324,8 @@
                         }
                     });
                 }
+
+
                 //  $.ajax({
                 //    type: 'POST',
                 //    url: './Content/drawimage/test/upload.php',
@@ -311,19 +379,18 @@
             </script>
         </div>
     </div>*@
-        <!-- footstart -->
-        @*<footer>
-                <div id="footer-icons">
-                    <a id="stumbleupon-icon" href="http://websanova.com/stumbleupon" target="_blank"></a>
-                    <a id="linkedin-icon" href="http://websanova.com/linkedin" target="_blank"></a>
-                    <a id="facebook-icon" href="http://websanova.com/facebook" target="_blank"></a>
-                    <a id="googleplus-icon" href="http://websanova.com/googleplus" target="_blank"></a>
-                    <a id="twitter-icon" href="http://websanova.com/twitter" target="_blank"></a>
-                    <a id="github-icon" href="http://websanova.com/github" target="_blank"></a>
-                    <a id="rss-icon" href="http://websanova.com/feed" target="_blank"></a>
-                </div>
-            </footer>*@
-        <!-- footend -->
-    </body>
+    <!-- footstart -->
+    @*<footer>
+        <div id="footer-icons">
+            <a id="stumbleupon-icon" href="http://websanova.com/stumbleupon" target="_blank"></a>
+            <a id="linkedin-icon" href="http://websanova.com/linkedin" target="_blank"></a>
+            <a id="facebook-icon" href="http://websanova.com/facebook" target="_blank"></a>
+            <a id="googleplus-icon" href="http://websanova.com/googleplus" target="_blank"></a>
+            <a id="twitter-icon" href="http://websanova.com/twitter" target="_blank"></a>
+            <a id="github-icon" href="http://websanova.com/github" target="_blank"></a>
+            <a id="rss-icon" href="http://websanova.com/feed" target="_blank"></a>
+        </div>
+    </footer>*@
+    <!-- footend -->
+</body>
 </html>
-

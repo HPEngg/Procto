@@ -17,6 +17,6 @@ namespace DoctorWeb.Models
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
-        public IEnumerable<Prescription> Prescriptions { get; set; }
+        public ICollection<Prescription> Prescriptions { get; set; }
     }
 }

@@ -17,7 +17,12 @@ namespace DoctorWeb.Models.CustomModels
 
         public int DoctorID { get; set; }
         public int PatientID { get; set; }
-        public int InstructionID { get; set; }
+        //public int InstructionID { get; set; }
+
+        public IEnumerable<SelectListItem> Instructions { get; set; }
+
+        public List<int> SelectedInstructionsIDs { get; set; }
+
         public int PatientTypeID { get; set; }
 
         public string M { get; set; }
@@ -39,7 +44,7 @@ namespace DoctorWeb.Models.CustomModels
 
         public string PatientImage { get; set; }
 
-        public string Investigation { get; set; }
+        public int InvestigationID { get; set; }
 
         public int[] OINTTypeID { get; set; }
         public string[] Medicine_OINTMore { get; set; }

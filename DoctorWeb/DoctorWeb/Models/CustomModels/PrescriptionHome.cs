@@ -42,7 +42,8 @@ namespace DoctorWeb.Models.CustomModels
 
         public List<int> SelectedPrescriptionImages { get; set; }
 
-        public string PatientImage { get; set; }
+        public string PatientImage1 { get; set; }
+        public string PatientImage2 { get; set; }
 
         public int InvestigationID { get; set; }
 

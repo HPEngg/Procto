@@ -67,10 +67,8 @@
             alert(dataURL);
             $.ajax({
                 type: "POST",
-                url: "/Home/ImageLightbox/?data=" + dataURL.toString() + "&imageID=" + activeTabID,
-                data: {
-                    imgBase64: dataURL
-                },
+                url: '@Url.Action("ImageLightbox", "Home")',
+                data: { data: dataURL.toString(), patientID: @ViewBag.PatientID, imageID: activeTabID/* add other additional parameters */ },
                 success: function (resp) {
                     // internal function for displaying status messages in the canvas
                     _this._displayStatus('Image saved successfully');
@@ -102,10 +100,8 @@
             alert(dataURL);
             $.ajax({
                 type: "POST",
-                url: "/Home/ImageLightbox/?data=" + dataURL.toString() + "&imageID=" + activeTabID,
-                data: {
-                    imgBase64: dataURL
-                },
+                url: '@Url.Action("ImageLightbox", "Home")',
+                data: { data: dataURL.toString(), patientID: @ViewBag.PatientID, imageID: activeTabID/* add other additional parameters */ },
                 success: function (resp) {
                     // internal function for displaying status messages in the canvas
                     _this._displayStatus('Image saved successfully');

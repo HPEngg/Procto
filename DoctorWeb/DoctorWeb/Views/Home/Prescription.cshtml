@@ -265,7 +265,7 @@
                                 @Html.EditorFor(model => model.Pending, new { htmlAttributes = new { name = "pm_rupees", placeholder = "Pending", style = "width:60px!important; padding: 0!important; height:25px;", disabled = "disabled", id = "pm_pending" } })
                                 @Html.ValidationMessageFor(model => model.Pending, "", new { @class = "text-danger" })
 
-                                @Html.HiddenFor(model => model.PatientImage)
+                                @Html.HiddenFor(model => model.PatientImage1)
                             </div>
                         </div>
                         <div id="patient_image">
@@ -958,11 +958,12 @@
         }
         //var dataURL = canvas.toDataURL();
         function saveimage() {
-            document.getElementById("PatientImage").value = dataURL;
-            document.getElementById("PatientImage").style.border = "2px solid";
+            //document.getElementById("PatientImage").style.border = "2px solid";
             var dataURL = canvas.toDataURL();
             //document.getElementById("PatientImage").src = dataURL;
             document.getElementById("PatientImage").value = dataURL;
+            document.getElementById("PatientImage").value = dataURL;
+
             //$.ajax({
             //    type: "POST",
             //    url: "/Home/DrawImage/?data="+dataURL.toString(),

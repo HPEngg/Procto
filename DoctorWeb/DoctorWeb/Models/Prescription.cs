@@ -50,7 +50,8 @@ namespace DoctorWeb.Models
 
         public ICollection<PreImage> PreImages { get; set; }
 
-        public byte[] PrescriptionImage { get; set; }
+        public byte[] PrescriptionImage1 { get; set; }
+        public byte[] PrescriptionImage2 { get; set; }
 
         public int InvestigationID { get; set; }
         public virtual Investigation Investigation { get; set; }

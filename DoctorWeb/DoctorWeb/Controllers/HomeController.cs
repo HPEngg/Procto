@@ -54,22 +54,30 @@ namespace DoctorWeb.Controllers
             //return View(model.ToList());
         }
 
-        public ActionResult ImageLightbox(string data, int id, int imageID)
+        public ActionResult ImageLightbox(int id)
         {
             ViewBag.PatientID = id;
             return PartialView();
-            //byte[] imgarr = Convert.FromBase64String(data.Remove(0, 22));
-            //Image image;
-            //using (MemoryStream ms = new MemoryStream(imgarr))
-            //{
-            //    image = Image.FromStream(ms);
-            //}
-            //image.Save("~/Content/Images/PatientImage.png");
-            //ViewBag.Logo = Server.MapPath("~") + @"Content\Images\PatientImage.png";
-            //return PartialView();
         }
 
-
+        [HttpPost]
+        public ActionResult ImageLightbox(string data, int patientID, int imageID)
+        {
+            Patient p = db.Patients.Find(patientID);
+            if(p != null)
+            {
+                byte[] imgarr = Convert.FromBase64String(data.Remove(0, 22));
+                Image image;
+                using (MemoryStream ms = new MemoryStream(imgarr))
+                {
+                    image = Image.FromStream(ms);
+                    string imageFileName = patientID + "PatientImage" + imageID + ".png";
+                    //image.Save("~/Content/Images/" + imageFileName);
+                    image.Save("C:/test/" + imageFileName);
+                }
+            }
+            return PartialView();
+        }
 
         public ActionResult DrawImage()
         {
@@ -97,7 +105,6 @@ namespace DoctorWeb.Controllers
         {
             ViewBag.PatientID = id;
             return PartialView();
-            //return View(model.ToList());
         }
 
         private byte[] String_To_Bytes2(string strInput)
@@ -110,6 +117,8 @@ namespace DoctorWeb.Controllers
             }
             return bytes;
         }
+
+        // Captures patient.photo from webcam
         public ActionResult CaptureImage(int id)
         {
             var stream = Request.InputStream;
@@ -122,30 +131,12 @@ namespace DoctorWeb.Controllers
                 {
                     dump = reader.ReadToEnd();
                     patient.Photo = String_To_Bytes2(dump);
-
-                    ////DateTime nm = DateTime.Now;
-
-                    ////string date = nm.ToString("yyyymmddMMss");
-
-                    //var path = Server.MapPath("~/Content/PatientImages/test.png");
-
-                    //System.IO.File.WriteAllBytes(path, String_To_Bytes2(dump));
-
-                    ////ViewData["path"] = date + "test.jpg";
-
-                    ////Session["val"] = date + "test.jpg";
                 }
                 db.Entry(patient).State = EntityState.Modified;
                 db.SaveChanges();
-                //return RedirectToAction("Prescription", new { id = id });
                 return View();
             }
 
-
-            
-            //string url = Session["val"].ToString();
-            //Session["val"] = null;
-            //return PartialView("Webcam");
             return View();
         }
 
@@ -170,7 +161,6 @@ namespace DoctorWeb.Controllers
         public JsonResult AutoComplete(string MedicineName)
         {
             var model = db.Medicines.Where(m => m.OINTMore.Contains(MedicineName)).Select(m => new { m.OINTMore, m.IsDayAffected }).ToList();
-            //var model = db.Medicines.Where(m => m.OINTMore.Contains(MedicineName)).Select(m => m.OINTMore).ToList();
             return Json(model);
         }
 
@@ -265,10 +255,25 @@ namespace DoctorWeb.Controllers
                 Received = model.Received,
                 Rs = model.Rs,
                 M = model.M,
-                PrescriptionImage = Convert.FromBase64String(model.PatientImage.Remove(0, 22)),
+                //PrescriptionImage1 = System.IO.File.ReadAllBytes(Server.MapPath("~") + @"Content\Images\" + model.PatientID + "PatientImage1.png"),
+                //PrescriptionImage2 = Convert.FromBase64String(model.PatientImage2.Remove(0, 22)),
                 //Investigation = model.Investigation
                 InvestigationID = model.InvestigationID
             };
+
+            string imageFile1 = "C:/test/" + model.PatientID + "PatientImage1.png"; //Server.MapPath("~") + @"Content\Images\" + model.PatientID + "PatientImage1.png";
+            string imageFile2 = "C:/test/" + model.PatientID + "PatientImage2.png"; //Server.MapPath("~") + @"Content\Images\" + model.PatientID + "PatientImage2.png";
+            if (System.IO.File.Exists(imageFile1))
+            {
+                prescription.PrescriptionImage1 = System.IO.File.ReadAllBytes(imageFile1);
+                System.IO.File.Delete(imageFile1);
+            }
+            if (System.IO.File.Exists(imageFile2))
+            {
+                prescription.PrescriptionImage2 = System.IO.File.ReadAllBytes(imageFile2);
+                System.IO.File.Delete(imageFile2);
+            }
+
             if (ModelState.IsValid)
             {
                 if (model.SelectedPrescriptionImages != null)
@@ -424,7 +429,7 @@ namespace DoctorWeb.Controllers
 
                 if(prescription != null)
                 {
-                    model.PrescriptionImage = prescription.PrescriptionImage;
+                    model.PrescriptionImage = prescription.PrescriptionImage1;
                     model.Diagnosis = prescription.Diagnosis;
                     model.FollowDate = prescription.FollowDate == null ? string.Empty : prescription.FollowDate.Value.ToShortDateString();
                     //model.Instruction = prescription.Instruction.Description;

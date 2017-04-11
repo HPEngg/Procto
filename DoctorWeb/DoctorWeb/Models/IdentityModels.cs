@@ -71,6 +71,8 @@ namespace DoctorWeb.Models
 
         public DbSet<Investigation> Investigations { get; set; }
 
+        public DbSet<SMS> ShortMessages { get; set; }
+
         public System.Data.Entity.DbSet<DoctorWeb.Models.PatientHistory> PatientHistories { get; set; }
     }
 }

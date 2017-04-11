@@ -218,6 +218,7 @@
     <Compile Include="Controllers\PrescriptionController.cs" />
     <Compile Include="Controllers\PrescriptionMedicineController.cs" />
     <Compile Include="Controllers\ReferredByController.cs" />
+    <Compile Include="Controllers\SMSController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -245,6 +246,7 @@
     <Compile Include="Models\Enums\OINTType.cs" />
     <Compile Include="Models\Enums\PatientStatus.cs" />
     <Compile Include="Models\Enums\ReferredBy.cs" />
+    <Compile Include="Models\Enums\SMSToPatients.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Instruction.cs" />
     <Compile Include="Models\Investigation.cs" />
@@ -262,8 +264,10 @@
     <Compile Include="Models\PrescriptionCategory.cs" />
     <Compile Include="Models\PrescriptionMedicine.cs" />
     <Compile Include="Models\ReferredBy.cs" />
+    <Compile Include="Models\SMS.cs" />
     <Compile Include="Models\Tools\Extentions.cs" />
     <Compile Include="Models\Tools\OfflineInterceptor.cs" />
+    <Compile Include="Models\Tools\SMSHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -512,7 +516,9 @@
     <Content Include="Content\Images\mainbg2.png" />
     <Content Include="Content\Images\menu.png" />
     <Content Include="Content\Images\password.png" />
+    <Content Include="Content\Images\patient_drawing_image_bg.jpg" />
     <Content Include="Content\Images\patient_drawing_image_bg.png" />
+    <Content Include="Content\Images\patient_drawing_image_bg11.png" />
     <Content Include="Content\Images\patient_drawing_image_bg2.png" />
     <Content Include="Content\Images\preview\audio.png" />
     <Content Include="Content\Images\preview\comlogo.png" />
@@ -860,6 +866,11 @@
     <Content Include="Views\Certificate\Unfit.cshtml" />
     <Content Include="Views\Shared\_Certificate.cshtml" />
     <Content Include="Views\Home\ImageLightbox.cshtml" />
+    <Content Include="Views\SMS\Create.cshtml" />
+    <Content Include="Views\SMS\Delete.cshtml" />
+    <Content Include="Views\SMS\Details.cshtml" />
+    <Content Include="Views\SMS\Edit.cshtml" />
+    <Content Include="Views\SMS\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

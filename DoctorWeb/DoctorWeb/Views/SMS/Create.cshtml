@@ -1,0 +1,204 @@
+﻿@model DoctorWeb.Models.SMS
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style type="text/css">
+    span {
+        font-family: Calibri, Verdana;
+        font-size: 16px;
+        line-height: 200%;
+    }
+
+    #Holiday_One, #Holiday_Two {
+        line-height: 300%;
+        text-align: left;
+    }
+
+        #Holiday_One div, #Holiday_Two div {
+            border: 1px solid #ccc;
+            margin-left: 15px;
+            max-width: 570px;
+            -moz-border-radius: 2px;
+            -webkit-border-radius: 2px;
+            border-radius: 2px;
+            margin-bottom: 0;
+            font-size: 12px;
+            color: #666;
+            background: #fff;
+            line-height: 30px;
+            padding: 10px;
+        }
+
+        #Holiday_One input[type="text"], #Holiday_Two input[type="text"] {
+            font-family: Calibri, Verdana;
+            font-size: 16px;
+            height: 20px;
+            border: none;
+            border-bottom: 1px solid black;
+            line-height: 100%;
+            height: 100%;
+            width: 100%;
+            text-align: center;
+            box-shadow: none;
+        }
+</style>
+<h2>Send SMS</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        <div class="form-group">
+            @Html.LabelFor(model => model.Patients, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.Patients, htmlAttributes: new { @class = "form-control", id = "Select_Number" })
+                @Html.ValidationMessageFor(model => model.Patients, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Select Message</label>
+            <div class="col-md-10">
+                <select id="Select_Message" style="width:100%;">
+                    <option value="Personal">Personla Message</option>
+                    <option value="Holiday1">Holiday Message 1</option>
+                    <option value="Holiday2">Holiday Message 2</option>
+                </select>
+            </div>
+        </div>
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        
+        <div class="form-group" id="Personal">
+            @Html.LabelFor(model => model.Message, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Message, new { htmlAttributes = new { @class = "form-control", @style = "height:auto; max-width:600px !important;" } })
+                @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" id="Holiday_One" style="display:none;">
+            @Html.LabelFor(model => model.Message, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <span>Doctor is not available at </span><input type="text" style="max-width: 200px;" />
+                <span> From </span>
+                <input type="text" style="max-width: 40px;" placeholder="DD" /> <span> / </span>
+                <input type="text" style="max-width: 40px;" placeholder="MM" /> <span> / </span>
+                <input type="text" style="max-width: 60px;" placeholder="YYYY" /><span> to </span>
+                <input type="text" style="max-width: 40px;" placeholder="DD" /><span> / </span>
+                <input type="text" style="max-width: 40px;" placeholder="MM" /> <span> / </span>
+                <input type="text" style="max-width: 60px;" placeholder="YYYY" /><span>. So please call us for further query.</span>
+            </div>
+        </div>
+
+        <div class="form-group" id="Holiday_Two" style="display:none;">
+            @Html.LabelFor(model => model.Message, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <span>Dear all </span><input type="text" style="max-width: 200px;" />
+                <span> will be closed from </span>
+                <input type="text" style="max-width: 40px;" placeholder="DD" /> <span> / </span>
+                <input type="text" style="max-width: 40px;" placeholder="MM" /> <span> / </span>
+                <input type="text" style="max-width: 60px;" placeholder="YYYY" /><span> to </span>
+                <input type="text" style="max-width: 40px;" placeholder="DD" /><span> / </span>
+                <input type="text" style="max-width: 40px;" placeholder="MM" /> <span> / </span>
+                <input type="text" style="max-width: 60px;" placeholder="YYYY" /><span>. So please call us for further query.</span>
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="form-group" id="Mob_Number" style="display:none;">
+            @Html.LabelFor(model => model.MobileNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MobileNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MobileNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group" id="From_Date" style="display:none;">
+            @Html.LabelFor(model => model.FromDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control", type = "datetime-local" } })
+                @Html.ValidationMessageFor(model => model.FromDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" id="To_Date" style="display:none;">
+            @Html.LabelFor(model => model.ToData, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ToData, new { htmlAttributes = new { @class = "form-control", type = "datetime-local" } })
+                @Html.ValidationMessageFor(model => model.ToData, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("SMS History", "Index")
+</div>
+
+<script type="text/javascript">
+    jQuery( "#Select_Message" ).change(function() {
+        var s = document.getElementById('Select_Message');
+        var item1 = s.options[s.selectedIndex].value;
+        if (item1 == "Personal") {
+            document.getElementById("Personal").style.display = 'block';
+            document.getElementById("Holiday_One").style.display = 'none';
+            document.getElementById("Holiday_Two").style.display = 'none';
+        }
+        else if (item1 == "Holiday1") {
+            document.getElementById("Personal").style.display = 'none';
+            document.getElementById("Holiday_One").style.display = 'block';
+            document.getElementById("Holiday_Two").style.display = 'none';
+        }
+        else if (item1 == "Holiday2") {
+            document.getElementById("Personal").style.display = 'none';
+            document.getElementById("Holiday_One").style.display = 'none';
+            document.getElementById("Holiday_Two").style.display = 'block';
+        }
+    });
+
+    jQuery("#Select_Number").change(function () {
+        var s = document.getElementById('Select_Number');
+        var item1 = s.options[s.selectedIndex].value;
+        if (item1 == "3") {
+            document.getElementById("From_Date").style.display = 'block';
+            document.getElementById("To_Date").style.display = 'block';
+            document.getElementById("Mob_Number").style.display = 'none';
+        }
+        else if (item1 == "4") {
+            document.getElementById("From_Date").style.display = 'none';
+            document.getElementById("To_Date").style.display = 'none';
+            document.getElementById("Mob_Number").style.display = 'block';
+        }
+        else {
+            document.getElementById("From_Date").style.display = 'none';
+            document.getElementById("To_Date").style.display = 'none';
+            document.getElementById("Mob_Number").style.display = 'none';
+        }
+    });
+</script>

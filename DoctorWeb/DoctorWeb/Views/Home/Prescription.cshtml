@@ -21,7 +21,7 @@
 
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Prescription", "Home", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -36,7 +36,7 @@
                                 <label for="file-input">
                                     <img src="~/Content/Images/imageupload.png" />
                                 </label>
-                                <input id="file-input" type="file" />
+                                <input id="file-input" name="preImage" type="file" />
                             </div>
 
                         <a href="#" class="webcam_img" onclick="    patientimage();"><img src="/Content/Images/webcam.png" /></a>

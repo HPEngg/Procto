@@ -17,13 +17,13 @@ namespace DoctorWeb.Models
         [DataType(DataType.MultilineText)]     
         public string Message { get; set; }
         public string Status { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
 
         [Display(Name = "From Date")]
-        public DateTime FromDate { get; set; }
+        public DateTime? FromDate { get; set; }
 
         [Display(Name = "To Date")]
-        public DateTime ToData { get; set; }
+        public DateTime? ToData { get; set; }
 
         [Display(Name = "Select Numbers")]
         public SMSToPatients Patients { get; set; }

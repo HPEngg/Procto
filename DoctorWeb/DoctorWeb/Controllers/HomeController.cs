@@ -236,7 +236,7 @@ namespace DoctorWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Prescription(PrescriptionHome model)
+        public ActionResult Prescription(PrescriptionHome model, HttpPostedFileBase preImage)
         {
             var prescription = new Prescription()
             {
@@ -272,6 +272,14 @@ namespace DoctorWeb.Controllers
             {
                 prescription.PrescriptionImage2 = System.IO.File.ReadAllBytes(imageFile2);
                 System.IO.File.Delete(imageFile2);
+            }
+
+            if (preImage != null && preImage.ContentLength > 0)
+            {
+                using (var reader = new System.IO.BinaryReader(preImage.InputStream))
+                {
+                    prescription.UploadedImage = reader.ReadBytes(preImage.ContentLength);
+                }
             }
 
             if (ModelState.IsValid)

@@ -1006,8 +1006,13 @@ td {
         width: 30%;
     }
 
+#SelectedInstructionsIDs{
+    height: 140px !important;
+    color:#000 !important;
+}
+
 #SelectedPrescriptionImages {
-    height: 280px !important;
+    height: 140px !important;
     color:#000 !important;
 }
 

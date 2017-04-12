@@ -199,7 +199,7 @@
             width: 100%;
         }
         #wPaint .wPaint-canvas {
-            background: url("/Content/Images/patient_drawing_image_bg.jpg") no-repeat;
+            /*background: url("/Content/Images/patient_drawing_image_bg.jpg") no-repeat;*/
             background-color: #fff;
             background-position: center;
         }
@@ -220,6 +220,12 @@
         <div id="tabs-1">
             <div id="content">
                 <div class="content-box">
+                    <img id="canvas_first_background" width="500" height="200" src="~/Content/Images/patient_drawing_image_bg.jpg" alt="Canvas background" style="display:none;">
+                    @*<div style="background:url('/Content/Images/patient_drawing_image_bg.png') no-repeat;"></div>*@
+                    @*<div style="background:url('/Content/Images/patient_drawing_image_bg.jpg') no-repeat;">
+                        <canvas id="canvasss" width="235" height="235" style=" position:relative;border:2px solid;"></canvas>
+                    </div>*@
+
                     <div id="wPaint" style="position:relative; width:500px; height:200px; background-color:#7a7a7a; margin:70px auto 20px auto;"></div>
                     @*<center style="margin-bottom: 50px;">
                         <input type="button" value="toggle menu" onclick="console.log($('#wPaint').wPaint('menuOrientation')); $('#wPaint').wPaint('menuOrientation', $('#wPaint').wPaint('menuOrientation') === 'vertical' ? 'horizontal' : 'vertical');" />
@@ -231,6 +237,7 @@
         <div id="tabs-2">
             <div id="content">
                 <div class="content-box">
+                    <img id="canvas_second_background" width="500" height="200" src="~/Content/Images/patient_drawing_image_bg2.jpg" alt="Canvas background" style="display:none;">
                     <div id="wPaint2" style="position:relative; width:500px; height:200px; background-color:#7a7a7a; margin:70px auto 20px auto;"></div>
                     @*<center style="margin-bottom: 50px;">
                         <input type="button" value="toggle menu" onclick="console.log($('#wPaint2').wPaint('menuOrientation')); $('#wPaint2').wPaint('menuOrientation', $('#wPaint2').wPaint('menuOrientation') === 'vertical' ? 'horizontal' : 'vertical');" />
@@ -240,6 +247,19 @@
             </div>
         </div>
     </div>
+    
+    <script type="text/javascript">
+            var c=document.getElementsByClassName("wPaint-canvas")[0];
+            var ctx=c.getContext("2d");
+            var img=document.getElementById("canvas_first_background");
+            ctx.drawImage(img,0,0);
+
+            var second=document.getElementsByClassName("wPaint-canvas")[1];
+            var ctx1=second.getContext("2d");
+            var img1=document.getElementById("canvas_second_background");
+            ctx1.drawImage(img1,0,0);
+
+    </script>
 
     <!-- headstart -->
     @*<header>

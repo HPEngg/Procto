@@ -519,6 +519,7 @@
     <Content Include="Content\Images\patient_drawing_image_bg.jpg" />
     <Content Include="Content\Images\patient_drawing_image_bg.png" />
     <Content Include="Content\Images\patient_drawing_image_bg11.png" />
+    <Content Include="Content\Images\patient_drawing_image_bg2.jpg" />
     <Content Include="Content\Images\patient_drawing_image_bg2.png" />
     <Content Include="Content\Images\preview\audio.png" />
     <Content Include="Content\Images\preview\comlogo.png" />

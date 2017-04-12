@@ -31,7 +31,7 @@
                 <div id="testDiv1">
                     <fieldset style="height: 100%">
                         <h2 class="fs-title" style="text-align:center;">
-                        <a href="#" class="imgdrawing" id="ImageDrawing" onclick="imagelightbox();"><img src="~/Content/Images/imagedrawing.png" style="width:40px; height:40px; padding-right:5px;" /></a>
+                            <a href="#" class="imgdrawing" id="ImageDrawing" onclick="imagelightbox();"><img src="~/Content/Images/imagedrawing.png" style="width:40px; height:40px; padding-right:5px;" /></a>
                             <div class="image-upload">
                                 <label for="file-input">
                                     <img src="~/Content/Images/imageupload.png" />
@@ -39,8 +39,9 @@
                                 <input id="file-input" type="file" />
                             </div>
 
-                        <a href="#" class="webcam_img" onclick="    patientimage();"><img src="/Content/Images/webcam.png" /></a>
-                        <a href="@Url.Action("Print", "Home", new { id = ViewBag.PatientID })" target="blank" class="profile_pic_img"><img src="/Content/Images/print_icon.png" /></a>Prescription Form</h2>
+                            <a href="#" class="webcam_img" onclick="    patientimage();"><img src="/Content/Images/webcam.png" /></a>
+                            <a href="@Url.Action("Print", "Home", new { id = ViewBag.PatientID })" target="blank" class="profile_pic_img"><img src="/Content/Images/print_icon.png" /></a>Prescription Form
+                        </h2>
                         @*<h2 class="fs-title" style="text-align:center;"><a href="#" class="webcam_img" onclick="patientimage();"><img src="/Content/Images/webcam.png" /></a><a href="#" class="profile_pic_img"><img src="/Content/Images/profilepic.png" /></a><a href="#" onclick="printform();" class="profile_pic_img"><img src="/Content/Images/print_icon.png" /></a>Prescription Form</h2>*@
                         <div style="width:100%; clear:both;">
                             <label title="Rx" class="rx_label rx_label_right">Rx</label>
@@ -187,9 +188,16 @@
 
                             @*<div class="form-group">*@
                             @*@Html.LabelFor(model => model.PatientTypeID, "PatientTypeID", htmlAttributes: new { @class = "control-label col-md-2" })*@
-                            <div class="pat_type">
-                                @Html.DropDownList("PatientTypeID", null, htmlAttributes: new { @name = "patient_type", @class = "pre", @style = "width: 120px!important; padding: 0!important;color:#000;" })
+                            <div class="pat_type" style="clear:both; display:block; width:49%; float:left;">
+                                @Html.DropDownList("PatientTypeID", null, htmlAttributes: new { @name = "patient_type", @class = "pre", @style = "width: 100%!important; padding: 0!important;color:#000;" })
                                 @Html.ValidationMessageFor(model => model.PatientTypeID, "", new { @class = "text-danger" })
+                            </div>
+
+                            @*INVESTIGATION COMBOBOX CODE BELOW*@
+
+                            <div style="display:block; width:49%; float:right;">
+                                @Html.DropDownList("InvestigationID", null, htmlAttributes: new { @name = "InvestigationID", @class = "pre", @style = "width: 100%!important; padding: 0!important;color:#000;" })
+                                @Html.ValidationMessageFor(model => model.InvestigationID, "", new { @class = "text-danger" })
                             </div>
                             @*</div>*@
 
@@ -202,15 +210,20 @@
                             *@
 
                             @*@Html.DropDownList("InstructionID", null, htmlAttributes: new { @name = "instructions", @class = "pre", @style = "width: 120px!important; padding: 0!important; margin-left: 10px;color:#000;" })
-                            @Html.ValidationMessageFor(model => model.InstructionID, "", new { @class = "text-danger" })*@
-
-                            @Html.ListBoxFor(model => model.SelectedInstructionsIDs, Model.Instructions, new { htmlAttributes = new { @size = 5, @class = "form-control", @Multiple = "multiple", @style = "height:50px !important; width:100% !important;" } })
-                            @Html.ValidationMessageFor(model => model.Instructions, "", new { @class = "text-danger" })
-
+                                @Html.ValidationMessageFor(model => model.InstructionID, "", new { @class = "text-danger" })*@
+                            <div id="Insturction" style="clear:both; display:block; width:49%; float:left;">
+                                <label class="control-label col-md-2" , style="float:left; font-size: 90%; font-weight:700; padding:5px 5px 5px 0;">Instructions:</label>
+                                @Html.ListBoxFor(model => model.SelectedInstructionsIDs, Model.Instructions, new { htmlAttributes = new { @size = 5, @class = "form-control", @Multiple = "multiple", @style = "height:140px !important; width:100% !important;" } })
+                                @Html.ValidationMessageFor(model => model.Instructions, "", new { @class = "text-danger" })
+                            </div>
+                            <div id="select_image" style="float: right; width:49%;">
+                                <label class="control-label col-md-2" , style="float:left; font-size: 90%; font-weight:700; padding:5px 5px 5px 0;">Images:</label>
+                                @Html.ListBoxFor(model => model.SelectedPrescriptionImages, Model.PrescriptionImages, new { htmlAttributes = new { @size = 5, @class = "form-control", @Multiple = "multiple", @style = "height:50px !important; width:100% !important;" } })
+                            </div>
                             @*
                                     </div>
                                 </div>*@
-
+                            
                             @*<div class="form-group">
                                     @Html.LabelFor(model => model.FollowDate, htmlAttributes: new { @class = "control-label col-md-2" })
                                     <div class="col-md-10">
@@ -223,18 +236,20 @@
                         </div>
                         <div style="display:block; width:auto; float:left;">
                             @*@Html.LabelFor(model => model.FollowDate, htmlAttributes: new { @class = "control-label col-md-2", style="float:left; padding-left:0"})*@
-                            <label class="control-label col-md-2" , style="float:left; font-size: 90%; padding:5px 5px 0 0;">Follow Date</label>
+                            <label class="control-label col-md-2" , style="float:left; font-size: 90%; font-weight:700; padding:5px 5px 0 0;">Follow Date</label>
                             @Html.EditorFor(model => model.FollowDate, new { htmlAttributes = new { @class = "form-control", name = "follow_datefollow_date", value = "", placeholder = "DD/MM/YYYY", style = "text-align:left;", type = "date" } })
                             @Html.ValidationMessageFor(model => model.FollowDate, "", new { @class = "text-danger" })
                         </div>
 
-                        <div style="clear:both; display:block; width:100%; float:left;">
+                        @*<div style="clear:both; display:block; width:100%; float:left;">*@
                             @*@Html.LabelFor(model => model.FollowDate, htmlAttributes: new { @class = "control-label col-md-2", style="float:left; padding-left:0"})*@
                             @*@Html.EditorFor(model => model.Investigation, new { htmlAttributes = new { @placeholder = "Investigation" } })
-                            @Html.ValidationMessageFor(model => model.Investigation, "", new { @class = "text-danger" })*@
-                            @Html.DropDownList("InvestigationID", null, htmlAttributes: new { @name = "InvestigationID", @class = "pre", @style = "width: 120px!important; padding: 0!important;color:#000;" })
-                            @Html.ValidationMessageFor(model => model.InvestigationID, "", new { @class = "text-danger" })
-                        </div>
+                                @Html.ValidationMessageFor(model => model.Investigation, "", new { @class = "text-danger" })*@
+                            @*@Html.DropDownList("InvestigationID", null, htmlAttributes: new { @name = "InvestigationID", @class = "pre", @style = "width: 120px!important; padding: 0!important;color:#000;" })
+        @Html.ValidationMessageFor(model => model.InvestigationID, "", new { @class = "text-danger" })
+    </div>*@
+                        
+
 
 
                         <div style=" width:96%; position:relative; clear:both; bottom:0;" class="pmtype_div">
@@ -268,32 +283,29 @@
                                 @Html.HiddenFor(model => model.PatientImage1)
                             </div>
                         </div>
-                        <div id="patient_image">
-                            <div id="draw_image" style="float: left; width:35%;">
-                                <img id="canvac_background" width="235" height="235" src="~/Content/Images/patient_drawing_image_bg.png" alt="Canvas background" style="display:none;">
-                                @*<div style="background:url('/Content/Images/patient_drawing_image_bg.png') no-repeat;"></div>*@
-                                <div style="background:url('/Content/Images/patient_drawing_image_bg.png') no-repeat;">
-                                    <canvas id="canvasss" width="235" height="235" style=" position:relative;border:2px solid;"></canvas>
+                        @*<div id="patient_image">
+                                <div id="draw_image" style="float: left; width:35%;">
+                                    <img id="canvac_background" width="235" height="235" src="~/Content/Images/patient_drawing_image_bg.jpg" alt="Canvas background" style="display:none;">
+                                    <div style="background:url('/Content/Images/patient_drawing_image_bg.jpg') no-repeat;">
+                                        <canvas id="canvasss" width="235" height="235" style=" position:relative;border:2px solid;"></canvas>
+                                    </div>
+                                    <div id="imagecolor">
+                                        <div style="position:relative;top:12%;text-align:left;margin-bottom:5px;">Choose Drawing Color</div>
+                                        <div class="margin-right" style="position:relative;background:green;" id="green" onclick="color(this)"></div>
+                                        <div class="margin-right" style="position:relative;background:blue;" id="blue" onclick="color(this)"></div>
+                                        <div class="margin-right" style="position:relative;float:left;background:red;" id="red" onclick="color(this)"></div>
+                                        <div class="margin-right" style="position:relative;float:left;background:yellow;" id="yellow" onclick="color(this)"></div>
+                                        <div class="margin-right" style="position:relative;float:left;background:orange;" id="orange" onclick="color(this)"></div>
+                                        <div class="margin-right" style="position:relative;float:left;background:black;" id="black" onclick="color(this)"></div>
+                                    </div>
+                                    <div id="eraser">
+                                        <input type="button" value="Clear" id="clr" size="23" onclick="erase()" style="position:relative;top:20%;left:0%;">
+                                    </div>
                                 </div>
-                                <div id="imagecolor">
-                                    <div style="position:relative;top:12%;text-align:left;margin-bottom:5px;">Choose Drawing Color</div>
-                                    <div class="margin-right" style="position:relative;background:green;" id="green" onclick="color(this)"></div>
-                                    <div class="margin-right" style="position:relative;background:blue;" id="blue" onclick="color(this)"></div>
-                                    <div class="margin-right" style="position:relative;float:left;background:red;" id="red" onclick="color(this)"></div>
-                                    <div class="margin-right" style="position:relative;float:left;background:yellow;" id="yellow" onclick="color(this)"></div>
-                                    <div class="margin-right" style="position:relative;float:left;background:orange;" id="orange" onclick="color(this)"></div>
-                                    <div class="margin-right" style="position:relative;float:left;background:black;" id="black" onclick="color(this)"></div>
+                                <div id="select_image" style="float: right; width:60%;">
+                                    @Html.ListBoxFor(model => model.SelectedPrescriptionImages, Model.PrescriptionImages, new { htmlAttributes = new { @size = 5, @class = "form-control", @Multiple = "multiple", @style = "height:50px !important; width:100% !important;" } })
                                 </div>
-                                <div id="eraser">
-                                    @*<div style="position:relative;top:20%; margin-bottom:5px;">Eraser</div>
-                                        <div id="white" onclick="color(this)"></div>*@
-                                    <input type="button" value="Clear" id="clr" size="23" onclick="erase()" style="position:relative;top:20%;left:0%;">
-                                </div>
-                            </div>
-                            <div id="select_image" style="float: right; width:60%;">
-                                @Html.ListBoxFor(model => model.SelectedPrescriptionImages, Model.PrescriptionImages, new { htmlAttributes = new { @size = 5, @class = "form-control", @Multiple = "multiple", @style = "height:50px !important; width:100% !important;" } })
-                            </div>
-                        </div>
+                            </div>*@
                         <div id="prescription_submit" style="width:100%; clear:both;">
                             <input type="submit" value="Create" class="next action-button" onclick="saveimage()" />
                         </div>
@@ -476,12 +488,10 @@
             function calc_qty(current_rec) {
                 var mor, noon, night;
                 //for (count = 1; count <= jQuery("#input_fields_wrap_js > div").length; count++)
-                    for (count = 1; count <= i; count++)
-                {
+                for (count = 1; count <= i; count++) {
                     //alert("days_flag" + count + "Value = " + jQuery("#days_flag" + parseInt(count)).val());
                     var qtyflag = (jQuery("#days_flag" + parseInt(count)).val());
-                    if(qtyflag=="true")
-                    {
+                    if (qtyflag == "true") {
                         var days = document.getElementById("patient_days_presc").value;
                         if ($('option:selected', $("#MorningDozID" + parseInt(count))).text() == "1/2") {
                             mor = parseFloat(0.5);
@@ -505,8 +515,7 @@
                         var qty = (parseFloat(mor) + parseFloat(noon) + parseFloat(night)) * parseFloat(days);
                         jQuery("#qut_" + parseInt(count)).val(qty);
                     }
-                    else
-                    {
+                    else {
                         jQuery("#qut_" + parseInt(count)).val(0);
                     }
                 }
@@ -589,9 +598,9 @@
                         var current_rec = $(this).attr('id').substring(17);
                         jQuery("#days_flag" + parseInt(i - 1)).val(j.item.term);
                         //if (j.item.term == true) {
-                            //flag = true;
-                            calc_qty(current_rec);
-                            //var isdayaffected = false;
+                        //flag = true;
+                        calc_qty(current_rec);
+                        //var isdayaffected = false;
                         //}
                         //else {
                         //    //flag = false;
@@ -790,7 +799,7 @@
             jQuery("#ImageLightbox").dialog({
                 autoOpen: true,
                 position: { my: "top", at: "top", of: window },
-//                width: 1200,
+                //                width: 1200,
                 //resizable: false,
                 title: 'Image Lightbox',
                 modal: true,
@@ -808,8 +817,8 @@
             });
             return false;
         }
-
-        @*function printform() {
+    </script>
+    @*function printform() {
             jQuery("#PrintForm").dialog({
                 autoOpen: true,
                 position: { my: "top", at: "top", of: window },
@@ -831,154 +840,154 @@
         }*@
 
 
-    </script>
 
 
-    <script type="text/javascript">
 
-        document.addEventListener('DOMContentLoaded', function () {
-            init();
-        });
-        var canvas, ctx, flag = false,
-        prevX = 0,
-        currX = 0,
-        prevY = 0,
-        currY = 0,
-        dot_flag = false;
+    @*<script type="text/javascript">
 
-        var x = "red",
-            y = 5;
+            document.addEventListener('DOMContentLoaded', function () {
+                init();
+            });
+            var canvas, ctx, flag = false,
+            prevX = 0,
+            currX = 0,
+            prevY = 0,
+            currY = 0,
+            dot_flag = false;
 
-        function init() {
-            canvas = document.getElementById('canvasss');
-            ctx = canvas.getContext("2d");
-            w = canvas.width;
-            h = canvas.height;
+            var x = "red",
+                y = 5;
 
-            var img = document.getElementById("canvac_background");
-            //ctx.drawImage(img, 0, 0);
+            function init() {
+                canvas = document.getElementById('canvasss');
+                ctx = canvas.getContext("2d");
+                w = canvas.width;
+                h = canvas.height;
 
-            canvas.addEventListener("mousemove", function (e) {
-                findxy('move', e)
-            }, false);
-            canvas.addEventListener("mousedown", function (e) {
-                findxy('down', e)
-            }, false);
-            canvas.addEventListener("mouseup", function (e) {
-                findxy('up', e)
-            }, false);
-            canvas.addEventListener("mouseout", function (e) {
-                findxy('out', e)
-            }, false);
-        }
+                var img = document.getElementById("canvac_background");
+                //ctx.drawImage(img, 0, 0);
 
-        function color(obj) {
-            switch (obj.id) {
-                case "green":
-                    x = "green";
-                    break;
-                case "blue":
-                    x = "blue";
-                    break;
-                case "red":
-                    x = "red";
-                    break;
-                case "yellow":
-                    x = "yellow";
-                    break;
-                case "orange":
-                    x = "orange";
-                    break;
-                case "black":
-                    x = "black";
-                    break;
-                case "white":
-                    x = "white";
-                    break;
+                canvas.addEventListener("mousemove", function (e) {
+                    findxy('move', e)
+                }, false);
+                canvas.addEventListener("mousedown", function (e) {
+                    findxy('down', e)
+                }, false);
+                canvas.addEventListener("mouseup", function (e) {
+                    findxy('up', e)
+                }, false);
+                canvas.addEventListener("mouseout", function (e) {
+                    findxy('out', e)
+                }, false);
             }
-            if (x == "white") y = 14;
-            else y = 5;
 
-        }
+            function color(obj) {
+                switch (obj.id) {
+                    case "green":
+                        x = "green";
+                        break;
+                    case "blue":
+                        x = "blue";
+                        break;
+                    case "red":
+                        x = "red";
+                        break;
+                    case "yellow":
+                        x = "yellow";
+                        break;
+                    case "orange":
+                        x = "orange";
+                        break;
+                    case "black":
+                        x = "black";
+                        break;
+                    case "white":
+                        x = "white";
+                        break;
+                }
+                if (x == "white") y = 14;
+                else y = 5;
 
-        function draw() {
-            ctx.beginPath();
-            ctx.moveTo(prevX, prevY);
-            ctx.lineTo(currX, currY);
-            ctx.strokeStyle = x;
-            ctx.lineWidth = y;
-            ctx.stroke();
-            ctx.closePath();
-        }
-
-        function erase() {
-            var m = confirm("Want to clear");
-            if (m) {
-                ctx.clearRect(0, 0, w, h);
-                document.getElementById("canvasimg").style.display = "none";
             }
-        }
 
-        function save() {
-            document.getElementById("canvasimg").style.border = "2px solid";
-            var dataURL = canvas.toDataURL();
-            document.getElementById("canvasimg").src = dataURL;
-            //document.getElementById("canvasimg").style.display = "inline";
-        }
+            function draw() {
+                ctx.beginPath();
+                ctx.moveTo(prevX, prevY);
+                ctx.lineTo(currX, currY);
+                ctx.strokeStyle = x;
+                ctx.lineWidth = y;
+                ctx.stroke();
+                ctx.closePath();
+            }
 
-        function findxy(res, e) {
-            if (res == 'down') {
-                prevX = currX;
-                prevY = currY;
-                currX = e.clientX - canvas.offsetLeft;
-                currY = e.clientY - canvas.offsetTop;
-
-                flag = true;
-                dot_flag = true;
-                if (dot_flag) {
-                    ctx.beginPath();
-                    ctx.fillStyle = x;
-                    ctx.fillRect(currX, currY, 2, 2);
-                    ctx.closePath();
-                    dot_flag = false;
+            function erase() {
+                var m = confirm("Want to clear");
+                if (m) {
+                    ctx.clearRect(0, 0, w, h);
+                    document.getElementById("canvasimg").style.display = "none";
                 }
             }
-            if (res == 'up' || res == "out") {
-                flag = false;
+
+            function save() {
+                document.getElementById("canvasimg").style.border = "2px solid";
+                var dataURL = canvas.toDataURL();
+                document.getElementById("canvasimg").src = dataURL;
+                //document.getElementById("canvasimg").style.display = "inline";
             }
-            if (res == 'move') {
-                if (flag) {
+
+            function findxy(res, e) {
+                if (res == 'down') {
                     prevX = currX;
                     prevY = currY;
                     currX = e.clientX - canvas.offsetLeft;
                     currY = e.clientY - canvas.offsetTop;
-                    draw();
+
+                    flag = true;
+                    dot_flag = true;
+                    if (dot_flag) {
+                        ctx.beginPath();
+                        ctx.fillStyle = x;
+                        ctx.fillRect(currX, currY, 2, 2);
+                        ctx.closePath();
+                        dot_flag = false;
+                    }
+                }
+                if (res == 'up' || res == "out") {
+                    flag = false;
+                }
+                if (res == 'move') {
+                    if (flag) {
+                        prevX = currX;
+                        prevY = currY;
+                        currX = e.clientX - canvas.offsetLeft;
+                        currY = e.clientY - canvas.offsetTop;
+                        draw();
+                    }
                 }
             }
-        }
-        //var dataURL = canvas.toDataURL();
-        function saveimage() {
-            //document.getElementById("PatientImage").style.border = "2px solid";
-            var dataURL = canvas.toDataURL();
-            //document.getElementById("PatientImage").src = dataURL;
-            document.getElementById("PatientImage").value = dataURL;
-            document.getElementById("PatientImage").value = dataURL;
+            //var dataURL = canvas.toDataURL();
+            function saveimage() {
+                //document.getElementById("PatientImage").style.border = "2px solid";
+                var dataURL = canvas.toDataURL();
+                //document.getElementById("PatientImage").src = dataURL;
+                document.getElementById("PatientImage").value = dataURL;
+                document.getElementById("PatientImage").value = dataURL;
 
-            //$.ajax({
-            //    type: "POST",
-            //    url: "/Home/DrawImage/?data="+dataURL.toString(),
-            //    data: {
-            //        imgBase64: dataURL
-            //    }
-            //}).done(function (o) {
-            //    alert("Saved");
-            //    // If you want the file to be visible in the browser
-            //    // - please modify the callback in javascript. All you
-            //    // need is to return the url to the file, you just saved
-            //    // and than put the image in your browser.
-            //});
-        }
-    </script>
+                //$.ajax({
+                //    type: "POST",
+                //    url: "/Home/DrawImage/?data="+dataURL.toString(),
+                //    data: {
+                //        imgBase64: dataURL
+                //    }
+                //}).done(function (o) {
+                //    alert("Saved");
+                //    // If you want the file to be visible in the browser
+                //    // - please modify the callback in javascript. All you
+                //    // need is to return the url to the file, you just saved
+                //    // and than put the image in your browser.
+                //});
+            }
+        </script>*@
 
 
     @section Scripts {

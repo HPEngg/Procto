@@ -5,454 +5,62 @@
 }
 <link href="~/Content/css/style.css" rel="stylesheet" />
 <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
-<div class="dl-horizontal">
-    <div id="print_details">
-        <div style="padding:10px 0px;">
-            <dt>
-                @Html.DisplayNameFor(model => model.PatientID)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.PatientID)
-            </dd>
-        </div>
-        <div style="padding:10px 0px;">
-            <dt>
-                @Html.DisplayNameFor(model => model.PatientName)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.PatientName), @Html.DisplayFor(model => model.Age), @Html.DisplayFor(model => model.Gender)
-            </dd>
-        </div>
-        <div style="padding:10px 0px;">
-            <dt>
-                @Html.DisplayNameFor(model => model.Address)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Address)
-            </dd>
-        </div>
-        <div style="padding:10px 0px;">
-            @*<dt>
-                    @Html.DisplayNameFor(model => model.Age)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.Age)
-                </dd>*@
-            @*<dt>
-                    @Html.DisplayNameFor(model => model.Gender)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.Gender)
-                </dd>*@
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Occuption)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Occuption)
-            </dd>
-        </div>
-        <div style="padding:10px 0px;">
-            <dt>
-                @Html.DisplayNameFor(model => model.Habbits)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Habbits)
-            </dd>
-        </div>
-        <div style="padding:10px 0px;">
-            <dt>
-                @Html.DisplayNameFor(model => model.RefBy)
-            </dt>
-            @*<dd>
-                    @Html.DisplayFor(model => model.RefBy)
-                </dd>
-                <dt>
-                    @Html.DisplayNameFor(model => model.RefDoctorName)
-                </dt>*@
-            <dd>
-                @Html.DisplayFor(model => model.RefDoctorName)
-            </dd>
-        </div>
-        <div style="padding:10px 0px;">
-            <dt>
-                @Html.DisplayNameFor(model => model.KCO)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.KCO)
-            </dd>
-        </div>
-        <div style="padding:10px 0px;">
-            <dt>
-                @Html.DisplayNameFor(model => model.CO)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.CO)
-            </dd>
-        </div>
-        <div id="C_P" class="clear_display" style="padding:10px 0px;">
-            <div id="Constipation" style="float:left; padding-right20px;">
-                <dt>
-                    @Html.DisplayNameFor(model => model.Constipation)
-                </dt>
-                <dd class="ddfltleft">
-                    @Html.DisplayFor(model => model.Constipation)
-                </dd>
-                @*<dt>
-                        @Html.DisplayNameFor(model => model.ConstipationMore)
-                    </dt>*@
-                <dd class="ddfltleft">
-                    @Html.DisplayFor(model => model.ConstipationMore)
-                </dd>
-            </div>
-            <div id="Pain" style="float:left;">
-                <dt>
-                    @Html.DisplayNameFor(model => model.Pain)
-                </dt>
-                <dd class="ddfltleft">
-                    @Html.DisplayFor(model => model.Pain)
-                </dd>
-                @*<dt>
-                        @Html.DisplayNameFor(model => model.PainMore)
-                    </dt>*@
-                <dd class="ddfltleft">
-                    @Html.DisplayFor(model => model.PainMore)
-                </dd>
-            </div>
-        </div>
-
-        <div id="B_B" class="clear_display" style="padding:10px 0px;">
-            <div id="Burning" style="float:left; padding-right20px;">
-                <dt>
-                    @Html.DisplayNameFor(model => model.Burning)
-                </dt>
-                <dd class="ddfltleft">
-                    @Html.DisplayFor(model => model.Burning)
-                </dd>
-                @*<dt>
-                        @Html.DisplayNameFor(model => model.BurningMore)
-                    </dt>*@
-                <dd class="ddfltleft">
-                    @Html.DisplayFor(model => model.BurningMore)
-                </dd>
-            </div>
-            <div id="Bleeding" style="float:left;">
-                <dt>
-                    @Html.DisplayNameFor(model => model.Bleeding)
-                </dt>
-                <dd class="ddfltleft">
-                    @Html.DisplayFor(model => model.Bleeding)
-                </dd>
-                @*<dt>
-                        @Html.DisplayNameFor(model => model.BleedingMore)
-                    </dt>*@
-                <dd class="ddfltleft">
-                    @Html.DisplayFor(model => model.BleedingMore)
-                </dd>
-            </div>
-        </div>
-        <div id="I_P" class="clear_display" style="padding:10px 0px;">
-            <div id="Itching" style="float:left; padding-right20px;">
-                <dt>
-                    @Html.DisplayNameFor(model => model.Itching)
-                </dt>
-                <dd class="ddfltleft">
-                    @Html.DisplayFor(model => model.Itching)
-                </dd>
-                @*<dt>
-                        @Html.DisplayNameFor(model => model.ItchingMore)
-                    </dt>*@
-                <dd class="ddfltleft">
-                    @Html.DisplayFor(model => model.ItchingMore)
-                </dd>
-            </div>
-            <div id="PusDrainage" style="float:left;">
-                <dt>
-                    @Html.DisplayNameFor(model => model.PusDrainage)
-                </dt>
-                <dd class="ddfltleft">
-                    @Html.DisplayFor(model => model.PusDrainage)
-                </dd>
-                @*<dt>
-                        @Html.DisplayNameFor(model => model.PusDrainageMore)
-                    </dt>*@
-                <dd class="ddfltleft">
-                    @Html.DisplayFor(model => model.PusDrainageMore)
-                </dd>
-            </div>
-        </div>
-        <div id="S_S" class="clear_display" style="padding:10px 0px;">
-            <div id="Swelling" style="float:left; padding-right20px;">
-                <dt>
-                    @Html.DisplayNameFor(model => model.Swelling)
-                </dt>
-                <dd class="ddfltleft">
-                    @Html.DisplayFor(model => model.Swelling)
-                </dd>
-                @*<dt>
-                        @Html.DisplayNameFor(model => model.SwellingMore)
-                    </dt>*@
-                <dd class="ddfltleft">
-                    @Html.DisplayFor(model => model.SwellingMore)
-                </dd>
-            </div>
-            <div id="SCO" style="float:left;">
-                <dt>
-                    @Html.DisplayNameFor(model => model.SCO)
-                </dt>
-                <dd class="ddfltleft">
-                    @Html.DisplayFor(model => model.SCO)
-                </dd>
-            </div>
-        </div>
-        <div style="padding:10px 0px;">
-            <dt>
-                @Html.DisplayNameFor(model => model.ComplainForm)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.ComplainForm)
-            </dd>
-        </div>
-        <div style="padding:10px 0px;">
-            <dt>
-                @Html.DisplayNameFor(model => model.ACO)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.ACO)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Allergy)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Allergy)
-            </dd>
-        </div>
-        <div style="padding:10px 0px;">
-            <dt>
-                @Html.DisplayNameFor(model => model.History)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.History)
-            </dd>
-        </div>
-        <div id="W_H_T" class="clear_display" style="padding:10px 0px;">
-            <div id="Weight" style="float:left; padding-right20px;">
-                <dt>
-                    @Html.DisplayNameFor(model => model.Weight)
-                </dt>
-                <dd class="ddfltleft">
-                    @Html.DisplayFor(model => model.Weight)
-                </dd>
-            </div>
-            <div id="Height" style="float:left;">
-                <dt>
-                    @Html.DisplayNameFor(model => model.Height)
-                </dt>
-                <dd class="ddfltleft">
-                    @Html.DisplayFor(model => model.Height)
-                </dd>
-            </div>
-            <div id="T" style="float:left;">
-                <dt>
-                    @Html.DisplayNameFor(model => model.T)
-                </dt>
-                <dd class="ddfltleft">
-                    @Html.DisplayFor(model => model.T)
-                </dd>
-            </div>
-        </div>
-        <div id="PR_BP_SPO" class="clear_display" style="padding:10px 0px;">
-            <div id="PR" style="float:left; padding-right20px;">
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.PR)
-                </dt>
-                <dd class="ddfltleft">
-                    @Html.DisplayFor(model => model.PR)
-                </dd>
-            </div>
-            <div id="BP" style="float:left;">
-                <dt>
-                    @Html.DisplayNameFor(model => model.BP)
-                </dt>
-                <dd class="ddfltleft">
-                    @Html.DisplayFor(model => model.BP)
-                </dd>
-            </div>
-            <div id="SPO" style="float:left;">
-                <dt>
-                    @Html.DisplayNameFor(model => model.SPO2)
-                </dt>
-                <dd class="ddfltleft">
-                    @Html.DisplayFor(model => model.SPO2)
-                </dd>
-            </div>
-        </div>
-        <div style="padding:10px 0px;">
-            <dt>
-                @Html.DisplayNameFor(model => model.PRR)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.PRR)
-            </dd>
-        </div>
-        <div style="padding:10px 0px;">
-            <dt>
-                @Html.DisplayNameFor(model => model.Proctoscopy)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Proctoscopy)
-            </dd>
-        </div>
-        @*<dt>
-                @Html.DisplayNameFor(model => model.LightOnOff)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.LightOnOff)
-            </dd>*@
-        <div style="padding:10px 0px;">
-            <dt>
-                @Html.DisplayNameFor(model => model.Other)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Other)
-            </dd>
-        </div>
-        <div style="padding:10px 0px;">
-            <dt>
-                @Html.DisplayNameFor(model => model.Diagnosis)
-            </dt>
-            <dd class="ddfltleft">
-                @Html.DisplayFor(model => model.Diagnosis)
-            </dd>
-        </div>
-        <div style="padding:10px 0px;">
-            <dt>
-                RX
-            </dt>
-            <table class="table table-bordered" style="width:auto;">
-                <tr>
-                    <th>
-                        Medicine Type
-                    </th>
-                    <th>
-                        Medicine Name
-                    </th>
-                    <th>
-                        Morning Doz
-                    </th>
-                    <th>
-                        Noon Doz
-                    </th>
-                    <th>
-                        Night Doz
-                    </th>
-                    <th>
-                        Dosage
-                    </th>
-                    <th>
-                        Quantity
-                    </th>
-                </tr>
-                @foreach (var item in Model.Medicines)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.OINT.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.OINTMore)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Morning.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Noon.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Night.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Dosage.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Quantity)
-                        </td>
-                    </tr>
-                }
-            </table>
-        </div>
-        <div style="padding:10px 0px;">
-            <dt>
-                @Html.DisplayNameFor(model => model.FollowDate)
-            </dt>
-            <dd class="ddfltleft">
-                @Html.DisplayFor(model => model.FollowDate)
-            </dd>
-        </div>
-        <div id="Inst" class="clear_display" style="padding:10px 0px;">
-            <dt>
-                @*@Html.DisplayNameFor(model => model.Instruction)*@
-                Instructions
-            </dt>
-            <table class="table table-bordered" style="width:auto;">
-                <tr>
-                    <th>
-                        Instructions
-                    </th>
-                </tr>
-                @foreach (var item in Model.Instructions)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Description)
-                        </td>
-                    </tr>
-                }
-            </table>
-            @*<dd>
-                @Html.DisplayFor(model => model.Instruction)
-            </dd>*@
-        </div>
-        <div style="padding:10px 0px;">
-            <dt>
-                <span>Bill Amount </span> @Html.DisplayNameFor(model => model.Rs)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Rs)
-            </dd>
-        </div>
-        @*<dt>
-                @Html.DisplayNameFor(model => model.Less)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Less)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Total)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Total)
-            </dd>*@
-    </div>
-    <div id="print_image">
-        <div id="OPDDate" class="clear_display" style="padding:10px 0px;">
-            <dt>
-                @Html.DisplayNameFor(model => model.DateToday)
-            </dt>
-            <dd class="ddfltleft">
-                @Html.DisplayFor(model => model.DateToday)
-            </dd>
-        </div>
-        <div class="clear_display" style="background: transparent url(&quot;/Content/Images/patient_drawing_image_bg.png&quot;) no-repeat scroll 0% 0%; border: 1px solid rgb(0, 0, 0);">
-            @if (Model.PrescriptionImage != null)
-            {
-                @Html.Raw("<img src=\"data:image/jpeg;base64," + Convert.ToBase64String(Model.PrescriptionImage) + "\" width=240 height=240/>");
-            }
-        </div>
-    </div>
-
+<div>
+    <h4>Patient</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Patient.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Patient.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Patient.Age)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Patient.Age)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Patient.Gender)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Patient.Gender)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Patient.Address)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Patient.Address)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Patient.Contact)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Patient.Contact)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Patient.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Patient.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Patient.Habbit)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Patient.Habbit)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Patient.Diet)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Patient.Diet)
+        </dd>
+    </dl>
 </div>
+
 <div style="clear:both; display:block;">
     <button onclick="window.print();">Print this page</button>
 </div>

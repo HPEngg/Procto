@@ -387,66 +387,57 @@ namespace DoctorWeb.Controllers
                 var prescription = db.Prescriptions.Where(p => p.PatientID == id).OrderByDescending(q => q.ID).FirstOrDefault();
 
                 var model = new PrintModel();   
-                model.PatientID = patient.ID;
-                model.PatientName = patient.Name;
-                model.Age = patient.Age;
-                model.Gender = patient.Gender.ToString();
-                model.Address = patient.Address;
-                model.Occuption = patient.Occupation;
-                model.Habbits = patient.Habit.ToString();
-                model.RefBy = patient.ReferredBy.ToString();
-                model.DateToday = DateTime.Today.Date.ToShortDateString();
-                if(patient.Doctor != null)
-                {
-                    model.RefDoctorName = patient.Doctor.Name;
-                }
+                model.Patient.ID = patient.ID;
+                model.Patient.Name = patient.Name;
+                model.Patient.Age = patient.Age;
+                model.Patient.Gender = patient.Gender.ToString();
+                model.Patient.Address = patient.Address;
+                model.Patient.Habbit = patient.Habit.ToString();
+                model.Patient.TodayDate = DateTime.Today.Date.ToShortDateString();
+                model.Patient.Photo = patient.Photo;
 
                 if (patientHistory != null)
                 {
-                    model.KCO = patientHistory.KCO;
-                    model.CO = patientHistory.CO;
-                    model.ComplainForm = patientHistory.ComplainForm;
-                    model.Constipation = patientHistory.Constipation;
-                    model.ConstipationMore = patientHistory.ConstipationMore;
-                    model.Pain = patientHistory.Pain;
-                    model.PainMore = patientHistory.PainMore;
-                    model.Burning = patientHistory.Burning;
-                    model.BurningMore = patientHistory.BurningMore;
-                    model.Bleeding = patientHistory.Bleeding;
-                    model.BleedingMore = patientHistory.BleedingMore;
-                    model.Itching = patientHistory.Itching;
-                    model.ItchingMore = patientHistory.ItchingMore;
-                    model.PusDrainage = patientHistory.PusDrainage;
-                    model.PusDrainageMore = patientHistory.PusDrainageMore;
-                    model.Swelling = patientHistory.Swelling;
-                    model.SwellingMore = patientHistory.SwellingMore;
-                    model.SCO = patientHistory.SCO;
-                    model.ACO = patientHistory.ACO;
-                    model.Allergy = patientHistory.Allergy;
-                    model.History = patientHistory.History;
-                    model.Weight = patientHistory.Weight;
-                    model.Height = patientHistory.Height;
-                    model.T = patientHistory.T;
-                    model.PR = patientHistory.PR;
-                    model.BP = patientHistory.BP;
-                    model.SPO2 = patientHistory.SPO2;
-                    model.PRR = patientHistory.PRR;
-                    model.Proctoscopy = patientHistory.Proctoscopy;
-                    model.Other = patientHistory.Other;
+                    model.Patient.KCO = patientHistory.KCO;
+                    model.Patient.ComplainOf = patientHistory.ComplainForm;
+                    model.Patient.Constipation = patientHistory.Constipation;
+                    model.Patient.ConstipationMore = patientHistory.ConstipationMore;
+                    model.Patient.Pain = patientHistory.Pain;
+                    model.Patient.PainMore = patientHistory.PainMore;
+                    model.Patient.Burning = patientHistory.Burning;
+                    model.Patient.BurningMore = patientHistory.BurningMore;
+                    model.Patient.Bleeding = patientHistory.Bleeding;
+                    model.Patient.BleedingMore = patientHistory.BleedingMore.ToString();
+                    model.Patient.Swelling = patientHistory.Swelling;
+                    model.Patient.SwellingMore = patientHistory.SwellingMore;
+                    model.Patient.SCO = patientHistory.SCO;
+                    model.Patient.ACO = patientHistory.ACO;
+                    model.Patient.Allergy = patientHistory.Allergy;
+                    model.Patient.History = patientHistory.History;
+                    model.Patient.Weight = patientHistory.Weight.ToString();
+                    model.Patient.Height = patientHistory.Height.ToString();
+                    model.Patient.Temprature = patientHistory.T.ToString();
+                    model.Patient.PR = patientHistory.PR;
+                    model.Patient.BP = patientHistory.BP;
+                    model.Patient.SPO2 = patientHistory.SPO2;
+                    model.Patient.Proctoscopy = patientHistory.Proctoscopy;
+                    model.Patient.Others = patientHistory.Other;
                 }
 
                 if(prescription != null)
                 {
-                    model.PrescriptionImage = prescription.PrescriptionImage1;
-                    model.Diagnosis = prescription.Diagnosis;
-                    model.FollowDate = prescription.FollowDate == null ? string.Empty : prescription.FollowDate.Value.ToShortDateString();
-                    //model.Instruction = prescription.Instruction.Description;
-                    model.Instructions = db.Instructions.Where(p => p.Prescriptions.Any(q => q.ID == prescription.ID)).ToList();
-                    model.Rs = prescription.Rs.ToString();
-                    model.Less = prescription.Less;
-                    model.Total = Convert.ToString( prescription.Rs - Convert.ToDecimal(prescription.Less));
-                    model.Medicines = db.PrescriptionMedicines.Where(p => p.PrescriptionID == prescription.ID).ToList();
+                    model.Patient.Diagnosis = prescription.Diagnosis;
+                    model.Patient.Procedure = prescription.Procedure;
                 }
+
+                model.Compulsory.FollowDate = prescription.FollowDate == null ? string.Empty : prescription.FollowDate.Value.ToShortDateString();
+                model.Compulsory.Instructions = db.Instructions.Where(p => p.Prescriptions.Any(q => q.ID == prescription.ID)).ToList();
+                model.Compulsory.Day = "Test";
+
+                model.Invoice.Consult = prescription.Rs.ToString();
+                model.Invoice.Less = prescription.Less;
+                model.Invoice.Total = Convert.ToString(prescription.Rs - Convert.ToDecimal(prescription.Less));
+                model.RX.Medicines = db.PrescriptionMedicines.Where(p => p.PrescriptionID == prescription.ID).ToList();
 
                 return View(model);
             }

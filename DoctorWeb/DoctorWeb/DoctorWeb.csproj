@@ -231,6 +231,7 @@
     <Compile Include="Models\CustomModels\PatientSearch.cs" />
     <Compile Include="Models\CustomModels\PrescriptionHome.cs" />
     <Compile Include="Models\CustomModels\PrintModel.cs" />
+    <Compile Include="Models\CustomModels\PrintModules.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Doctor.cs" />
     <Compile Include="Models\Dosage.cs" />

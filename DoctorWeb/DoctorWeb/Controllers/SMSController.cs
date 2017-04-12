@@ -49,13 +49,13 @@ namespace DoctorWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,MobileNumber,Message,Status,Date,FromDate,ToData,Patients")] SMS sMS)
         {
-            string targetMobileNumber = string.Empty;
+            string targetMobileNumbers = string.Empty;
             if(sMS.Patients == Models.Enums.SMSToPatients.All)
             {
                 var query = from pt in db.Patients
                             join pr in db.Prescriptions on pt.ID equals pr.PatientID
                             select pt.Contact;
-                targetMobileNumber = string.Join(",", query);
+                targetMobileNumbers = string.Join(",", query);
                 
             }
             else if(sMS.Patients == Models.Enums.SMSToPatients.VisitingToday)
@@ -64,7 +64,7 @@ namespace DoctorWeb.Controllers
                             join pr in db.Prescriptions on pt.ID equals pr.PatientID
                             where pr.FollowDate == DateTime.Today.Date
                             select pt.Contact;
-                targetMobileNumber = string.Join(",", query);
+                targetMobileNumbers = string.Join(",", query);
             }
             else if (sMS.Patients == Models.Enums.SMSToPatients.VisitingTomorow)
             {
@@ -72,7 +72,7 @@ namespace DoctorWeb.Controllers
                             join pr in db.Prescriptions on pt.ID equals pr.PatientID
                             where pr.FollowDate == DateTime.Today.Date.AddDays(1)
                             select pt.Contact;
-                targetMobileNumber = string.Join(",", query);
+                targetMobileNumbers = string.Join(",", query);
             }
             else if (sMS.Patients == Models.Enums.SMSToPatients.SelectVisitDates)
             {
@@ -80,29 +80,22 @@ namespace DoctorWeb.Controllers
                             join pr in db.Prescriptions on pt.ID equals pr.PatientID
                             where sMS.FromDate < pr.FollowDate && pr.FollowDate <= sMS.ToData
                             select pt.Contact;
-                targetMobileNumber = string.Join(",", query);
+                targetMobileNumbers = string.Join(",", query);
             }
             else if (sMS.Patients == Models.Enums.SMSToPatients.EnterManually)
             {
-                targetMobileNumber = sMS.MobileNumber;
+                targetMobileNumbers = sMS.MobileNumber;
             }
 
             if (ModelState.IsValid)
             {
-                var result = SMSHelper.sendMessage(sMS.MobileNumber, sMS.Message);
+                var result = SMSHelper.sendMessage(targetMobileNumbers, sMS.Message);
                 sMS.Status = result;
+                sMS.Date = DateTime.Now.Date;
                 db.ShortMessages.Add(sMS);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            //foreach (ModelState modelState in ViewData.ModelState.Values)
-            //{
-            //    foreach (ModelError error in modelState.Errors)
-            //    {
-            //        //DoSomethingWith(error);
-            //    }
-            //}
 
             return View(sMS);
         }

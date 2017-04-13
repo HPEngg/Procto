@@ -380,28 +380,38 @@ namespace DoctorWeb.Controllers
 
         public ActionResult Print(int id)
         {
+            var model = new PrintModel();
+
+            model.Header.HeaderPhoto = db.Pictures.Select(p => p.Header).FirstOrDefault();
             Patient patient = db.Patients.Find(id);
             if (patient != null)
             {
-                var patientHistory = db.PatientHistories.Where(p => p.PatientID == id).OrderByDescending(q => q.ID).FirstOrDefault();
-                var prescription = db.Prescriptions.Where(p => p.PatientID == id).OrderByDescending(q => q.ID).FirstOrDefault();
-
-                var model = new PrintModel();   
                 model.Patient.ID = patient.ID;
+                model.Patient.Photo = patient.Photo;
                 model.Patient.Name = patient.Name;
                 model.Patient.Age = patient.Age;
                 model.Patient.Gender = patient.Gender.ToString();
+                model.Patient.TodayDate = DateTime.Now.Date.ToShortDateString();
+                model.Patient.No = patient.ID.ToString();
+                model.Patient.Contact = patient.Contact;
+                model.Patient.Email = patient.Email;
                 model.Patient.Address = patient.Address;
                 model.Patient.Habbit = patient.Habit.ToString();
-                model.Patient.TodayDate = DateTime.Today.Date.ToShortDateString();
-                model.Patient.Photo = patient.Photo;
+                model.Patient.Diet = patient.FoodPreference.ToString();
 
+                var patientHistory = db.PatientHistories.Where(p => p.PatientID == id).OrderByDescending(q => q.ID).FirstOrDefault();
                 if (patientHistory != null)
                 {
+                    model.Patient.Weight = patientHistory.Weight.ToString();
                     model.Patient.KCO = patientHistory.KCO;
                     model.Patient.ComplainOf = patientHistory.ComplainForm;
+                    //model.Patient.Since = patientHistory.since;
                     model.Patient.Constipation = patientHistory.Constipation;
                     model.Patient.ConstipationMore = patientHistory.ConstipationMore;
+                    model.Patient.GAS = patientHistory.Gas;
+                    model.Patient.GASMore = patientHistory.GasMore;
+                    model.Patient.Acidity = patientHistory.Acidity;
+                    model.Patient.AcidityMore = patientHistory.AcidityMore;
                     model.Patient.Pain = patientHistory.Pain;
                     model.Patient.PainMore = patientHistory.PainMore;
                     model.Patient.Burning = patientHistory.Burning;
@@ -414,30 +424,43 @@ namespace DoctorWeb.Controllers
                     model.Patient.ACO = patientHistory.ACO;
                     model.Patient.Allergy = patientHistory.Allergy;
                     model.Patient.History = patientHistory.History;
-                    model.Patient.Weight = patientHistory.Weight.ToString();
                     model.Patient.Height = patientHistory.Height.ToString();
                     model.Patient.Temprature = patientHistory.T.ToString();
-                    model.Patient.PR = patientHistory.PR;
+                    //model.Patient.Pulse = patientHistory.
                     model.Patient.BP = patientHistory.BP;
                     model.Patient.SPO2 = patientHistory.SPO2;
+                    model.Patient.PR = patientHistory.PR;
                     model.Patient.Proctoscopy = patientHistory.Proctoscopy;
                     model.Patient.Others = patientHistory.Other;
                 }
 
-                if(prescription != null)
+                var prescription = db.Prescriptions.Where(p => p.PatientID == id).OrderByDescending(q => q.ID).FirstOrDefault();
+                if (prescription != null)
                 {
+
                     model.Patient.Diagnosis = prescription.Diagnosis;
+                    //model.Patient.Advice =
                     model.Patient.Procedure = prescription.Procedure;
+                    model.Patient.Investigation = prescription.Investigation.Name;
+
+                    model.RX.Medicines = db.PrescriptionMedicines.Where(p => p.PrescriptionID == prescription.ID).ToList();
+
+                    model.Compulsory.FollowDate = prescription.FollowDate == null ? string.Empty : prescription.FollowDate.Value.ToShortDateString();
+                    model.Compulsory.Day = "Test";
+                    model.Compulsory.Instructions = db.Instructions.Where(p => p.Prescriptions.Any(q => q.ID == prescription.ID)).ToList();
                 }
-
-                model.Compulsory.FollowDate = prescription.FollowDate == null ? string.Empty : prescription.FollowDate.Value.ToShortDateString();
-                model.Compulsory.Instructions = db.Instructions.Where(p => p.Prescriptions.Any(q => q.ID == prescription.ID)).ToList();
-                model.Compulsory.Day = "Test";
-
-                model.Invoice.Consult = prescription.Rs.ToString();
+                
+                //model.Invoice.Consult = prescription.
+                //model.Invoice.Proctoscopy = prescription.
+                //model.Invoice.Dressing = prescription
+                //model.Invoice.KSProcedure 
+                //model.Invoice.Medicine = 
+                //model.Invoice.Other = prescription
                 model.Invoice.Less = prescription.Less;
+                //model.Invoice.Net
                 model.Invoice.Total = Convert.ToString(prescription.Rs - Convert.ToDecimal(prescription.Less));
-                model.RX.Medicines = db.PrescriptionMedicines.Where(p => p.PrescriptionID == prescription.ID).ToList();
+                model.Invoice.CashRecived = prescription.Received.ToString();
+                model.Invoice.PendingAmount = prescription.Pending.ToString();
 
                 return View(model);
             }

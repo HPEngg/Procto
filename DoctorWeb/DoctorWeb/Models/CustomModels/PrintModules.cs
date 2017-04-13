@@ -8,12 +8,14 @@ namespace DoctorWeb.Models.CustomModels
 {
     public class Header
     {
-        public string HospitalName { get; set; }
-        public string SubName { get; set; }
-        public string Address { get; set; }
-        public string DoctorName { get; set; }
-        public string DoctorTitle { get; set; }
-        public string PhoneNumber { get; set; }
+        public byte[] HeaderPhoto { get; set; }
+        //public string HospitalName { get; set; }
+        //public string SubName { get; set; }
+        //public string TagLine { get; set; }
+        //public string Address { get; set; }
+        //public string DoctorName { get; set; }
+        //public string DoctorTitle { get; set; }
+        //public string PhoneNumber { get; set; }
     }
     public class PrintPatient
     {
@@ -28,7 +30,6 @@ namespace DoctorWeb.Models.CustomModels
         public string Contact { get; set; }
         public string Email { get; set; }
         public string Address { get; set; }
-
         public string KCO { get; set; }
         public string ComplainOf { get; set; }
         public string Since { get; set; }
@@ -62,6 +63,7 @@ namespace DoctorWeb.Models.CustomModels
         public string Proctoscopy { get; set; }
         public string Others { get; set; }
         public string Diagnosis { get; set; }
+        public string Advice { get; set; }
         public string Procedure { get; set; }
         public string Investigation { get; set; }
     }

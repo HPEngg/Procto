@@ -426,7 +426,7 @@ namespace DoctorWeb.Controllers
                     model.Patient.History = patientHistory.History;
                     model.Patient.Height = patientHistory.Height.ToString();
                     model.Patient.Temprature = patientHistory.T.ToString();
-                    //model.Patient.Pulse = patientHistory.
+                    model.Patient.Pulse = patientHistory.PRR;
                     model.Patient.BP = patientHistory.BP;
                     model.Patient.SPO2 = patientHistory.SPO2;
                     model.Patient.PR = patientHistory.PR;

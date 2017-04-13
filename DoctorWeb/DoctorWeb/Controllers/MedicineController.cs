@@ -126,7 +126,7 @@ namespace DoctorWeb.Controllers
                 medicineToUpdate.NightDozID = model.NightDozID;
                 medicineToUpdate.DosageID = model.DosageID;
 
-                if (TryUpdateModel(medicineToUpdate, "Medicine", new string[] { "ID", "OINTMore", "IsDayAffected", "Quantity" }))
+                if (TryUpdateModel(medicineToUpdate, "Medicine", new string[] { "ID", "OINTMore", "IsDayAffected", "Unit", "Quantity" }))
                 {
                     if(model.SelectedPrescriptionCategories != null)
                     {

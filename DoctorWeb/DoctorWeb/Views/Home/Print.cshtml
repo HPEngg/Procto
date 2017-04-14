@@ -6,60 +6,745 @@
 <link href="~/Content/css/style.css" rel="stylesheet" />
 <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
 
-<div>
-    <h4>Patient</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Patient.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Patient.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Patient.Age)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Patient.Age)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Patient.Gender)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Patient.Gender)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Patient.Address)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Patient.Address)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Patient.Contact)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Patient.Contact)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Patient.Email)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Patient.Email)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Patient.Habbit)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Patient.Habbit)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Patient.Diet)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Patient.Diet)
-        </dd>
-    </dl>
+<div class="print_margin fonts_candara">
+    <div id="HeaderPart">
+        <h4>Header</h4>
+        @*EDITABLE CODE HTML TO BE GENERATED HERE*@
+
+    </div>
+    <div id="PatientPart">
+        <h4>Patient</h4>
+        <hr />
+
+        <div class="fltleft" style="width:100%; max-width:100px; max-height:100px; padding-right:10px;">
+            @{
+                if (!string.IsNullOrEmpty(System.Text.Encoding.UTF8.GetString(Model.Patient.Photo)))
+                {
+                    var base64 = Convert.ToBase64String(Model.Patient.Photo);
+                    var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                    <img src="@imgSrc" />
+                }
+            }
+        </div>
+        <div class="fltleft" style="width:82%;">
+            @{
+                if (!string.IsNullOrEmpty(Model.Patient.Name))
+                {
+                    <div class="print_text_padding" style="width:40%;">
+                        <div class="print_text_fltleft">
+                            @Html.DisplayNameFor(model => model.Patient.Name)
+                        </div>
+                        <div>
+                            @Html.DisplayFor(model => model.Patient.Name)
+                        </div>
+                    </div>
+                }
+            }
+            @{
+                if (!string.IsNullOrEmpty(Model.Patient.Age.ToString()))
+                {
+                    <div class="print_text_padding">
+                        <div class="fltleft">
+                            @Html.DisplayFor(model => model.Patient.Age)
+                        </div>
+                        <span class="fltleft" style="padding: 0 2px;"> / </span>
+                        <div class="fltleft">
+                            @Html.DisplayFor(model => model.Patient.Gender)
+                        </div>
+                    </div>
+                }
+            }
+
+            @{
+                if (!string.IsNullOrEmpty(Model.Patient.Weight))
+                {
+                    <div class="print_text_padding">
+                        <div class="print_text_fltleft">
+                            @Html.DisplayNameFor(model => model.Patient.Weight)
+                        </div>
+                        <div>
+                            @Html.DisplayFor(model => model.Patient.Weight)
+                        </div>
+                    </div>
+                }
+            }
+
+            <div class="print_text_padding">
+                <div class="print_text_fltleft">Date:</div>
+                <div>@DateTime.Now.ToString("dd/MM/yyyy")</div>
+            </div>
+        </div>
+        <div class="fltleft" style="width:82%;">
+            @{
+                if (!string.IsNullOrEmpty(Model.Patient.ID.ToString()))
+                {
+                    <div class="print_text_padding" style="width:100%;">
+                        <div class="print_text_fltleft">
+                            @Html.DisplayNameFor(model => model.Patient.ID)
+                        </div>
+                        <div>
+                            @Html.DisplayFor(model => model.Patient.ID)
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+        <div class="fltleft" style="width:82%;">
+            @{
+                if (!string.IsNullOrEmpty(Model.Patient.Contact))
+                {
+                    <div class="print_text_padding" style="width:40%;">
+                        <div class="print_text_fltleft">
+                            @Html.DisplayNameFor(model => model.Patient.Contact)
+                        </div>
+                        <div>
+                            @Html.DisplayFor(model => model.Patient.Contact)
+                        </div>
+                    </div>
+                }
+            }
+            @{
+                if (!string.IsNullOrEmpty(Model.Patient.Email))
+                {
+                    <div class="print_text_padding" style="width:40%;">
+                        <div class="print_text_fltleft">
+                            @Html.DisplayNameFor(model => model.Patient.Email)
+                        </div>
+                        <div>
+                            @Html.DisplayFor(model => model.Patient.Email)
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+        <div class="fltleft" style="width:82%;">
+            @{
+                if (!string.IsNullOrEmpty(Model.Patient.Address))
+                {
+                    <div class="print_text_padding" style="width:100%;">
+                        <div class="print_text_fltleft">
+                            @Html.DisplayNameFor(model => model.Patient.Address)
+                        </div>
+                        <div>
+                            @Html.DisplayFor(model => model.Patient.Address)
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+        @{
+            if (!string.IsNullOrEmpty(Model.Patient.KCO))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Patient.KCO)
+                </div>
+                    <div>
+                        @Html.DisplayFor(model => model.Patient.KCO)
+                    </div>
+            }
+        }
+        @{
+            if (!string.IsNullOrEmpty(Model.Patient.ComplainOf))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Patient.ComplainOf)
+                </div>
+                        <div>
+                            @Html.DisplayFor(model => model.Patient.ComplainOf)
+                        </div>
+            }
+        }
+
+        @{
+            if (!string.IsNullOrEmpty(Model.Patient.Since))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Patient.Since)
+                </div>
+                            <div>
+                                @Html.DisplayFor(model => model.Patient.Since)
+                            </div>
+            }
+        }
+
+        @{
+            if (!string.IsNullOrEmpty(Model.Patient.Constipation.ToString()))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Patient.Constipation)
+                </div>
+                                <div>
+                                    @Html.DisplayFor(model => model.Patient.Constipation)
+                                </div>
+            }
+        }
+        @{
+            if (!string.IsNullOrEmpty(Model.Patient.ConstipationMore))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Patient.ConstipationMore)
+                </div>
+                                    <div>
+                                        @Html.DisplayFor(model => model.Patient.ConstipationMore)
+                                    </div>
+            }
+        }
+        @{
+            if (!string.IsNullOrEmpty(Model.Patient.GAS.ToString()))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Patient.GAS)
+                </div>
+                                        <div>
+                                            @Html.DisplayFor(model => model.Patient.GAS)
+                                        </div>
+            }
+        }
+        @{
+            if (!string.IsNullOrEmpty(Model.Patient.GASMore))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Patient.GASMore)
+                </div>
+                                            <div>
+                                                @Html.DisplayFor(model => model.Patient.GASMore)
+                                            </div>
+            }
+        }
+        @{
+            if (!string.IsNullOrEmpty(Model.Patient.Acidity.ToString()))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Patient.Acidity)
+                </div>
+                                                <div>
+                                                    @Html.DisplayFor(model => model.Patient.Acidity)
+                                                </div>
+            }
+        }
+        @{
+            if (!string.IsNullOrEmpty(Model.Patient.AcidityMore))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Patient.AcidityMore)
+                </div>
+                                                    <div>
+                                                        @Html.DisplayFor(model => model.Patient.AcidityMore)
+                                                    </div>
+            }
+        }
+        @{
+            if (!string.IsNullOrEmpty(Model.Patient.Pain.ToString()))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Patient.Pain)
+                </div>
+                                                        <div>
+                                                            @Html.DisplayFor(model => model.Patient.Pain)
+                                                        </div>
+            }
+        }
+        @{
+            if (!string.IsNullOrEmpty(Model.Patient.PainMore))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Patient.PainMore)
+                </div>
+                                                            <div>
+                                                                @Html.DisplayFor(model => model.Patient.PainMore)
+                                                            </div>
+            }
+        }
+        @{
+            if (!string.IsNullOrEmpty(Model.Patient.Burning.ToString()))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Patient.Burning)
+                </div>
+                                                                <div>
+                                                                    @Html.DisplayFor(model => model.Patient.Burning)
+                                                                </div>
+            }
+        }
+        @{
+            if (!string.IsNullOrEmpty(Model.Patient.BurningMore))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Patient.BurningMore)
+                </div>
+                                                                    <div>
+                                                                        @Html.DisplayFor(model => model.Patient.BurningMore)
+                                                                    </div>
+            }
+        }
+        @{
+            if (!string.IsNullOrEmpty(Model.Patient.Bleeding.ToString()))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Patient.Bleeding)
+                </div>
+                                                                        <div>
+                                                                            @Html.DisplayFor(model => model.Patient.Bleeding)
+                                                                        </div>
+            }
+        }
+        @{
+            if (!string.IsNullOrEmpty(Model.Patient.BleedingMore))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Patient.BleedingMore)
+                </div>
+                                                                            <div>
+                                                                                @Html.DisplayFor(model => model.Patient.BleedingMore)
+                                                                            </div>
+            }
+        }
+        @{
+            if (!string.IsNullOrEmpty(Model.Patient.Swelling.ToString()))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Patient.Swelling)
+                </div>
+                                                                                <div>
+                                                                                    @Html.DisplayFor(model => model.Patient.Swelling)
+                                                                                </div>
+            }
+        }
+        @{
+            if (!string.IsNullOrEmpty(Model.Patient.SwellingMore))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Patient.SwellingMore)
+                </div>
+                                                                                    <div>
+                                                                                        @Html.DisplayFor(model => model.Patient.SwellingMore)
+                                                                                    </div>
+            }
+        }@{
+            if (!string.IsNullOrEmpty(Model.Patient.SCO))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Patient.SCO)
+                </div>
+                                                                                    <div>
+                                                                                        @Html.DisplayFor(model => model.Patient.SCO)
+                                                                                    </div>
+            }
+        }
+        @{
+            if (!string.IsNullOrEmpty(Model.Patient.ACO))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Patient.ACO)
+                </div>
+                                                                                        <div>
+                                                                                            @Html.DisplayFor(model => model.Patient.ACO)
+                                                                                        </div>
+            }
+        }
+        @{
+            if (!string.IsNullOrEmpty(Model.Patient.Allergy))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Patient.Allergy)
+                </div>
+                                                                                            <div>
+                                                                                                @Html.DisplayFor(model => model.Patient.Allergy)
+                                                                                            </div>
+            }
+        }
+        @{
+            if (!string.IsNullOrEmpty(Model.Patient.History))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Patient.History)
+                </div>
+                                                                                                <div>
+                                                                                                    @Html.DisplayFor(model => model.Patient.History)
+                                                                                                </div>
+            }
+        }
+        @{
+            if (!string.IsNullOrEmpty(Model.Patient.Habbit))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Patient.Habbit)
+                </div>
+                                                                                                    <div>
+                                                                                                        @Html.DisplayFor(model => model.Patient.Habbit)
+                                                                                                    </div>
+            }
+        }
+        @{
+            if (!string.IsNullOrEmpty(Model.Patient.Diet))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Patient.Diet)
+                </div>
+                                                                                                        <div>
+                                                                                                            @Html.DisplayFor(model => model.Patient.Diet)
+                                                                                                        </div>
+            }
+        }
+        <label>EXAMINATION</label>
+        @*IMAGES WILL BE CODED HERE*@
+
+
+        @{
+            if (!string.IsNullOrEmpty(Model.Patient.Height))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Patient.Height)
+                </div>
+                                                                                                            <div>
+                                                                                                                @Html.DisplayFor(model => model.Patient.Height)
+                                                                                                            </div>
+            }
+        }
+
+        @{
+            if (!string.IsNullOrEmpty(Model.Patient.Temprature))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Patient.Temprature)
+                </div>
+                                                                                                                <div>
+                                                                                                                    @Html.DisplayFor(model => model.Patient.Temprature)
+                                                                                                                </div>
+            }
+        }
+
+        @{
+            if (!string.IsNullOrEmpty(Model.Patient.Pulse))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Patient.Pulse)
+                </div>
+                                                                                                                    <div>
+                                                                                                                        @Html.DisplayFor(model => model.Patient.Pulse)
+                                                                                                                    </div>
+            }
+        }
+        @{
+            if (!string.IsNullOrEmpty(Model.Patient.BP))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Patient.BP)
+                </div>
+                                                                                                                        <div>
+                                                                                                                            @Html.DisplayFor(model => model.Patient.BP)
+                                                                                                                        </div>
+            }
+        }
+
+        @{
+            if (!string.IsNullOrEmpty(Model.Patient.SPO2))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Patient.SPO2)
+                </div>
+                                                                                                                            <div>
+                                                                                                                                @Html.DisplayFor(model => model.Patient.SPO2)
+                                                                                                                            </div>
+            }
+        }
+        @{
+            if (!string.IsNullOrEmpty(Model.Patient.PR))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Patient.PR)
+                </div>
+                                                                                                                                <div>
+                                                                                                                                    @Html.DisplayFor(model => model.Patient.PR)
+                                                                                                                                </div>
+            }
+        }
+
+        @{
+            if (!string.IsNullOrEmpty(Model.Patient.Proctoscopy))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Patient.Proctoscopy)
+                </div>
+                                                                                                                                    <div>
+                                                                                                                                        @Html.DisplayFor(model => model.Patient.Proctoscopy)
+                                                                                                                                    </div>
+            }
+        }
+
+        @{
+            if (!string.IsNullOrEmpty(Model.Patient.Others))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Patient.Others)
+                </div>
+                                                                                                                                        <div>
+                                                                                                                                            @Html.DisplayFor(model => model.Patient.Others)
+                                                                                                                                        </div>
+            }
+        }
+        @{
+            if (!string.IsNullOrEmpty(Model.Patient.Diagnosis))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Patient.Diagnosis)
+                </div>
+                                                                                                                                            <div>
+                                                                                                                                                @Html.DisplayFor(model => model.Patient.Diagnosis)
+                                                                                                                                            </div>
+            }
+        }
+        @{
+            if (!string.IsNullOrEmpty(Model.Patient.Procedure))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Patient.Procedure)
+                </div>
+                                                                                                                                                <div>
+                                                                                                                                                    @Html.DisplayFor(model => model.Patient.Procedure)
+                                                                                                                                                </div>
+            }
+        }
+        @{
+            if (!string.IsNullOrEmpty(Model.Patient.Investigation))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Patient.Investigation)
+                </div>
+                                                                                                                                                    <div>
+                                                                                                                                                        @Html.DisplayFor(model => model.Patient.Investigation)
+                                                                                                                                                    </div>
+            }
+        }
+    </div>
+
 </div>
+<div id="RxPart">
+    <h4>Treatment</h4>
+    <label>
+        RX
+    </label>
+    <table class="table table-bordered" style="width:auto;">
+        <tr>
+            <th>
+                Medicine Type
+            </th>
+            <th>
+                Medicine Name
+            </th>
+            <th>
+                Morning Doz
+            </th>
+            <th>
+                Noon Doz
+            </th>
+            <th>
+                Night Doz
+            </th>
+            <th>
+                Dosage
+            </th>
+            <th>
+                Quantity
+            </th>
+        </tr>
+        @foreach (var item in Model.RX.Medicines)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OINT.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OINTMore)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Morning.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Noon.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Night.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dosage.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<div id="CompulsoryPart">
+    <h4>Compulsory</h4>
+    <div>
+        @{
+            if (!string.IsNullOrEmpty(Model.Compulsory.FollowDate))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Compulsory.FollowDate)
+                </div>
+                <div>
+                    @Html.DisplayFor(model => model.Compulsory.FollowDate)
+                </div>
+            }
+        }
+        @{
+            if (!string.IsNullOrEmpty(Model.Compulsory.Day))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Compulsory.Day)
+                </div>
+                <div>
+                    @Html.DisplayFor(model => model.Compulsory.Day)
+                </div>
+            }
+        }
+    </div>
+    <label>
+        Instructions
+    </label>
+    <table class="table table-bordered" style="width:auto;">
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Description
+            </th>
+        </tr>
+        @foreach (var item in Model.Compulsory.Instructions)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+<div id="InvoicePart">
+    <h4>Invoice</h4>
+    <div>
+        @{
+            if (!string.IsNullOrEmpty(Model.Invoice.Consult))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Invoice.Consult)
+                </div>
+                <div>
+                    @Html.DisplayFor(model => model.Invoice.Consult)
+                </div>
+            }
+        }
+        @{
+            if (!string.IsNullOrEmpty(Model.Invoice.Proctoscopy))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Invoice.Proctoscopy)
+                </div>
+                <div>
+                    @Html.DisplayFor(model => model.Invoice.Proctoscopy)
+                </div>
+            }
+        }
+        @{
+            if (!string.IsNullOrEmpty(Model.Invoice.Dressing))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Invoice.Dressing)
+                </div>
+                <div>
+                    @Html.DisplayFor(model => model.Invoice.Dressing)
+                </div>
+            }
+        }
+        @{
+            if (!string.IsNullOrEmpty(Model.Invoice.KSProcedure))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Invoice.KSProcedure)
+                </div>
+                <div>
+                    @Html.DisplayFor(model => model.Invoice.KSProcedure)
+                </div>
+            }
+        }
+        @{
+            if (!string.IsNullOrEmpty(Model.Invoice.Medicine))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Invoice.Medicine)
+                </div>
+                <div>
+                    @Html.DisplayFor(model => model.Invoice.Medicine)
+                </div>
+            }
+        }
+        @{
+            if (!string.IsNullOrEmpty(Model.Invoice.Other))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Invoice.Other)
+                </div>
+                <div>
+                    @Html.DisplayFor(model => model.Invoice.Other)
+                </div>
+            }
+        }@{
+            if (!string.IsNullOrEmpty(Model.Invoice.Less))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Invoice.Less)
+                </div>
+                <div>
+                    @Html.DisplayFor(model => model.Invoice.Less)
+                </div>
+            }
+        }
+        @{
+            if (!string.IsNullOrEmpty(Model.Invoice.Total))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Invoice.Total)
+                </div>
+                <div>
+                    @Html.DisplayFor(model => model.Invoice.Total)
+                </div>
+            }
+        }
+        @{
+            if (!string.IsNullOrEmpty(Model.Invoice.CashRecived))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Invoice.CashRecived)
+                </div>
+                <div>
+                    @Html.DisplayFor(model => model.Invoice.CashRecived)
+                </div>
+            }
+        }
+        @{
+            if (!string.IsNullOrEmpty(Model.Invoice.PendingAmount))
+            {
+                <div>
+                    @Html.DisplayNameFor(model => model.Invoice.PendingAmount)
+                </div>
+                <div>
+                    @Html.DisplayFor(model => model.Invoice.PendingAmount)
+                </div>
+            }
+        }
+    </div>
+</div>
+
+</div>
+
 
 <div style="clear:both; display:block;">
     <button onclick="window.print();">Print this page</button>

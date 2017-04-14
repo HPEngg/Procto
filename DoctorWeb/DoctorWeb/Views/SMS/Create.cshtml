@@ -151,7 +151,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default" onclick="checkvalidation();" />
             </div>
         </div>
     </div>
@@ -201,4 +201,15 @@
             document.getElementById("Mob_Number").style.display = 'none';
         }
     });
+
+    function checkvalidation()
+    {
+        var frmdt = document.getElementById("From_Date");
+        var tdt = document.getElementById("To_Date");
+        if (frmdt.value === "") {
+            alert("Please Enter From & To Date Value");
+            return false;
+        }
+        else { alert("Nothing"); }
+    }
 </script>

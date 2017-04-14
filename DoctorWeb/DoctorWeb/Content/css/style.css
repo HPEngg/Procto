@@ -2,6 +2,18 @@
 
 */
 @import url(http://fonts.googleapis.com/css?family=Montserrat);
+
+/* use this class to attach this font to any element i.e. <p class="fontsforweb_fontid_1398">Text with this font applied</p> */
+@font-face {
+    font-family: 'CANDARA';
+    src: url('../fonts/CANDARA.eot') format('embedded-opentype'), url('../fonts/CANDARA.ttf') format('truetype'), url('../fonts/CANDARA.woff') format('woff');
+}
+.fonts_candara {
+	font-family: 'CANDARA' !important;
+    font-size:12px;
+    text-transform:uppercase;
+}
+
 /*basic reset*/
 * {
     margin: 0;
@@ -1056,5 +1068,34 @@ td {
 .clear_display {
   clear: both;
   display: block;
+}
+
+.print_margin {
+    margin:0 auto;
+    max-width:720px;
+    width:100%;
+    line-height:2;
+}
+
+.print_text_padding {
+    float:left;
+    width:20%;
+}
+.fltleft {
+    float:left;
+}
+
+.print_text_fltleft {
+    float:left;
+    padding-right:10px;
+}
+
+.fltright {
+    float:right;
+}
+
+#PatientPart img {
+    height:100px;
+    width:100px;
 }
 

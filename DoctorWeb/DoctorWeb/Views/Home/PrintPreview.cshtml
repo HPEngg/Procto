@@ -6,12 +6,66 @@
 <link href="~/Content/css/style.css" rel="stylesheet" />
 <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
 
+@using (Html.BeginForm("Print", "Home", null, FormMethod.Post))
+{
+    <input type="hidden" name="PatientID" value="@ViewBag.PatientID" />
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.HeaderRequired, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.HeaderRequired)
+                @Html.ValidationMessageFor(model => model.HeaderRequired, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PatientRequired, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.PatientRequired)
+                @Html.ValidationMessageFor(model => model.PatientRequired, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.RXRequired, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.RXRequired)
+                @Html.ValidationMessageFor(model => model.RXRequired, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.InvoiceRequired, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.InvoiceRequired)
+                @Html.ValidationMessageFor(model => model.InvoiceRequired, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.FooterRequired, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.FooterRequired)
+                @Html.ValidationMessageFor(model => model.FooterRequired, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
 <div class="print_margin fonts_candara">
     <div id="HeaderPart">
         <h4>Header</h4>
         <div class="fltleft" style="width:100%; max-width:100px; max-height:100px; padding-right:10px;">
             @{
-                if (Model.HeaderRequired && Model.Header.HeaderPhoto != null)
+                if (Model.Header.HeaderPhoto != null)
                 {
                     var base64 = Convert.ToBase64String(Model.Header.HeaderPhoto);
                     var imgSrchdr = String.Format("data:image/gif;base64,{0}", base64);
@@ -49,14 +103,14 @@
             </div>
         </div>
     </div>
-    <hr style="clear:both; border-bottom:1px solid #000;"/>
+    <hr style="clear:both; border-bottom:1px solid #000;" />
     <div id="PatientPart">
         <h4>Patient</h4>
 
 
         <div class="fltleft" style="width:100%; max-width:100px; max-height:100px; padding-right:10px;">
             @{
-                if (Model.Patient.Photo!=null)
+                if (Model.Patient.Photo != null)
                 {
                     var base64 = Convert.ToBase64String(Model.Patient.Photo);
                     var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
@@ -796,3 +850,11 @@
         <button onclick="window.print();">Print</button>
     </div>
 </div>
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Save" class="btn btn-default" />
+    </div>
+</div>
+
+}

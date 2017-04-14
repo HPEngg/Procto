@@ -66,6 +66,9 @@ namespace DoctorWeb.Models.CustomModels
         public string Advice { get; set; }
         public string Procedure { get; set; }
         public string Investigation { get; set; }
+        public byte[] DrawenImage1 { get; set; }
+        public byte[] DrawenImage2 { get; set; }
+        public List<byte[]> PrescriptionImages { get; set; }
     }
 
     public class RX
@@ -94,5 +97,10 @@ namespace DoctorWeb.Models.CustomModels
         public string Total { get; set; }
         public string CashRecived { get; set; }
         public string PendingAmount { get; set; }
+    }
+
+    public class Footer
+    {
+        public byte[] FooterPhoto { get; set; }
     }
 }

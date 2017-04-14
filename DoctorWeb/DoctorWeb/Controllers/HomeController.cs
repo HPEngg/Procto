@@ -378,12 +378,50 @@ namespace DoctorWeb.Controllers
             return View(model);
         }
 
-        public ActionResult Print(int id)
+        public ActionResult PrintPreview(int id)
+        {
+            var model = GetPatientPriscription(id);
+            ViewBag.PatientID = id;
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Print(PrintModel model)
+        {
+            var printData = GetPatientPriscription(model.PatientID);
+            return View(printData);
+        }
+
+        public ActionResult FollowUp(int id)
+        {
+            var model = GetPatientPriscription(id);
+            ViewBag.PatientID = id;
+            ViewBag.Values = new SelectList(db.Prescriptions.Where(p => p.PatientID == id), "ID", "Date");
+            return View(model);
+        }
+
+        public ActionResult MedicineList(string id)
+        {
+            var model = db.Medicines.Where(p => p.PrescriptionCategories.Any(q => q.Name == id)).ToList();
+            foreach(var med in model)
+            {
+
+            }
+            ViewBag.DosageIDL = new SelectList(db.Dosages, "ID", "Name");
+            ViewBag.MorningDozIDL = new SelectList(db.Dozes, "ID", "Name");
+            ViewBag.NightDozIDL = new SelectList(db.Dozes, "ID", "Name");
+            ViewBag.NoonDozIDL = new SelectList(db.Dozes, "ID", "Name");
+            ViewBag.OINTTypeIDL = new SelectList(db.OINTTypes, "ID", "Name");
+            ViewBag.PrescriptionCategoryIDL = new SelectList(db.PrescriptionCategories, "ID", "Name");
+            return PartialView(model);
+        }
+
+        private PrintModel GetPatientPriscription(int patientID)
         {
             var model = new PrintModel();
 
             model.Header.HeaderPhoto = db.Pictures.Select(p => p.Header).FirstOrDefault();
-            Patient patient = db.Patients.Find(id);
+            Patient patient = db.Patients.Find(patientID);
             if (patient != null)
             {
                 model.Patient.ID = patient.ID;
@@ -399,7 +437,7 @@ namespace DoctorWeb.Controllers
                 model.Patient.Habbit = patient.Habit.ToString();
                 model.Patient.Diet = patient.FoodPreference.ToString();
 
-                var patientHistory = db.PatientHistories.Where(p => p.PatientID == id).OrderByDescending(q => q.ID).FirstOrDefault();
+                var patientHistory = db.PatientHistories.Where(p => p.PatientID == patientID).OrderByDescending(q => q.ID).FirstOrDefault();
                 if (patientHistory != null)
                 {
                     model.Patient.Weight = patientHistory.Weight.ToString();
@@ -434,7 +472,7 @@ namespace DoctorWeb.Controllers
                     model.Patient.Others = patientHistory.Other;
                 }
 
-                var prescription = db.Prescriptions.Where(p => p.PatientID == id).OrderByDescending(q => q.ID).FirstOrDefault();
+                var prescription = db.Prescriptions.Where(p => p.PatientID == patientID).OrderByDescending(q => q.ID).FirstOrDefault();
                 if (prescription != null)
                 {
 
@@ -442,6 +480,9 @@ namespace DoctorWeb.Controllers
                     //model.Patient.Advice =
                     model.Patient.Procedure = prescription.Procedure;
                     model.Patient.Investigation = prescription.Investigation.Name;
+                    model.Patient.DrawenImage1 = prescription.PrescriptionImage1;
+                    model.Patient.DrawenImage2 = prescription.PrescriptionImage2;
+                    model.Patient.PrescriptionImages = db.PreImages.Where(p => p.Prescriptions.Any(q => q.ID == prescription.ID)).Select(t => t.Image).ToList();
 
                     model.RX.Medicines = db.PrescriptionMedicines.Where(p => p.PrescriptionID == prescription.ID).ToList();
 
@@ -449,7 +490,7 @@ namespace DoctorWeb.Controllers
                     model.Compulsory.Day = "Test";
                     model.Compulsory.Instructions = db.Instructions.Where(p => p.Prescriptions.Any(q => q.ID == prescription.ID)).ToList();
                 }
-                
+
                 //model.Invoice.Consult = prescription.
                 //model.Invoice.Proctoscopy = prescription.
                 //model.Invoice.Dressing = prescription
@@ -462,25 +503,10 @@ namespace DoctorWeb.Controllers
                 model.Invoice.CashRecived = prescription.Received.ToString();
                 model.Invoice.PendingAmount = prescription.Pending.ToString();
 
-                return View(model);
+                model.Footer.FooterPhoto = db.Pictures.Select(p => p.Footer).FirstOrDefault();
             }
-            return View();
-        }
 
-        public ActionResult MedicineList(string id)
-        {
-            var model = db.Medicines.Where(p => p.PrescriptionCategories.Any(q => q.Name == id)).ToList();
-            foreach(var med in model)
-            {
-
-            }
-            ViewBag.DosageIDL = new SelectList(db.Dosages, "ID", "Name");
-            ViewBag.MorningDozIDL = new SelectList(db.Dozes, "ID", "Name");
-            ViewBag.NightDozIDL = new SelectList(db.Dozes, "ID", "Name");
-            ViewBag.NoonDozIDL = new SelectList(db.Dozes, "ID", "Name");
-            ViewBag.OINTTypeIDL = new SelectList(db.OINTTypes, "ID", "Name");
-            ViewBag.PrescriptionCategoryIDL = new SelectList(db.PrescriptionCategories, "ID", "Name");
-            return PartialView(model);
+            return model;
         }
     }
 }

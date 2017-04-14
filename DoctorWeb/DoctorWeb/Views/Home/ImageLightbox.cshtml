@@ -63,9 +63,9 @@
             var selector = '#tabs > ul > li > a';
             var activeTabID = $(selector).eq(activeTabIdx).attr('href');
             activeTabID = activeTabID[activeTabID.length -1];
-            alert(activeTabID);
+            //alert(activeTabID);
             var dataURL = $("#wPaint").wPaint("image");
-            alert(dataURL);
+            //alert(dataURL);
             $.ajax({
                 type: "POST",
                 url: '@Url.Action("ImageLightbox", "Home")',
@@ -89,16 +89,16 @@
             });
         }
         function secondimg(){
-            alert("Second Image");
+           // alert("Second Image");
             var _this = this;
 
             var activeTabIdx = $('#tabs').tabs('option','active');
             var selector = '#tabs > ul > li > a';
             var activeTabID = $(selector).eq(activeTabIdx).attr('href');
             activeTabID = activeTabID[activeTabID.length -1];
-            alert(activeTabID);
+           // alert(activeTabID);
             var dataURL = $("#wPaint2").wPaint("image");
-            alert(dataURL);
+           // alert(dataURL);
             $.ajax({
                 type: "POST",
                 url: '@Url.Action("ImageLightbox", "Home")',

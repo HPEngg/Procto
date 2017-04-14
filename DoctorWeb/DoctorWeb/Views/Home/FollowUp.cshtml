@@ -6,12 +6,22 @@
 <link href="~/Content/css/style.css" rel="stylesheet" />
 <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
 
+@using (Html.BeginForm("FollowUp", "Home"))
+{
+
+    <div style="float:left;">
+        <label style="float:left;padding-right:5px;">Prescription Date</label>
+        @Html.DropDownList("ID", (SelectList)ViewBag.Values, "Select Date", new { onchange = "this.form.submit();" })
+    </div>
+}
+</br></br>
+
 <div class="print_margin fonts_candara">
     <div id="HeaderPart">
         <h4>Header</h4>
         <div class="fltleft" style="width:100%; max-width:100px; max-height:100px; padding-right:10px;">
             @{
-                if (Model.HeaderRequired && Model.Header.HeaderPhoto != null)
+                if (Model.Header.HeaderPhoto != null)
                 {
                     var base64 = Convert.ToBase64String(Model.Header.HeaderPhoto);
                     var imgSrchdr = String.Format("data:image/gif;base64,{0}", base64);
@@ -49,14 +59,14 @@
             </div>
         </div>
     </div>
-    <hr style="clear:both; border-bottom:1px solid #000;"/>
+    <hr style="clear:both; border-bottom:1px solid #000;" />
     <div id="PatientPart">
         <h4>Patient</h4>
 
 
         <div class="fltleft" style="width:100%; max-width:100px; max-height:100px; padding-right:10px;">
             @{
-                if (Model.Patient.Photo!=null)
+                if (Model.Patient.Photo != null)
                 {
                     var base64 = Convert.ToBase64String(Model.Patient.Photo);
                     var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
@@ -791,8 +801,5 @@
             }
         </div>
 
-    </div>
-    <div style="clear:both; display:block;">
-        <button onclick="window.print();">Print</button>
     </div>
 </div>

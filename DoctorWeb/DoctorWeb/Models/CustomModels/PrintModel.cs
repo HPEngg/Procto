@@ -16,6 +16,7 @@ namespace DoctorWeb.Models.CustomModels
             RX = new RX();
             Compulsory = new Compulsory();
             Invoice = new Invoice();
+            Footer = new Footer();
         }
         public bool HeaderRequired { get; set; }
         public Header Header { get; set; }
@@ -26,5 +27,8 @@ namespace DoctorWeb.Models.CustomModels
         public Compulsory Compulsory { get; set; }
         public bool InvoiceRequired { get; set; }
         public Invoice Invoice { get; set; }
+        public bool FooterRequired { get; set; }
+        public Footer Footer { get; set; }
+        public int PatientID { get; set; }
     }
 }

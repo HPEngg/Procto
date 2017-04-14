@@ -6,10 +6,10 @@ using System.Web;
 
 namespace DoctorWeb.Models.Enums
 {
-    public enum ReferredBy
-    {
-        Self,
-        [Display(Name = "Doctor/Patient Relative")]
-        Doctor, NewPaperAds, SignBoard
-    }
+    //public enum ReferredBy
+    //{
+    //    Self,
+    //    [Display(Name = "Doctor/Patient Relative")]
+    //    Doctor, NewPaperAds, SignBoard
+    //}
 }

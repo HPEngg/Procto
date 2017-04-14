@@ -877,6 +877,8 @@
     <Content Include="Views\SMS\Edit.cshtml" />
     <Content Include="Views\SMS\Index.cshtml" />
     <Content Include="Views\Medicine\ByCategory.cshtml" />
+    <Content Include="Views\Home\PrintPreview.cshtml" />
+    <Content Include="Views\Home\FollowUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

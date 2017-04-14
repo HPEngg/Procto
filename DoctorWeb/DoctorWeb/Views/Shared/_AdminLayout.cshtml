@@ -89,6 +89,7 @@
                         <ul @if ((ctrName == "Medicine" && actnName == "Create") || (ctrName == "Medicine" && actnName == "Index")) { <text> style="display:block;" </text> }>
                             <li @if (ctrName == "Medicine" && actnName == "Create") { <text> class="active" </text>  }><div id="icontitlediv">@Html.ActionLink("Add Medicine", "Create", "Medicine")</div></li>
                             <li @if (ctrName == "Medicine" && actnName == "Index") { <text> class="active" </text>  }><div id="icontitlediv">@Html.ActionLink("Medicine List", "Index", "Medicine")</div></li>
+                            <li @if (ctrName == "Medicine" && actnName == "ByCategory") { <text> class="active" </text>   }><div id="icontitlediv">@Html.ActionLink("Medicine By Category", "ByCategory", "Medicine")</div></li>
                         </ul>
                     </li>
                     @* PRESCRIPTION CATEGORY *@

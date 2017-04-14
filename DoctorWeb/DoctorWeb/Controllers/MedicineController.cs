@@ -26,6 +26,16 @@ namespace DoctorWeb.Controllers
             return View(medicines.ToList());
         }
 
+        public ActionResult ByCategory(int? id)
+        {
+            if (TempData["ErrorMessage"] != null)
+                ViewBag.ErrorMessage = TempData["ErrorMessage"].ToString();
+
+            ViewBag.Values = new SelectList(db.PrescriptionCategories, "ID", "Name");
+            var medicines = db.Medicines.Where(p => p.PrescriptionCategories.Any(t => t.ID == id)).Include(m => m.Dosage).Include(m => m.Morning).Include(m => m.Night).Include(m => m.Noon).Include(m => m.OINT);
+            return View(medicines.ToList());
+        }
+
         // GET: Medicine/Details/5
         public ActionResult Details(int? id)
         {

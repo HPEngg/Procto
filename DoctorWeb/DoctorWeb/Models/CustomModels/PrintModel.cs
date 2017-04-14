@@ -9,6 +9,14 @@ namespace DoctorWeb.Models.CustomModels
 {
     public class PrintModel
     {
+        public PrintModel()
+        {
+            Header = new Header();
+            Patient = new PrintPatient();
+            RX = new RX();
+            Compulsory = new Compulsory();
+            Invoice = new Invoice();
+        }
         public bool HeaderRequired { get; set; }
         public Header Header { get; set; }
         public bool PatientRequired { get; set; }

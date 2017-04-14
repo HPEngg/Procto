@@ -404,8 +404,8 @@ namespace DoctorWeb.Controllers
                 {
                     model.Patient.Weight = patientHistory.Weight.ToString();
                     model.Patient.KCO = patientHistory.KCO;
-                    model.Patient.ComplainOf = patientHistory.ComplainForm;
-                    //model.Patient.Since = patientHistory.since;
+                    model.Patient.ComplainOf = patientHistory.CO;
+                    model.Patient.Since = patientHistory.ComplainForm;
                     model.Patient.Constipation = patientHistory.Constipation;
                     model.Patient.ConstipationMore = patientHistory.ConstipationMore;
                     model.Patient.GAS = patientHistory.Gas;
@@ -426,10 +426,10 @@ namespace DoctorWeb.Controllers
                     model.Patient.History = patientHistory.History;
                     model.Patient.Height = patientHistory.Height.ToString();
                     model.Patient.Temprature = patientHistory.T.ToString();
-                    model.Patient.Pulse = patientHistory.PRR;
+                    model.Patient.Pulse = patientHistory.PR;
                     model.Patient.BP = patientHistory.BP;
                     model.Patient.SPO2 = patientHistory.SPO2;
-                    model.Patient.PR = patientHistory.PR;
+                    model.Patient.PR = patientHistory.PRR;
                     model.Patient.Proctoscopy = patientHistory.Proctoscopy;
                     model.Patient.Others = patientHistory.Other;
                 }

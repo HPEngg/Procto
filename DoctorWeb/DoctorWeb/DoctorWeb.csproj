@@ -704,6 +704,9 @@
     <Content Include="Content\drawimage\README.md" />
     <Content Include="Content\drawimage\test\upload.php" />
     <Content Include="Content\drawimage\wPaint.jquery.json" />
+    <Content Include="Content\fonts\CANDARA.eot" />
+    <Content Include="Content\fonts\CANDARA.ttf" />
+    <Content Include="Content\fonts\CANDARA.woff" />
     <None Include="Properties\PublishProfiles\pubish.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-1.10.2.js1" />

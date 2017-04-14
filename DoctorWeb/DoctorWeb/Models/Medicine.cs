@@ -45,6 +45,8 @@ namespace DoctorWeb.Models
         [Display(Name = "Affect to Qty.")]
         public bool IsDayAffected { get; set; }
 
+        public float Unit { get; set; }
+
         public float Quantity { get; set; }
 
         //[Display(Name = "Category")]

@@ -1070,6 +1070,10 @@ td {
   display: block;
 }
 
+#HeaderPart input {
+    width:95%;
+}
+
 .print_margin {
     margin:0 auto;
     max-width:720px;
@@ -1084,6 +1088,9 @@ td {
 .fltleft {
     float:left;
 }
+.fltright {
+    float:right;
+}
 
 .print_text_fltleft {
     float:left;
@@ -1097,5 +1104,18 @@ td {
 #PatientPart img {
     height:100px;
     width:100px;
+}
+
+.print_heading {
+    font-weight:700;
+}
+
+.print_heading:after{
+    content: ": ";
+}
+
+.arial_heading {
+    font-family:Arial Black;
+    font-weight:900;
 }
 

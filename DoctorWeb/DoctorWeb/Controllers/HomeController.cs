@@ -172,6 +172,7 @@ namespace DoctorWeb.Controllers
             var patient = model.Patient;
             //This line is temporary fix
             Patient p = new Patient();
+            patient.CreatedDate = DateTime.Now.Date;
             patient.DoctorID = model.DoctorID == 0 ? null : model.DoctorID;
             patient.ReferredByID = model.ReferredByID;
             patient.DepartmentID = model.DepartmentID;

@@ -38,6 +38,8 @@ namespace DoctorWeb.Models
         public string Occupation { get; set; }
         public Habit? Habit { get; set; }
 
+        public DateTime CreatedDate { get; set; }
+
         [Display(Name = "Food Preference")]
         public FoodPreference FoodPreference { get; set; }
 

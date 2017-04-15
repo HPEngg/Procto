@@ -160,7 +160,7 @@ namespace DoctorWeb.Controllers
         [HttpPost]
         public JsonResult AutoComplete(string MedicineName)
         {
-            var model = db.Medicines.Where(m => m.OINTMore.Contains(MedicineName)).Select(m => new { m.OINTMore, m.IsDayAffected }).ToList();
+            var model = db.Medicines.Where(m => m.OINTMore.Contains(MedicineName)).Select(m => new { m.OINTMore, m.IsDayAffected, m.Quantity, m.Unit }).ToList();
             return Json(model);
         }
 

@@ -80,7 +80,7 @@
                                         @Html.LabelFor(model => model.Medicine.OINT, htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-10">
                                     *@
-                                    @Html.DropDownList("OINTTypeID", null, htmlAttributes: new { @class = "pre tabname", @id = "tabname_1", @style = "width: 85px!important; max-width: 85px!important; padding: 0!important;" })
+                                    @Html.DropDownList("OINTTypeID", null, htmlAttributes: new { @class = "pre tabname", @id = "tabname_1", @style = "width: 75px!important; max-width: 75px!important; padding: 0!important;" })
                                     @*@Html.EnumDropDownListFor(model => model.Medicine.OINT, htmlAttributes: new { @class = "pre tabname", @id = "tabname_1", @style = "width: 85px!important; padding: 0!important;" })*@
                                     @Html.ValidationMessageFor(model => model.Medicine.OINTTypeID, "", new { @class = "text-danger" })
                                     @*
@@ -142,7 +142,7 @@
                                         @Html.LabelFor(model => model.Medicine.DozTiming, htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-10">
                                     *@
-                                    @Html.DropDownList("DosageID", null, htmlAttributes: new { @class = "pre", style = "width: 120px!important; padding: 0!important;" })
+                                    @Html.DropDownList("DosageID", null, htmlAttributes: new { @class = "pre", style = "width: 110px!important; padding: 0!important;" })
                                     @Html.ValidationMessageFor(model => model.Medicine.DosageID, "", new { @class = "text-danger" })
                                     @*@Html.EnumDropDownListFor(model => model.Medicine.Dosage, htmlAttributes: new { @class = "pre", style = "width: 90px!important; padding: 0!important;" })
                                         @Html.ValidationMessageFor(model => model.Medicine.Dosage, "", new { @class = "text-danger" })*@
@@ -154,10 +154,13 @@
                                         @Html.LabelFor(model => model.Medicine.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-10">
                                     *@
-                                    @Html.EditorFor(model => model.Medicine.Quantity, new { htmlAttributes = new { Name = "Medicine_Quantity", @id = "qut_1", @class = "pre qut", @placeholder = "Qty", @style = "width: 50px;color:#000; padding: 6px;" } })
+                                    @Html.EditorFor(model => model.Medicine.Quantity, new { htmlAttributes = new { Name = "Medicine_Quantity", @id = "qut_1", @class = "pre qut", @placeholder = "Qty", @style = "width: 40px;color:#000; padding: 6px;" } })
                                     @Html.ValidationMessageFor(model => model.Medicine.Quantity, "", new { @class = "text-danger" })
 
-                                    @Html.EditorFor(model => model.Medicine.Unit, new { htmlAttributes = new { Name = "Medicine_Unit", @id = "unt_1", @class = "pre qut", @placeholder = "Unit", @style = "width: 50px;color:#000; padding: 6px;", @readonly = "readonly" } })
+                                    @Html.EditorFor(model => model.Medicine.Unit, new { htmlAttributes = new { Name = "Medicine_Unit", @id = "unt_1", @class = "pre qut", @placeholder = "Unit", @style = "width: 40px;color:#000; padding: 6px;", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Medicine.Unit, "", new { @class = "text-danger" })
+
+                                    @Html.EditorFor(model => model.Medicine.Unit, new { htmlAttributes = new { Name = "Medicine_Unit", @id = "mtotal_1", @class = "pre qut", @placeholder = "Unit", @style = "width: 40px;color:#000; padding: 6px;", @readonly = "readonly" } })
                                     @Html.ValidationMessageFor(model => model.Medicine.Unit, "", new { @class = "text-danger" })
 
                                     <input value="+" class="add_field_button plusbutton" type="button" required>
@@ -355,6 +358,8 @@
 
                 newhtmlstring = newhtmlstring.replace("qut_" + a, "qut_" + id);
                 newhtmlstring = newhtmlstring.replace("unt_" + a, "unt_" + id);
+                newhtmlstring = newhtmlstring.replace("mtotal_" + a, "mtotal_" + id);
+                
                 return newhtmlstring;
             }
 
@@ -399,7 +404,7 @@
                     i++;
 
                     //alert(htmlString);
-                    jQuery(wrapper).append('<div>' + htmlString + '</div>');
+                    jQuery(wrapper).append('<div style="clear:both;">' + htmlString + '</div>');
                     $("#MorningDozID" + parseInt(i - 1)).change(function () {
                         var current_rec = $(this).attr('id').substring(12);
                         calc_qty(current_rec);
@@ -436,7 +441,7 @@
                     i++;
 
                     //alert(htmlString);
-                    jQuery(wrapper).append('<div>' + htmlString + '</div>');
+                    jQuery(wrapper).append('<div style="clear:both;">' + htmlString + '</div>');
                     $("#MorningDozID" + parseInt(i - 1)).change(function () {
                         var current_rec = $(this).attr('id').substring(12);
                         calc_qty(current_rec);
@@ -590,7 +595,8 @@
                                         label: item.OINTMore,
                                         value: item.OINTMore,
                                         term: item.IsDayAffected,
-                                        unit: item.Unit,
+                                        quantity:item.Quantity,
+                                        unit: item.Unit
                                     }
                                 }))
                             },
@@ -603,10 +609,22 @@
                         });
                     },
                     select: function (e, j) {
+                        var qty;
+                        if (j.item.term == true) {
+                            qty = parseFloat(jQuery("#qut_" + parseInt(i - 1)).val());
+                        }
+                        else {
+                            jQuery("#qty_" + parseInt(i - 1)).val(j.item.quantity);
+                            qty = parseFloat(j.item.quantity);
+                        }
+                        jQuery("#unt_" + parseInt(i - 1)).val(j.item.unit);
+                        //var qty = parseFloat(jQuery("#qut_" + parseInt(i - 1)).val());
+                        var mtot = (parseFloat(j.item.unit) * qty);
+                        jQuery("#mtotal_" + parseInt(i - 1)).val(mtot);
                         var current_rec = $(this).attr('id').substring(17);
                         jQuery("#days_flag" + parseInt(i - 1)).val(j.item.term);
                         //if (j.item.term == true) {
-                        alert(j.item.Unit);
+                        
                         //flag = true;
                         calc_qty(current_rec);
                         //var isdayaffected = false;
@@ -635,7 +653,8 @@
                                         label: item.OINTMore,
                                         value: item.OINTMore,
                                         term: item.IsDayAffected,
-                                        unit: item.Unit,
+                                        quantity: item.Quantity,
+                                        unit: item.Unit
                                     }
                                 }))
                             },
@@ -648,12 +667,26 @@
                         });
                     },
                     select: function (e, j) {
+
+                        var qty;
+                        if (j.item.term == true) {
+                            qty = parseFloat(jQuery("#qut_" + parseInt(i - 1)).val());
+                        }
+                        else {
+                            jQuery("#qty_" + parseInt(i - 1)).val(j.item.quantity);
+                            qty = parseFloat(j.item.quantity);
+                        }
+                        jQuery("#unt_" + parseInt(i - 1)).val(j.item.unit);
+                        //var qty = parseFloat(jQuery("#qut_" + parseInt(i - 1)).val());
+                        var mtot = (parseFloat(j.item.unit) * qty);
+                        jQuery("#mtotal_" + parseInt(i - 1)).val(mtot);
                         var current_rec = $(this).attr('id').substring(17);
                         jQuery("#days_flag" + parseInt(i - 1)).val(j.item.term);
-                        alert(j.item.Unit);
                         //if (j.item.term == true) {
+
                         //flag = true;
                         calc_qty(current_rec);
+                        //var isdayaffected = false;
                         //}
                         //else {
                         //    //flag = false;

@@ -39,7 +39,10 @@ namespace DoctorWeb.Controllers
         // GET: SMS/Create
         public ActionResult Create()
         {
-            return View();
+            var model = new SMS();
+            model.FromDate = DateTime.Now.Date;
+            model.ToData = DateTime.Now.Date;
+            return View(model);
         }
 
         // POST: SMS/Create

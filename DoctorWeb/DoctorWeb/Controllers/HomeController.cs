@@ -447,7 +447,7 @@ namespace DoctorWeb.Controllers
             var printData = GetPatientPriscription(prescriptionID);
             printData.HeaderRequired = model.HeaderRequired;
             printData.PatientRequired = model.PatientRequired;
-            printData.RXRequired = model.PatientRequired;
+            printData.RXRequired = model.RXRequired;
             printData.FooterRequired = model.FooterRequired;
             printData.InvoiceRequired = model.InvoiceRequired;
             return View(printData);

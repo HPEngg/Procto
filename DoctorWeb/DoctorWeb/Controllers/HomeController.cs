@@ -389,6 +389,11 @@ namespace DoctorWeb.Controllers
         public ActionResult Print(PrintModel model)
         {
             var printData = GetPatientPriscription(model.PatientID);
+            printData.HeaderRequired = model.HeaderRequired;
+            printData.PatientRequired = model.PatientRequired;
+            printData.RXRequired = model.PatientRequired;
+            printData.FooterRequired = model.FooterRequired;
+            printData.InvoiceRequired = model.InvoiceRequired;
             return View(printData);
         }
 

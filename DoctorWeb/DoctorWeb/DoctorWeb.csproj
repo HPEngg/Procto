@@ -80,6 +80,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -196,6 +197,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ChartController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\CertificateController.cs" />
     <Compile Include="Controllers\DoctorController.cs" />
@@ -225,6 +227,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Charge.cs" />
+    <Compile Include="Models\Chart\DataPoint.cs" />
     <Compile Include="Models\CustomModels\MedicineViewModel.cs" />
     <Compile Include="Models\CustomModels\PatientHome.cs" />
     <Compile Include="Models\CustomModels\PatientRefByDoctor.cs" />
@@ -882,6 +885,7 @@
     <Content Include="Views\Home\PrintPreview.cshtml" />
     <Content Include="Views\Home\FollowUp.cshtml" />
     <Content Include="Views\Home\PrintInvoice.cshtml" />
+    <Content Include="Views\Chart\DepartmentWisePatient.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

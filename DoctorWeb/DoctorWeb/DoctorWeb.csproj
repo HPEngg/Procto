@@ -230,6 +230,7 @@
     <Compile Include="Models\CustomModels\PatientRefByDoctor.cs" />
     <Compile Include="Models\CustomModels\PatientSearch.cs" />
     <Compile Include="Models\CustomModels\PrescriptionHome.cs" />
+    <Compile Include="Models\CustomModels\PrintInvoice.cs" />
     <Compile Include="Models\CustomModels\PrintModel.cs" />
     <Compile Include="Models\CustomModels\PrintModules.cs" />
     <Compile Include="Models\Department.cs" />
@@ -879,6 +880,7 @@
     <Content Include="Views\Medicine\ByCategory.cshtml" />
     <Content Include="Views\Home\PrintPreview.cshtml" />
     <Content Include="Views\Home\FollowUp.cshtml" />
+    <Content Include="Views\Home\PrintInvoice.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

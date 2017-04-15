@@ -389,6 +389,57 @@ namespace DoctorWeb.Controllers
             return View(model);
         }
 
+        public ActionResult PrintInvoice(int id)
+        {
+            var model = new PrintInvoice();
+            var prescription = db.Prescriptions.Where(p => p.ID == id).FirstOrDefault();
+            if (prescription != null)
+            {
+                Patient patient = db.Patients.Find(prescription.PatientID);
+                if (patient != null)
+                {
+                    model.Name = patient.Name;
+                    model.Age = patient.Age;
+                    model.Gender = patient.Gender.ToString();
+                    model.TodayDate = DateTime.Now.Date.ToShortDateString();
+                    model.Address = patient.Address;
+                }
+                model.InvoiceNo = prescription.ID;
+                model.Medicines = db.PrescriptionMedicines.Where(p => p.PrescriptionID == prescription.ID).ToList();
+                decimal? consultCarge = db.PaymentTypes.Where(w => w.PaymentTypeName.StartsWith("C")).Select(s => s.Rupees).FirstOrDefault();
+                if(consultCarge != null)
+                {
+                    model.Consult = consultCarge.ToString();
+                }
+
+                decimal? proctoscopyCarge = db.PaymentTypes.Where(w => w.PaymentTypeName.StartsWith("P")).Select(s => s.Rupees).FirstOrDefault();
+                if (proctoscopyCarge != null)
+                {
+                    model.Proctoscopy = proctoscopyCarge.ToString();
+                }
+
+                decimal? dressingCarge = db.PaymentTypes.Where(w => w.PaymentTypeName.StartsWith("D")).Select(s => s.Rupees).FirstOrDefault();
+                if (dressingCarge != null)
+                {
+                    model.Dressing = dressingCarge.ToString();
+                }
+
+                decimal? ksProcedureCarge = db.PaymentTypes.Where(w => w.PaymentTypeName.StartsWith("K")).Select(s => s.Rupees).FirstOrDefault();
+                if (ksProcedureCarge != null)
+                {
+                    model.KSProcedure = ksProcedureCarge.ToString();
+                }
+
+                decimal? otherCarge = db.PaymentTypes.Where(w => w.PaymentTypeName.StartsWith("O")).Select(s => s.Rupees).FirstOrDefault();
+                if (otherCarge != null)
+                {
+                    model.Other = otherCarge.ToString();
+                }
+            }
+
+            return View(model);
+        }
+
         [HttpPost]
         public ActionResult Print(PrintModel model)
         {

@@ -2,7 +2,7 @@
 
   // setup menu
   $.fn.wPaint.menus.main = {
-    img: './plugins/main/img/icons-menu-main.png',
+      img: '/Content/drawimage/plugins/main/img/icons-menu-main.png',
     items: {
       undo: {
         icon: 'generic',

@@ -10,6 +10,7 @@ using DoctorWeb.Models;
 using DoctorWeb.Models.CustomModels;
 using System.IO;
 using System.ComponentModel;
+using System.Web.Script.Serialization;
 
 namespace DoctorWeb.Controllers
 {
@@ -182,5 +183,32 @@ namespace DoctorWeb.Controllers
             WriteTsv(patients, Response.Output);
             Response.End();
         }
+
+        [HttpPost]
+        public ActionResult UploadPatientImage(string jsonData)
+        {
+            bool result = true;
+            PatientPhoto personData;
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            personData = jss.Deserialize<PatientPhoto>(jsonData);
+            Patient patient = db.Patients.Find(personData.Id);
+            if (patient == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                patient.Photo = personData.Photo;
+            }
+            db.Entry(patient).State = EntityState.Modified;
+            db.SaveChanges();
+            return Content(result.ToString());
+        }
+    }
+
+    public class PatientPhoto
+    {
+        public int Id { get; set; }
+        public byte[] Photo { get; set; }
     }
 }

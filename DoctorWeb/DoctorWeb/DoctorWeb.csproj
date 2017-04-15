@@ -227,6 +227,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Charge.cs" />
+    <Compile Include="Models\Chart\ChartModel.cs" />
     <Compile Include="Models\Chart\DataPoint.cs" />
     <Compile Include="Models\CustomModels\MedicineViewModel.cs" />
     <Compile Include="Models\CustomModels\PatientHome.cs" />
@@ -241,6 +242,7 @@
     <Compile Include="Models\Dosage.cs" />
     <Compile Include="Models\Doz.cs" />
     <Compile Include="Models\Enums\Bleeding.cs" />
+    <Compile Include="Models\Enums\ChartQuery.cs" />
     <Compile Include="Models\Enums\Department.cs" />
     <Compile Include="Models\Enums\Doz.cs" />
     <Compile Include="Models\Enums\DozTiming.cs" />
@@ -885,6 +887,8 @@
     <Content Include="Views\Home\FollowUp.cshtml" />
     <Content Include="Views\Home\PrintInvoice.cshtml" />
     <Content Include="Views\Chart\DepartmentWisePatient.cshtml" />
+    <Content Include="Views\Chart\NewOldPatient.cshtml" />
+    <Content Include="Views\Chart\ReferenceWisePatient.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

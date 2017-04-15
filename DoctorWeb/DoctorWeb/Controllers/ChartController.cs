@@ -1,5 +1,6 @@
 ﻿using DoctorWeb.Models;
 using DoctorWeb.Models.Chart;
+using DoctorWeb.Models.Enums;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -19,10 +20,61 @@ namespace DoctorWeb.Controllers
             return View();
         }
 
-        public ActionResult DepartmentWisePatient()
+        public ActionResult DepartmentWisePatient(ChartQuery? query, DateTime? FromDate, DateTime? ToDate)
         {
-            var dataPoints = db.Patients.GroupBy(g => g.DepartmentID).Select(s => new DataPoint() { x = s.Key, y = s.Count() });
-            ViewBag.DataPoints = JsonConvert.SerializeObject(dataPoints.ToList()).Replace("\"", "");
+            var dataPoints = from d in db.Departments
+                             join p in db.Patients on d.ID equals p.DepartmentID into dp
+                             group dp by d.Name into grouped
+                             select new StringDataPoint() { label = grouped.Key, y = grouped.Count() };
+
+            string output = "[";
+            dataPoints.ToList().ForEach((data) => output = output + "{label:\'" + data.label + "\'," + "y:" + data.y + "},");
+            output = output + "]";
+            ViewBag.DataPoints = output;
+            
+            return View();
+        }
+
+        public ActionResult NewOldPatient(ChartQuery? query, DateTime? FromDate, DateTime? ToDate)
+        {
+            var dataPoints = new List<StringDataPoint>();
+
+            var newPatients = from pt in db.Patients
+                             join pr in db.Prescriptions on pt.ID equals pr.PatientID into ptpr
+                             group ptpr by pt.ID into grouped
+                             where grouped.Count() <= 1
+                             select grouped.Key;
+
+            var oldPatients = from pt in db.Patients
+                              join pr in db.Prescriptions on pt.ID equals pr.PatientID into ptpr
+                              group ptpr by pt.ID into grouped
+                              where grouped.Count() > 1
+                              select grouped.Key;
+
+            dataPoints.Add(new StringDataPoint() { label = "New", y = newPatients.Count() });
+            dataPoints.Add(new StringDataPoint() { label = "Old", y = oldPatients.Count() });
+
+
+            string output = "[";
+            dataPoints.ToList().ForEach((data) => output = output + "{label:\'" + data.label + "\'," + "y:" + data.y + "},");
+            output = output + "]";
+            ViewBag.DataPoints = output;
+
+            return View();
+        }
+
+        public ActionResult ReferenceWisePatient(ChartQuery? query, DateTime? FromDate, DateTime? ToDate)
+        {
+            var dataPoints = from r in db.ReferredBy
+                             join p in db.Patients on r.ID equals p.ReferredByID into rp
+                             group rp by r.Name into grouped
+                             select new StringDataPoint() { label = grouped.Key, y = grouped.Count() };
+
+            string output = "[";
+            dataPoints.ToList().ForEach((data) => output = output + "{label:\'" + data.label + "\'," + "y:" + data.y + "},");
+            output = output + "]";
+            ViewBag.DataPoints = output;
+
             return View();
         }
     }

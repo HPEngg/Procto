@@ -394,6 +394,12 @@ namespace DoctorWeb.Controllers
         {
             int prescriptionID = db.Prescriptions.Where(p => p.PatientID == model.PatientID).OrderByDescending(o => o.Date).Select(s => s.ID).FirstOrDefault();
             var printData = GetPatientPriscription(prescriptionID);
+            var printData = GetPatientPriscription(model.PatientID);
+            printData.HeaderRequired = model.HeaderRequired;
+            printData.PatientRequired = model.PatientRequired;
+            printData.RXRequired = model.PatientRequired;
+            printData.FooterRequired = model.FooterRequired;
+            printData.InvoiceRequired = model.InvoiceRequired;
             return View(printData);
         }
 

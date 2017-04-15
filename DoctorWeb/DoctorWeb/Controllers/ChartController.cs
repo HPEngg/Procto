@@ -44,17 +44,29 @@ namespace DoctorWeb.Controllers
                 FromDate = DateTime.MinValue;
             }
 
+            //dataPoints = from d in db.Departments
+            //             join p in db.Patients.Where(w => FromDate <= w.CreatedDate && w.CreatedDate <= ToDate) on d.ID equals p.DepartmentID into dp
+            //             group dp by d.Name into grouped
+            //             select new StringDataPoint() { label = grouped.Key, y = grouped.Count() };
+
             dataPoints = from d in db.Departments
-                         join p in db.Patients.Where(w => FromDate <= w.CreatedDate && w.CreatedDate <= ToDate) on d.ID equals p.DepartmentID into dp
-                         group dp by d.Name into grouped
-                         select new StringDataPoint() { label = grouped.Key, y = grouped.Count() };
+                         let pCount =
+                         (
+                           from p in db.Patients.Where(w => FromDate <= w.CreatedDate && w.CreatedDate <= ToDate)
+                           where d.ID == p.DepartmentID
+                           select p
+                         ).Count()
+                         select new StringDataPoint() { label = d.Name, y = pCount };
 
             string output = "[";
             dataPoints.ToList().ForEach((data) => output = output + "{label:\'" + data.label + "\'," + "y:" + data.y + "},");
             output = output + "]";
             ViewBag.DataPoints = output;
-            
-            return View();
+
+            var model = new ChartModel();
+            model.FromDate = DateTime.Now.Date;
+            model.ToDate = DateTime.Now.Date;
+            return View(model);
         }
 
         public ActionResult NewOldPatient(ChartQuery? query, DateTime? FromDate, DateTime? ToDate)
@@ -81,17 +93,37 @@ namespace DoctorWeb.Controllers
                 FromDate = DateTime.MinValue;
             }
 
-            var newPatients = from pt in db.Patients.Where(w => FromDate <= w.CreatedDate && w.CreatedDate <= ToDate)
-                              join pr in db.Prescriptions on pt.ID equals pr.PatientID into ptpr
-                             group ptpr by pt.ID into grouped
-                             where grouped.Count() <= 1
-                             select grouped.Key;
+            //var newPatients = from pt in db.Patients.Where(w => FromDate <= w.CreatedDate && w.CreatedDate <= ToDate)
+            //                  join pr in db.Prescriptions on pt.ID equals pr.PatientID into ptpr
+            //                 group ptpr by pt.ID into grouped
+            //                 where grouped.Count() <= 1
+            //                 select grouped.Key;
 
-            var oldPatients = from pt in db.Patients.Where(w => FromDate <= w.CreatedDate && w.CreatedDate <= ToDate)
-                              join pr in db.Prescriptions on pt.ID equals pr.PatientID into ptpr
-                              group ptpr by pt.ID into grouped
-                              where grouped.Count() > 1
-                              select grouped.Key;
+            var newPatients = from p in db.Patients
+                             let cCount =
+                             (
+                               from pr in db.Prescriptions
+                               where p.ID == pr.PatientID
+                               select pr
+                             ).Count()
+                             where cCount <= 1
+                             select p;
+
+            //var oldPatients = from pt in db.Patients.Where(w => FromDate <= w.CreatedDate && w.CreatedDate <= ToDate)
+            //                  join pr in db.Prescriptions on pt.ID equals pr.PatientID into ptpr
+            //                  group ptpr by pt.ID into grouped
+            //                  where grouped.Count() > 1
+            //                  select grouped.Key;
+
+            var oldPatients = from p in db.Patients
+                              let cCount =
+                              (
+                                from pr in db.Prescriptions
+                                where p.ID == pr.PatientID
+                                select pr
+                              ).Count()
+                              where cCount > 1
+                              select p;
 
             dataPoints.Add(new StringDataPoint() { label = "New", y = newPatients.Count() });
             dataPoints.Add(new StringDataPoint() { label = "Old", y = oldPatients.Count() });
@@ -102,7 +134,10 @@ namespace DoctorWeb.Controllers
             output = output + "]";
             ViewBag.DataPoints = output;
 
-            return View();
+            var model = new ChartModel();
+            model.FromDate = DateTime.Now.Date;
+            model.ToDate = DateTime.Now.Date;
+            return View(model);
         }
 
         public ActionResult ReferenceWisePatient(ChartQuery? query, DateTime? FromDate, DateTime? ToDate)
@@ -129,17 +164,31 @@ namespace DoctorWeb.Controllers
                 FromDate = DateTime.MinValue;
             }
 
+            var patients = db.Patients.Where(w => FromDate <= w.CreatedDate && w.CreatedDate <= ToDate).ToList();
+
+            //dataPoints = from r in db.ReferredBy
+            //             join p in db.Patients.Where(w => FromDate <= w.CreatedDate && w.CreatedDate <= ToDate) on r.ID equals p.ReferredByID into rp
+            //             group rp by r.Name into grouped
+            //             select new StringDataPoint() { label = grouped.Key, y = grouped.Count() };
+
             dataPoints = from r in db.ReferredBy
-                         join p in db.Patients.Where(w => FromDate <= w.CreatedDate && w.CreatedDate <= ToDate) on r.ID equals p.ReferredByID into rp
-                         group rp by r.Name into grouped
-                         select new StringDataPoint() { label = grouped.Key, y = grouped.Count() };
+                         let pCount =
+                         (
+                           from p in db.Patients.Where(w => FromDate <= w.CreatedDate && w.CreatedDate <= ToDate)
+                           where r.ID == p.ReferredByID
+                           select p
+                         ).Count()
+                         select new StringDataPoint() { label = r.Name, y = pCount };
 
             string output = "[";
             dataPoints.ToList().ForEach((data) => output = output + "{label:\'" + data.label + "\'," + "y:" + data.y + "},");
             output = output + "]";
             ViewBag.DataPoints = output;
 
-            return View();
+            var model = new ChartModel();
+            model.FromDate = DateTime.Now.Date;
+            model.ToDate = DateTime.Now.Date;
+            return View(model);
         }
     }
 }

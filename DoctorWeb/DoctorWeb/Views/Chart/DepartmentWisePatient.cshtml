@@ -4,19 +4,19 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-    <script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
-    <script type="text/javascript">
- 
+<script src="~/Content/js/canvasjs.min.js"></script>
+<script type="text/javascript">
+
 	window.onload = function () {
 		var chart = new CanvasJS.Chart("chartContainer", {
-			theme: "theme2",
+			theme: "theme3",
 			animationEnabled: true,
 			title: {
-				text: "Simple Column Chart in ASP.NET MVC"
+				text: "Departmentwise Patient's List"
 			},
-			subtitles: [
-				{ text: "Try Resizing the Browser" }
-			],
+			//subtitles: [
+			//	{ text: "Try Resizing the Browser" }
+			//],
 			data: [
 			{
 				type: "column", //change type to bar, line, area, pie, etc
@@ -34,8 +34,9 @@
 
     <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Query, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="form-group" style="padding-top:10px;">
+            @*@Html.LabelFor(model => model.Query, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <label style=" float:left; padding-left:5%; font-size:13px; width:150px;">Chart Filters</label>
             <div class="col-md-10">
                 @Html.EnumDropDownListFor(model => model.Query, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Query, "", new { @class = "text-danger" })
@@ -43,7 +44,8 @@
         </div>
 
         <div class="form-group" id="From_Date" style="display:none;">
-            @Html.LabelFor(model => model.FromDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            @*@Html.LabelFor(model => model.FromDate, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <label style=" float:left; padding-left:5%; font-size:13px; width:150px;">From Date</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control", type = "date", id = "From_Date" } })
                 @Html.ValidationMessageFor(model => model.FromDate, "", new { @class = "text-danger" })
@@ -51,7 +53,8 @@
         </div>
 
         <div class="form-group" id="To_Date" style="display:none;">
-            @Html.LabelFor(model => model.ToDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            @*@Html.LabelFor(model => model.ToDate, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <label style=" float:left; padding-left:5%; font-size:13px; width:150px;">To Date</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ToDate, new { htmlAttributes = new { @class = "form-control", type = "date", id = "To_Date" } })
                 @Html.ValidationMessageFor(model => model.ToDate, "", new { @class = "text-danger" })
@@ -60,11 +63,31 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" onclick="checkvalidation();" />
+                <input type="submit" value="Show Chart" class="btn btn-default" />
             </div>
         </div>
 
     </div>
 }
 
-<div id="chartContainer"></div>
+<div id="chartContainer" style="min-height:500px;"></div>
+<script type="text/javascript">
+ jQuery("#Query").change(function () {
+        var s = document.getElementById('Query');
+        var item1 = s.options[s.selectedIndex].value;
+        if (item1 == "2") {
+            document.getElementById("From_Date").style.display = 'block';
+            document.getElementById("To_Date").style.display = 'block';
+            document.getElementById("Mob_Number").style.display = 'none';
+        }
+        else {
+            document.getElementById("From_Date").style.display = 'none';
+            document.getElementById("To_Date").style.display = 'none';
+        }
+ });
+</script>
+<style type="text/css">
+    .canvasjs-chart-credit {
+        display: none;
+    }
+</style>

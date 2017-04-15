@@ -7,6 +7,6 @@ namespace DoctorWeb.Models.Enums
 {
     public enum ChartQuery
     {
-        DateRange, ThisWeek, ThisMonth
+        ThisWeek, ThisMonth, DateRange
     }
 }

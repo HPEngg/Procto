@@ -584,6 +584,7 @@
     <Content Include="Content\js\bootstrap-timepicker.min.js" />
     <Content Include="Content\js\bootstrap.js" />
     <Content Include="Content\js\bootstrap.min.js" />
+    <Content Include="Content\js\canvasjs.min.js" />
     <Content Include="Content\js\certi_bootstrap.min.js" />
     <Content Include="Content\js\certi_jquery.min.js" />
     <Content Include="Content\js\charCount.js" />

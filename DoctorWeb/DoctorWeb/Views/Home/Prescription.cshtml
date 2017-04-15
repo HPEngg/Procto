@@ -40,7 +40,9 @@
                             </div>
 
                             <a href="#" class="webcam_img" onclick="    patientimage();"><img src="/Content/Images/webcam.png" /></a>
-                            <a href="@Url.Action("PrintPreview", "Home", new { id = ViewBag.PatientID })" target="blank" class="profile_pic_img"><img src="/Content/Images/print_icon.png" /></a>Prescription Form
+                            <a href="@Url.Action("PrintPreview", "Home", new { id = ViewBag.PatientID })" target="blank" class="profile_pic_img"><img src="/Content/Images/print_icon.png" /></a>
+                            <a href="@Url.Action("FollowUp", "Home", new { patientID = ViewBag.PatientID, id = ViewBag.PrescriptionID })" target="blank" class="profile_pic_img"><img src="/Content/Images/print_icon.png" /></a>Prescription Form
+
                         </h2>
                         @*<h2 class="fs-title" style="text-align:center;"><a href="#" class="webcam_img" onclick="patientimage();"><img src="/Content/Images/webcam.png" /></a><a href="#" class="profile_pic_img"><img src="/Content/Images/profilepic.png" /></a><a href="#" onclick="printform();" class="profile_pic_img"><img src="/Content/Images/print_icon.png" /></a>Prescription Form</h2>*@
                         <div style="width:100%; clear:both;">

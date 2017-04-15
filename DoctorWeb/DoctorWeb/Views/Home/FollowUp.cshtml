@@ -12,6 +12,8 @@
     <div style="float:left;">
         <label style="float:left;padding-right:5px;">Prescription Date</label>
         @Html.DropDownList("ID", (SelectList)ViewBag.Values, "Select Date", new { onchange = "this.form.submit();" })
+
+        <input type="hidden" name="patientID" value="@ViewBag.PatientID" />
     </div>
 }
 </br></br>

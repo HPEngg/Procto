@@ -217,6 +217,9 @@ namespace DoctorWeb.Controllers
             ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name");
             //ViewBag.InstructionID = new SelectList(db.Instructions, "ID", "Name");
             ViewBag.PatientID = patientID;
+
+            int? prescriptionID = db.Prescriptions.Where(p => p.PatientID == patientID).OrderByDescending(o => o.Date).Select(s => s.ID).FirstOrDefault();
+            ViewBag.PrescriptionID = prescriptionID == null ? 0 : prescriptionID;               
             ViewBag.PatientTypeID = new SelectList(db.PatientTypes, "ID", "PatientTypeName");
 
             ViewBag.DosageID = new SelectList(db.Dosages, "ID", "Name");
@@ -380,7 +383,8 @@ namespace DoctorWeb.Controllers
 
         public ActionResult PrintPreview(int id)
         {
-            var model = GetPatientPriscription(id);
+            int prescriptionID = db.Prescriptions.Where(p => p.PatientID == id).OrderByDescending(o => o.Date).Select(s => s.ID).FirstOrDefault();
+            var model = GetPatientPriscription(prescriptionID);
             ViewBag.PatientID = id;
             return View(model);
         }
@@ -388,15 +392,16 @@ namespace DoctorWeb.Controllers
         [HttpPost]
         public ActionResult Print(PrintModel model)
         {
-            var printData = GetPatientPriscription(model.PatientID);
+            int prescriptionID = db.Prescriptions.Where(p => p.PatientID == model.PatientID).OrderByDescending(o => o.Date).Select(s => s.ID).FirstOrDefault();
+            var printData = GetPatientPriscription(prescriptionID);
             return View(printData);
         }
 
-        public ActionResult FollowUp(int id)
+        public ActionResult FollowUp(int patientID, int id)
         {
             var model = GetPatientPriscription(id);
-            ViewBag.PatientID = id;
-            ViewBag.Values = new SelectList(db.Prescriptions.Where(p => p.PatientID == id), "ID", "Date");
+            ViewBag.PatientID = patientID;
+            ViewBag.Values = new SelectList(db.Prescriptions.Where(p => p.PatientID == patientID), "ID", "Date");
             return View(model);
         }
 
@@ -416,11 +421,32 @@ namespace DoctorWeb.Controllers
             return PartialView(model);
         }
 
-        private PrintModel GetPatientPriscription(int patientID)
+        private PrintModel GetPatientPriscription(int prescriptionID)
         {
             var model = new PrintModel();
 
+            var prescription = db.Prescriptions.Where(p => p.ID == prescriptionID).FirstOrDefault();
+            if (prescription != null)
+            {
+                model.Patient.Diagnosis = prescription.Diagnosis;
+                //model.Patient.Advice =
+                model.Patient.Procedure = prescription.Procedure;
+                model.Patient.Investigation = prescription.Investigation.Name;
+                model.Patient.DrawenImage1 = prescription.PrescriptionImage1;
+                model.Patient.DrawenImage2 = prescription.PrescriptionImage2;
+                model.Patient.PrescriptionImages = db.PreImages.Where(p => p.Prescriptions.Any(q => q.ID == prescription.ID)).Select(t => t.Image).ToList();
+
+                model.RX.Medicines = db.PrescriptionMedicines.Where(p => p.PrescriptionID == prescription.ID).ToList();
+
+                model.Compulsory.FollowDate = prescription.FollowDate == null ? string.Empty : prescription.FollowDate.Value.ToShortDateString();
+                model.Compulsory.Day = "Test";
+                model.Compulsory.Instructions = db.Instructions.Where(p => p.Prescriptions.Any(q => q.ID == prescription.ID)).ToList();
+            }
+
+
             model.Header.HeaderPhoto = db.Pictures.Select(p => p.Header).FirstOrDefault();
+
+            int patientID = prescription.PatientID;
             Patient patient = db.Patients.Find(patientID);
             if (patient != null)
             {
@@ -472,24 +498,7 @@ namespace DoctorWeb.Controllers
                     model.Patient.Others = patientHistory.Other;
                 }
 
-                var prescription = db.Prescriptions.Where(p => p.PatientID == patientID).OrderByDescending(q => q.ID).FirstOrDefault();
-                if (prescription != null)
-                {
-
-                    model.Patient.Diagnosis = prescription.Diagnosis;
-                    //model.Patient.Advice =
-                    model.Patient.Procedure = prescription.Procedure;
-                    model.Patient.Investigation = prescription.Investigation.Name;
-                    model.Patient.DrawenImage1 = prescription.PrescriptionImage1;
-                    model.Patient.DrawenImage2 = prescription.PrescriptionImage2;
-                    model.Patient.PrescriptionImages = db.PreImages.Where(p => p.Prescriptions.Any(q => q.ID == prescription.ID)).Select(t => t.Image).ToList();
-
-                    model.RX.Medicines = db.PrescriptionMedicines.Where(p => p.PrescriptionID == prescription.ID).ToList();
-
-                    model.Compulsory.FollowDate = prescription.FollowDate == null ? string.Empty : prescription.FollowDate.Value.ToShortDateString();
-                    model.Compulsory.Day = "Test";
-                    model.Compulsory.Instructions = db.Instructions.Where(p => p.Prescriptions.Any(q => q.ID == prescription.ID)).ToList();
-                }
+                
 
                 //model.Invoice.Consult = prescription.
                 //model.Invoice.Proctoscopy = prescription.

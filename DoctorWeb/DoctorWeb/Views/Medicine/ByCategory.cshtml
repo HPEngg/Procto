@@ -4,10 +4,12 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
+<h2>Categorywise Medicines List</h2>
+
 @using (Html.BeginForm("ByCategory", "Medicine"))
 {
 
-    <div style="float:left;">
+    <div style="float:left; padding-top:10px; padding-bottom:10px;">
         <label style="float:left;padding-right:5px;">Prescription Category</label>
         @Html.DropDownList("ID", (SelectList)ViewBag.Values, "Select Category", new { onchange = "this.form.submit();" })
     </div>
@@ -16,22 +18,27 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Dosage.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Morning.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Night.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Noon.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OINT.Name)
+            @*@Html.DisplayNameFor(model => model.OINT.Name)*@
+            Type
         </th>
         <th>
             @Html.DisplayNameFor(model => model.OINTMore)
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Morning.Name)*@
+            Morning
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Noon.Name)*@
+            Noon
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Night.Name)*@
+            Night
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Dosage.Name)*@
+            Dosage
         </th>
         <th>
             @Html.DisplayNameFor(model => model.IsDayAffected)
@@ -45,25 +52,26 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Dosage.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Morning.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Night.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Noon.Name)
-        </td>
         <td>
             @Html.DisplayFor(modelItem => item.OINT.Name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.OINTMore)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Morning.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Noon.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Night.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dosage.Name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.IsDayAffected)
@@ -75,9 +83,9 @@
             @Html.DisplayFor(modelItem => item.Quantity)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
         </td>
     </tr>
 }

@@ -2,10 +2,11 @@
 
 @{
     ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    //   Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = null;
 }
 
-<h2>Edit</h2>
+@*<h2>Edit</h2>
 
 @using (Html.BeginForm())
 {
@@ -83,4 +84,49 @@
 
 <div>
     @Html.ActionLink("Back to List", "Index")
-</div>
+</div>*@
+
+
+
+@{
+    ViewBag.Title = "Column Chart";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div id="chartContainer"></div>
+<script src="~/Scripts/modernizr-2.6.2.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script src="~/Content/js/jquery-1.12.0.min.js"></script>
+<script type="text/javascript">
+
+    $(function () {
+        var chart = new CanvasJS.Chart("chartContainer", {
+            theme: "theme2",
+            animationEnabled: true,
+            title: {
+                text: "Column Chart in ASP.Net MVC using CanvasJS"
+            },
+            data: [
+            {
+                type: "column",
+                dataPoints: [
+                    { y: 6, label: "Apple" },
+					{ y: 4, label: "Mango" },
+					{ y: 5, label: "Orange" },
+					{ y: 7, label: "Banana" },
+					{ y: 4, label: "Pineapple" },
+					{ y: 6, label: "Pears" },
+					{ y: 7, label: "Grapes" },
+					{ y: 5, label: "Lychee" },
+					{ y: 4, label: "Jackfruit" }
+                ],
+
+                //You can add dynamic data from the controller as shown below. Check the controller and uncomment the line which generates dataPoints.
+                //dataPoints: @Html.Raw(ViewBag.DataPoints),
+            }
+            ]
+        });
+        chart.render();
+    });
+</script>

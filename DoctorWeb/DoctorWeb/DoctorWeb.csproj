@@ -533,6 +533,7 @@
     <Content Include="Content\Images\preview\image5.png" />
     <Content Include="Content\Images\preview\image6.png" />
     <Content Include="Content\Images\preview\video.png" />
+    <Content Include="Content\Images\previous_prescription.png" />
     <Content Include="Content\Images\print_icon.png" />
     <Content Include="Content\Images\profilepic.png" />
     <Content Include="Content\Images\profilethumb.png" />

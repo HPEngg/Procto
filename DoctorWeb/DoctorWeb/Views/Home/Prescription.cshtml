@@ -41,7 +41,7 @@
 
                             <a href="#" class="webcam_img" onclick="    patientimage();"><img src="/Content/Images/webcam.png" /></a>
                             <a href="@Url.Action("PrintPreview", "Home", new { id = ViewBag.PatientID })" target="blank" class="profile_pic_img"><img src="/Content/Images/print_icon.png" /></a>
-                            <a href="@Url.Action("FollowUp", "Home", new { patientID = ViewBag.PatientID, id = ViewBag.PrescriptionID })" target="blank" class="profile_pic_img"><img src="/Content/Images/print_icon.png" /></a>Prescription Form
+                            <a href="@Url.Action("FollowUp", "Home", new { patientID = ViewBag.PatientID, id = ViewBag.PrescriptionID })" target="blank" class="profile_pic_img"><img src="/Content/Images/previous_prescription.png" /></a>Prescription Form
 
                         </h2>
                         @*<h2 class="fs-title" style="text-align:center;"><a href="#" class="webcam_img" onclick="patientimage();"><img src="/Content/Images/webcam.png" /></a><a href="#" class="profile_pic_img"><img src="/Content/Images/profilepic.png" /></a><a href="#" onclick="printform();" class="profile_pic_img"><img src="/Content/Images/print_icon.png" /></a>Prescription Form</h2>*@
@@ -156,6 +156,10 @@
                                     *@
                                     @Html.EditorFor(model => model.Medicine.Quantity, new { htmlAttributes = new { Name = "Medicine_Quantity", @id = "qut_1", @class = "pre qut", @placeholder = "Qty", @style = "width: 50px;color:#000; padding: 6px;" } })
                                     @Html.ValidationMessageFor(model => model.Medicine.Quantity, "", new { @class = "text-danger" })
+
+                                    @Html.EditorFor(model => model.Medicine.Unit, new { htmlAttributes = new { Name = "Medicine_Unit", @id = "unt_1", @class = "pre qut", @placeholder = "Unit", @style = "width: 50px;color:#000; padding: 6px;", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Medicine.Unit, "", new { @class = "text-danger" })
+
                                     <input value="+" class="add_field_button plusbutton" type="button" required>
                                     <a href="#" class="remove_field" style="text-decoration:none;font-weight:bold; float:left;">--</a>
 
@@ -350,6 +354,7 @@
                 //    newhtmlstring = newhtmlstring.replace("DosageID", "DosageID" + id);
 
                 newhtmlstring = newhtmlstring.replace("qut_" + a, "qut_" + id);
+                newhtmlstring = newhtmlstring.replace("unt_" + a, "unt_" + id);
                 return newhtmlstring;
             }
 
@@ -584,7 +589,8 @@
                                     return {
                                         label: item.OINTMore,
                                         value: item.OINTMore,
-                                        term: item.IsDayAffected
+                                        term: item.IsDayAffected,
+                                        unit: item.Unit,
                                     }
                                 }))
                             },
@@ -600,6 +606,7 @@
                         var current_rec = $(this).attr('id').substring(17);
                         jQuery("#days_flag" + parseInt(i - 1)).val(j.item.term);
                         //if (j.item.term == true) {
+                        alert(j.item.Unit);
                         //flag = true;
                         calc_qty(current_rec);
                         //var isdayaffected = false;
@@ -627,7 +634,8 @@
                                     return {
                                         label: item.OINTMore,
                                         value: item.OINTMore,
-                                        term: item.IsDayAffected
+                                        term: item.IsDayAffected,
+                                        unit: item.Unit,
                                     }
                                 }))
                             },
@@ -642,6 +650,7 @@
                     select: function (e, j) {
                         var current_rec = $(this).attr('id').substring(17);
                         jQuery("#days_flag" + parseInt(i - 1)).val(j.item.term);
+                        alert(j.item.Unit);
                         //if (j.item.term == true) {
                         //flag = true;
                         calc_qty(current_rec);

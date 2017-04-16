@@ -485,6 +485,8 @@
     <Content Include="Content\Images\iconsweets-icons.png" />
     <Content Include="Content\Images\imagedrawing.png" />
     <Content Include="Content\Images\imageupload.png" />
+    <Content Include="Content\Images\invoice.jpg" />
+    <Content Include="Content\Images\Invoice.png" />
     <Content Include="Content\Images\layout.png" />
     <Content Include="Content\Images\loaders\loader1.gif" />
     <Content Include="Content\Images\loaders\loader10.gif" />

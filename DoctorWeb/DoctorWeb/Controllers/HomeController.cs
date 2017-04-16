@@ -72,8 +72,11 @@ namespace DoctorWeb.Controllers
                 {
                     image = Image.FromStream(ms);
                     string imageFileName = patientID + "PatientImage" + imageID + ".png";
-                    //image.Save("~/Content/Images/" + imageFileName);
-                    image.Save("C:/test/" + imageFileName);
+                    //Uri myUri = new Uri("http://localhost:50409/");
+                    //string host = myUri.AbsoluteUri;  // host is "www.contoso.com"
+                    //image.Save(host + "/Content/Images/" + imageFileName);
+                    image.Save(Request.Url.Host + "/Content/Images/" + imageFileName);
+                    //image.Save("C:/test/" + imageFileName);
                 }
             }
             return PartialView();
@@ -265,8 +268,12 @@ namespace DoctorWeb.Controllers
                 InvestigationID = model.InvestigationID
             };
 
-            string imageFile1 = "C:/test/" + model.PatientID + "PatientImage1.png"; //Server.MapPath("~") + @"Content\Images\" + model.PatientID + "PatientImage1.png";
-            string imageFile2 = "C:/test/" + model.PatientID + "PatientImage2.png"; //Server.MapPath("~") + @"Content\Images\" + model.PatientID + "PatientImage2.png";
+            //string imageFile1 = "C:/test/" + model.PatientID + "PatientImage1.png"; //Server.MapPath("~") + @"Content\Images\" + model.PatientID + "PatientImage1.png";
+            //string imageFile2 = "C:/test/" + model.PatientID + "PatientImage2.png"; //Server.MapPath("~") + @"Content\Images\" + model.PatientID + "PatientImage2.png";
+
+            string imageFile1 = Request.Url.Host + "/Content/Images/" + model.PatientID + "PatientImage1.png";
+            string imageFile2 = Request.Url.Host + "/Content/Images/" + model.PatientID + "PatientImage2.png";
+
             if (System.IO.File.Exists(imageFile1))
             {
                 prescription.PrescriptionImage1 = System.IO.File.ReadAllBytes(imageFile1);

@@ -40,8 +40,22 @@
                             </div>
 
                             <a href="#" class="webcam_img" onclick="    patientimage();"><img src="/Content/Images/webcam.png" /></a>
-                            <a href="@Url.Action("PrintPreview", "Home", new { id = ViewBag.PatientID })" target="blank" class="profile_pic_img"><img src="/Content/Images/print_icon.png" /></a>
-                            <a href="@Url.Action("FollowUp", "Home", new { patientID = ViewBag.PatientID, id = ViewBag.PrescriptionID })" target="blank" class="profile_pic_img"><img src="/Content/Images/previous_prescription.png" /></a>Prescription Form
+
+                            @{
+                                if (ViewBag.PrescriptionID != 0)
+                                {
+                                    <a href="@Url.Action("PrintPreview", "Home", new { id = ViewBag.PatientID })" target="blank" class="profile_pic_img"><img src="/Content/Images/print_icon.png" style="pointer-events:auto;"/></a>
+                                    <a href="@Url.Action("FollowUp", "Home", new { patientID = ViewBag.PatientID, id = ViewBag.PrescriptionID })" target="blank" class="profile_pic_img"><img src="/Content/Images/previous_prescription.png" style="pointer-events:auto;"/></a>
+                                    <a href="@Url.Action("PrintInvoice", "Home", new { id = ViewBag.PrescriptionID })" target="blank" class="profile_pic_img"><img src="/Content/Images/invoice.png" style="pointer-events:auto;"/></a><span>Prescription Form</span>
+                                }
+                                else
+                                {
+                                    <a href="#" class="profile_pic_img"><img src="/Content/Images/print_icon.png" style="opacity:0.5; pointer-events:none;"/></a>
+                                    <a href="#" class="profile_pic_img"><img src="/Content/Images/previous_prescription.png" style="opacity:0.5; pointer-events:none;"/></a>
+                                    <a href="#" class="profile_pic_img"><img src="/Content/Images/invoice.png" style="opacity:0.5; pointer-events:none;"/></a><span>Prescription Form</span>
+                                }
+
+                            }
 
                         </h2>
                         @*<h2 class="fs-title" style="text-align:center;"><a href="#" class="webcam_img" onclick="patientimage();"><img src="/Content/Images/webcam.png" /></a><a href="#" class="profile_pic_img"><img src="/Content/Images/profilepic.png" /></a><a href="#" onclick="printform();" class="profile_pic_img"><img src="/Content/Images/print_icon.png" /></a>Prescription Form</h2>*@

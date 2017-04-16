@@ -99,8 +99,8 @@ namespace DoctorWeb.Controllers
             //                 where grouped.Count() <= 1
             //                 select grouped.Key;
 
-            var newPatients = from p in db.Patients
-                             let cCount =
+            var newPatients = from p in db.Patients.Where(w => FromDate <= w.CreatedDate && w.CreatedDate <= ToDate)
+                              let cCount =
                              (
                                from pr in db.Prescriptions
                                where p.ID == pr.PatientID
@@ -115,7 +115,7 @@ namespace DoctorWeb.Controllers
             //                  where grouped.Count() > 1
             //                  select grouped.Key;
 
-            var oldPatients = from p in db.Patients
+            var oldPatients = from p in db.Patients.Where(w => FromDate <= w.CreatedDate && w.CreatedDate <= ToDate)
                               let cCount =
                               (
                                 from pr in db.Prescriptions

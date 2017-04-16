@@ -187,13 +187,34 @@ namespace DoctorWeb.Controllers
             Response.End();
         }
 
+        //[HttpPost]
+        //public ActionResult UploadPatientImage(string jsonData)
+        //{
+        //    bool result = true;
+        //    PatientPhoto personData;
+        //    JavaScriptSerializer jss = new JavaScriptSerializer();
+        //    personData = jss.Deserialize<PatientPhoto>(jsonData);
+        //    Patient patient = db.Patients.Find(personData.Id);
+        //    if (patient == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    else
+        //    {
+        //        patient.Photo = personData.Photo;
+        //    }
+        //    db.Entry(patient).State = EntityState.Modified;
+        //    db.SaveChanges();
+        //    return Content(result.ToString());
+        //}
+
         [HttpPost]
-        public ActionResult UploadPatientImage(string jsonData)
+        public ActionResult UploadPatientImage(PatientPhoto personData1)
         {
             bool result = true;
-            PatientPhoto personData;
-            JavaScriptSerializer jss = new JavaScriptSerializer();
-            personData = jss.Deserialize<PatientPhoto>(jsonData);
+            PatientPhoto personData = personData1;
+            //JavaScriptSerializer jss = new JavaScriptSerializer();
+            //personData = jss.Deserialize<PatientPhoto>(jsonData);
             Patient patient = db.Patients.Find(personData.Id);
             if (patient == null)
             {

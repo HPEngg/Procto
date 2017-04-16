@@ -128,11 +128,14 @@ namespace DoctorWeb.Controllers
         public ActionResult Refered(int? id)
         {
             IEnumerable<PatientRefByDoctor> patients = null;
-            //ViewBag.Values = new SelectList(db.Doctors, "ID", "Name");
-            //if (id == null)
-            //    patients = db.Patients.Where(p => p.ReferredBy == Models.Enums.ReferredBy.Doctor).Select(o =>  new PatientRefByDoctor() { ID = o.ID, Name = o.Name, Age = o.Age.ToString(), Address = o.Address, Sex = o.Gender.ToString(), Status = o.Status.ToString(), Department = o.DepartmentID.ToString(), Ammount = db.Prescriptions.Where(p => p.PatientID == o.ID).Sum(s => (decimal?)s.Rs) ?? 0 });
-            //else
-            //    patients = db.Patients.Where(p => p.ReferredBy == Models.Enums.ReferredBy.Doctor && p.DoctorID == id).Select(o => new PatientRefByDoctor() { ID = o.ID, Name = o.Name, Age = o.Age.ToString(), Address = o.Address, Sex = o.Gender.ToString(), Status = o.Status.ToString(), Department = o.DepartmentID.ToString(), Ammount = db.Prescriptions.Where(p => p.PatientID == o.ID).Sum(s => (decimal?)s.Rs) ?? 0 });
+            ViewBag.Values = new SelectList(db.Doctors, "ID", "Name");
+
+            int? docId = db.ReferredBy.Where(w => w.Name == "Doctor").Select(s => s.ID).FirstOrDefault();
+
+            if (id == null && docId != null)
+                patients = db.Patients.Where(p => p.ReferredByID == docId).Select(o => new PatientRefByDoctor() { ID = o.ID, Name = o.Name, Age = o.Age.ToString(), Address = o.Address, Sex = o.Gender.ToString(), Status = o.Status.ToString(), Department = o.DepartmentID.ToString(), Ammount = db.Prescriptions.Where(p => p.PatientID == o.ID).Sum(s => (decimal?)s.Rs) ?? 0 });
+            else if(id != null)
+                patients = db.Patients.Where(p => p.DoctorID == id).Select(o => new PatientRefByDoctor() { ID = o.ID, Name = o.Name, Age = o.Age.ToString(), Address = o.Address, Sex = o.Gender.ToString(), Status = o.Status.ToString(), Department = o.DepartmentID.ToString(), Ammount = db.Prescriptions.Where(p => p.PatientID == o.ID).Sum(s => (decimal?)s.Rs) ?? 0 });
 
             //ViewBag.DoctorID = id;
             return View(patients.ToList());

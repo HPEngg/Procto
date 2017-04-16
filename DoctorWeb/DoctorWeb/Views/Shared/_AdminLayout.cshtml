@@ -62,8 +62,121 @@
             <div class="leftmenu">
                 <ul class="nav nav-tabs nav-stacked">
                     <li class="nav-header" style="padding-left:20px;">Main Navigation</li>
-                    <li @if (ctrName == "Pictures" && actnName == "Index") { <text> class="active" </text> }><div id="icondiv"><span class="icon-align-justify"></span></div><div id="icontitlediv">@Html.ActionLink("Header & Footer images", "Index", "Pictures")</div></li>
+                    
 
+                    @*Invoice*@
+                    <li class="dropdown">
+                        <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Invoice List</div></a>
+                        <ul @if (ctrName == "Invoice" && actnName == "Index") { <text> style="display:block;" </text>   }>
+                            <li @if (ctrName == "Invoice" && actnName == "Daily") { <text> class="active" </text>   }><div id="icontitlediv">@Html.ActionLink("Daily List", "Daily", "Invoice")</div></li>
+                            <li @if (ctrName == "Invoice" && actnName == "Weekly") { <text> class="active" </text>   }><div id="icontitlediv">@Html.ActionLink("Weekly List", "Weekly", "Invoice")</div></li>
+                            <li @if (ctrName == "Invoice" && actnName == "Monthly") { <text> class="active" </text>    }><div id="icontitlediv">@Html.ActionLink("Monthly List", "Monthly", "Invoice", new { month = Convert.ToInt32(DateTime.Now.Month), year = Convert.ToInt32(DateTime.Now.Year) }, null)</div></li>
+                        </ul>
+                    </li>
+
+                    @* MEDICINE *@
+                    <li class="dropdown">
+                        <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Medicine</div></a>
+                        <ul @if ((ctrName == "Medicine" && actnName == "Create") || (ctrName == "Medicine" && actnName == "Index")) { <text> style="display:block;" </text>  }>
+                            <li @if (ctrName == "Medicine" && actnName == "Create") { <text> class="active" </text>   }><div id="icontitlediv">@Html.ActionLink("Add Medicine", "Create", "Medicine")</div></li>
+                            <li @if (ctrName == "Medicine" && actnName == "Index") { <text> class="active" </text>   }><div id="icontitlediv">@Html.ActionLink("Medicine List", "Index", "Medicine")</div></li>
+                            <li @if (ctrName == "Medicine" && actnName == "ByCategory") { <text> class="active" </text>    }><div id="icontitlediv">@Html.ActionLink("Medicine By Category", "ByCategory", "Medicine")</div></li>
+                        </ul>
+                    </li>
+
+                    @* PRESCRIPTION CATEGORY *@
+                    <li class="dropdown">
+                        <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Medicine Protocol</div></a>
+                        <ul @if ((ctrName == "PrescriptionCategory" && actnName == "Create") || (ctrName == "PrescriptionCategory" && actnName == "Index")) { <text> style="display:block;" </text>   }>
+                            <li @if (ctrName == "PrescriptionCategory" && actnName == "Create") { <text> class="active" </text>    }><div id="icontitlediv">@Html.ActionLink("Add Medicine Protocol", "Create", "PrescriptionCategory")</div></li>
+                            <li @if (ctrName == "PrescriptionCategory" && actnName == "Index") { <text> class="active" </text>    }><div id="icontitlediv">@Html.ActionLink("Medicine Protocol List", "Index", "PrescriptionCategory")</div></li>
+                        </ul>
+                    </li>
+
+                    @* MEDICINE TYPE *@
+                    <li class="dropdown">
+                        <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Medicine Type</div></a>
+                        <ul @if ((ctrName == "OINTtype" && actnName == "Create") || (ctrName == "OINTtype" && actnName == "Index")) { <text> style="display:block;" </text>    }>
+                            <li @if (ctrName == "OINTtype" && actnName == "Create") { <text> class="active" </text>     }><div id="icontitlediv">@Html.ActionLink("Add Medicine Type", "Create", "OINTtype")</div></li>
+                            <li @if (ctrName == "OINTtype" && actnName == "Index") { <text> class="active" </text>     }><div id="icontitlediv">@Html.ActionLink("List of Types", "Index", "OINTtype")</div></li>
+                        </ul>
+                    </li>
+
+                    @* Doz Values *@
+                    <li class="dropdown">
+                        <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Dosage Values</div></a>
+                        <ul @if ((ctrName == "Doz" && actnName == "Create") || (ctrName == "Doz" && actnName == "Index")) { <text> style="display:block;" </text>      }>
+                            <li @if (ctrName == "Doz" && actnName == "Create") { <text> class="active" </text>       }><div id="icontitlediv">@Html.ActionLink("Add Dosage Value", "Create", "Doz")</div></li>
+                            <li @if (ctrName == "Doz" && actnName == "Index") { <text> class="active" </text>       }><div id="icontitlediv">@Html.ActionLink("List of Dosage Values", "Index", "Doz")</div></li>
+                        </ul>
+                    </li>
+
+                    @* MEDICINE DOSAGE *@
+                    <li class="dropdown">
+                        <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Dosage</div></a>
+                        <ul @if ((ctrName == "Dosage" && actnName == "Create") || (ctrName == "Dosage" && actnName == "Index")) { <text> style="display:block;" </text>     }>
+                            <li @if (ctrName == "Dosage" && actnName == "Create") { <text> class="active" </text>      }><div id="icontitlediv">@Html.ActionLink("Add Dosage", "Create", "Dosage")</div></li>
+                            <li @if (ctrName == "Dosage" && actnName == "Index") { <text> class="active" </text>      }><div id="icontitlediv">@Html.ActionLink("List of Dosage", "Index", "Dosage")</div></li>
+                        </ul>
+                    </li>
+
+                    @* Department *@
+                    <li class="dropdown">
+                        <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Department</div></a>
+                        <ul @if ((ctrName == "Department" && actnName == "Create") || (ctrName == "Department" && actnName == "Index")) { <text> style="display:block;" </text>    }>
+                            <li @if (ctrName == "Department" && actnName == "Create") { <text> class="active" </text>     }><div id="icontitlediv">@Html.ActionLink("Add Department", "Create", "Department")</div></li>
+                            <li @if (ctrName == "Department" && actnName == "Index") { <text> class="active" </text>     }><div id="icontitlediv">@Html.ActionLink("Department List", "Index", "Department")</div></li>
+                        </ul>
+                    </li>
+
+                    @* PATIENT TYPE *@
+                    <li class="dropdown">
+                        <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Patient Type</div></a>
+                        <ul @if ((ctrName == "PatientType" && actnName == "Create") || (ctrName == "PatientType" && actnName == "Index")) { <text> style="display:block;" </text>   }>
+                            <li @if (ctrName == "PatientType" && actnName == "Create") { <text> class="active" </text>    }><div id="icontitlediv">@Html.ActionLink("Add Patient Type", "Create", "PatientType")</div></li>
+                            <li @if (ctrName == "PatientType" && actnName == "Index") { <text> class="active" </text>    }><div id="icontitlediv">@Html.ActionLink("Patient Type List", "Index", "PatientType")</div></li>
+                        </ul>
+                    </li>
+
+                    @* PAYMENT TYPE *@
+                    <li class="dropdown">
+                        <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Charges Type</div></a>
+                        <ul @if ((ctrName == "PaymentType" && actnName == "Create") || (ctrName == "PaymentType" && actnName == "Index")) { <text> style="display:block;" </text>   }>
+                            <li @if (ctrName == "PaymentType" && actnName == "Create") { <text> class="active" </text>    }><div id="icontitlediv">@Html.ActionLink("Add Charge Type", "Create", "PaymentType")</div></li>
+                            <li @if (ctrName == "PaymentType" && actnName == "Index") { <text> class="active" </text>    }><div id="icontitlediv">@Html.ActionLink("Charges Type List", "Index", "PaymentType")</div></li>
+                        </ul>
+                    </li>
+
+                    @* INSTRUCTION *@
+                    <li class="dropdown">
+                        <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Instruction</div></a>
+                        <ul @if ((ctrName == "Instruction" && actnName == "Create") || (ctrName == "Instruction" && actnName == "Index")) { <text> style="display:block;" </text>   }>
+                            <li @if (ctrName == "Instruction" && actnName == "Create") { <text> class="active" </text>    }><div id="icontitlediv">@Html.ActionLink("Add Instruction", "Create", "Instruction")</div></li>
+                            <li @if (ctrName == "Instruction" && actnName == "Index") { <text> class="active" </text>    }><div id="icontitlediv">@Html.ActionLink("Instruction List", "Index", "Instruction")</div></li>
+                        </ul>
+                    </li>
+
+                    <li @if (ctrName == "Patient" && actnName == "Refered") { <text> class="active" </text>   }><div id="icondiv"><span class="icon-align-justify"></span></div><div id="icontitlediv">@Html.ActionLink("Patients reffered by Doctor", "Refered", "Patient")</div></li>
+
+                    @* ReferredBy *@
+                    <li class="dropdown">
+                        <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">ReferredBy</div></a>
+                        <ul @if ((ctrName == "ReferredBy" && actnName == "Create") || (ctrName == "ReferredBy" && actnName == "Index")) { <text> style="display:block;" </text>     }>
+                            <li @if (ctrName == "ReferredBy" && actnName == "Create") { <text> class="active" </text>      }><div id="icontitlediv">@Html.ActionLink("Add ReferredBy", "Create", "ReferredBy")</div></li>
+                            <li @if (ctrName == "ReferredBy" && actnName == "Index") { <text> class="active" </text>      }><div id="icontitlediv">@Html.ActionLink("ReferredBy List", "Index", "ReferredBy")</div></li>
+                        </ul>
+                    </li>
+
+                    @* DOCTOR *@
+                    <li class="dropdown">
+                        <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Doctor</div></a>
+                        <ul @if ((ctrName == "Doctor" && actnName == "Create") || (ctrName == "Doctor" && actnName == "Index")) { <text> style="display:block;" </text>   }>
+                            <li @if (ctrName == "Doctor" && actnName == "Create") { <text> class="active" </text>    }><div id="icontitlediv">@Html.ActionLink("Add Doctor", "Create", "Doctor")</div></li>
+                            <li @if (ctrName == "Doctor" && actnName == "Index") { <text> class="active" </text>    }><div id="icontitlediv">@Html.ActionLink("Doctors List", "Index", "Doctor")</div></li>
+                        </ul>
+                    </li>
+
+                    @* Prescription Images *@
                     <li class="dropdown">
                         <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Prescription Images</div></a>
                         <ul @if (ctrName == "PreImage" && actnName == "Index") { <text> style="display:block;" </text>    }>
@@ -72,114 +185,8 @@
                         </ul>
                     </li>
 
-                    <li @if (ctrName == "Patient" && actnName == "Refered") { <text> class="active" </text>  }><div id="icondiv"><span class="icon-align-justify"></span></div><div id="icontitlediv">@Html.ActionLink("Patients reffered by Doctor", "Refered", "Patient")</div></li>
-                    @*<li class="active"><div id="icondiv"><span class="icon-align-justify"></span></div><div id="icontitlediv">@Html.ActionLink("Add Image", "Index", "Pictures")</div></li>*@
-                    @*Prescription Image*@
-                    <li class="dropdown">
-                        <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Invoice List</div></a>
-                        <ul @if (ctrName == "Invoice" && actnName == "Index") { <text> style="display:block;" </text>  }>
-                            <li @if (ctrName == "Invoice" && actnName == "Daily") { <text> class="active" </text>  }><div id="icontitlediv">@Html.ActionLink("Daily List", "Daily", "Invoice")</div></li>
-                            <li @if (ctrName == "Invoice" && actnName == "Weekly") { <text> class="active" </text>  }><div id="icontitlediv">@Html.ActionLink("Weekly List", "Weekly", "Invoice")</div></li>
-                            <li @if (ctrName == "Invoice" && actnName == "Monthly") { <text> class="active" </text>   }><div id="icontitlediv">@Html.ActionLink("Monthly List", "Monthly", "Invoice", new { month = Convert.ToInt32(DateTime.Now.Month), year = Convert.ToInt32(DateTime.Now.Year) }, null)</div></li>
-                        </ul>
-                    </li>
-                    @* MEDICINE *@
-                    <li class="dropdown">
-                        <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Medicine</div></a>
-                        <ul @if ((ctrName == "Medicine" && actnName == "Create") || (ctrName == "Medicine" && actnName == "Index")) { <text> style="display:block;" </text> }>
-                            <li @if (ctrName == "Medicine" && actnName == "Create") { <text> class="active" </text>  }><div id="icontitlediv">@Html.ActionLink("Add Medicine", "Create", "Medicine")</div></li>
-                            <li @if (ctrName == "Medicine" && actnName == "Index") { <text> class="active" </text>  }><div id="icontitlediv">@Html.ActionLink("Medicine List", "Index", "Medicine")</div></li>
-                            <li @if (ctrName == "Medicine" && actnName == "ByCategory") { <text> class="active" </text>   }><div id="icontitlediv">@Html.ActionLink("Medicine By Category", "ByCategory", "Medicine")</div></li>
-                        </ul>
-                    </li>
-                    @* PRESCRIPTION CATEGORY *@
-                    <li class="dropdown">
-                        <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Category</div></a>
-                        <ul @if ((ctrName == "PrescriptionCategory" && actnName == "Create") || (ctrName == "PrescriptionCategory" && actnName == "Index")) { <text> style="display:block;" </text>  }>
-                            <li @if (ctrName == "PrescriptionCategory" && actnName == "Create") { <text> class="active" </text>   }><div id="icontitlediv">@Html.ActionLink("Add Category", "Create", "PrescriptionCategory")</div></li>
-                            <li @if (ctrName == "PrescriptionCategory" && actnName == "Index") { <text> class="active" </text>   }><div id="icontitlediv">@Html.ActionLink("Category List", "Index", "PrescriptionCategory")</div></li>
-                        </ul>
-                    </li>
-                    @* PATIENT TYPE *@
-                    <li class="dropdown">
-                        <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Patient Type</div></a>
-                        <ul @if ((ctrName == "PatientType" && actnName == "Create") || (ctrName == "PatientType" && actnName == "Index")) { <text> style="display:block;" </text>  }>
-                            <li @if (ctrName == "PatientType" && actnName == "Create") { <text> class="active" </text>   }><div id="icontitlediv">@Html.ActionLink("Add Patient Type", "Create", "PatientType")</div></li>
-                            <li @if (ctrName == "PatientType" && actnName == "Index") { <text> class="active" </text>   }><div id="icontitlediv">@Html.ActionLink("Patient Type List", "Index", "PatientType")</div></li>
-                        </ul>
-                    </li>
-
-                    @* PAYMENT TYPE *@
-                    <li class="dropdown">
-                        <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Charges Type</div></a>
-                        <ul @if ((ctrName == "PaymentType" && actnName == "Create") || (ctrName == "PaymentType" && actnName == "Index")) { <text> style="display:block;" </text>  }>
-                            <li @if (ctrName == "PaymentType" && actnName == "Create") { <text> class="active" </text>   }><div id="icontitlediv">@Html.ActionLink("Add Charge Type", "Create", "PaymentType")</div></li>
-                            <li @if (ctrName == "PaymentType" && actnName == "Index") { <text> class="active" </text>   }><div id="icontitlediv">@Html.ActionLink("Charges Type List", "Index", "PaymentType")</div></li>
-                        </ul>
-                    </li>
-
-                    @* INSTRUCTION *@
-                    <li class="dropdown">
-                        <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Instruction</div></a>
-                        <ul @if ((ctrName == "Instruction" && actnName == "Create") || (ctrName == "Instruction" && actnName == "Index")) { <text> style="display:block;" </text>  }>
-                            <li @if (ctrName == "Instruction" && actnName == "Create") { <text> class="active" </text>   }><div id="icontitlediv">@Html.ActionLink("Add Instruction", "Create", "Instruction")</div></li>
-                            <li @if (ctrName == "Instruction" && actnName == "Index") { <text> class="active" </text>   }><div id="icontitlediv">@Html.ActionLink("Instruction List", "Index", "Instruction")</div></li>
-                        </ul>
-                    </li>
-
-                    @* DOCTOR *@
-                    <li class="dropdown">
-                        <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Doctor</div></a>
-                        <ul @if ((ctrName == "Doctor" && actnName == "Create") || (ctrName == "Doctor" && actnName == "Index")) { <text> style="display:block;" </text>  }>
-                            <li @if (ctrName == "Doctor" && actnName == "Create") { <text> class="active" </text>   }><div id="icontitlediv">@Html.ActionLink("Add Doctor", "Create", "Doctor")</div></li>
-                            <li @if (ctrName == "Doctor" && actnName == "Index") { <text> class="active" </text>   }><div id="icontitlediv">@Html.ActionLink("Doctors List", "Index", "Doctor")</div></li>
-                        </ul>
-                    </li>
-
-                    @* MEDICINE TYPE *@
-                    <li class="dropdown">
-                        <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Medicine Type</div></a>
-                        <ul @if ((ctrName == "OINTtype" && actnName == "Create") || (ctrName == "OINTtype" && actnName == "Index")) { <text> style="display:block;" </text>   }>
-                            <li @if (ctrName == "OINTtype" && actnName == "Create") { <text> class="active" </text>    }><div id="icontitlediv">@Html.ActionLink("Add Medicine Type", "Create", "OINTtype")</div></li>
-                            <li @if (ctrName == "OINTtype" && actnName == "Index") { <text> class="active" </text>    }><div id="icontitlediv">@Html.ActionLink("List of Types", "Index", "OINTtype")</div></li>
-                        </ul>
-                    </li>
-
-                    @* MEDICINE DOSAGE *@
-                    <li class="dropdown">
-                        <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Dosage</div></a>
-                        <ul @if ((ctrName == "Dosage" && actnName == "Create") || (ctrName == "Dosage" && actnName == "Index")) { <text> style="display:block;" </text>    }>
-                            <li @if (ctrName == "Dosage" && actnName == "Create") { <text> class="active" </text>     }><div id="icontitlediv">@Html.ActionLink("Add Dosage", "Create", "Dosage")</div></li>
-                            <li @if (ctrName == "Dosage" && actnName == "Index") { <text> class="active" </text>     }><div id="icontitlediv">@Html.ActionLink("List of Dosage", "Index", "Dosage")</div></li>
-                        </ul>
-                    </li>
-
-                    @* Doz Values *@
-                    <li class="dropdown">
-                        <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Dosage Values</div></a>
-                        <ul @if ((ctrName == "Doz" && actnName == "Create") || (ctrName == "Doz" && actnName == "Index")) { <text> style="display:block;" </text>     }>
-                            <li @if (ctrName == "Doz" && actnName == "Create") { <text> class="active" </text>      }><div id="icontitlediv">@Html.ActionLink("Add Dosage Value", "Create", "Doz")</div></li>
-                            <li @if (ctrName == "Doz" && actnName == "Index") { <text> class="active" </text>      }><div id="icontitlediv">@Html.ActionLink("List of Dosage Values", "Index", "Doz")</div></li>
-                        </ul>
-                    </li>
-
-                    @* Department *@
-                    <li class="dropdown">
-                        <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Department</div></a>
-                        <ul @if ((ctrName == "Department" && actnName == "Create") || (ctrName == "Department" && actnName == "Index")) { <text> style="display:block;" </text>   }>
-                            <li @if (ctrName == "Department" && actnName == "Create") { <text> class="active" </text>    }><div id="icontitlediv">@Html.ActionLink("Add Department", "Create", "Department")</div></li>
-                            <li @if (ctrName == "Department" && actnName == "Index") { <text> class="active" </text>    }><div id="icontitlediv">@Html.ActionLink("Department List", "Index", "Department")</div></li>
-                        </ul>
-                    </li>
-
-                    @* ReferredBy *@
-                    <li class="dropdown">
-                        <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">ReferredBy</div></a>
-                        <ul @if ((ctrName == "ReferredBy" && actnName == "Create") || (ctrName == "ReferredBy" && actnName == "Index")) { <text> style="display:block;" </text>    }>
-                            <li @if (ctrName == "ReferredBy" && actnName == "Create") { <text> class="active" </text>     }><div id="icontitlediv">@Html.ActionLink("Add ReferredBy", "Create", "ReferredBy")</div></li>
-                            <li @if (ctrName == "ReferredBy" && actnName == "Index") { <text> class="active" </text>     }><div id="icontitlediv">@Html.ActionLink("ReferredBy List", "Index", "ReferredBy")</div></li>
-                        </ul>
-                    </li>
+                    @* Header footer *@
+                    <li @if (ctrName == "Pictures" && actnName == "Index") { <text> class="active" </text>  }><div id="icondiv"><span class="icon-align-justify"></span></div><div id="icontitlediv">@Html.ActionLink("Header & Footer images", "Index", "Pictures")</div></li>
 
                     @* Investigation *@
                     <li class="dropdown">
@@ -220,47 +227,6 @@
                             <li @if (ctrName == "Chart" && actnName == "ReferenceWisePatient") { <text> class="active" </text>     }><div id="icontitlediv">@Html.ActionLink("ReferenceWisePatient", "ReferenceWisePatient", new { controller = "Chart" })</div></li>
                         </ul>
                     </li>
-
-                    @*<li><div id="icondiv"><span class="icon-briefcase"></span></div><div id="icontitlediv">@Html.ActionLink("Referring By", "Index", "Doctor")</div></li>
-
-                    <li class="dropdown">
-                        <a href=""><span class="icon-briefcase"></span> Doctor</a>
-                        <ul>
-                            <li><a href="elements.html">Theme Components</a></li>
-                            <li><a href="bootstrap.html">Bootstrap Components</a></li>
-                            <li>@Html.ActionLink("Add New", "Create", "Doctor")</li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href=""><span class="icon-th-list"></span> Tables</a>
-                        <ul>
-                            <li><a href="table-static.html">Static Table</a></li>
-                            <li><a href="table-dynamic.html">Dynamic Table</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="typography.html"><span class="icon-font"></span> Typography</a></li>
-                    <li><a href="charts.html"><span class="icon-signal"></span> Graph &amp; Charts</a></li>
-                    <li><a href="messages.html"><span class="icon-envelope"></span> Messages</a></li>
-                    <li><a href="buttons.html"><span class="icon-hand-up"></span> Buttons &amp; Icons</a></li>
-                    <li class="dropdown">
-                        <a href=""><span class="icon-pencil"></span> Forms</a>
-                        <ul>
-                            <li><a href="forms.html">Form Styles</a></li>
-                            <li><a href="wizards.html">Wizard Form</a></li>
-                            <li><a href="wysiwyg.html">WYSIWYG</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="calendar.html"><span class="icon-calendar"></span> Calendar</a></li>
-                    <li><a href="animations.html"><span class="icon-play"></span> Animations</a></li>
-                    <li class="dropdown">
-                        <a href=""><span class="icon-book"></span> Other Pages</a>
-                        <ul>
-                            <li><a href="404.html">404 Error Page</a></li>
-                            <li><a href="invoice.html">Invoice Page</a></li>
-                            <li><a href="editprofile.html">Edit Profile</a></li>
-                            <li><a href="grid.html">Grid Styles</a></li>
-                        </ul>
-                    </li>*@
                 </ul>
             </div>
             <!--leftmenu-->

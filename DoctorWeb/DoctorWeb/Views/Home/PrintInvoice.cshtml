@@ -12,35 +12,22 @@
     <title>PrintInvoice</title>
 </head>
 <body>
+        @Html.DisplayNameFor(model => model.Age)
+        @Html.DisplayNameFor(model => model.Gender)
+        @Html.DisplayNameFor(model => model.Address)
+
     <table class="table">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Age)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Gender)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Address)
-            </th>
+            
         </tr>
     
-    @foreach (var item in Model) {
+    @foreach (var item in Model.Medicines) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Age)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Gender)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
+                @Html.DisplayFor(modelItem => item.DosageID)
             </td>
         </tr>
     }

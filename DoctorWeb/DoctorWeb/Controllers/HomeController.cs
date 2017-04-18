@@ -316,6 +316,8 @@ namespace DoctorWeb.Controllers
                         Night = db.Dozes.Find(model.NightDozID[i]),
                         DosageID = model.DosageID[i],
                         Quantity = model.Medicine_Quantity[i],
+                        Unit = model.Medicine_Unit[i],
+                        Total = model.Medicine_Total[i],
                         OINTTypeID = model.OINTTypeID[i]
                     };
 
@@ -390,6 +392,11 @@ namespace DoctorWeb.Controllers
         {
             int prescriptionID = db.Prescriptions.Where(p => p.PatientID == id).OrderByDescending(o => o.Date).Select(s => s.ID).FirstOrDefault();
             var model = GetPatientPriscription(prescriptionID);
+            model.FooterRequired = true;
+            model.HeaderRequired = true;
+            model.InvoiceRequired = true;
+            model.PatientRequired = true;
+            model.RXRequired = true;
             ViewBag.PatientID = id;
             return View(model);
         }
@@ -400,6 +407,7 @@ namespace DoctorWeb.Controllers
             var prescription = db.Prescriptions.Where(p => p.ID == id).FirstOrDefault();
             if (prescription != null)
             {
+                model.HeaderPhoto = db.Pictures.Select(p => p.Header).FirstOrDefault();
                 Patient patient = db.Patients.Find(prescription.PatientID);
                 if (patient != null)
                 {
@@ -492,6 +500,7 @@ namespace DoctorWeb.Controllers
                 model.Patient.Diagnosis = prescription.Diagnosis;
                 //model.Patient.Advice =
                 model.Patient.Procedure = prescription.Procedure;
+                model.Patient.Type = prescription.PatientType.PatientTypeName.ToString();
                 model.Patient.Investigation = prescription.Investigation.Name;
                 model.Patient.DrawenImage1 = prescription.PrescriptionImage1;
                 model.Patient.DrawenImage2 = prescription.PrescriptionImage2;
@@ -518,6 +527,7 @@ namespace DoctorWeb.Controllers
                 model.Patient.Gender = patient.Gender.ToString();
                 model.Patient.TodayDate = DateTime.Now.Date.ToShortDateString();
                 model.Patient.No = patient.ID.ToString();
+                model.Patient.Department = patient.Department.Name.ToString();
                 model.Patient.Contact = patient.Contact;
                 model.Patient.Email = patient.Email;
                 model.Patient.Address = patient.Address;
@@ -559,7 +569,36 @@ namespace DoctorWeb.Controllers
                     model.Patient.Others = patientHistory.Other;
                 }
 
-                
+
+                decimal? consultCarge = db.PaymentTypes.Where(w => w.PaymentTypeName.StartsWith("C")).Select(s => s.Rupees).FirstOrDefault();
+                if (consultCarge != null)
+                {
+                    model.Invoice.Consult = consultCarge.ToString();
+                }
+
+                decimal? proctoscopyCarge = db.PaymentTypes.Where(w => w.PaymentTypeName.StartsWith("P")).Select(s => s.Rupees).FirstOrDefault();
+                if (proctoscopyCarge != null)
+                {
+                    model.Invoice.Proctoscopy = proctoscopyCarge.ToString();
+                }
+
+                decimal? dressingCarge = db.PaymentTypes.Where(w => w.PaymentTypeName.StartsWith("D")).Select(s => s.Rupees).FirstOrDefault();
+                if (dressingCarge != null)
+                {
+                    model.Invoice.Dressing = dressingCarge.ToString();
+                }
+
+                decimal? ksProcedureCarge = db.PaymentTypes.Where(w => w.PaymentTypeName.StartsWith("K")).Select(s => s.Rupees).FirstOrDefault();
+                if (ksProcedureCarge != null)
+                {
+                    model.Invoice.KSProcedure = ksProcedureCarge.ToString();
+                }
+
+                decimal? otherCarge = db.PaymentTypes.Where(w => w.PaymentTypeName.StartsWith("O")).Select(s => s.Rupees).FirstOrDefault();
+                if (otherCarge != null)
+                {
+                    model.Invoice.Other = otherCarge.ToString();
+                }
 
                 //model.Invoice.Consult = prescription.
                 //model.Invoice.Proctoscopy = prescription.

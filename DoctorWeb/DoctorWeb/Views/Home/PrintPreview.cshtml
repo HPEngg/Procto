@@ -81,35 +81,6 @@
                         }
                     }
                 </div>
-                @*<div class="fltleft" style="width:82%;">
-                        <div style="width:100%;">
-                            <div style="width:65%;" class="fltleft">
-                                <input type="text" placeholder="Hospital Name Here" />
-                            </div>
-                            <div style="width:35%;" class="fltleft">
-                                <input type="text" placeholder="Doctor Name Here" />
-                            </div>
-                        </div>
-                        <div style="width:100%;">
-                            <div style="width:65%;" class="fltleft">
-                                <input type="text" placeholder="Type Here" />
-                            </div>
-                            <div style="width:35%;" class="fltleft">
-                                <input type="text" placeholder="Degree Here" />
-                            </div>
-                        </div>
-                        <div style="width:100%;">
-                            <div style="width:65%;" class="fltleft">
-                                <input type="text" placeholder="Tagline Here" />
-                            </div>
-                            <div style="width:35%;" class="fltleft">
-                                <input type="text" placeholder="Phone Number Here" />
-                            </div>
-                        </div>
-                        <div style="width:100%;">
-                            <input type="text" placeholder="Address" style="width:98%;" />
-                        </div>
-                    </div>*@
             </div>
             <hr style="clear:both; border-bottom:1px solid #000; padding:5px 0;" />
             <div id="PatientPart">
@@ -180,8 +151,16 @@
                                 <div class="print_text_fltleft print_heading">
                                     @Html.DisplayNameFor(model => model.Patient.ID)
                                 </div>
-                                <div>
+                                <div class="fltleft">
                                     @Html.DisplayFor(model => model.Patient.ID)
+                                </div>
+                                <span class="fltleft" style="padding: 0 2px;"> - </span>
+                                <div class="fltleft">
+                                    @Html.DisplayFor(model => model.Patient.Department)
+                                </div>
+                                <span class="fltleft" style="padding: 0 2px;"> / </span>
+                                <div class="fltleft">
+                                    @Html.DisplayFor(model => model.Patient.Type)
                                 </div>
                             </div>
                         }
@@ -235,7 +214,7 @@
                         if (!string.IsNullOrEmpty(Model.Patient.KCO))
                         {
                             <div class="print_text_fltleft print_heading">
-                                <span class="print_heading">K / C / O</span>
+                                <span class="print_heading">K/C/O</span>
                             </div>
                             <div>
                                 @Html.DisplayFor(model => model.Patient.KCO)
@@ -396,8 +375,7 @@
                         {
                             <div class="print_text_padding " style="width:25%;">
                                 <div class="print_text_fltleft print_heading">
-
-                                    @Html.DisplayNameFor(model => model.Patient.SCO)
+                                    <span class="print_heading">S/C/O</span>
                                 </div>
                                 <div>
                                     @Html.DisplayFor(model => model.Patient.SCO) <span> degree</span>

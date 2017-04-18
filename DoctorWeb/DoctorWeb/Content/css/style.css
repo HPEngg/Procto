@@ -11,7 +11,7 @@
 .fonts_candara {
 	font-family: 'CANDARA' !important;
     font-size:12px;
-    text-transform:uppercase;
+    /*text-transform:uppercase;*/
 }
 
 /*basic reset*/

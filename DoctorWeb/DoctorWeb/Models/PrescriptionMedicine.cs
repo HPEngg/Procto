@@ -31,6 +31,10 @@ namespace DoctorWeb.Models
 
         public float Quantity { get; set; }
 
+        public float Unit { get;  set;}
+
+        public float Total { get; set; }
+
         public int PrescriptionID { get; set; }
         public virtual Prescription Prescription { get; set; }
 

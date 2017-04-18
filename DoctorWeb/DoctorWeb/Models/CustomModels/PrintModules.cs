@@ -27,6 +27,8 @@ namespace DoctorWeb.Models.CustomModels
         public string Weight { get; set; }
         public string TodayDate { get; set; }
         public string No { get; set; }
+        public string Department { get; set; }
+        public string Type { get; set; }
         public string Contact { get; set; }
         public string Email { get; set; }
         public string Address { get; set; }

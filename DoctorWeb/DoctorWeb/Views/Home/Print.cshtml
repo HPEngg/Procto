@@ -125,8 +125,16 @@
                                     <div class="print_text_fltleft print_heading">
                                         @Html.DisplayNameFor(model => model.Patient.ID)
                                     </div>
-                                    <div>
+                                    <div class="fltleft">
                                         @Html.DisplayFor(model => model.Patient.ID)
+                                    </div>
+                                    <span class="fltleft" style="padding: 0 2px;"> - </span>
+                                    <div class="fltleft">
+                                        @Html.DisplayFor(model => model.Patient.Department)
+                                    </div>
+                                    <span class="fltleft" style="padding: 0 2px;"> / </span>
+                                    <div class="fltleft">
+                                        @Html.DisplayFor(model => model.Patient.Type)
                                     </div>
                                 </div>
                             }
@@ -180,7 +188,7 @@
                             if (!string.IsNullOrEmpty(Model.Patient.KCO))
                             {
                                 <div class="print_text_fltleft print_heading">
-                                    <span class="print_heading">K / C / O</span>
+                                    <span class="print_heading">K/C/O</span>
                                 </div>
                                 <div>
                                     @Html.DisplayFor(model => model.Patient.KCO)
@@ -340,9 +348,11 @@
                             if (!string.IsNullOrEmpty(Model.Patient.SCO))
                             {
                                 <div class="print_text_padding " style="width:25%;">
-                                    <div class="print_text_fltleft print_heading">
-
+                                    @*<div class="print_text_fltleft print_heading">
                                         @Html.DisplayNameFor(model => model.Patient.SCO)
+                                    </div>*@
+                                    <div class="print_text_fltleft print_heading">
+                                        <span class="print_heading">S/C/O</span>
                                     </div>
                                     <div>
                                         @Html.DisplayFor(model => model.Patient.SCO) <span> degree</span>

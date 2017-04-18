@@ -54,6 +54,7 @@ namespace DoctorWeb.Models.CustomModels
         public int[] NightDozID { get; set; }
         public int[] DosageID { get; set; }
         public int[] Medicine_Quantity { get; set; }
-
+        public float[] Medicine_Unit { get; set; }
+        public float[] Medicine_Total { get; set; }
     }
 }

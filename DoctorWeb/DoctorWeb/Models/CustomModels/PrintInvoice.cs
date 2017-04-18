@@ -7,6 +7,8 @@ namespace DoctorWeb.Models.CustomModels
 {
     public class PrintInvoice
     {
+
+        public byte[] HeaderPhoto { get; set; }
         public string Name { get; set; }
         public int? Age { get; set; }
         public string Gender { get; set; }
@@ -14,7 +16,6 @@ namespace DoctorWeb.Models.CustomModels
         public string TodayDate { get; set; }
         public string Address { get; set; }
         public int InvoiceNo { get; set; }
-
         public List<PrescriptionMedicine> Medicines { get; set; }
 
         public string Consult { get; set; }

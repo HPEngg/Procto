@@ -55,6 +55,8 @@ namespace DoctorWeb.Models
 
         public byte[] UploadedImage { get; set; }
 
+        public string Other { get; set; }
+
         public int InvestigationID { get; set; }
         public virtual Investigation Investigation { get; set; }
     }

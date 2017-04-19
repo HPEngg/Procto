@@ -32,6 +32,8 @@ namespace DoctorWeb.Models.CustomModels
         public Decimal Received { get; set; }
         public Decimal Pending { get; set; }
 
+        public string Other { get; set; }
+
         public IEnumerable<PaymentType> PaymentTypes { get; set; }
 
         public IEnumerable<PrescriptionCategory> Categories { get; set; }

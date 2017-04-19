@@ -20,7 +20,8 @@ namespace DoctorWeb.Controllers
 
         public ActionResult Search(String PatientName)
         {
-            var model = db.Patients.Where(p => p.Name.Contains(PatientName) || p.Address.Contains(PatientName) || p.Contact.Contains("")).Select(p => new PatientSearch()
+            //PatientName = PatientName.Replace('\u00A0', ' ');
+            var model = db.Patients.Where(p => p.Name.Contains(PatientName) || p.Address.Contains(PatientName) || p.Contact.Contains(PatientName)).Select(p => new PatientSearch()
             {
                 Status = p.Status.ToString(),
                 Name = p.Name,
@@ -29,7 +30,7 @@ namespace DoctorWeb.Controllers
                 DepartmentName = p.DepartmentID.ToString(),
                 Reference = p.ReferredBy.Name,
                 ID = p.ID,
-                RefferalName = "test"
+                RefferalName = p.DoctorID != null ? db.Doctors.Where(w => w.ID == p.DoctorID).Select(s => s.Name).FirstOrDefault() : "Other"//"test"
             }).ToList();
 
             foreach(var patient in model)
@@ -233,7 +234,7 @@ namespace DoctorWeb.Controllers
             ViewBag.PrescriptionCategoryID = new SelectList(db.PrescriptionCategories, "ID", "Name");
 
             model.PrescriptionImages = db.PreImages.Select(o => new SelectListItem() { Text = o.Label, Value = o.ID.ToString(), Selected = false });
-            model.Instructions = db.Instructions.Select(p => new SelectListItem() { Text = p.Description, Value = p.ID.ToString(), Selected = false });
+            model.Instructions = db.Instructions.Select(p => new SelectListItem() { Text = p.Name, Value = p.ID.ToString(), Selected = false });
 
             return View(model);
         }
@@ -262,7 +263,8 @@ namespace DoctorWeb.Controllers
                 //PrescriptionImage1 = System.IO.File.ReadAllBytes(Server.MapPath("~") + @"Content\Images\" + model.PatientID + "PatientImage1.png"),
                 //PrescriptionImage2 = Convert.FromBase64String(model.PatientImage2.Remove(0, 22)),
                 //Investigation = model.Investigation
-                InvestigationID = model.InvestigationID
+                InvestigationID = model.InvestigationID,
+                Other = model.Other
             };
 
             //string imageFile1 = "C:/test/" + model.PatientID + "PatientImage1.png"; //Server.MapPath("~") + @"Content\Images\" + model.PatientID + "PatientImage1.png";

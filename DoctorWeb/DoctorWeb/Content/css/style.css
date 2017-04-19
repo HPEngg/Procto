@@ -8,9 +8,10 @@
     font-family: 'CANDARA';
     src: url('../fonts/CANDARA.eot') format('embedded-opentype'), url('../fonts/CANDARA.ttf') format('truetype'), url('../fonts/CANDARA.woff') format('woff');
 }
+
 .fonts_candara {
-	font-family: 'CANDARA' !important;
-    font-size:12px;
+    font-family: 'CANDARA' !important;
+    font-size: 12px;
     /*text-transform:uppercase;*/
 }
 
@@ -240,7 +241,7 @@ select.pre1 {
 /*headings*/
 .fs-title {
     font-size: 14px;
-    font-weight:bold;
+    font-weight: bold;
     text-transform: uppercase;
     color: #2C3E50;
     margin-bottom: 10px;
@@ -912,21 +913,20 @@ td {
 /* CSS FOR IMAGE UPLOAD BROWSE BUTTON STARTS */
 
 .image-upload {
-	float: left;
-	width: 35px;
-	height: 35px;
-    padding:0 5px 0 3px;
-}
-.image-upload > input
-{
-    display: none;
+    float: left;
+    width: 35px;
+    height: 35px;
+    padding: 0 5px 0 3px;
 }
 
-.image-upload img
-{
-    width: 40px;
-    cursor: pointer;
-}
+    .image-upload > input {
+        display: none;
+    }
+
+    .image-upload img {
+        width: 40px;
+        cursor: pointer;
+    }
 
 /* CSS FOR IMAGE UPLOAD BROWSE BUTTON ENDS */
 
@@ -959,13 +959,13 @@ td {
 
 /*PRESCRIPTION PAGE CSS*/
 #msform_right {
-    font-family:montserrat, arial, verdana;
-    font-size:14px;
+    font-family: montserrat, arial, verdana;
+    font-size: 14px;
 }
 
-#msform_right .top {
-    display: none;
-}
+    #msform_right .top {
+        display: none;
+    }
 
 #msform_right_main {
     float: left;
@@ -1018,124 +1018,139 @@ td {
         width: 30%;
     }
 
-#SelectedInstructionsIDs{
+#SelectedInstructionsIDs {
     height: 140px !important;
-    color:#000 !important;
+    color: #000 !important;
 }
 
 #SelectedPrescriptionImages {
     height: 140px !important;
-    color:#000 !important;
+    color: #000 !important;
 }
 
 #Description {
-    max-width:600px !important;
+    max-width: 600px !important;
 }
 
 .dl-horizontal dt {
-    float:left;
-    margin-right:10px;
-    min-width:120px;
+    float: left;
+    margin-right: 10px;
+    min-width: 120px;
 }
 
 .dl-horizontal dd {
-        margin-left: 0px !important;
-    }
+    margin-left: 0px !important;
+}
 
-.dl-horizontal dt:after
-{
+.dl-horizontal dt:after {
     content: " :";
 }
 
 .dl-horizontal #print_details {
-  float: left;
-  width: 75%;
+    float: left;
+    width: 75%;
 }
 
 .dl-horizontal #print_image {
-  float: left;
+    float: left;
 }
 
-.ddfltleft{
-    float:left;
-    padding-right:10px;
+.ddfltleft {
+    float: left;
+    padding-right: 10px;
 }
 
-.ddfltleft:after{
-    content: ", ";
-}
+    .ddfltleft:after {
+        content: ", ";
+    }
 
 .clear_display {
-  clear: both;
-  display: block;
+    clear: both;
+    display: block;
 }
 
 #HeaderPart input {
-    width:95%;
+    width: 95%;
 }
 
 .print_margin {
-    margin:0 auto;
-    max-width:720px;
-    width:100%;
-    line-height:2;
+    margin: 0 auto;
+    max-width: 720px;
+    width: 100%;
+    line-height: 2;
 }
 
 .print_text_padding {
-    float:left;
-    width:20%;
+    float: left;
+    width: 20%;
 }
+
 .fltleft {
-    float:left;
+    float: left;
 }
+
 .fltright {
-    float:right;
+    float: right;
 }
 
 .print_text_fltleft {
-    float:left;
-    padding-right:10px;
+    float: left;
+    padding-right: 10px;
 }
 
 .fltright {
-    float:right;
+    float: right;
 }
 
 #PatientPart img {
-    height:100px;
-    width:100px;
+    height: 100px;
+    width: 100px;
 }
 
 .print_heading {
-    font-weight:700;
+    font-weight: 700;
 }
 
-.print_heading:after{
-    content: ": ";
-}
+    .print_heading:after {
+        content: ": ";
+    }
 
 .arial_heading {
-    font-family:Arial Black;
-    font-weight:900;
+    font-family: Arial Black;
+    font-weight: 900;
 }
 
 .print_btn {
-	width: 105px;
-	background: #1665AD;
-	border: 0 none;
-	color: #fff;
-	font-weight: bold;
-	border-radius: 1 px;
-	margin-top: 9px;
+    width: 105px;
+    background: #1665AD;
+    border: 0 none;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 1 px;
+    margin-top: 9px;
     margin-bottom: 9px;
-	margin-left: 0px;
-	height: 34px;
-	cursor: pointer;
+    margin-left: 0px;
+    height: 34px;
+    cursor: pointer;
 }
 
 
 @media print {
-  #print_button {
-    visibility: hidden;
-  }
+    #print_button {
+        visibility: hidden;
+    }
+}
+
+.invoice_colspan {
+    text-align: right;
+    padding-right: 5px;
+}
+
+.invoice td {
+    border: 1px solid #000;
+    padding-left: 5px;
+}
+
+.invoice th {
+    border: 1px solid #000;  
 }

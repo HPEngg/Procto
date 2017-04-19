@@ -711,7 +711,10 @@
                                         <div class="fltleft" style="width:3%;">
                                             <span>@inst_cnt)</span>
                                         </div>
-                                        <div class="fltleft" style="width:95%; text-align:justify;">
+                                        <div class="fltleft" style="padding-right:5px; text-align:justify;">
+                                            @Html.DisplayFor(modelItem => item.Name):
+                                        </div>
+                                        <div class="fltleft" style="width:80%; text-align:justify;">
                                             @Html.DisplayFor(modelItem => item.Description)
                                         </div>
                                     </div>

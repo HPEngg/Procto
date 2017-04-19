@@ -455,6 +455,27 @@
                                 </div>
                             }
                         }
+
+                        @{
+                            if (Model.Patient.UploadedImage1 != null)
+                            {
+                                var base64 = Convert.ToBase64String(Model.Patient.UploadedImage1);
+                                var imgSrchdr = String.Format("data:image/gif;base64,{0}", base64);
+                                <div class="print_text_padding" style="width:19%; border:1px solid #000; margin-right:5px;">
+                                    <img src="@imgSrchdr" style="height:125px; width:150px;" />
+                                </div>
+                            }
+                        }
+                        @{
+                            if (Model.Patient.UploadedImage2 != null)
+                            {
+                                var base64 = Convert.ToBase64String(Model.Patient.UploadedImage2);
+                                var imgSrchdr = String.Format("data:image/gif;base64,{0}", base64);
+                                <div class="print_text_padding" style="width:19%; border:1px solid #000; margin-right:5px;">
+                                    <img src="@imgSrchdr" style="height:125px; width:150px;" />
+                                </div>
+                            }
+                        }  
                         @{
                             if (Model.Patient.PrescriptionImages != null)
                             {

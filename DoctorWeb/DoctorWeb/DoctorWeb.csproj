@@ -232,6 +232,10 @@
     <Compile Include="Migrations\201704180904054_OtherColumnAdded.Designer.cs">
       <DependentUpon>201704180904054_OtherColumnAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704191242347_AddedColumnUploadedImage2.cs" />
+    <Compile Include="Migrations\201704191242347_AddedColumnUploadedImage2.Designer.cs">
+      <DependentUpon>201704191242347_AddedColumnUploadedImage2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Charge.cs" />
@@ -920,6 +924,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704180904054_OtherColumnAdded.resx">
       <DependentUpon>201704180904054_OtherColumnAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704191242347_AddedColumnUploadedImage2.resx">
+      <DependentUpon>201704191242347_AddedColumnUploadedImage2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -241,7 +241,7 @@ namespace DoctorWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Prescription(PrescriptionHome model, HttpPostedFileBase preImage)
+        public ActionResult Prescription(PrescriptionHome model, HttpPostedFileBase preImage1, HttpPostedFileBase preImage2)
         {
             var prescription = new Prescription()
             {
@@ -284,11 +284,19 @@ namespace DoctorWeb.Controllers
                 System.IO.File.Delete(imageFile2);
             }
 
-            if (preImage != null && preImage.ContentLength > 0)
+            if (preImage1 != null && preImage1.ContentLength > 0)
             {
-                using (var reader = new System.IO.BinaryReader(preImage.InputStream))
+                using (var reader = new System.IO.BinaryReader(preImage1.InputStream))
                 {
-                    prescription.UploadedImage = reader.ReadBytes(preImage.ContentLength);
+                    prescription.UploadedImage1 = reader.ReadBytes(preImage1.ContentLength);
+                }
+            }
+
+            if (preImage2 != null && preImage2.ContentLength > 0)
+            {
+                using (var reader = new System.IO.BinaryReader(preImage2.InputStream))
+                {
+                    prescription.UploadedImage2 = reader.ReadBytes(preImage2.ContentLength);
                 }
             }
 
@@ -506,6 +514,8 @@ namespace DoctorWeb.Controllers
                 model.Patient.Investigation = prescription.Investigation.Name;
                 model.Patient.DrawenImage1 = prescription.PrescriptionImage1;
                 model.Patient.DrawenImage2 = prescription.PrescriptionImage2;
+                model.Patient.UploadedImage1 = prescription.UploadedImage1;
+                model.Patient.UploadedImage2 = prescription.UploadedImage2;
                 model.Patient.PrescriptionImages = db.PreImages.Where(p => p.Prescriptions.Any(q => q.ID == prescription.ID)).Select(t => t.Image).ToList();
 
                 model.RX.Medicines = db.PrescriptionMedicines.Where(p => p.PrescriptionID == prescription.ID).ToList();

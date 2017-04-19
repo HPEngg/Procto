@@ -21,6 +21,8 @@ namespace DoctorWeb.Models.CustomModels
     {
         public int ID { get; set; }
         public byte[] Photo { get; set; }
+        public byte[] UploadedImage1 { get; set; }
+        public byte[] UploadedImage2 { get; set; }
         public string Name { get; set; }
         public int? Age { get; set; }
         public string Gender { get; set; }

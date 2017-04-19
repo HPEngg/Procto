@@ -53,7 +53,9 @@ namespace DoctorWeb.Models
         public byte[] PrescriptionImage1 { get; set; }
         public byte[] PrescriptionImage2 { get; set; }
 
-        public byte[] UploadedImage { get; set; }
+        public byte[] UploadedImage1 { get; set; }
+
+        public byte[] UploadedImage2 { get; set; }
 
         public string Other { get; set; }
 

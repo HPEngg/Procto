@@ -5,6 +5,17 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@if (ViewBag.Message != string.Empty)
+{
+    <script type="text/javascript">
+    jQuery.noConflict();
+    document.addEventListener('DOMContentLoaded', function () {
+        alert('@ViewBag.Message');
+    });
+
+    </script>
+}
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -15,6 +26,7 @@
                 <div class="form-horizontal mdform my-mdform">
                     @*<h4>Patient</h4>*@
                     <h2 class="fs-title">Patient Details</h2>
+                    <a href="@Url.Action("FollowUpMessage", "SMS")" class="webcam_img"><img src="/Content/Images/message-icon.png" /></a>
                     <label style='width:100%;text-align:left; color:blue;display:block;'>Patient No. @ViewBag.PatientCount</label>
                     <div class="mdform my-mdform">
                         @*<hr />*@

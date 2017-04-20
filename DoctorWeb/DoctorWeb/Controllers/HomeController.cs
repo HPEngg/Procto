@@ -11,6 +11,8 @@ using System.Web.UI;
 using System.Drawing;
 using System.IO;
 using System.Web.Services;
+using System.Web.Configuration;
+using DoctorWeb.Models.Tools;
 
 namespace DoctorWeb.Controllers
 {
@@ -150,6 +152,7 @@ namespace DoctorWeb.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.Message = TempData["Message"] ?? string.Empty;
             ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name");
             ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name");
             ViewBag.ReferredByID = new SelectList(db.ReferredBy, "ID", "Name");
@@ -181,6 +184,16 @@ namespace DoctorWeb.Controllers
             {
                 p = db.Patients.Add(patient);
                 db.SaveChanges();
+
+                if(patient.DoctorID != null)
+                {
+                    string hDoc_web = WebConfigurationManager.AppSettings["HDoctorName"];
+                    string hospitalName = WebConfigurationManager.AppSettings["HospitalName"];
+                    var doctor = db.Doctors.Where(w => w.ID == patient.DoctorID).FirstOrDefault();
+                    string patientDetails = patient.Name + "," + patient.Age + "//" + patient.Gender + "//" + patient.Address;
+                    string message = "Dear "+ doctor.Name +" your referred  patient " + patientDetails + " was examined by "+ hDoc_web + " at " + hospitalName + " on " + DateTime.Now.Date + ". Thanks for your reference.";
+                    SMSHelper.sendMessage(doctor.Contact, message);
+                }
                 //return RedirectToAction("Index");
             }
 

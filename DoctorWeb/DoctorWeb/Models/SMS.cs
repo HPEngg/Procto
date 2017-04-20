@@ -25,6 +25,9 @@ namespace DoctorWeb.Models
         [Display(Name = "To Date")]
         public DateTime? ToData { get; set; }
 
+        public DateTime? FromHolidayDate { get; set; }
+        public DateTime? ToHolidayDate { get; set; }
+
         [Display(Name = "Select Numbers")]
         public SMSToPatients Patients { get; set; }
     }

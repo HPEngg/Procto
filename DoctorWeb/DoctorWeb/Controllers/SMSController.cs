@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using DoctorWeb.Models;
 using DoctorWeb.Models.Tools;
+using System.Web.Configuration;
 
 namespace DoctorWeb.Controllers
 {
@@ -50,7 +51,7 @@ namespace DoctorWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,MobileNumber,Message,Status,Date,FromDate,ToData,Patients")] SMS sMS)
+        public ActionResult Create([Bind(Include = "ID,MobileNumber,Message,Status,Date,FromDate,ToData,FromHolidayDate,ToHolidayDate,Patients")] SMS sMS)
         {
             string targetMobileNumbers = string.Empty;
             if(sMS.Patients == Models.Enums.SMSToPatients.All)
@@ -92,7 +93,8 @@ namespace DoctorWeb.Controllers
 
             if (ModelState.IsValid)
             {
-                var result = SMSHelper.sendMessage(targetMobileNumbers, sMS.Message);
+                string message = sMS.Message.Replace("FROM", "From " + sMS.FromHolidayDate.Value.ToShortDateString()).Replace("TO", " to " + sMS.ToHolidayDate.Value.ToShortDateString());
+                var result = SMSHelper.sendMessage(targetMobileNumbers, message);
                 sMS.Status = result;
                 sMS.Date = DateTime.Now.Date;
                 db.ShortMessages.Add(sMS);
@@ -101,6 +103,31 @@ namespace DoctorWeb.Controllers
             }
 
             return View(sMS);
+        }
+
+        public ActionResult FollowUpMessage()
+        {
+            var tomorowDate = DateTime.Today.Date.AddDays(1);
+            var patients = from pt in db.Patients
+                        join pr in db.Prescriptions on pt.ID equals pr.PatientID
+                        where DbFunctions.TruncateTime(pr.FollowDate) == DbFunctions.TruncateTime(tomorowDate)
+                        select pt;
+
+            foreach(Patient p in patients)
+            {
+                if (!string.IsNullOrEmpty(p.Contact))
+                {
+                    string hDoc_web = WebConfigurationManager.AppSettings["HDoctorName"];
+                    string hospitalName = WebConfigurationManager.AppSettings["HospitalName"];
+                    string mobileNumber = WebConfigurationManager.AppSettings["HDocMobile"];
+                    var visitDate = db.Prescriptions.Where(w => w.PatientID == p.ID).Max(m => m.Date);
+                    string message = "Dear " + p.Name + ", Your Appointment has been confirmed with " + hDoc_web + "  at " + hospitalName + "  on " + visitDate.Date.ToShortDateString() + " at " + visitDate.Date.ToShortTimeString() + ". Call " + mobileNumber + " for any query.";
+                    SMSHelper.sendMessage(p.Contact, message);
+                }
+            }
+
+            TempData["Message"] = "SMS Sent to " + patients.Count() + " Patient(s)";
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: SMS/Edit/5

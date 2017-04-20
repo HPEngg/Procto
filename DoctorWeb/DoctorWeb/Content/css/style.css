@@ -1077,7 +1077,7 @@ td {
     margin: 0 auto;
     max-width: 720px;
     width: 100%;
-    line-height: 2;
+    line-height: 1.5;
 }
 
 .print_text_padding {
@@ -1116,6 +1116,7 @@ td {
     }
 
 .arial_heading {
+    clear:both;
     font-family: Arial Black;
     font-weight: 900;
 }

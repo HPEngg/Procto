@@ -11,7 +11,7 @@
 
 .fonts_candara {
     font-family: 'CANDARA' !important;
-    font-size: 12px;
+    font-size: 10pt;
     /*text-transform:uppercase;*/
 }
 
@@ -1118,7 +1118,7 @@ td {
 .arial_heading {
     clear:both;
     font-family: Arial Black;
-    font-weight: 900;
+    font-size: 9pt;
 }
 
 .print_btn {
@@ -1154,4 +1154,8 @@ td {
 
 .invoice th {
     border: 1px solid #000;  
+}
+
+#RxPart table, #RxPart tr, #RxPart td, #RxPart th{
+    border:none;
 }

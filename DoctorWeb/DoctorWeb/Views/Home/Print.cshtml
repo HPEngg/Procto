@@ -70,7 +70,7 @@
                                 }
                             }
                         </div>
-                        <div class="fltleft" style="width:82%;">
+                        <div class="fltleft" style="width:82%; font-family:Calibri; font-size:10pt;">
                             @{
                                 if (!string.IsNullOrEmpty(Model.Patient.Name))
                                 {
@@ -118,7 +118,7 @@
                                 <div>@DateTime.Now.ToString("dd/MM/yyyy")</div>
                             </div>
                         </div>
-                        <div class="fltleft" style="width:82%;">
+                        <div class="fltleft" style="width:82%; font-family:Calibri; font-size:10pt;">
                             @{
                                 if (!string.IsNullOrEmpty(Model.Patient.ID.ToString()))
                                 {
@@ -141,7 +141,7 @@
                                 }
                             }
                         </div>
-                        <div class="fltleft" style="width:82%;">
+                        <div class="fltleft" style="width:82%; font-family:Calibri; font-size:10pt;">
                             @{
                                 if (!string.IsNullOrEmpty(Model.Patient.Contact))
                                 {
@@ -169,7 +169,7 @@
                                 }
                             }
                         </div>
-                        <div class="fltleft" style="width:82%;">
+                        <div class="fltleft" style="width:82%; font-family:Calibri; font-size:10pt;">
                             @{
                                 if (!string.IsNullOrEmpty(Model.Patient.Address))
                                 {
@@ -492,7 +492,7 @@
                             }
                         </div>
 
-                        <div class="fltleft" style="width:100%; clear:both;">
+                        <div class="fltleft" style="width:100%; clear:both; font-family:Calibri; font-size:11pt;">
                             @{
                                 if (!string.IsNullOrEmpty(Model.Patient.Height))
                                 {
@@ -601,7 +601,7 @@
                                 }
                             }
                         </div>
-                        <div class="fltleft" style="width:100%; clear:both;">
+                        <div class="fltleft" style="width:100%; clear:both; font-family:arial black; font-size:10pt; text-decoration:underline;">
                             @{
                                 if (!string.IsNullOrEmpty(Model.Patient.Diagnosis))
                                 {
@@ -648,7 +648,7 @@
                 if (Model.RXRequired)
                 {
                     <div id="RxPart">
-                        <label class="print_heading" style="clear:both;">
+                        <label class="arial_heading" style="clear:both; font-family:Calibri; font-size:10pt;">
                             RX
                         </label>
                         <table class="table table-bordered" style="width:auto;">
@@ -709,14 +709,17 @@
                     @{
                         if (!string.IsNullOrEmpty(Model.Compulsory.FollowDate))
                         {
-                            <div class="print_text_fltleft print_heading">
-                                @Html.DisplayNameFor(model => model.Compulsory.FollowDate)
-                            </div>
-                            <div>
+                            <div class="print_text_fltleft arial_heading">
+                                <label class="arial_heading" style="float:left; padding-right:5px;">FOLLOW UP DATE:</label>
                                 @Html.DisplayFor(model => model.Compulsory.FollowDate)
                                 <span>, </span>
                                 @Html.DisplayFor(model => model.Compulsory.Day)
                             </div>
+                            @*<div class="arial_heading" style="float:left;">
+                                @Html.DisplayFor(model => model.Compulsory.FollowDate)
+                                <span>, </span>
+                                @Html.DisplayFor(model => model.Compulsory.Day)
+                            </div>*@
                         }
                     }
                 </div>
@@ -755,7 +758,7 @@
                     {
                         <div id="InvoicePart">
                             <label class="arial_heading">Invoice</label>
-                            <div class="fltleft" style="width:100%;">
+                            <div class="fltleft" style="width:100%; font-family:Calibri; font-size:10pt;">
                                 @{
                                     if (!string.IsNullOrEmpty(Model.Invoice.Consult))
                                     {
@@ -833,7 +836,7 @@
                                     }
                                 }
                             </div>
-                            <div class="fltleft" style="width:100%;">
+                            <div class="fltleft" style="width:100%; font-family:Calibri; font-size:10pt;">
                                 @{
                                     if (!string.IsNullOrEmpty(Model.Invoice.Total))
                                     {

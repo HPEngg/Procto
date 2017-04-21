@@ -26,7 +26,6 @@
                 <div class="form-horizontal mdform my-mdform">
                     @*<h4>Patient</h4>*@
                     <h2 class="fs-title">Patient Details</h2>
-                    <a href="@Url.Action("FollowUpMessage", "SMS")" class="webcam_img"><img src="/Content/Images/message-icon.png" /></a>
                     <label style='width:100%;text-align:left; color:blue;display:block;'>Patient No. @ViewBag.PatientCount</label>
                     <div class="mdform my-mdform">
                         @*<hr />*@
@@ -291,7 +290,10 @@
             </fieldset>
 
             <fieldset class="left_part_form2 div_scrollbar">
-                <h2 class="fs-title fs-title_cmplnfrm" style="color:blue;">Complain Form</h2>
+                <div>
+                    <h2 class="fs-title fs-title_cmplnfrm" style="color:blue; float:left; width:80%;">Complain Form</h2>
+                    <a style="float:right;" href="@Url.Action("FollowUpMessage", "SMS")" class="webcam_img"><img src="/Content/Images/message-icon.png" /></a>
+                </div>
                 <div class="mdform my-mdform">
 
                     <div class="mdform my-mdform">

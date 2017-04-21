@@ -22,7 +22,7 @@ namespace DoctorWeb.Controllers
 
         public ActionResult Search(String PatientName)
         {
-            //PatientName = PatientName.Replace('\u00A0', ' ');
+            PatientName = PatientName.Replace('_', ' ');
             var model = db.Patients.Where(p => p.Name.Contains(PatientName) || p.Address.Contains(PatientName) || p.Contact.Contains(PatientName)).Select(p => new PatientSearch()
             {
                 Status = p.Status.ToString(),

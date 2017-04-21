@@ -11,60 +11,61 @@
     <div class="print_margin fonts_candara">
         <input type="hidden" name="PatientID" value="@ViewBag.PatientID" />
         <div class="fltleft" style="width:100%;">
-            <label class="arial_heading">Print Section:</label>
-            <div class="print_text_padding" style="width:20%;">
-                <div class="print_text_fltleft print_heading checkbox">
-                    @*@Html.LabelFor(model => model.HeaderRequired, htmlAttributes: new { @class = "control-label col-md-2", style = "float:left;" })*@
-                    <label class="arial_heading" style="float:left;">Header</label>
+            <label class="arial_heading" style="width:15%; float:left;">Print Section:</label>
+            <div style="width:84%">
+                <div class="print_text_padding" style="width:20%;">
+                    <div class="print_text_fltleft print_heading checkbox">
+                        @*@Html.LabelFor(model => model.HeaderRequired, htmlAttributes: new { @class = "control-label col-md-2", style = "float:left;" })*@
+                        <label class="arial_heading" style="float:left;">Header</label>
+                    </div>
+                    <div class="print_text_fltleft checkbox">
+                        @Html.EditorFor(model => model.HeaderRequired)
+                        @Html.ValidationMessageFor(model => model.HeaderRequired, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-                <div class="print_text_fltleft checkbox">
-                    @Html.EditorFor(model => model.HeaderRequired)
-                    @Html.ValidationMessageFor(model => model.HeaderRequired, "", new { @class = "text-danger" })
-                </div>
-            </div>
 
-            <div class="print_text_padding" style="width:20%;">
-                <div class="print_text_fltleft print_heading checkbox">
-                    @*@Html.LabelFor(model => model.PatientRequired, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                    <label class="arial_heading" style="float:left;">Patient</label>
+                <div class="print_text_padding" style="width:20%;">
+                    <div class="print_text_fltleft print_heading checkbox">
+                        @*@Html.LabelFor(model => model.PatientRequired, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                        <label class="arial_heading" style="float:left;">Patient</label>
+                    </div>
+                    <div class="print_text_fltleft checkbox">
+                        @Html.EditorFor(model => model.PatientRequired)
+                        @Html.ValidationMessageFor(model => model.PatientRequired, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-                <div class="print_text_fltleft checkbox">
-                    @Html.EditorFor(model => model.PatientRequired)
-                    @Html.ValidationMessageFor(model => model.PatientRequired, "", new { @class = "text-danger" })
-                </div>
-            </div>
 
-            <div class="print_text_padding" style="width:20%;">
-                <div class="print_text_fltleft print_heading checkbox">
-                    @*@Html.LabelFor(model => model.RXRequired, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                    <label class="arial_heading" style="float:left;">RX</label>
+                <div class="print_text_padding" style="width:20%;">
+                    <div class="print_text_fltleft print_heading checkbox">
+                        @*@Html.LabelFor(model => model.RXRequired, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                        <label class="arial_heading" style="float:left;">RX</label>
+                    </div>
+                    <div class="print_text_fltleft checkbox">
+                        @Html.EditorFor(model => model.RXRequired)
+                        @Html.ValidationMessageFor(model => model.RXRequired, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-                <div class="print_text_fltleft checkbox">
-                    @Html.EditorFor(model => model.RXRequired)
-                    @Html.ValidationMessageFor(model => model.RXRequired, "", new { @class = "text-danger" })
-                </div>
-            </div>
 
-            <div class="print_text_padding" style="width:20%;">
-                <div class="print_text_fltleft print_heading checkbox">
-                    @*@Html.LabelFor(model => model.InvoiceRequired, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                    <label class="arial_heading" style="float:left;">Invoice</label>
+                <div class="print_text_padding" style="width:20%;">
+                    <div class="print_text_fltleft print_heading checkbox">
+                        @*@Html.LabelFor(model => model.InvoiceRequired, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                        <label class="arial_heading" style="float:left;">Invoice</label>
+                    </div>
+                    <div class="print_text_fltleft checkbox">
+                        @Html.EditorFor(model => model.InvoiceRequired)
+                        @Html.ValidationMessageFor(model => model.InvoiceRequired, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-                <div class="print_text_fltleft checkbox">
-                    @Html.EditorFor(model => model.InvoiceRequired)
-                    @Html.ValidationMessageFor(model => model.InvoiceRequired, "", new { @class = "text-danger" })
-                </div>
-            </div>
 
-            <div class="print_text_padding" style="width:20%;">
+                @*<div class="print_text_padding" style="width:20%;">
                 <div class="print_text_fltleft print_heading checkbox">
-                    @*@Html.LabelFor(model => model.FooterRequired, htmlAttributes: new { @class = "control-label col-md-2" })*@
                     <label class="arial_heading" style="float:left;">Footer</label>
                 </div>
                 <div class="print_text_fltleft checkbox">
                     @Html.EditorFor(model => model.FooterRequired)
                     @Html.ValidationMessageFor(model => model.FooterRequired, "", new { @class = "text-danger" })
                 </div>
+            </div>*@
             </div>
         </div>
 
@@ -96,7 +97,7 @@
                             }
                         }
                     </div>
-                    <div class="fltleft" style="width:82%;">
+                    <div class="fltleft" style="width:82%; font-family:Calibri; font-size:10pt;">
                         @{
                             if (!string.IsNullOrEmpty(Model.Patient.Name))
                             {
@@ -144,7 +145,7 @@
                             <div>@DateTime.Now.ToString("dd/MM/yyyy")</div>
                         </div>
                     </div>
-                    <div class="fltleft" style="width:82%;">
+                    <div class="fltleft" style="width:82%; font-family:Calibri; font-size:10pt;">
                         @{
                             if (!string.IsNullOrEmpty(Model.Patient.ID.ToString()))
                             {
@@ -167,7 +168,7 @@
                             }
                         }
                     </div>
-                    <div class="fltleft" style="width:82%;">
+                    <div class="fltleft" style="width:82%; font-family:Calibri; font-size:10pt;">
                         @{
                             if (!string.IsNullOrEmpty(Model.Patient.Contact))
                             {
@@ -195,7 +196,7 @@
                             }
                         }
                     </div>
-                    <div class="fltleft" style="width:82%;">
+                    <div class="fltleft" style="width:82%; font-family:Calibri; font-size:10pt;">
                         @{
                             if (!string.IsNullOrEmpty(Model.Patient.Address))
                             {
@@ -516,7 +517,7 @@
                         }
                     </div>
 
-                    <div class="fltleft" style="width:100%; clear:both;">
+                    <div class="fltleft" style="width:100%; clear:both; font-family:Calibri; font-size:11pt;">
                         @{
                             if (!string.IsNullOrEmpty(Model.Patient.Height))
                             {
@@ -625,11 +626,11 @@
                             }
                         }
                     </div>
-                    <div class="fltleft" style="width:100%; clear:both;">
+                    <div class="fltleft" style="width:100%; clear:both; font-family:arial black; font-size:10pt; text-decoration:underline;">
                         @{
                             if (!string.IsNullOrEmpty(Model.Patient.Diagnosis))
                             {
-                                <div class="print_text_fltleft print_heading">
+                                <div class="print_text_fltleft print_heading" style="text-transform:uppercase;">
                                     @Html.DisplayNameFor(model => model.Patient.Diagnosis)
                                 </div>
                                 <div>
@@ -666,10 +667,10 @@
                     </div>
                 </div>
                 <div id="RxPart">
-                    <label class="print_heading" style="clear:both;">
+                    <label class="arial_heading" style="clear:both;">
                         RX
                     </label>
-                    <table class="table table-bordered" style="width:auto;">
+                    <table class="table table-bordered" style="width:auto; font-family:Calibri; font-size:10pt; border:none;">
                         <tr>
                             <th>
                                 Medicine Type
@@ -726,14 +727,18 @@
                         @{
                             if (!string.IsNullOrEmpty(Model.Compulsory.FollowDate))
                             {
-                                <div class="print_text_fltleft print_heading">
-                                    @Html.DisplayNameFor(model => model.Compulsory.FollowDate)
-                                </div>
-                                <div>
+                                <div class="print_text_fltleft arial_heading">
+                                    @*@Html.DisplayNameFor(model => model.Compulsory.FollowDate):*@
+                                    <label class="arial_heading" style="float:left; padding-right:5px;">FOLLOW UP DATE:</label>
                                     @Html.DisplayFor(model => model.Compulsory.FollowDate)
                                     <span>, </span>
                                     @Html.DisplayFor(model => model.Compulsory.Day)
                                 </div>
+                                @*<div class="arial_heading" style="float:left;">
+                                    @Html.DisplayFor(model => model.Compulsory.FollowDate)
+                                    <span>, </span>
+                                    @Html.DisplayFor(model => model.Compulsory.Day)
+                                </div>*@
                             }
                         }
                     </div>
@@ -770,7 +775,7 @@
             </div>
             <div id="InvoicePart">
                 <label class="arial_heading">Invoice</label>
-                <div class="fltleft" style="width:100%;">
+                <div class="fltleft" style="width:100%; font-family:Calibri; font-size:10pt;">
                     @{
                         if (!string.IsNullOrEmpty(Model.Invoice.Consult))
                         {
@@ -848,7 +853,7 @@
                         }
                     }
                 </div>
-                <div class="fltleft" style="width:100%;">
+                <div class="fltleft" style="width:100%; font-family:Calibri; font-size:10pt;">
                     @{
                         if (!string.IsNullOrEmpty(Model.Invoice.Total))
                         {

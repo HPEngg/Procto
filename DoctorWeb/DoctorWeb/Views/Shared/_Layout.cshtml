@@ -117,9 +117,8 @@
             classname: 'searchdialog',
             open: function () {
                 var patientname = document.getElementById("PatientName").value;
-                var pname = patientname;
-                @*searchpatient(this).load('@Url.Action("Search", "Home", new { PatientName = pname})'.replace("ID", patientname));*@
-                searchpatient(this).load('@Url.Action("Search", "Home", new { PatientName = "ID"})'.replace("ID", patientname));
+                var pname = patientname.replace(" ", "_");
+                searchpatient(this).load('@Url.Action("Search", "Home", new { PatientName = "ID"})'.replace("ID", pname));
                 searchpatient('#SearchRecords').focus();
             },
             close: function () {

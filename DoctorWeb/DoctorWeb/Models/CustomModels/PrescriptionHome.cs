@@ -20,8 +20,9 @@ namespace DoctorWeb.Models.CustomModels
         //public int InstructionID { get; set; }
 
         public IEnumerable<SelectListItem> Instructions { get; set; }
-
+        public IEnumerable<SelectListItem> Investigations { get; set; }
         public List<int> SelectedInstructionsIDs { get; set; }
+        public List<int> SelectedInvestigationIDs { get; set; }
 
         public int PatientTypeID { get; set; }
 

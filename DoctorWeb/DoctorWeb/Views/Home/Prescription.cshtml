@@ -222,12 +222,14 @@
                                 @Html.ValidationMessageFor(model => model.PatientTypeID, "", new { @class = "text-danger" })
                             </div>
 
-                            @*INVESTIGATION COMBOBOX CODE BELOW*@
+                            @*INVESTIGATION DROPDOWN CODE BELOW*@
 
-                            <div style="display:block; width:49%; float:right;">
-                                @Html.DropDownList("InvestigationID", null, htmlAttributes: new { @name = "InvestigationID", @class = "pre", @style = "width: 100%!important; padding: 0!important;color:#000;" })
-                                @Html.ValidationMessageFor(model => model.InvestigationID, "", new { @class = "text-danger" })
+                            <div id="Insturction" style="clear:both; display:block; width:49%; float:left;">
+                                <label class="control-label col-md-2" , style="float:left; font-size: 90%; font-weight:700; padding:5px 5px 5px 0;">Investigations:</label>
+                                @Html.ListBoxFor(model => model.SelectedInvestigationIDs, Model.Investigations, new { htmlAttributes = new { @size = 5, @class = "form-control", @Multiple = "multiple", @style = "height:140px !important; width:100% !important;" } })
+                                @Html.ValidationMessageFor(model => model.Investigations, "", new { @class = "text-danger" })
                             </div>
+
                             @*</div>*@
 
                             @*@Html.HiddenFor(model => model.PatientID)

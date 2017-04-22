@@ -69,7 +69,7 @@ namespace DoctorWeb.Models.CustomModels
         public string Diagnosis { get; set; }
         public string Advice { get; set; }
         public string Procedure { get; set; }
-        public string Investigation { get; set; }
+        public List<Investigation> Investigations { get; set; }
         public byte[] DrawenImage1 { get; set; }
         public byte[] DrawenImage2 { get; set; }
         public List<byte[]> PrescriptionImages { get; set; }

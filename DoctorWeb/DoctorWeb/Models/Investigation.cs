@@ -10,6 +10,6 @@ namespace DoctorWeb.Models
         public int ID { get; set; }
         public string Name { get; set; }
 
-        public IEnumerable<Prescription> Prescriptions { get; set; }
+        public ICollection<Prescription> Prescriptions { get; set; }
     }
 }

@@ -882,11 +882,10 @@
                                     }
                 }
 
-                @{
+                @*@{
                     if (Model.FooterRequired)
                     {
                         <div id="FooterPart">
-                            @*<h4>Header</h4>*@
                             <div class="fltleft" style="width:100%;">
                                 @{
                                     if (Model.Footer.FooterPhoto != null)
@@ -899,7 +898,7 @@
                             </div>
                         </div>
                                     }
-                }
+                }*@
             </div>
     <div style="clear:both; display:block;" id="print_button">
         <button onclick="window.print();" class="print_btn">Print</button>

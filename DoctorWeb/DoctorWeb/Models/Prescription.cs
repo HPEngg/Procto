@@ -42,6 +42,7 @@ namespace DoctorWeb.Models
         //public virtual Instruction Instruction { get; set; }
 
         public ICollection<Instruction> Instructions { get; set; }
+        public ICollection<Investigation> Investigations { get; set; }
 
         public int PatientTypeID { get; set; }
         public virtual PatientType PatientType { get; set; }
@@ -59,7 +60,7 @@ namespace DoctorWeb.Models
 
         public string Other { get; set; }
 
-        public int InvestigationID { get; set; }
-        public virtual Investigation Investigation { get; set; }
+        //public int InvestigationID { get; set; }
+        //public virtual Investigation Investigation { get; set; }
     }
 }

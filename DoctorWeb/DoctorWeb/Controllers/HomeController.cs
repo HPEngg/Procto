@@ -242,12 +242,13 @@ namespace DoctorWeb.Controllers
             ViewBag.NightDozID = new SelectList(db.Dozes, "ID", "Name");
             ViewBag.NoonDozID = new SelectList(db.Dozes, "ID", "Name");
             ViewBag.OINTTypeID = new SelectList(db.OINTTypes, "ID", "Name");
-            ViewBag.InvestigationID = new SelectList(db.Investigations, "ID", "Name");
+            //ViewBag.InvestigationID = new SelectList(db.Investigations, "ID", "Name");
 
             ViewBag.PrescriptionCategoryID = new SelectList(db.PrescriptionCategories, "ID", "Name");
 
             model.PrescriptionImages = db.PreImages.Select(o => new SelectListItem() { Text = o.Label, Value = o.ID.ToString(), Selected = false });
             model.Instructions = db.Instructions.Select(p => new SelectListItem() { Text = p.Name, Value = p.ID.ToString(), Selected = false });
+            model.Investigations = db.Investigations.Select(p => new SelectListItem() { Text = p.Name, Value = p.ID.ToString(), Selected = false });
 
             return View(model);
         }
@@ -276,7 +277,7 @@ namespace DoctorWeb.Controllers
                 //PrescriptionImage1 = System.IO.File.ReadAllBytes(Server.MapPath("~") + @"Content\Images\" + model.PatientID + "PatientImage1.png"),
                 //PrescriptionImage2 = Convert.FromBase64String(model.PatientImage2.Remove(0, 22)),
                 //Investigation = model.Investigation
-                InvestigationID = model.InvestigationID,
+                //InvestigationID = model.InvestigationID,
                 Other = model.Other
             };
 
@@ -320,6 +321,9 @@ namespace DoctorWeb.Controllers
 
                 if (model.SelectedInstructionsIDs != null)
                     prescription.Instructions = db.Instructions.Where(m => model.SelectedInstructionsIDs.Contains(m.ID)).ToList();
+
+                if (model.SelectedInvestigationIDs != null)
+                    prescription.Investigations = db.Investigations.Where(m => model.SelectedInvestigationIDs.Contains(m.ID)).ToList();
 
                 var prescroptionObj = db.Prescriptions.Add(prescription);
                 // ReaderExecuted method code commented due to below line blocks exicution while adding prescription record
@@ -524,7 +528,7 @@ namespace DoctorWeb.Controllers
                 //model.Patient.Advice =
                 model.Patient.Procedure = prescription.Procedure;
                 model.Patient.Type = prescription.PatientType.PatientTypeName.ToString();
-                model.Patient.Investigation = prescription.Investigation.Name;
+                model.Patient.Investigations = db.Investigations.Where(p => p.Prescriptions.Any(q => q.ID == prescription.ID)).ToList();
                 model.Patient.DrawenImage1 = prescription.PrescriptionImage1;
                 model.Patient.DrawenImage2 = prescription.PrescriptionImage2;
                 model.Patient.UploadedImage1 = prescription.UploadedImage1;

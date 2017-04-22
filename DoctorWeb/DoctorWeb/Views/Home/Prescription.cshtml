@@ -296,6 +296,9 @@
                                 @Html.EditorFor(model => model.M, new { htmlAttributes = new { id = "pm_madicine", placeholder = " M", style = "width:60px!important; padding: 0!important; height:25px;", onkeyup = "cal_charges(event);" } })
                                 @Html.ValidationMessageFor(model => model.M, "", new { @class = "text-danger" })
 
+                                @Html.EditorFor(model => model.Other, new { htmlAttributes = new { id = "Other", placeholder = " Other", style = "width:60px!important; padding: 0!important; height:25px;", onkeyup = "cal_charges(event);" } })
+                                @Html.ValidationMessageFor(model => model.Other, "", new { @class = "text-danger" })
+
                                 @Html.EditorFor(model => model.Percent, new { htmlAttributes = new { id = "pm_less_perc", placeholder = " %", style = "width:60px!important; padding: 0!important; height:25px;", onkeyup = "cal_charges(event);" } })
                                 @Html.ValidationMessageFor(model => model.Percent, "", new { @class = "text-danger" })
 
@@ -311,8 +314,8 @@
                                 @Html.EditorFor(model => model.Pending, new { htmlAttributes = new { name = "pm_rupees", placeholder = "Pending", style = "width:60px!important; padding: 0!important; height:25px; pointer-events: none;", id = "pm_pending", @readonly="readonly" } })
                                 @Html.ValidationMessageFor(model => model.Pending, "", new { @class = "text-danger" })
 
-                                @Html.EditorFor(model => model.Other, new { htmlAttributes = new { id = "Other", placeholder = " Other", style = "width:100px!important; padding: 0!important; height:25px;" } })
-                                @Html.ValidationMessageFor(model => model.Other, "", new { @class = "text-danger" })
+                                @*@Html.EditorFor(model => model.Other, new { htmlAttributes = new { id = "Other", placeholder = " Other", style = "width:100px!important; padding: 0!important; height:25px;" } })
+                                @Html.ValidationMessageFor(model => model.Other, "", new { @class = "text-danger" })*@
 
                                 @Html.HiddenFor(model => model.PatientImage1)
                             </div>
@@ -787,11 +790,15 @@
             if (jQuery.isNumeric(jQuery("input[id=pm_madicine]").val()))
                 total_charges = total_charges + parseInt(jQuery("input[id=pm_madicine]").val());
 
+            // ADD OTHER CHARGES TO TOTAL CHARGES
+            if (jQuery.isNumeric(jQuery("input[id=Other]").val()))
+                total_charges = total_charges + parseInt(jQuery("input[id=Other]").val());
+
             var less_perc = 0;
             if (jQuery.isNumeric(jQuery("input[id=pm_less_perc]").val()))
                 less_perc = parseInt(jQuery("input[id=pm_less_perc]").val());
 
-            var less_net = total_charges * less_perc / 100;
+            var less_net =  parseInt(jQuery("input[id=pm_madicine]").val()) * less_perc / 100;
 
             jQuery("input[id=pm_less_net]").val(less_net);
             total_charges = total_charges - less_net;

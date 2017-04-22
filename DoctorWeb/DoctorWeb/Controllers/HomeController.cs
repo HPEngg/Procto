@@ -220,9 +220,9 @@ namespace DoctorWeb.Controllers
         public ActionResult Prescription(int patientID)
         {
             //ViewBag.Message = "Your application description page.";
-            if (prescr_success == 1)
+            if (prescr_success > 0)
             {
-                ViewBag.Message = "Patient Prescription Created Successfully";
+                ViewBag.Message = "Patient Prescription Created Successfully: ID=" + prescr_success;
                 prescr_success = 0;
             }
             var model = new PrescriptionHome();
@@ -352,8 +352,8 @@ namespace DoctorWeb.Controllers
                 }
 
                 db.SaveChanges();
-                //  ViewBag.Message = "Patient Prescription Created Successfully";
-                prescr_success = 1;
+                ViewBag.Message = "Patient Prescription Created Successfully";
+                prescr_success = prescroptionObj.ID;
                 return RedirectToAction("Prescription", new { patientID = model.PatientID });
             }
 
@@ -629,15 +629,10 @@ namespace DoctorWeb.Controllers
                     model.Invoice.Other = otherCarge.ToString();
                 }
 
-                //model.Invoice.Consult = prescription.
-                //model.Invoice.Proctoscopy = prescription.
-                //model.Invoice.Dressing = prescription
-                //model.Invoice.KSProcedure 
-                //model.Invoice.Medicine = 
-                //model.Invoice.Other = prescription
+                model.Invoice.Medicine = prescription.M;
+                model.Invoice.OtherFromTextbox = prescription.Other;
                 model.Invoice.Less = prescription.Less;
-                //model.Invoice.Net
-                model.Invoice.Total = Convert.ToString(prescription.Rs - Convert.ToDecimal(prescription.Less));
+                model.Invoice.Total = Convert.ToString(prescription.Rs);
                 model.Invoice.CashRecived = prescription.Received.ToString();
                 model.Invoice.PendingAmount = prescription.Pending.ToString();
 

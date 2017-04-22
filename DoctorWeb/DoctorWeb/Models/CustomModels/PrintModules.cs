@@ -101,6 +101,7 @@ namespace DoctorWeb.Models.CustomModels
         public string Total { get; set; }
         public string CashRecived { get; set; }
         public string PendingAmount { get; set; }
+        public string OtherFromTextbox { get; set; }
     }
 
     public class Footer

@@ -818,16 +818,17 @@
                         }
                     }
                     @{
-                        if (!string.IsNullOrEmpty(Model.Invoice.Other))
+                        if (!string.IsNullOrEmpty(Model.Invoice.OtherFromTextbox))
                         {
                             <div class="print_heading fltleft">
-                                @Html.DisplayNameFor(model => model.Invoice.Other)
+                                @Html.DisplayNameFor(model => model.Invoice.OtherFromTextbox)
                             </div>
                             <div>
-                                @Html.DisplayFor(model => model.Invoice.Other)
+                                @Html.DisplayFor(model => model.Invoice.OtherFromTextbox)
                             </div>
                         }
-                    }@{
+                    }
+                    @{
                         if (!string.IsNullOrEmpty(Model.Invoice.Less))
                         {
                             <div class="print_heading fltleft">

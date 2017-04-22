@@ -428,12 +428,69 @@ namespace DoctorWeb.Controllers
             return View(model);
         }
 
-        public ActionResult PrintInvoice(int id)
+        [HttpPost]
+        public ActionResult PrintInvoice(PrintInvoice model)
+        {
+            var printData = new PrintInvoice();
+            printData.IsHeaderPhotoRequired = model.IsHeaderPhotoRequired;
+            var prescription = db.Prescriptions.Where(p => p.ID == model.PrescriptionID).FirstOrDefault();
+            if (prescription != null)
+            {
+                printData.HeaderPhoto = db.Pictures.Select(p => p.Header).FirstOrDefault();
+                Patient patient = db.Patients.Find(prescription.PatientID);
+                if (patient != null)
+                {
+                    printData.Name = patient.Name;
+                    printData.Age = patient.Age;
+                    printData.Gender = patient.Gender.ToString();
+                    printData.TodayDate = DateTime.Now.Date.ToShortDateString();
+                    printData.Address = patient.Address;
+                }
+                printData.InvoiceNo = prescription.ID;
+                printData.Medicines = db.PrescriptionMedicines.Where(p => p.PrescriptionID == prescription.ID).ToList();
+                decimal? consultCarge = db.PaymentTypes.Where(w => w.PaymentTypeName.StartsWith("C")).Select(s => s.Rupees).FirstOrDefault();
+                if (consultCarge != null)
+                {
+                    printData.Consult = consultCarge.ToString();
+                }
+
+                decimal? proctoscopyCarge = db.PaymentTypes.Where(w => w.PaymentTypeName.StartsWith("P")).Select(s => s.Rupees).FirstOrDefault();
+                if (proctoscopyCarge != null)
+                {
+                    printData.Proctoscopy = proctoscopyCarge.ToString();
+                }
+
+                decimal? dressingCarge = db.PaymentTypes.Where(w => w.PaymentTypeName.StartsWith("D")).Select(s => s.Rupees).FirstOrDefault();
+                if (dressingCarge != null)
+                {
+                    printData.Dressing = dressingCarge.ToString();
+                }
+
+                decimal? ksProcedureCarge = db.PaymentTypes.Where(w => w.PaymentTypeName.StartsWith("K")).Select(s => s.Rupees).FirstOrDefault();
+                if (ksProcedureCarge != null)
+                {
+                    printData.KSProcedure = ksProcedureCarge.ToString();
+                }
+
+                decimal? otherCarge = db.PaymentTypes.Where(w => w.PaymentTypeName.StartsWith("O")).Select(s => s.Rupees).FirstOrDefault();
+                if (otherCarge != null)
+                {
+                    printData.Other = otherCarge.ToString();
+                }
+                ViewBag.PatientID = patient.ID;
+            }
+
+            return View(printData);
+
+        }
+
+        public ActionResult PrintInvoicePreview(int id)
         {
             var model = new PrintInvoice();
             var prescription = db.Prescriptions.Where(p => p.ID == id).FirstOrDefault();
             if (prescription != null)
             {
+                model.PrescriptionID = prescription.ID;
                 model.HeaderPhoto = db.Pictures.Select(p => p.Header).FirstOrDefault();
                 Patient patient = db.Patients.Find(prescription.PatientID);
                 if (patient != null)
@@ -447,7 +504,7 @@ namespace DoctorWeb.Controllers
                 model.InvoiceNo = prescription.ID;
                 model.Medicines = db.PrescriptionMedicines.Where(p => p.PrescriptionID == prescription.ID).ToList();
                 decimal? consultCarge = db.PaymentTypes.Where(w => w.PaymentTypeName.StartsWith("C")).Select(s => s.Rupees).FirstOrDefault();
-                if(consultCarge != null)
+                if (consultCarge != null)
                 {
                     model.Consult = consultCarge.ToString();
                 }
@@ -476,7 +533,7 @@ namespace DoctorWeb.Controllers
                     model.Other = otherCarge.ToString();
                 }
             }
-
+            model.IsHeaderPhotoRequired = true;
             return View(model);
         }
 

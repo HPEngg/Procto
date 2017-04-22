@@ -52,7 +52,7 @@
                                 {
                                     <a href="@Url.Action("PrintPreview", "Home", new { id = ViewBag.PatientID })" target="blank" class="profile_pic_img"><img src="/Content/Images/print_icon.png" style="pointer-events:auto;"/></a>
                                     <a href="@Url.Action("FollowUp", "Home", new { patientID = ViewBag.PatientID, id = ViewBag.PrescriptionID })" target="blank" class="profile_pic_img"><img src="/Content/Images/previous_prescription.png" style="pointer-events:auto;"/></a>
-                                    <a href="@Url.Action("PrintInvoice", "Home", new { id = ViewBag.PrescriptionID })" target="blank" class="profile_pic_img"><img src="/Content/Images/invoice.png" style="pointer-events:auto;"/></a><span>Prescription Form</span>
+                                    <a href="@Url.Action("PrintInvoicePreview", "Home", new { id = ViewBag.PrescriptionID })" target="blank" class="profile_pic_img"><img src="/Content/Images/invoice.png" style="pointer-events:auto;"/></a><span>Prescription Form</span>
                                 }
                                 else
                                 {

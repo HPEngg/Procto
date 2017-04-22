@@ -7,8 +7,9 @@ namespace DoctorWeb.Models.CustomModels
 {
     public class PrintInvoice
     {
-
+        public int PrescriptionID { get; set; }
         public byte[] HeaderPhoto { get; set; }
+        public bool IsHeaderPhotoRequired { get; set; }
         public string Name { get; set; }
         public int? Age { get; set; }
         public string Gender { get; set; }

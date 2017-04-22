@@ -914,6 +914,7 @@
     <Content Include="Views\Chart\DepartmentWisePatient.cshtml" />
     <Content Include="Views\Chart\NewOldPatient.cshtml" />
     <Content Include="Views\Chart\ReferenceWisePatient.cshtml" />
+    <Content Include="Views\Home\PrintInvoicePreview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

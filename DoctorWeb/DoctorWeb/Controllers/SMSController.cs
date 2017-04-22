@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using DoctorWeb.Models;
 using DoctorWeb.Models.Tools;
 using System.Web.Configuration;
+using System.Text.RegularExpressions;
 
 namespace DoctorWeb.Controllers
 {
@@ -72,9 +73,10 @@ namespace DoctorWeb.Controllers
             }
             else if (sMS.Patients == Models.Enums.SMSToPatients.VisitingTomorow)
             {
+                var tomorowDate = DateTime.Today.Date.AddDays(1);
                 var query = from pt in db.Patients
                             join pr in db.Prescriptions on pt.ID equals pr.PatientID
-                            where pr.FollowDate == DateTime.Today.Date.AddDays(1)
+                            where pr.FollowDate == tomorowDate
                             select pt.Contact;
                 targetMobileNumbers = string.Join(",", query);
             }
@@ -94,6 +96,7 @@ namespace DoctorWeb.Controllers
             if (ModelState.IsValid)
             {
                 string message = sMS.Message.Replace("FROM", "From " + sMS.FromHolidayDate.Value.ToShortDateString()).Replace("TO", " to " + sMS.ToHolidayDate.Value.ToShortDateString());
+                message = Regex.Replace(message, @"(?:(?:\r?\n)+ +){2,}", @" ");
                 var result = SMSHelper.sendMessage(targetMobileNumbers, message);
                 sMS.Status = result;
                 sMS.Date = DateTime.Now.Date;

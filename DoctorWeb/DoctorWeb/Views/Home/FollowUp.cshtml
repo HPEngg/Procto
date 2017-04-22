@@ -627,17 +627,30 @@
                     }
                 </div>
                 <div class="fltleft" style="width:100%; clear:both;">
-                    @{
-                        if (!string.IsNullOrEmpty(Model.Patient.Investigation))
-                        {
-                            <div class="print_text_fltleft print_heading">
-                                @Html.DisplayNameFor(model => model.Patient.Investigation)
-                            </div>
-                            <div>
-                                @Html.DisplayFor(model => model.Patient.Investigation)
-                            </div>
-                        }
-                    }
+                  @{
+                      if (Model.Patient.Investigations.Count() > 0)
+                      {
+                          int inst_cnt = 1;
+                        <div class="print_heading">
+                            @Html.DisplayNameFor(model => model.Patient.Investigations)
+                        </div>
+                                <div>
+                                    @foreach (var item in Model.Patient.Investigations)
+                                    {
+                                        <div style="clear:both; width:100%">
+                                            <div class="fltleft" style="width:3%;">
+                                                <span>@inst_cnt)</span>
+                                            </div>
+                                            <div class="fltleft" style="padding-right:5px; text-align:justify;">
+                                                @Html.DisplayFor(modelItem => item.Name):
+                                            </div>
+                                        </div>
+                                        inst_cnt = inst_cnt + 1;
+                                    }
+                                </div>
+
+                      }
+                }
                 </div>
             </div>
             <div id="RxPart">

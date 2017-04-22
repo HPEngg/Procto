@@ -11,23 +11,23 @@
     <div class="print_margin fonts_candara">
         <input type="hidden" name="PatientID" value="@ViewBag.PatientID" />
         <div class="fltleft" style="width:100%;">
-            <label class="arial_heading" style="width:15%; float:left;">Print Section:</label>
-            <div style="width:84%">
-                <div class="print_text_padding" style="width:20%;">
-                    <div class="print_text_fltleft print_heading checkbox">
+            <label class="arial_heading" style="width:13%; float:left;">Print Section:</label>
+            <div style="width:87%">
+                <div class="print_text_padding" style="width:17%;">
+                    <div class="print_text_fltleft print_heading checkbox" style="padding-left:10px;">
                         @*@Html.LabelFor(model => model.HeaderRequired, htmlAttributes: new { @class = "control-label col-md-2", style = "float:left;" })*@
                         <label class="arial_heading" style="float:left;">Header</label>
                     </div>
-                    <div class="print_text_fltleft checkbox">
+                    <div class="print_text_fltleft checkbox" >
                         @Html.EditorFor(model => model.HeaderRequired)
                         @Html.ValidationMessageFor(model => model.HeaderRequired, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
-                <div class="print_text_padding" style="width:20%;">
+                <div class="print_text_padding" style="width:33%;">
                     <div class="print_text_fltleft print_heading checkbox">
                         @*@Html.LabelFor(model => model.PatientRequired, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                        <label class="arial_heading" style="float:left;">Patient</label>
+                        <label class="arial_heading" style="float:left;">Patient Face Photo</label>
                     </div>
                     <div class="print_text_fltleft checkbox">
                         @Html.EditorFor(model => model.PatientRequired)
@@ -35,7 +35,7 @@
                     </div>
                 </div>
 
-                <div class="print_text_padding" style="width:20%;">
+                <div class="print_text_padding" style="width:15%;">
                     <div class="print_text_fltleft print_heading checkbox">
                         @*@Html.LabelFor(model => model.RXRequired, htmlAttributes: new { @class = "control-label col-md-2" })*@
                         <label class="arial_heading" style="float:left;">RX</label>

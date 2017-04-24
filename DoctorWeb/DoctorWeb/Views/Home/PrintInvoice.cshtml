@@ -130,30 +130,17 @@
                         </td>
                     </tr>
                 }
-                <tr>
-                    <th colspan="4" class="invoice_colspan">
-                        @Html.DisplayNameFor(model => model.Consult)
-                    </th>
-                    <td>@Html.DisplayFor(model => model.Consult)</td>
-                </tr>
-                <tr>
-                    <th colspan="4" class="invoice_colspan">
-                        @Html.DisplayNameFor(model => model.Proctoscopy)
-                    </th>
-                    <td>@Html.DisplayFor(model => model.Proctoscopy)</td>
-                </tr>
-                <tr>
-                    <th colspan="4" class="invoice_colspan">
-                        @Html.DisplayNameFor(model => model.Dressing)
-                    </th>
-                    <td>@Html.DisplayFor(model => model.Dressing)</td>
-                </tr>
-                <tr>
-                    <th colspan="4" class="invoice_colspan">
-                        @Html.DisplayNameFor(model => model.KSProcedure)
-                    </th>
-                    <td>@Html.DisplayFor(model => model.KSProcedure)</td>
-                </tr>
+                @{
+                    foreach (var pt in Model.PaymentTypes)
+                    {
+                        <tr>
+                            <th colspan="4" class="invoice_colspan">
+                                <span>@pt.PaymentTypeName</span>
+                            </th>
+                            <td><span>@pt.Rupees</span></td>
+                        </tr>
+                    }
+                }
                 <tr>
                     <th colspan="4" class="invoice_colspan">
                         @Html.DisplayNameFor(model => model.Other)

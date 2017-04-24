@@ -90,12 +90,13 @@ namespace DoctorWeb.Models.CustomModels
 
     public class Invoice
     {
-        public string Consult { get; set; }
-        public string Proctoscopy { get; set; }
-        public string Dressing { get; set; }
-        public string KSProcedure { get; set; }
+        //public string Consult { get; set; }
+        //public string Proctoscopy { get; set; }
+        //public string Dressing { get; set; }
+        //public string KSProcedure { get; set; }
+        //public string Other { get; set; }
+        public List<PaymentType> PaymentTypes { get; set; }
         public string Medicine { get; set; }
-        public string Other { get; set; }
         public string Less { get; set; }
         public string Net { get; set; }
         public string Total { get; set; }

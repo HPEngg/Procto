@@ -115,7 +115,7 @@
                             if (!string.IsNullOrEmpty(Model.Patient.Age.ToString()))
                             {
                                 <div class="print_text_padding">
-                                    <div class="fltleft print_heading">
+                                    <div class="fltleft">
                                         @Html.DisplayFor(model => model.Patient.Age)
                                     </div>
                                     <span class="fltleft" style="padding: 0 2px;"> / </span>
@@ -261,11 +261,11 @@
                         @{
                             if (!string.IsNullOrEmpty(Model.Patient.Constipation.ToString()))
                             {
-                                <div class="print_text_padding " style="width:25%;">
+                                <div style="float:left;">
                                     <div class="print_text_fltleft print_heading">
                                         @Html.DisplayNameFor(model => model.Patient.Constipation)
                                     </div>
-                                    <div>
+                                    <div class="print_text_fltleft">
                                         @Html.DisplayFor(model => model.Patient.Constipation)
                                         <span>, </span>
                                         @Html.DisplayFor(model => model.Patient.ConstipationMore)
@@ -276,11 +276,11 @@
                         @{
                             if (!string.IsNullOrEmpty(Model.Patient.GAS.ToString()))
                             {
-                                <div class="print_text_padding " style="width:25%;">
+                                <div style="float:left;">
                                     <div class="print_text_fltleft print_heading">
                                         @Html.DisplayNameFor(model => model.Patient.GAS)
                                     </div>
-                                    <div>
+                                    <div class="print_text_fltleft">
                                         @Html.DisplayFor(model => model.Patient.GAS)
                                         <span>, </span>
                                         @Html.DisplayFor(model => model.Patient.GASMore)
@@ -292,11 +292,11 @@
                         @{
                             if (!string.IsNullOrEmpty(Model.Patient.Acidity.ToString()))
                             {
-                                <div class="print_text_padding " style="width:25%;">
+                                <div style="float:left;">
                                     <div class="print_text_fltleft print_heading">
                                         @Html.DisplayNameFor(model => model.Patient.Acidity)
                                     </div>
-                                    <div>
+                                    <div class="print_text_fltleft">
                                         @Html.DisplayFor(model => model.Patient.Acidity)
                                         <span>, </span>
                                         @Html.DisplayFor(model => model.Patient.AcidityMore)
@@ -308,11 +308,11 @@
                         @{
                             if (!string.IsNullOrEmpty(Model.Patient.Pain.ToString()))
                             {
-                                <div class="print_text_padding " style="width:25%;">
+                                <div style="style="float:left;">
                                     <div class="print_text_fltleft print_heading">
                                         @Html.DisplayNameFor(model => model.Patient.Pain)
                                     </div>
-                                    <div>
+                                    <div class="print_text_fltleft">
                                         @Html.DisplayFor(model => model.Patient.Pain)
                                         <span>, </span>
                                         @Html.DisplayFor(model => model.Patient.PainMore)
@@ -327,11 +327,11 @@
                         @{
                             if (!string.IsNullOrEmpty(Model.Patient.Burning.ToString()))
                             {
-                                <div class="print_text_padding " style="width:25%;">
+                                <div style="style="float:left;">
                                     <div class="print_text_fltleft print_heading">
                                         @Html.DisplayNameFor(model => model.Patient.Burning)
                                     </div>
-                                    <div>
+                                    <div class="print_text_fltleft">
                                         @Html.DisplayFor(model => model.Patient.Burning)
                                         <span>, </span>
                                         @Html.DisplayFor(model => model.Patient.BurningMore)
@@ -343,11 +343,11 @@
                         @{
                             if (!string.IsNullOrEmpty(Model.Patient.Bleeding.ToString()))
                             {
-                                <div class="print_text_padding " style="width:25%;">
+                                <div style="style="float:left;">
                                     <div class="print_text_fltleft print_heading">
                                         @Html.DisplayNameFor(model => model.Patient.Bleeding)
                                     </div>
-                                    <div>
+                                    <div class="print_text_fltleft">
                                         @Html.DisplayFor(model => model.Patient.Bleeding)
                                         <span>, </span>
                                         @Html.DisplayFor(model => model.Patient.BleedingMore)
@@ -359,11 +359,11 @@
                         @{
                             if (!string.IsNullOrEmpty(Model.Patient.Swelling.ToString()))
                             {
-                                <div class="print_text_padding " style="width:25%;">
+                                <div style="style="float:left;">
                                     <div class="print_text_fltleft print_heading">
                                         @Html.DisplayNameFor(model => model.Patient.Swelling)
                                     </div>
-                                    <div>
+                                    <div class="print_text_fltleft">
                                         @Html.DisplayFor(model => model.Patient.Swelling)
                                         <span>, </span>
                                         @Html.DisplayFor(model => model.Patient.SwellingMore)
@@ -375,11 +375,11 @@
 
                             if (!string.IsNullOrEmpty(Model.Patient.SCO))
                             {
-                                <div class="print_text_padding " style="width:25%;">
+                                <div style="style="float:left;">
                                     <div class="print_text_fltleft print_heading">
                                         <span class="print_heading">S/C/O</span>
                                     </div>
-                                    <div>
+                                    <div class="print_text_fltleft">
                                         @Html.DisplayFor(model => model.Patient.SCO) <span> degree</span>
                                     </div>
                                 </div>
@@ -653,100 +653,96 @@
                         }
                     </div>
                     <div class="fltleft" style="width:100%; clear:both;">
-                        @*@{
-                            if (!string.IsNullOrEmpty(Model.Patient.Investigation))
-                            {
-                                <div class="print_text_fltleft print_heading">
-                                    @Html.DisplayNameFor(model => model.Patient.Investigation)
-                                </div>
-                                <div>
-                                    @Html.DisplayFor(model => model.Patient.Investigation)
-                                </div>
-                            }
-                        }*@
-
-                        @{
-                            if (Model.Patient.Investigations.Count() > 0)
-                            {
-                                int inst_cnt = 1;
-                                <div class="print_heading">
-                                    @Html.DisplayNameFor(model => model.Patient.Investigations)
-                                </div>
-                                <div>
-                                    @foreach (var item in Model.Patient.Investigations)
-                                    {
-                                        <div style="clear:both; width:100%">
-                                            <div class="fltleft" style="width:3%;">
-                                                <span>@inst_cnt)</span>
-                                            </div>
+                        <div class="fltleft" style="width:100%; clear:both;">
+                            @{
+                                if (Model.Patient.Investigations.Count() > 0)
+                                {
+                                    //int inst_cnt = 1;
+                                    <div class="print_heading fltleft">
+                                        @Html.DisplayNameFor(model => model.Patient.Investigations)
+                                    </div>
+                                    <div class="fltleft">
+                                        @foreach (var item in Model.Patient.Investigations)
+                                        {
                                             <div class="fltleft" style="padding-right:5px; text-align:justify;">
-                                                @Html.DisplayFor(modelItem => item.Name):
+                                                @Html.DisplayFor(modelItem => item.Name),
                                             </div>
-                                        </div>
-                                        inst_cnt = inst_cnt + 1;
-                                    }
-                                </div>
+                                        }
+                                    </div>
 
+                                    @*<div>
+                                            @foreach (var item in Model.Patient.Investigations)
+                                            {
+                                                <div style="clear:both; width:100%">
+                                                    <div class="fltleft" style="width:3%;">
+                                                        <span>@inst_cnt)</span>
+                                                    </div>
+                                                    <div class="fltleft" style="padding-right:5px; text-align:justify;">
+                                                        @Html.DisplayFor(modelItem => item.Name):
+                                                    </div>
+                                                </div>
+                                                inst_cnt = inst_cnt + 1;
+                                            }
+                                        </div>*@
+                                }
                             }
-                        }
+                        </div>
 
                     </div>
                 </div>
                 <div id="RxPart">
                     <label class="arial_heading" style="clear:both;">
-                        RX
+                        R/X:
                     </label>
-                    <table class="table table-bordered" style="width:auto; font-family:Calibri; font-size:10pt; border:none;">
-                        <tr>
-                            <th>
-                                Medicine Type
-                            </th>
-                            <th>
+                    <table class="table table-bordered" style="width:auto; font-family:Calibri; font-size:10pt; border:none; margin-bottom:10px;">
+                        <tr style="text-transform:uppercase;">
+                            <th colspan="2" style="padding-left:0px;">
                                 Medicine Name
                             </th>
                             <th>
-                                Morning Doz
+                                Morning
                             </th>
                             <th>
-                                Noon Doz
+                                Noon
                             </th>
                             <th>
-                                Night Doz
+                                Night
                             </th>
                             <th>
                                 Dosage
                             </th>
                             <th>
-                                Quantity
+                                QTY.
                             </th>
                         </tr>
                         @foreach (var item in Model.RX.Medicines)
                         {
                             <tr>
-                                <td>
+                                <td style="width:5%; padding-left:0px;">
                                     @Html.DisplayFor(modelItem => item.OINT.Name)
                                 </td>
-                                <td>
+                                <td style="width:45%;">
                                     @Html.DisplayFor(modelItem => item.OINTMore)
                                 </td>
-                                <td>
+                                <td style="width:5%; text-align:center;">
                                     @Html.DisplayFor(modelItem => item.Morning.Name)
                                 </td>
-                                <td>
+                                <td style="width:5%; text-align:center;">
                                     @Html.DisplayFor(modelItem => item.Noon.Name)
                                 </td>
-                                <td>
+                                <td style="width:5%; text-align:center;">
                                     @Html.DisplayFor(modelItem => item.Night.Name)
                                 </td>
-                                <td>
+                                <td style="width:30%;">
                                     @Html.DisplayFor(modelItem => item.Dosage.Name)
                                 </td>
-                                <td>
+                                <td style="width:5%; text-align:center;">
                                     @Html.DisplayFor(modelItem => item.Quantity)
                                 </td>
                             </tr>
                         }
                     </table>
+
                 </div>
                 <div id="CompulsoryPart">
                     <div class="fltleft" style="width:100%;">
@@ -800,7 +796,7 @@
                 </div>
             </div>
             <div id="InvoicePart">
-                <label class="arial_heading">Invoice</label>
+                <label class="arial_heading" style="text-decoration:underline;">INVOICE</label>
                 <div class="fltleft" style="width:100%; font-family:Calibri; font-size:10pt;">
                     @{
                         if (!string.IsNullOrEmpty(Model.Invoice.Consult))

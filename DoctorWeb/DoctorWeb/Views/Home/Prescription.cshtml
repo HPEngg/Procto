@@ -100,7 +100,7 @@
                                         @Html.LabelFor(model => model.Medicine.OINT, htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-10">
                                     *@
-                                    @Html.DropDownList("OINTTypeID", null, htmlAttributes: new { @class = "pre tabname", @id = "tabname_1", @style = "width: 75px!important; max-width: 75px!important; padding: 0!important;" })
+                                    @Html.DropDownList("OINTTypeID", null, htmlAttributes: new { @class = "pre tabname", @id = "tabname_1", @style = "width: 75px!important; max-width: 70px!important; padding: 0!important;" })
                                     @*@Html.EnumDropDownListFor(model => model.Medicine.OINT, htmlAttributes: new { @class = "pre tabname", @id = "tabname_1", @style = "width: 85px!important; padding: 0!important;" })*@
                                     @Html.ValidationMessageFor(model => model.Medicine.OINTTypeID, "", new { @class = "text-danger" })
                                     @*
@@ -111,7 +111,7 @@
                                         @Html.LabelFor(model => model.Medicine.OINTMore, htmlAttributes: new { @class = "control-label col-md-2" })*@
                                     @*<div class="col-md-10">
                                     *@
-                                    @Html.EditorFor(model => model.Medicine.OINTMore, new { htmlAttributes = new { id = "Medicine_OINTMore1", Name = "Medicine_OINTMore", @style = "width:110px;", @class = "pre autocomplete", @type = "textbox", @value = "OINTOINT", @placeholder = "Medicine Name" } })
+                                    @Html.EditorFor(model => model.Medicine.OINTMore, new { htmlAttributes = new { id = "Medicine_OINTMore1", Name = "Medicine_OINTMore", @style = "width:105px;", @class = "pre autocomplete", @type = "textbox", @value = "OINTOINT", @placeholder = "Medicine Name" } })
                                     @Html.ValidationMessageFor(model => model.Medicine.OINTMore, "", new { @class = "text-danger" })
                                     <input type="hidden" id="hfPatient" name="Pat_ID" />
 
@@ -124,7 +124,7 @@
                                         @Html.LabelFor(model => model.Medicine.Morning, htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-10">
                                     *@
-                                    @Html.DropDownList("MorningDozID", null, htmlAttributes: new { @id = "MorningDozID1", @class = "pre svar", @style = "width: 60px!important; padding: 0!important;" })
+                                    @Html.DropDownList("MorningDozID", null, htmlAttributes: new { @id = "MorningDozID1", @class = "pre svar", @style = "width: 50px!important; padding: 0!important;" })
                                     @Html.ValidationMessageFor(model => model.Medicine.MorningDozID, "", new { @class = "text-danger" })
 
 
@@ -138,7 +138,7 @@
                                         @Html.LabelFor(model => model.Medicine.Noon, htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-10">
                                     *@
-                                    @Html.DropDownList("NoonDozID", null, htmlAttributes: new { @id = "NoonDozID1", @class = "pre bpor", @style = "width: 60px!important; padding: 0!important;" })
+                                    @Html.DropDownList("NoonDozID", null, htmlAttributes: new { @id = "NoonDozID1", @class = "pre bpor", @style = "width: 50px!important; padding: 0!important;" })
                                     @Html.ValidationMessageFor(model => model.Medicine.NoonDozID, "", new { @class = "text-danger" })
                                     @*@Html.EnumDropDownListFor(model => model.Medicine.Noon, htmlAttributes: new { @class = "pre bpor", @style = "width: 40px!important; padding: 0!important;" })
                                         @Html.ValidationMessageFor(model => model.Medicine.Noon, "", new { @class = "text-danger" })*@
@@ -150,7 +150,7 @@
                                         @Html.LabelFor(model => model.Medicine.Night, htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-10">
                                     *@
-                                    @Html.DropDownList("NightDozID", null, htmlAttributes: new { @id = "NightDozID1", @class = "pre sanj", @style = "width: 60px!important; padding: 0!important;" })
+                                    @Html.DropDownList("NightDozID", null, htmlAttributes: new { @id = "NightDozID1", @class = "pre sanj", @style = "width: 50px!important; padding: 0!important;" })
                                     @Html.ValidationMessageFor(model => model.Medicine.NightDozID, "", new { @class = "text-danger" })
                                     @*@Html.EnumDropDownListFor(model => model.Medicine.Night, htmlAttributes: new { @class = "pre sanj", @style = "width: 40px!important; padding: 0!important;" })
                                         @Html.ValidationMessageFor(model => model.Medicine.Night, "", new { @class = "text-danger" })*@
@@ -180,8 +180,7 @@
                                     @Html.EditorFor(model => model.Medicine.Unit, new { htmlAttributes = new { Name = "Medicine_Unit", @id = "unt_1", @class = "pre qut", @placeholder = "Unit", @style = "width: 40px;color:#000; padding: 6px;", @readonly = "readonly" } })
                                     @Html.ValidationMessageFor(model => model.Medicine.Unit, "", new { @class = "text-danger" })
 
-                                    @Html.EditorFor(model => model.Medicine.Unit, new { htmlAttributes = new { Name = "Medicine_Total", @id = "mtotal_1", @class = "pre qut", @placeholder = "Total", @style = "width: 40px;color:#000; padding: 6px;", @readonly = "readonly" } })
-                                    @Html.ValidationMessageFor(model => model.Medicine.Unit, "", new { @class = "text-danger" })
+                                    <input type="text" Name="Medicine_Total" , id="mtotal_1" , class="pre qut" , placeholder="Total" , style="width: 40px;color:#000; padding: 6px;" , readonly="readonly" />
 
                                     <input value="+" class="add_field_button plusbutton" type="button" required>
                                     <a href="#" class="remove_field" style="text-decoration:none;font-weight:bold; float:left;">--</a>
@@ -283,11 +282,11 @@
 
 
 
-                        <div style=" width:96%; position:relative; clear:both; bottom:0;" class="pmtype_div">
+                        <div style=" width:100%; position:relative; clear:both; bottom:0;" class="pmtype_div">
                             <div id="payment_types">
                                 @foreach (var item in Model.PaymentTypes)
                                 {
-                                    <input style="width:20px!important; padding: 0!important;" value="1" type="checkbox" name="pm_type[]" id="pmtype_@Html.DisplayFor(modelItem => item.ID)" class="pmtype" />
+                                    <input style="width:20px!important; padding: 0!important;" value="@item.ID" type="checkbox" name="pm_type" id="pmtype_@Html.DisplayFor(modelItem => item.ID)" class="pmtype" />
                                     <b style="width:10px!important; padding: 0!important;">@Html.DisplayFor(modelItem => item.PaymentTypeName)</b>
                                     <input type=hidden id="pmcharges_@Html.DisplayFor(modelItem => item.ID)" value="@Html.DisplayFor(modelItem => item.Rupees)" />
                                 }
@@ -433,6 +432,13 @@
 
                     //alert(htmlString);
                     jQuery(wrapper).append('<div style="clear:both;">' + htmlString + '</div>');
+
+                    jQuery("#qut_" + parseInt(i - 1)).blur(function () {
+                        var current_rec = $(this).attr('id').substring(4);
+                        calc_qty_change(current_rec);
+                    });
+
+
                     $("#MorningDozID" + parseInt(i - 1)).change(function () {
                         var current_rec = $(this).attr('id').substring(12);
                         calc_qty(current_rec);
@@ -440,13 +446,13 @@
                     });
 
                     $("#NoonDozID" + parseInt(i - 1)).change(function () {
-                        var current_rec = $(this).attr('id').substring(12);
+                        var current_rec = $(this).attr('id').substring(9);
                         calc_qty(current_rec);
                         //calc_qty(flag);
                     });
 
                     $("#NightDozID" + parseInt(i - 1)).change(function () {
-                        var current_rec = $(this).attr('id').substring(12);
+                        var current_rec = $(this).attr('id').substring(10);
                         calc_qty(current_rec);
                         //calc_qty(flag);
                     });
@@ -469,7 +475,15 @@
                     i++;
 
                     //alert(htmlString);
+
                     jQuery(wrapper).append('<div style="clear:both;">' + htmlString + '</div>');
+
+
+                    jQuery("#qut_" + parseInt(i - 1)).blur(function () {
+                        var current_rec = $(this).attr('id').substring(4);
+                        calc_qty_change(current_rec);
+                    });
+
                     $("#MorningDozID" + parseInt(i - 1)).change(function () {
                         var current_rec = $(this).attr('id').substring(12);
                         calc_qty(current_rec);
@@ -477,13 +491,13 @@
                     });
 
                     $("#NoonDozID" + parseInt(i - 1)).change(function () {
-                        var current_rec = $(this).attr('id').substring(12);
+                        var current_rec = $(this).attr('id').substring(9);
                         calc_qty(current_rec);
                         //calc_qty(flag);
                     });
 
                     $("#NightDozID" + parseInt(i - 1)).change(function () {
-                        var current_rec = $(this).attr('id').substring(12);
+                        var current_rec = $(this).attr('id').substring(10);
                         calc_qty(current_rec);
                         //calc_qty(flag);
                     });
@@ -519,47 +533,110 @@
             /* CODE FOR CHANGING QUANTITY ACCORDING TO DAYS HERE  */
             jQuery("#patient_days_presc").blur(function () {
                 for (count = 1; count <= jQuery("#input_fields_wrap_js > div").length; count++) {
-                    calc_qty(1);
+                    calc_qty(count);
                     //alert(count);
                 }
             });
+            
+            
+
+            function medicine_total()
+            {
+                alert("Hi");
+                var medicine_total = 0;
+                for (count = 1; count <= i; count++) {
+                    medicine_total = medicine_total + jQuery("#mtotal_" + parseInt(count)).val();
+                }
+                jQuery("#pm_madicine").val(medicine_total);
+            }
+
+            function calc_qty_change(current_rec) {
+                qty = jQuery("#qut_" + parseInt(current_rec)).val();
+                var mtot = jQuery("#unt_" + parseInt(current_rec)).val() * qty;
+                jQuery("#mtotal_" + parseInt(current_rec)).val(mtot);
+                medicine_total();
+            }
 
 
             function calc_qty(current_rec) {
                 var mor, noon, night;
-                //for (count = 1; count <= jQuery("#input_fields_wrap_js > div").length; count++)
-                for (count = 1; count <= i; count++) {
-                    //alert("days_flag" + count + "Value = " + jQuery("#days_flag" + parseInt(count)).val());
-                    var qtyflag = (jQuery("#days_flag" + parseInt(count)).val());
+                    //alert("days_flag" + current_rec + "Value = " + jQuery("#days_flag" + parseInt(current_rec)).val());
+                    var qtyflag = (jQuery("#days_flag" + parseInt(current_rec)).val());
+                    var qty = 0;
                     if (qtyflag == "true") {
                         var days = document.getElementById("patient_days_presc").value;
-                        if ($('option:selected', $("#MorningDozID" + parseInt(count))).text() == "1/2") {
+                        if ($('option:selected', $("#MorningDozID" + parseInt(current_rec))).text() == "1/2") {
                             mor = parseFloat(0.5);
                         }
                         else {
-                            mor = $('option:selected', $("#MorningDozID" + parseInt(count))).text();
+                            mor = $('option:selected', $("#MorningDozID" + parseInt(current_rec))).text();
                         }
-                        if ($('option:selected', $("#NoonDozID" + parseInt(count))).text() == "1/2") {
+                        if ($('option:selected', $("#NoonDozID" + parseInt(current_rec))).text() == "1/2") {
                             noon = parseFloat(0.5);
                         }
                         else {
-                            noon = $('option:selected', $("#NoonDozID" + parseInt(count))).text();
+                            noon = $('option:selected', $("#NoonDozID" + parseInt(current_rec))).text();
                         }
-                        if ($('option:selected', $("#NightDozID" + parseInt(count))).text() == "1/2") {
+                        if ($('option:selected', $("#NightDozID" + parseInt(current_rec))).text() == "1/2") {
                             night = parseFloat(0.5);
                         }
                         else {
-                            night = $('option:selected', $("#NightDozID" + parseInt(count))).text();
+                            night = $('option:selected', $("#NightDozID" + parseInt(current_rec))).text();
                         }
                         //alert("Days : " + days + ", Morning : " + mor + ", Noon : " + noon + ", Night : " + night);
-                        var qty = (parseFloat(mor) + parseFloat(noon) + parseFloat(night)) * parseFloat(days);
-                        jQuery("#qut_" + parseInt(count)).val(qty);
+                        qty = (parseFloat(mor) + parseFloat(noon) + parseFloat(night)) * parseFloat(days);
+                        jQuery("#qut_" + parseInt(current_rec)).val(qty);
+
                     }
                     else {
-                        jQuery("#qut_" + parseInt(count)).val(0);
+                        qty = 0;
+                        jQuery("#qut_" + parseInt(current_rec)).val(0);
                     }
-                }
+                    var mtot = jQuery("#unt_" + parseInt(current_rec)).val() * qty;
+                    jQuery("#mtotal_" + parseInt(current_rec)).val(mtot);
+                    medicine_total();
             }
+
+            //function calc_qty(current_rec) {
+            //    var mor, noon, night;
+            //    //for (count = 1; count <= jQuery("#input_fields_wrap_js > div").length; count++)
+            //    for (count = 1; count <= i; count++) {
+            //        //alert("days_flag" + count + "Value = " + jQuery("#days_flag" + parseInt(count)).val());
+            //        var qtyflag = (jQuery("#days_flag" + parseInt(count)).val());
+            //        var qty = 0;
+            //        if (qtyflag == "true") {
+            //            var days = document.getElementById("patient_days_presc").value;
+            //            if ($('option:selected', $("#MorningDozID" + parseInt(count))).text() == "1/2") {
+            //                mor = parseFloat(0.5);
+            //            }
+            //            else {
+            //                mor = $('option:selected', $("#MorningDozID" + parseInt(count))).text();
+            //            }
+            //            if ($('option:selected', $("#NoonDozID" + parseInt(count))).text() == "1/2") {
+            //                noon = parseFloat(0.5);
+            //            }
+            //            else {
+            //                noon = $('option:selected', $("#NoonDozID" + parseInt(count))).text();
+            //            }
+            //            if ($('option:selected', $("#NightDozID" + parseInt(count))).text() == "1/2") {
+            //                night = parseFloat(0.5);
+            //            }
+            //            else {
+            //                night = $('option:selected', $("#NightDozID" + parseInt(count))).text();
+            //            }
+            //            //alert("Days : " + days + ", Morning : " + mor + ", Noon : " + noon + ", Night : " + night);
+            //            qty = (parseFloat(mor) + parseFloat(noon) + parseFloat(night)) * parseFloat(days);
+            //            jQuery("#qut_" + parseInt(count)).val(qty);
+                       
+            //        }
+            //        else {
+            //            qty = 0;
+            //            jQuery("#qut_" + parseInt(count)).val(0);
+            //        }
+            //        var mtot = jQuery("#unt_" + parseInt(count)).val() * qty;
+            //        jQuery("#mtotal_" + parseInt(count)).val(mtot);
+            //    }
+            //}
 
             //var isdayaffected = true;
             //function calc_qty(flag) {
@@ -593,6 +670,12 @@
             //    }
             //}
 
+            jQuery("#qut_" + parseInt(i - 1)).blur(function () {
+                var current_rec = $(this).attr('id').substring(4);
+                calc_qty_change(current_rec);
+            });
+
+            var medicine_total = 0;
             $("#MorningDozID" + parseInt(i - 1)).change(function () {
                 var current_rec = $(this).attr('id').substring(12);
                 calc_qty(current_rec);
@@ -637,22 +720,24 @@
                         });
                     },
                     select: function (e, j) {
-                        var qty;
-                        if (j.item.term == true) {
-                            qty = parseFloat(jQuery("#qut_" + parseInt(i - 1)).val());
-                        }
-                        else {
-                            jQuery("#qty_" + parseInt(i - 1)).val(j.item.quantity);
-                            qty = parseFloat(j.item.quantity);
-                        }
-                        jQuery("#unt_" + parseInt(i - 1)).val(j.item.unit);
-                        //var qty = parseFloat(jQuery("#qut_" + parseInt(i - 1)).val());
-                        var mtot = (parseFloat(j.item.unit) * qty);
-                        jQuery("#mtotal_" + parseInt(i - 1)).val(mtot);
+                        //var qty;
+                        //if (j.item.term == true) {
+                        //    qty = parseFloat(jQuery("#qut_" + parseInt(i - 1)).val());
+                        //}
+                        //else {
+                        //    jQuery("#qty_" + parseInt(i - 1)).val(j.item.quantity);
+                        //    qty = parseFloat(j.item.quantity);
+                        //}
+                        
+                        ////var qty = parseFloat(jQuery("#qut_" + parseInt(i - 1)).val());
+                        //var mtot = (parseFloat(j.item.unit) * qty);
+                        //jQuery("#mtotal_" + parseInt(i - 1)).val(mtot);
 
 
                         var current_rec = $(this).attr('id').substring(17);
                         jQuery("#days_flag" + parseInt(i - 1)).val(j.item.term);
+                        jQuery("#unt_" + parseInt(i - 1)).val(j.item.unit);
+
                         //if (j.item.term == true) {
                         
                         //flag = true;
@@ -698,20 +783,23 @@
                     },
                     select: function (e, j) {
 
-                        var qty;
-                        if (j.item.term == true) {
-                            qty = parseFloat(jQuery("#qut_" + parseInt(i - 1)).val());
-                        }
-                        else {
-                            jQuery("#qty_" + parseInt(i - 1)).val(j.item.quantity);
-                            qty = parseFloat(j.item.quantity);
-                        }
-                        jQuery("#unt_" + parseInt(i - 1)).val(j.item.unit);
-                        //var qty = parseFloat(jQuery("#qut_" + parseInt(i - 1)).val());
-                        var mtot = (parseFloat(j.item.unit) * qty);
-                        jQuery("#mtotal_" + parseInt(i - 1)).val(mtot);
+                        //var qty;
+                        //if (j.item.term == true) {
+                        //    qty = parseFloat(jQuery("#qut_" + parseInt(i - 1)).val());
+                        //}
+                        //else {
+                        //    jQuery("#qty_" + parseInt(i - 1)).val(j.item.quantity);
+                        //    qty = parseFloat(j.item.quantity);
+                        //}
+                        //jQuery("#unt_" + parseInt(i - 1)).val(j.item.unit);
+                        ////var qty = parseFloat(jQuery("#qut_" + parseInt(i - 1)).val());
+                        //var mtot = (parseFloat(j.item.unit) * qty);
+                        //jQuery("#mtotal_" + parseInt(i - 1)).val(mtot);
+
+
                         var current_rec = $(this).attr('id').substring(17);
                         jQuery("#days_flag" + parseInt(i - 1)).val(j.item.term);
+                        jQuery("#unt_" + parseInt(i - 1)).val(j.item.unit);
                         //if (j.item.term == true) {
 
                         //flag = true;

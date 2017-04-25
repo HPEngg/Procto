@@ -1,10 +1,168 @@
 ﻿
 @{
     ViewBag.Title = "Bill";
-    Layout = "~/Views/Shared/_Certificate.cshtml";
+    Layout = null;
 }
 
-<!DOCTYPE HTML>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        body {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-family: Calibri, Verdana;
+            font-size: 24px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        h2 {
+            font-family: Calibri, Verdana;
+            font-size: 20px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        div {
+            line-height: 200%;
+            text-align: left;
+        }
+
+        span {
+            font-family: Calibri, Verdana;
+            font-size: 16px;
+        }
+
+        input[type=text], textarea {
+            font-family: Calibri, Verdana;
+            font-size: 16px;
+            height: 20px;
+            border: none;
+            border-bottom: 1px solid black;
+            width: 100%;
+            text-align: center;
+        }
+
+        select {
+            -webkit-appearance: button;
+            -webkit-padding-end: 20px;
+            -webkit-padding-start: 2px;
+            -webkit-user-select: none;
+            background-position: center right;
+            background-repeat: no-repeat;
+            border: none;
+            color: #555;
+            font-family: Calibri;
+            font-size: 12pt;
+            margin: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+            select option {
+                font-family: Calibri;
+                font-size: 12pt;
+            }
+
+        .print_btn {
+            width: 105px;
+            background: #1665AD;
+            border: 0 none;
+            color: #fff;
+            font-weight: bold;
+            border-radius: 1 px;
+            margin-top: 9px;
+            margin-bottom: 9px;
+            margin-left: 0px;
+            height: 34px;
+            cursor: pointer;
+        }
+
+        @@media print {
+            input[type=button] {
+                visibility: hidden;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="unfit_certi" style="max-width:700px; text-align:center; margin: 0 auto;">
+        @{
+            if (ViewBag.HeaderPhoto != null)
+            {
+                var base64 = Convert.ToBase64String(ViewBag.HeaderPhoto);
+                var imgSrchdr = String.Format("data:image/gif;base64,{0}", base64);
+                <img src="@imgSrchdr" style="height:150px; width:100%;" />
+            }
+        }
+        <h1>Received Bill Certificate</h1>
+        <h2>To whomsoever it may concern</h2>
+        <div style="font-family:calibri; font-size:14pt; min-height:650px;">
+            <span style="padding-left:45px;">
+                In the sum of rupees
+            </span>
+            <input type="text" style="max-width: 100px;" />
+            <span>
+                INR (
+            </span>
+            <input type="text" style="max-width: 355px;" />
+            <span>
+                ) Received with thanks from
+            </span>
+            <select>
+                <option>Mr</option>
+                <option>Mrs</option>
+                <option>Miss</option>
+            </select>
+            <input type="text" style="max-width: 446px;" />, <input type="text" style="max-width: 30px;" />
+            <span>YRS, </span>
+            <select>
+                <option>Male</option>
+                <option>Female</option>
+            </select>
+            <span> for the procedure of </span>
+            <input type="text" style="max-width: 295px;" />
+            <span>at @System.Web.Configuration.WebConfigurationManager.AppSettings["HospitalName"]</span>
+            <span>on </span>
+            <input type="text" style="max-width: 20px;" placeholder="DD" />
+            <span> / </span>
+            <input type="text" style="max-width: 25px;" placeholder="MM" />
+            <span> / </span>
+            <input type="text" style="max-width: 40px;" placeholder="YYYY" />
+            <span>.</span>            
+        </div>
+    </div>
+    <input type="button" value="Print" onClick="window.print()" class="print_btn">
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<!DOCTYPE HTML>
 <html>
 <head>
     <script src="~/Content/js/certi_jquery.min.js"></script>
@@ -24,16 +182,16 @@
     <link href="~/Content/css/editor.css" type="text/css" rel="stylesheet" />
 
 </head>
-<body>
-    @{
+<body>*@
+    @*@{
         if (ViewBag.HeaderPhoto != null)
         {
             var base64 = Convert.ToBase64String(ViewBag.HeaderPhoto);
             var imgSrchdr = String.Format("data:image/gif;base64,{0}", base64);
             <img src="@imgSrchdr" style="height:150px; width:100%;" />
         }
-    }
-    <div class="container-fluid">
+    }*@
+    @*<div class="container-fluid">
         <div class="row">
             <div class="container">
                 <div class="row">
@@ -47,10 +205,9 @@
     </div>
     <div class="footer">
         <span>&copy; Krishna Hospital</span>
-    </div>
-    <!--footer-->
+    </div>  
 </body>
-</html>
+</html>*@
 
 
 

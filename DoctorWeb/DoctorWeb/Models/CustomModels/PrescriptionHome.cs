@@ -59,5 +59,7 @@ namespace DoctorWeb.Models.CustomModels
         public int[] Medicine_Quantity { get; set; }
         public float[] Medicine_Unit { get; set; }
         public float[] Medicine_Total { get; set; }
+
+        public int[] pm_type { get; set; }
     }
 }

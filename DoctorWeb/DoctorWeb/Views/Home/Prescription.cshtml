@@ -177,10 +177,10 @@
                                     @Html.EditorFor(model => model.Medicine.Quantity, new { htmlAttributes = new { Name = "Medicine_Quantity", @id = "qut_1", @class = "pre qut", @placeholder = "Qty", @style = "width: 40px;color:#000; padding: 6px;" } })
                                     @Html.ValidationMessageFor(model => model.Medicine.Quantity, "", new { @class = "text-danger" })
 
-                                    @Html.EditorFor(model => model.Medicine.Unit, new { htmlAttributes = new { Name = "Medicine_Unit", @id = "unt_1", @class = "pre qut", @placeholder = "Unit", @style = "width: 40px;color:#000; padding: 6px;", @readonly = "readonly" } })
+                                    @Html.EditorFor(model => model.Medicine.Unit, new { htmlAttributes = new { Name = "Medicine_Unit", @id = "unt_1", @class = "pre qut", @placeholder = "Unit", @style = "width: 40px;color:#000; padding: 6px;", @readonly = "readonly", Value=0 } })
                                     @Html.ValidationMessageFor(model => model.Medicine.Unit, "", new { @class = "text-danger" })
 
-                                    <input type="text" Name="Medicine_Total" , id="mtotal_1" , class="pre qut" , placeholder="Total" , style="width: 40px;color:#000; padding: 6px;" , readonly="readonly" />
+                                    <input type="text" Name="Medicine_Total" , id="mtotal_1" , class="pre qut" , placeholder="Total" , style="width: 40px;color:#000; padding: 6px;" , readonly="readonly", Value=0 />
 
                                     <input value="+" class="add_field_button plusbutton" type="button" required>
                                     <a href="#" class="remove_field" style="text-decoration:none;font-weight:bold; float:left;">--</a>
@@ -507,6 +507,7 @@
 
             jQuery(wrapper).on("click", ".remove_field", function (e) { //user click on remove text
                 e.preventDefault(); jQuery(this).parent('div').remove();
+                medicinetotal();
                 //i--;
             });
 
@@ -533,19 +534,21 @@
             /* CODE FOR CHANGING QUANTITY ACCORDING TO DAYS HERE  */
             jQuery("#patient_days_presc").blur(function () {
                 for (count = 1; count <= jQuery("#input_fields_wrap_js > div").length; count++) {
-                    calc_qty(count);
+                    calc_qty_days(count);
                     //alert(count);
                 }
             });
             
             
 
-            function medicine_total()
+            function medicinetotal()
             {
-                alert("Hi");
                 var medicine_total = 0;
-                for (count = 1; count <= i; count++) {
-                    medicine_total = medicine_total + jQuery("#mtotal_" + parseInt(count)).val();
+                for (count = 1; count < i; count++) {
+                    var value = jQuery("#mtotal_" + parseInt(count)).val();
+                    if(value != undefined)
+                        medicine_total = parseInt(medicine_total) + parseInt(jQuery("#mtotal_" + parseInt(count)).val());
+
                 }
                 jQuery("#pm_madicine").val(medicine_total);
             }
@@ -554,9 +557,8 @@
                 qty = jQuery("#qut_" + parseInt(current_rec)).val();
                 var mtot = jQuery("#unt_" + parseInt(current_rec)).val() * qty;
                 jQuery("#mtotal_" + parseInt(current_rec)).val(mtot);
-                medicine_total();
+                medicinetotal();
             }
-
 
             function calc_qty(current_rec) {
                 var mor, noon, night;
@@ -586,15 +588,56 @@
                         //alert("Days : " + days + ", Morning : " + mor + ", Noon : " + noon + ", Night : " + night);
                         qty = (parseFloat(mor) + parseFloat(noon) + parseFloat(night)) * parseFloat(days);
                         jQuery("#qut_" + parseInt(current_rec)).val(qty);
-
                     }
                     else {
-                        qty = 0;
-                        jQuery("#qut_" + parseInt(current_rec)).val(0);
+                        qty = (jQuery("#qut_" + parseInt(current_rec)).val());
+                        //jQuery("#qut_" + parseInt(current_rec)).val(0);
                     }
                     var mtot = jQuery("#unt_" + parseInt(current_rec)).val() * qty;
                     jQuery("#mtotal_" + parseInt(current_rec)).val(mtot);
-                    medicine_total();
+                    medicinetotal();
+            }
+
+
+            function calc_qty_days(count) {
+                var mor, noon, night;
+                //alert("days_flag" + current_rec + "Value = " + jQuery("#days_flag" + parseInt(current_rec)).val());
+                for (count = 1; count <= i; count++) {
+                    var qtyflag = (jQuery("#days_flag" + parseInt(count)).val());
+                    var qty = 0;
+
+                    if (qtyflag == "true") {
+                        var days = document.getElementById("patient_days_presc").value;
+                        if ($('option:selected', $("#MorningDozID" + parseInt(count))).text() == "1/2") {
+                            mor = parseFloat(0.5);
+                        }
+                        else {
+                            mor = $('option:selected', $("#MorningDozID" + parseInt(count))).text();
+                        }
+                        if ($('option:selected', $("#NoonDozID" + parseInt(count))).text() == "1/2") {
+                            noon = parseFloat(0.5);
+                        }
+                        else {
+                            noon = $('option:selected', $("#NoonDozID" + parseInt(count))).text();
+                        }
+                        if ($('option:selected', $("#NightDozID" + parseInt(count))).text() == "1/2") {
+                            night = parseFloat(0.5);
+                        }
+                        else {
+                            night = $('option:selected', $("#NightDozID" + parseInt(count))).text();
+                        }
+                        //alert("Days : " + days + ", Morning : " + mor + ", Noon : " + noon + ", Night : " + night);
+                        qty = (parseFloat(mor) + parseFloat(noon) + parseFloat(night)) * parseFloat(days);
+                        jQuery("#qut_" + parseInt(count)).val(qty);
+                    }
+                    else {
+                        qty = (jQuery("#qut_" + parseInt(count)).val());
+                        //jQuery("#qut_" + parseInt(count)).val(0);
+                    }
+                    var mtot = jQuery("#unt_" + parseInt(count)).val() * qty;
+                    jQuery("#mtotal_" + parseInt(count)).val(mtot);
+                    medicinetotal();
+                }
             }
 
             //function calc_qty(current_rec) {
@@ -675,7 +718,7 @@
                 calc_qty_change(current_rec);
             });
 
-            var medicine_total = 0;
+            //var medicine_total = 0;
             $("#MorningDozID" + parseInt(i - 1)).change(function () {
                 var current_rec = $(this).attr('id').substring(12);
                 calc_qty(current_rec);

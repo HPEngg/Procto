@@ -799,49 +799,17 @@
                 <label class="arial_heading" style="text-decoration:underline;">INVOICE</label>
                 <div class="fltleft" style="width:100%; font-family:Calibri; font-size:10pt;">
                     @{
-                        if (!string.IsNullOrEmpty(Model.Invoice.Consult))
+                        foreach (var pt in Model.Invoice.PaymentTypes)
                         {
                             <div class="print_heading fltleft">
-                                @Html.DisplayNameFor(model => model.Invoice.Consult)
+                                <span>@pt.PaymentTypeName</span>
                             </div>
                             <div>
-                                @Html.DisplayFor(model => model.Invoice.Consult)
+                                <span>@pt.Rupees</span>
                             </div>
                         }
                     }
-                    @{
-                        if (!string.IsNullOrEmpty(Model.Invoice.Proctoscopy))
-                        {
-                            <div class="print_heading fltleft">
-                                @Html.DisplayNameFor(model => model.Invoice.Proctoscopy)
-                            </div>
-                            <div>
-                                @Html.DisplayFor(model => model.Invoice.Proctoscopy)
-                            </div>
-                        }
-                    }
-                    @{
-                        if (!string.IsNullOrEmpty(Model.Invoice.Dressing))
-                        {
-                            <div class="print_heading fltleft">
-                                @Html.DisplayNameFor(model => model.Invoice.Dressing)
-                            </div>
-                            <div>
-                                @Html.DisplayFor(model => model.Invoice.Dressing)
-                            </div>
-                        }
-                    }
-                    @{
-                        if (!string.IsNullOrEmpty(Model.Invoice.KSProcedure))
-                        {
-                            <div class="print_heading fltleft">
-                                @Html.DisplayNameFor(model => model.Invoice.KSProcedure)
-                            </div>
-                            <div>
-                                @Html.DisplayFor(model => model.Invoice.KSProcedure)
-                            </div>
-                        }
-                    }
+
                     @{
                         if (!string.IsNullOrEmpty(Model.Invoice.Medicine))
                         {

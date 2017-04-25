@@ -19,10 +19,7 @@ namespace DoctorWeb.Models.CustomModels
         public int InvoiceNo { get; set; }
         public List<PrescriptionMedicine> Medicines { get; set; }
 
-        public string Consult { get; set; }
-        public string Proctoscopy { get; set; }
-        public string Dressing { get; set; }
-        public string KSProcedure { get; set; }
+        public List<PaymentType> PaymentTypes { get; set; }
         public string Medicine { get; set; }
         public string Other { get; set; }
         public string Less { get; set; }

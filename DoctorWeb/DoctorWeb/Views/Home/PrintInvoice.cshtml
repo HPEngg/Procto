@@ -112,7 +112,7 @@
                     </th>
                 </tr>
                 @foreach (var item in Model.Medicines)
-                {
+            {
                     <tr style="font-family:Calibri; font-size:9pt;">
                         <td>
                             @Html.DisplayFor(modelItem => item.ID)
@@ -131,29 +131,32 @@
                         </td>
                     </tr>
                 }
+                @{
+                    foreach (var pt in Model.PaymentTypes)
+                    {
                 <tr>
                     <th colspan="4" class="invoice_colspan">
-                        @Html.DisplayNameFor(model => model.Consult)
+                                <span>@pt.PaymentTypeName</span>
                     </th>
-                    <td style="text-align:right; padding-right:10px;">@Html.DisplayFor(model => model.Consult)</td>
+                            <td><span>@pt.Rupees</span></td>
                 </tr>
                 <tr>
                     <th colspan="4" class="invoice_colspan">
                         @Html.DisplayNameFor(model => model.Proctoscopy)
                     </th>
-                    <td style="text-align:right; padding-right:10px;">@Html.DisplayFor(model => model.Proctoscopy)</td>
+                    <td>@Html.DisplayFor(model => model.Proctoscopy)</td>
                 </tr>
                 <tr>
                     <th colspan="4" class="invoice_colspan">
                         @Html.DisplayNameFor(model => model.Dressing)
                     </th>
-                    <td style="text-align:right; padding-right:10px;">@Html.DisplayFor(model => model.Dressing)</td>
+                    <td>@Html.DisplayFor(model => model.Dressing)</td>
                 </tr>
                 <tr>
                     <th colspan="4" class="invoice_colspan">
                         @Html.DisplayNameFor(model => model.KSProcedure)
                     </th>
-                    <td style="text-align:right; padding-right:10px;">@Html.DisplayFor(model => model.KSProcedure)</td>
+                    <td>@Html.DisplayFor(model => model.KSProcedure)</td>
                 </tr>
                 <tr>
                     <th colspan="4" class="invoice_colspan">

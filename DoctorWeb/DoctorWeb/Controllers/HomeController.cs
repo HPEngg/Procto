@@ -329,6 +329,14 @@ namespace DoctorWeb.Controllers
                 // ReaderExecuted method code commented due to below line blocks exicution while adding prescription record
                 db.SaveChanges();
 
+                // Adding charges
+                for(int pt = 0; pt < model.pm_type.Length; pt++)
+                {
+                    var preCharge = new Charge() { PaymentTypeID = model.pm_type[pt], PrescriptionID = prescription.ID };
+                    db.Charges.Add(preCharge);
+                    db.SaveChanges();
+                }
+
                 for (int i = 0; i < model.OINTTypeID.Length; i++)
                 {
                     var prescriptionMedicine = new PrescriptionMedicine()
@@ -448,36 +456,14 @@ namespace DoctorWeb.Controllers
                 }
                 printData.InvoiceNo = prescription.ID;
                 printData.Medicines = db.PrescriptionMedicines.Where(p => p.PrescriptionID == prescription.ID).ToList();
-                decimal? consultCarge = db.PaymentTypes.Where(w => w.PaymentTypeName.StartsWith("C")).Select(s => s.Rupees).FirstOrDefault();
-                if (consultCarge != null)
-                {
-                    printData.Consult = consultCarge.ToString();
-                }
-
-                decimal? proctoscopyCarge = db.PaymentTypes.Where(w => w.PaymentTypeName.StartsWith("P")).Select(s => s.Rupees).FirstOrDefault();
-                if (proctoscopyCarge != null)
-                {
-                    printData.Proctoscopy = proctoscopyCarge.ToString();
-                }
-
-                decimal? dressingCarge = db.PaymentTypes.Where(w => w.PaymentTypeName.StartsWith("D")).Select(s => s.Rupees).FirstOrDefault();
-                if (dressingCarge != null)
-                {
-                    printData.Dressing = dressingCarge.ToString();
-                }
-
-                decimal? ksProcedureCarge = db.PaymentTypes.Where(w => w.PaymentTypeName.StartsWith("K")).Select(s => s.Rupees).FirstOrDefault();
-                if (ksProcedureCarge != null)
-                {
-                    printData.KSProcedure = ksProcedureCarge.ToString();
-                }
-
-                decimal? otherCarge = db.PaymentTypes.Where(w => w.PaymentTypeName.StartsWith("O")).Select(s => s.Rupees).FirstOrDefault();
-                if (otherCarge != null)
-                {
-                    printData.Other = otherCarge.ToString();
-                }
+                var paymentTypeIDs = db.Charges.Where(w => w.PrescriptionID == prescription.ID).Select(s => s.PaymentTypeID).ToList();
+                printData.PaymentTypes = db.PaymentTypes.Where(w => paymentTypeIDs.Contains(w.ID)).ToList();
                 ViewBag.PatientID = patient.ID;
+                printData.Total = prescription.Rs.ToString();
+                printData.Other = prescription.Other;
+                printData.Medicine = prescription.M;
+                printData.Less = prescription.Less;
+                printData.Total = Convert.ToString(prescription.Rs);
             }
 
             return View(printData);
@@ -503,35 +489,14 @@ namespace DoctorWeb.Controllers
                 }
                 model.InvoiceNo = prescription.ID;
                 model.Medicines = db.PrescriptionMedicines.Where(p => p.PrescriptionID == prescription.ID).ToList();
-                decimal? consultCarge = db.PaymentTypes.Where(w => w.PaymentTypeName.StartsWith("C")).Select(s => s.Rupees).FirstOrDefault();
-                if (consultCarge != null)
-                {
-                    model.Consult = consultCarge.ToString();
-                }
+                var paymentTypeIDs = db.Charges.Where(w => w.PrescriptionID == prescription.ID).Select(s => s.PaymentTypeID).ToList();
+                model.PaymentTypes = db.PaymentTypes.Where(w => paymentTypeIDs.Contains(w.ID)).ToList();
+                model.Total = prescription.Rs.ToString();
+                model.Other = prescription.Other;
+                model.Medicine = prescription.M;
+                model.Less = prescription.Less;
+                model.Total = Convert.ToString(prescription.Rs);
 
-                decimal? proctoscopyCarge = db.PaymentTypes.Where(w => w.PaymentTypeName.StartsWith("P")).Select(s => s.Rupees).FirstOrDefault();
-                if (proctoscopyCarge != null)
-                {
-                    model.Proctoscopy = proctoscopyCarge.ToString();
-                }
-
-                decimal? dressingCarge = db.PaymentTypes.Where(w => w.PaymentTypeName.StartsWith("D")).Select(s => s.Rupees).FirstOrDefault();
-                if (dressingCarge != null)
-                {
-                    model.Dressing = dressingCarge.ToString();
-                }
-
-                decimal? ksProcedureCarge = db.PaymentTypes.Where(w => w.PaymentTypeName.StartsWith("K")).Select(s => s.Rupees).FirstOrDefault();
-                if (ksProcedureCarge != null)
-                {
-                    model.KSProcedure = ksProcedureCarge.ToString();
-                }
-
-                decimal? otherCarge = db.PaymentTypes.Where(w => w.PaymentTypeName.StartsWith("O")).Select(s => s.Rupees).FirstOrDefault();
-                if (otherCarge != null)
-                {
-                    model.Other = otherCarge.ToString();
-                }
             }
             model.IsHeaderPhotoRequired = true;
             return View(model);
@@ -656,36 +621,8 @@ namespace DoctorWeb.Controllers
                     model.Patient.Others = patientHistory.Other;
                 }
 
-
-                decimal? consultCarge = db.PaymentTypes.Where(w => w.PaymentTypeName.StartsWith("C")).Select(s => s.Rupees).FirstOrDefault();
-                if (consultCarge != null)
-                {
-                    model.Invoice.Consult = consultCarge.ToString();
-                }
-
-                decimal? proctoscopyCarge = db.PaymentTypes.Where(w => w.PaymentTypeName.StartsWith("P")).Select(s => s.Rupees).FirstOrDefault();
-                if (proctoscopyCarge != null)
-                {
-                    model.Invoice.Proctoscopy = proctoscopyCarge.ToString();
-                }
-
-                decimal? dressingCarge = db.PaymentTypes.Where(w => w.PaymentTypeName.StartsWith("D")).Select(s => s.Rupees).FirstOrDefault();
-                if (dressingCarge != null)
-                {
-                    model.Invoice.Dressing = dressingCarge.ToString();
-                }
-
-                decimal? ksProcedureCarge = db.PaymentTypes.Where(w => w.PaymentTypeName.StartsWith("K")).Select(s => s.Rupees).FirstOrDefault();
-                if (ksProcedureCarge != null)
-                {
-                    model.Invoice.KSProcedure = ksProcedureCarge.ToString();
-                }
-
-                decimal? otherCarge = db.PaymentTypes.Where(w => w.PaymentTypeName.StartsWith("O")).Select(s => s.Rupees).FirstOrDefault();
-                if (otherCarge != null)
-                {
-                    model.Invoice.Other = otherCarge.ToString();
-                }
+                var paymentTypeIDs = db.Charges.Where(w => w.PrescriptionID == prescription.ID).Select(s => s.PaymentTypeID).ToList();
+                model.Invoice.PaymentTypes = db.PaymentTypes.Where(w => paymentTypeIDs.Contains(w.ID)).ToList();
 
                 model.Invoice.Medicine = prescription.M;
                 model.Invoice.OtherFromTextbox = prescription.Other;

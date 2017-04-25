@@ -13,7 +13,7 @@
     <link href="~/Content/css/style.css" rel="stylesheet" />
     <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
 
-    <style ="text/css">
+    <style type="text/css">
         th, td {
             border: 1px solid #000;
             padding-left: 5px;
@@ -104,7 +104,7 @@
         </div>
 
         <div id="medicinelist" style="clear:both; display:block;padding-top:20px;" class="invoice">
-            <table width="100%">
+            <table style="width:100%;">
                 <tr style="font-family:Calibri; font-size:10pt;">
                     <th>
                         No
@@ -124,7 +124,7 @@
                 </tr>
                 @foreach (var item in Model.Medicines)
                 {
-                    <tr style="font-family:Calibri; font-size:9pt;">
+                    <tr style="font-family:Calibri; font-size:9pt;" id="medicine_list">
                         <td>
                             @Html.DisplayFor(modelItem => item.ID)
                         </td>
@@ -142,43 +142,36 @@
                         </td>
                     </tr>
                 }
-                <tr>
+                <tr style="font-family:Calibri; font-size:9pt;">
                     <th colspan="4" class="invoice_colspan">
-                        @Html.DisplayNameFor(model => model.Consult)
+                        @Html.DisplayNameFor(model => model.Medicine)
                     </th>
-                    <td style="text-align:right; padding-right:10px;">@Html.DisplayFor(model => model.Consult)</td>
+                    <td style="text-align:right; padding-right:10px;">@Html.DisplayFor(model => model.Medicine)</td>
                 </tr>
-                <tr>
-                    <th colspan="4" class="invoice_colspan">
-                        @Html.DisplayNameFor(model => model.Proctoscopy)
-                    </th>
-                    <td style="text-align:right; padding-right:10px;">@Html.DisplayFor(model => model.Proctoscopy)</td>
-                </tr>
-                <tr>
-                    <th colspan="4" class="invoice_colspan">
-                        @Html.DisplayNameFor(model => model.Dressing)
-                    </th>
-                    <td style="text-align:right; padding-right:10px;">@Html.DisplayFor(model => model.Dressing)</td>
-                </tr>
-                <tr>
-                    <th colspan="4" class="invoice_colspan">
-                        @Html.DisplayNameFor(model => model.KSProcedure)
-                    </th>
-                    <td style="text-align:right; padding-right:10px;">@Html.DisplayFor(model => model.KSProcedure)</td>
-                </tr>
-                <tr>
+                @{
+                    foreach (var pt in Model.PaymentTypes)
+                    {
+                        <tr style="font-family:Calibri; font-size:9pt; border-bottom:none;">
+                            <th colspan="4" class="invoice_colspan">
+                                   <span>@pt.PaymentTypeName</span>
+                            </th>
+                            <td style="text-align:right; padding-right:10px;"><span>@pt.Rupees.ToString("N0")</span></td>
+                        </tr>
+                    }
+                 }
+                <tr style="font-family:Calibri; font-size:9pt;">
                     <th colspan="4" class="invoice_colspan">
                         @Html.DisplayNameFor(model => model.Other)
                     </th>
                     <td style="text-align:right; padding-right:10px;">@Html.DisplayFor(model => model.Other)</td>
                 </tr>
-                <tr>
+                <tr style="font-family:Calibri; font-size:9pt;">
                     <th colspan="4" class="invoice_colspan">
                         @Html.DisplayNameFor(model => model.Less)
                     </th>
                     <td style="text-align:right; padding-right:10px;">@Html.DisplayFor(model => model.Less)</td>
                 </tr>
-                <tr style="font-weight:700;">
+                <tr style="font-weight:700; font-family:Calibri; font-size:9pt;">
                     <th colspan="4" class="invoice_colspan">
                         @Html.DisplayNameFor(model => model.Total)
                     </th>

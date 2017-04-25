@@ -1157,6 +1157,10 @@ td {
     border: 1px solid #000;  
 }
 
+#medicine_list td {
+    border-bottom: 1 1 0 1 solid #000;
+}
+
 #RxPart table, #RxPart tr, #RxPart td, #RxPart th{
     border:none;
     line-height:1.2;

@@ -1148,13 +1148,36 @@ td {
     padding-right: 5px;
 }
 
+.invoice .borderrow {
+    border-top:1px solid #000;
+    border-bottom:1px solid #000;
+}
+
 .invoice td {
     border: 1px solid #000;
     padding-left: 5px;
+    border-top:none;
+    border-bottom:none;
 }
 
 .invoice th {
-    border: 1px solid #000;  
+    border-left:1px;
+    border-right:1px;
+    border-color:#000;
+    border-style:solid;
+    border-top:none;
+    border-bottom:none;
+    text-transform:uppercase;
+  
+}
+
+.invoice .thalignleft {
+    text-align:left;
+}
+
+.invoice .thalignright {
+    text-align:right;
+    padding-right: 10px;
 }
 
 #medicine_list td {

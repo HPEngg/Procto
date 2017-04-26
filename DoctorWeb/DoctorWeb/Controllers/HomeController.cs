@@ -463,7 +463,8 @@ namespace DoctorWeb.Controllers
                 printData.Other = prescription.Other;
                 printData.Medicine = prescription.M;
                 printData.Less = prescription.Less;
-                printData.Total = Convert.ToString(prescription.Rs);
+                string tot = prescription.Rs.ToString("N0");
+                printData.Total = tot;
             }
 
             return View(printData);
@@ -495,7 +496,8 @@ namespace DoctorWeb.Controllers
                 model.Other = prescription.Other;
                 model.Medicine = prescription.M;
                 model.Less = prescription.Less;
-                model.Total = Convert.ToString(prescription.Rs);
+                string tot = prescription.Rs.ToString("N0");
+                model.Total = tot;
 
             }
             model.IsHeaderPhotoRequired = true;

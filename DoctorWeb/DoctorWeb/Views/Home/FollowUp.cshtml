@@ -774,11 +774,14 @@
                     @{
                         foreach (var pt in Model.Invoice.PaymentTypes)
                         {
-                            <div class="print_heading fltleft">
-                                <span>@pt.PaymentTypeName</span>
-                            </div>
-                            <div>
-                                <span>@pt.Rupees</span>
+                            <div class="fltleft">
+                                <div class="print_heading fltleft">
+                                    <span>@pt.PaymentTypeName</span>
+                                </div>
+                                <div class="fltleft" style="padding-right:5px;">
+                                    <span>@pt.Rupees</span>
+                                    <span> +</span>
+                                </div>
                             </div>
                         }
                     }
@@ -788,22 +791,24 @@
                             <div class="print_heading fltleft">
                                 @Html.DisplayNameFor(model => model.Invoice.Medicine)
                             </div>
-                            <div>
+                            <div class="fltleft">
                                 @Html.DisplayFor(model => model.Invoice.Medicine)
                             </div>
                         }
                     }
+                    <span class="fltleft" style="padding:0 5px;">+</span>
                     @{
                         if (!string.IsNullOrEmpty(Model.Invoice.OtherFromTextbox))
                         {
                             <div class="print_heading fltleft">
-                                @Html.DisplayNameFor(model => model.Invoice.OtherFromTextbox)
+                                <label class="print_heading fltleft">Other</label>
                             </div>
-                            <div>
+                            <div class="fltleft">
                                 @Html.DisplayFor(model => model.Invoice.OtherFromTextbox)
                             </div>
                         }
                     }
+                    <span class="fltleft" style="padding:0 5px;"> –</span>
                     @{
                         if (!string.IsNullOrEmpty(Model.Invoice.Less))
                         {

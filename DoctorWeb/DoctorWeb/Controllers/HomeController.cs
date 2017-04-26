@@ -57,6 +57,41 @@ namespace DoctorWeb.Controllers
             //return View(model.ToList());
         }
 
+        public ActionResult PatientToday()
+        {
+            var todayDate = DateTime.Now.Date;
+            var query = from p in db.Patients.Where(w => DbFunctions.TruncateTime(w.CreatedDate) == todayDate)
+                       where !db.Prescriptions.Any(a => p.ID == a.PatientID)
+                       select p;
+            var model = new List<PatientToday>();
+
+            foreach (var p in query.ToList())
+            {
+                var pt = new PatientToday()
+                {
+                    Status = p.Status.ToString(),
+                    Name = p.Name,
+                    MobileNo = p.Contact,
+                    Address = p.Address,
+                    DepartmentName = p.DepartmentID.ToString(),
+                    Reference = p.ReferredBy.Name,
+                    ID = p.ID,
+                    RefferalName = p.DoctorID != null ? db.Doctors.Where(w => w.ID == p.DoctorID).Select(s => s.Name).FirstOrDefault() : "Other"//"test"
+                };
+                var latestPatientHistory = db.PatientHistories.Where(q => q.PatientID == q.ID).FirstOrDefault();
+                if (latestPatientHistory != null)
+                {
+                    pt.RP = latestPatientHistory.RP;
+                    pt.KCO = latestPatientHistory.KCO;
+                    pt.ComplainForm = latestPatientHistory.ComplainForm;
+                    pt.Constipation = latestPatientHistory.Constipation;
+                    pt.ConstipationMore = latestPatientHistory.ConstipationMore;
+                }
+                model.Add(pt);
+            }
+            return View(model.ToList());
+        }
+
         public ActionResult ImageLightbox(int id)
         {
             ViewBag.PatientID = id;

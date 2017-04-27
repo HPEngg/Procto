@@ -1,7 +1,7 @@
 ﻿@model IList<DoctorWeb.Models.Medicine>
 
 @{
-    var count = 100;
+    var count = 1;
 
     foreach (var item in Model)
     {
@@ -84,11 +84,11 @@
             @Html.ValidationMessageFor(modelItem => item.Quantity, "", new { @class = "text-danger" })
 
 
-            @Html.EditorFor(modelItem => item.Unit, new { htmlAttributes = new { Name = "Medicine_Unit", @id = "unt_1", @class = "pre qut", @placeholder = "Unit", @style = "width: 40px;color:#000; padding: 6px;", @readonly = "readonly" } })
+            @Html.EditorFor(modelItem => item.Unit, new { htmlAttributes = new { Name = "Medicine_Unit", @id = "unt_" + count.ToString(), @class = "pre qut", @placeholder = "Unit", @style = "width: 40px;color:#000; padding: 6px;", @readonly = "readonly" } })
             @Html.ValidationMessageFor(mmodelItem => item.Unit, "", new { @class = "text-danger" })
 
             @{ var ttl = item.Quantity * item.Unit; }
-            <input type="text" Name = "Medicine_Total", id = "mtotal_1", class = "pre qut", placeholder = "Total", style = "width: 40px;color:#000; padding: 6px;", readonly = "readonly" value="@ttl"/>
+            <input type="text" Name = "Medicine_Total" id = @string.Concat("mtotal_", count.ToString()) class = "pre qut" placeholder = "Total" style = "width: 40px;color:#000; padding: 6px;" readonly = "readonly" value="@ttl"/>
 
 <input value="+" class="add_field_button plusbutton" type="button" required>
             <a href="#" class="remove_field" style="text-decoration:none;font-weight:bold; float:left;">--</a>
@@ -100,5 +100,7 @@
         </div>
         count++;
     }
+
+    <input type="hidden" value="@count" id="MedicineCount" />
 
 }

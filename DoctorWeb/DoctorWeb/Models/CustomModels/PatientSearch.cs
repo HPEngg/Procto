@@ -36,6 +36,8 @@ namespace DoctorWeb.Models.CustomModels
         public int No { get; set; }
         public string Status { get; set; }
         public string Name { get; set; }
+        public int? Age { get; set; }
+        public string DOB { get; set; }
         public string MobileNo { get; set; }
         public string Address { get; set; }
         public string Department { get; set; }

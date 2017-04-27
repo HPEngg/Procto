@@ -71,9 +71,11 @@ namespace DoctorWeb.Controllers
                 {
                     Status = p.Status.ToString(),
                     Name = p.Name,
+                    Age = p.Age,
                     MobileNo = p.Contact,
                     Address = p.Address,
-                    DepartmentName = p.DepartmentID.ToString(),
+                    DOB = p.DOB.Value == null ? string.Empty : p.DOB.Value.ToShortDateString(),
+                    DepartmentName = p.Department.Name.ToString(),
                     Reference = p.ReferredBy.Name,
                     ID = p.ID,
                     RefferalName = p.DoctorID != null ? db.Doctors.Where(w => w.ID == p.DoctorID).Select(s => s.Name).FirstOrDefault() : "Other"//"test"
@@ -390,7 +392,6 @@ namespace DoctorWeb.Controllers
                         Total = model.Medicine_Total[i],
                         OINTTypeID = model.OINTTypeID[i]
                     };
-
                     db.PrescriptionMedicines.Add(prescriptionMedicine);
                 }
 

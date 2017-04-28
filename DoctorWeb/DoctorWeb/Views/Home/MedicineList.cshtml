@@ -7,82 +7,29 @@
     {
         var df = "days_flag" + count.ToString();
         <div id="divname_1" class="divnamepresc">
-            @*<div class="form-group">
-                @Html.LabelFor(model => model.Medicine.OINT, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-            *@
+            
             @Html.DropDownList("OINTTypeID", new SelectList((SelectList)ViewBag.OINTTypeIDL, "Value", "Text", item.OINTTypeID), htmlAttributes: new { @class = "pre tabname", @id = "tabname_1", @style = "width: 75px!important; max-width: 70px!important; padding: 0!important;" })
-            @*@Html.EnumDropDownListFor(model => model.Medicine.OINT, htmlAttributes: new { @class = "pre tabname", @id = "tabname_1", @style = "width: 85px!important; padding: 0!important;" })*@
+            
             @Html.ValidationMessageFor(modelItem => item.OINTTypeID, "", new { @class = "text-danger" })
-            @*
-                    </div>
-                </div>*@
-
-            @*<div class="form-group">
-                @Html.LabelFor(model => model.Medicine.OINTMore, htmlAttributes: new { @class = "control-label col-md-2" })*@
-            @*<div class="col-md-10">
-            *@
-
 
             @Html.EditorFor(modelItem => item.OINTMore, new { htmlAttributes = new { @id = "Medicine_OINTMore" + count.ToString(), @style = "width:105px;", @class = "pre autocomplete", @type = "textbox", @value = "OINTOINT", @placeholder = "Medicine Name", @Name = "Medicine_OINTMore" } })
             @Html.ValidationMessageFor(modelItem => item.OINTMore, "", new { @class = "text-danger" })
             <input type="hidden" id="hfPatient" name="Pat_ID" />
 
-
-            @*@Html.DropDownList("MorningDozID", null, htmlAttributes: new { @class = "pre svar", @style = "width: 60px!important; padding: 0!important;" })*@
             @Html.DropDownList("MorningDozID", new SelectList((SelectList)ViewBag.MorningDozIDL, "Value", "Text", item.MorningDozID), htmlAttributes: new { @id = "MorningDozID" + count.ToString(), @class = "pre svar", @style = "width: 50px!important; padding: 0!important;" })
             @Html.ValidationMessageFor(modelItem => item.MorningDozID, "", new { @class = "text-danger" })
 
-
-            @*@Html.EnumDropDownListFor(model => model.Medicine.Morning, htmlAttributes: new { @class = "pre svar", @style = "width: 40px!important; padding: 0!important;" })
-                @Html.ValidationMessageFor(model => model.Medicine.Morning, "", new { @class = "text-danger" })*@
-            @*
-                    </div>
-                </div>*@
-
-            @*<div class="form-group">
-                @Html.LabelFor(model => model.Medicine.Noon, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-            *@
             @Html.DropDownList("NoonDozID", new SelectList((SelectList)ViewBag.NoonDozIDL, "Value", "Text", item.NoonDozID), htmlAttributes: new { @id = "NoonDozID" + count.ToString(), @class = "pre bpor", @style = "width: 50px!important; padding: 0!important;" })
             @Html.ValidationMessageFor(modelItem => item.NoonDozID, "", new { @class = "text-danger" })
-            @*@Html.EnumDropDownListFor(model => model.Medicine.Noon, htmlAttributes: new { @class = "pre bpor", @style = "width: 40px!important; padding: 0!important;" })
-                @Html.ValidationMessageFor(model => model.Medicine.Noon, "", new { @class = "text-danger" })*@
-            @*
-                    </div>
-                </div>*@
 
-            @*<div class="form-group">
-                @Html.LabelFor(model => model.Medicine.Night, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-            *@
             @Html.DropDownList("NightDozID", new SelectList((SelectList)ViewBag.NightDozIDL, "Value", "Text", item.NightDozID), htmlAttributes: new { @id = "NightDozID" + count.ToString(), @class = "pre sanj", @style = "width: 50px!important; padding: 0!important;" })
             @Html.ValidationMessageFor(modelItem => item.NightDozID, "", new { @class = "text-danger" })
-            @*@Html.EnumDropDownListFor(model => model.Medicine.Night, htmlAttributes: new { @class = "pre sanj", @style = "width: 40px!important; padding: 0!important;" })
-                @Html.ValidationMessageFor(model => model.Medicine.Night, "", new { @class = "text-danger" })*@
-            @*
-                    </div>
-                </div>*@
 
-            @*<div class="form-group">
-                @Html.LabelFor(model => model.Medicine.DozTiming, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-            *@
             @Html.DropDownList("DosageID", new SelectList((SelectList)ViewBag.DosageIDL, "Value", "Text", item.DosageID), htmlAttributes: new { @class = "pre", style = "width: 110px!important; padding: 0!important;" })
             @Html.ValidationMessageFor(modelItem => item.DosageID, "", new { @class = "text-danger" })
-            @*@Html.EnumDropDownListFor(model => model.Medicine.Dosage, htmlAttributes: new { @class = "pre", style = "width: 90px!important; padding: 0!important;" })
-                @Html.ValidationMessageFor(model => model.Medicine.Dosage, "", new { @class = "text-danger" })*@
-            @*
-                    </div>
-                </div>*@
 
-            @*<div class="form-group">
-                @Html.LabelFor(model => model.Medicine.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-            *@
             @Html.EditorFor(modelItem => item.Quantity, new { htmlAttributes = new { Name = "Medicine_Quantity", @id = "qut_" + count.ToString(), @class = "pre qut", @placeholder = "Qty", @style = "width: 40px;color:#000; padding: 6px;" } })
             @Html.ValidationMessageFor(modelItem => item.Quantity, "", new { @class = "text-danger" })
-
 
             @Html.EditorFor(modelItem => item.Unit, new { htmlAttributes = new { Name = "Medicine_Unit", @id = "unt_" + count.ToString(), @class = "pre qut", @placeholder = "Unit", @style = "width: 40px;color:#000; padding: 6px;", @readonly = "readonly" } })
             @Html.ValidationMessageFor(mmodelItem => item.Unit, "", new { @class = "text-danger" })
@@ -90,13 +37,11 @@
             @{ var ttl = item.Quantity * item.Unit; }
             <input type="text" Name = "Medicine_Total" id = @string.Concat("mtotal_", count.ToString()) class = "pre qut" placeholder = "Total" style = "width: 40px;color:#000; padding: 6px;" readonly = "readonly" value="@ttl"/>
 
-<input value="+" class="add_field_button plusbutton" type="button" required>
+            <input value="+" class="add_field_button plusbutton" type="button" required>
             <a href="#" class="remove_field" style="text-decoration:none;font-weight:bold; float:left;">--</a>
 
             <input type="hidden" id="@df" value=true name="@df" />
-            @*
-                    </div>
-                </div>*@
+            
         </div>
         count++;
     }

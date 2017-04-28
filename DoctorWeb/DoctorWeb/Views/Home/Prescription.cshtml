@@ -30,6 +30,7 @@
             <div class="form_fieldset_div">
                 <div id="testDiv1">
                     <fieldset style="height: 100%">
+                        @Html.HiddenFor(model => model.PatientID, new { id = @ViewBag.PatientID })
                         <h2 class="fs-title" style="text-align:center;">
                             <a href="#" class="imgdrawing" id="ImageDrawing" onclick="imagelightbox();"><img src="~/Content/Images/imagedrawing.png" style="width:40px; height:40px; padding-right:5px;" /></a>
                             <div class="image-upload">
@@ -115,7 +116,7 @@
                                     @Html.ValidationMessageFor(model => model.Medicine.OINTMore, "", new { @class = "text-danger" })
                                     <input type="hidden" id="hfPatient" name="Pat_ID" />
 
-                                    @Html.HiddenFor(model => model.PatientID, new { id = @ViewBag.PatientID })
+                                    
                                     @*
                                             </div>
                                         </div>*@
@@ -267,7 +268,12 @@
                         <div style="display:block; width:auto; float:left; clear:both;">
                             @*@Html.LabelFor(model => model.FollowDate, htmlAttributes: new { @class = "control-label col-md-2", style="float:left; padding-left:0"})*@
                             <label class="control-label col-md-2" , style="float:left; font-size: 90%; font-weight:700; padding:5px 5px 0 0;">Follow Date</label>
-                            @Html.EditorFor(model => model.FollowDate, new { htmlAttributes = new { @class = "form-control", name = "follow_datefollow_date", value = "", placeholder = "DD/MM/YYYY", style = "text-align:left;", type = "datetime-local" } })
+                            @{
+                                String fdate = DateTime.Now.Date.ToString("yyyy-MM-dd");
+                                fdate = fdate + "T00:00";
+                            }
+                            <input class="form-control text-box single-line" data-val="true" data-val-date="The field FollowDate must be a date." id="FollowDate" name="FollowDate" placeholder="DD/MM/YYYY" style="text-align:left; width:180px !important;" value=@fdate type="datetime-local">
+                            @*@Html.EditorFor(model => model.FollowDate, new { htmlAttributes = new { @class = "form-control", name = "follow_datefollow_date", value = "", placeholder = "DD/MM/YYYY", style = "text-align:left;", type = "datetime-local" } })*@
                             @Html.ValidationMessageFor(model => model.FollowDate, "", new { @class = "text-danger" })
                         </div>
 

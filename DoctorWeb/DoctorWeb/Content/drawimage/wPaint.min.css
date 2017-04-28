@@ -1,4 +1,4 @@
-.wPaint-menu{position:absolute !important;display:inline-block;*display:inline;zoom:1;line-height:0;z-index:99}
+.wPaint-menu{position:absolute !important;display:inline-block;*display:inline;zoom:1;line-height:0;z-index:99;}
 .wPaint-menu-behind{z-index:98}
 .wPaint-menu-holder{position:relative;margin:0 1px 1px 0}
 .wPaint-menu-handle{display:inline-block;*display:inline;zoom:1}

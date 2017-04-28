@@ -20,7 +20,7 @@ namespace DoctorWeb.Controllers
         // GET: SMS
         public ActionResult Index()
         {
-            return View(db.ShortMessages.ToList());
+            return View(db.ShortMessages.OrderByDescending(o => o.Date).ToList());
         }
 
         // GET: SMS/Details/5
@@ -52,10 +52,11 @@ namespace DoctorWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,MobileNumber,Message,Status,Date,FromDate,ToData,FromHolidayDate,ToHolidayDate,Patients")] SMS sMS)
+        public ActionResult Create([Bind(Include = "ID,MobileNumber,Message,Status,Date,FromDate,ToData,FromHolidayDate,ToHolidayDate,FromHolidayDate2,ToHolidayDate2,Patients,SMSTypes")] SMS sMS)
         {
             string targetMobileNumbers = string.Empty;
-            if(sMS.Patients == Models.Enums.SMSToPatients.All)
+            string message = string.Empty;
+            if (sMS.Patients == Models.Enums.SMSToPatients.All)
             {
                 var query = from pt in db.Patients
                             join pr in db.Prescriptions on pt.ID equals pr.PatientID
@@ -65,9 +66,10 @@ namespace DoctorWeb.Controllers
             }
             else if(sMS.Patients == Models.Enums.SMSToPatients.VisitingToday)
             {
+                var todayDate = DateTime.Today.Date;
                 var query = from pt in db.Patients
                             join pr in db.Prescriptions on pt.ID equals pr.PatientID
-                            where pr.FollowDate == DateTime.Today.Date
+                            where DbFunctions.TruncateTime(pr.FollowDate) == DbFunctions.TruncateTime(todayDate)
                             select pt.Contact;
                 targetMobileNumbers = string.Join(",", query);
             }
@@ -76,7 +78,7 @@ namespace DoctorWeb.Controllers
                 var tomorowDate = DateTime.Today.Date.AddDays(1);
                 var query = from pt in db.Patients
                             join pr in db.Prescriptions on pt.ID equals pr.PatientID
-                            where pr.FollowDate == tomorowDate
+                            where DbFunctions.TruncateTime(pr.FollowDate) == DbFunctions.TruncateTime(tomorowDate)
                             select pt.Contact;
                 targetMobileNumbers = string.Join(",", query);
             }
@@ -84,7 +86,7 @@ namespace DoctorWeb.Controllers
             {
                 var query = from pt in db.Patients
                             join pr in db.Prescriptions on pt.ID equals pr.PatientID
-                            where sMS.FromDate < pr.FollowDate && pr.FollowDate <= sMS.ToData
+                            where DbFunctions.TruncateTime(sMS.FromDate) <= DbFunctions.TruncateTime(pr.FollowDate) && DbFunctions.TruncateTime(pr.FollowDate) <= DbFunctions.TruncateTime(sMS.ToData)
                             select pt.Contact;
                 targetMobileNumbers = string.Join(",", query);
             }
@@ -93,13 +95,26 @@ namespace DoctorWeb.Controllers
                 targetMobileNumbers = sMS.MobileNumber;
             }
 
+            if(sMS.SMSTypes == Models.Enums.SMSTypes.Personal)
+            {
+                message = sMS.Message;
+            }
+            else if(sMS.SMSTypes == Models.Enums.SMSTypes.Holiday1)
+            {
+                message = sMS.Message.Replace("FROM", "From " + sMS.FromHolidayDate.Value.ToShortDateString()).Replace("TO", " to " + sMS.ToHolidayDate.Value.ToShortDateString());
+                message = Regex.Replace(message, @"(?:(?:\r?\n)+ +){2,}", @" ");
+            }
+            else if (sMS.SMSTypes == Models.Enums.SMSTypes.Holiday2)
+            {
+                message = sMS.Message.Replace("FROM", "From " + sMS.FromHolidayDate2.Value.ToShortDateString()).Replace("TO", " to " + sMS.ToHolidayDate2.Value.ToShortDateString());
+                message = Regex.Replace(message, @"(?:(?:\r?\n)+ +){2,}", @" ");
+            }
+
             if (ModelState.IsValid)
             {
-                string message = sMS.Message.Replace("FROM", "From " + sMS.FromHolidayDate.Value.ToShortDateString()).Replace("TO", " to " + sMS.ToHolidayDate.Value.ToShortDateString());
-                message = Regex.Replace(message, @"(?:(?:\r?\n)+ +){2,}", @" ");
                 var result = SMSHelper.sendMessage(targetMobileNumbers, message);
                 sMS.Status = result;
-                sMS.Date = DateTime.Now.Date;
+                sMS.Date = DateTime.Now;
                 db.ShortMessages.Add(sMS);
                 db.SaveChanges();
                 return RedirectToAction("Index");

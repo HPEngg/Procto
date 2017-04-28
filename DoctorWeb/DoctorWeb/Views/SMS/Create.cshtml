@@ -66,56 +66,11 @@
         <div class="form-group">
             <label class="control-label col-md-2">Select Message</label>
             <div class="col-md-10">
-                <select id="Select_Message" style="width:100%;">
-                    @*<option value="Followup">Follow Up</option>
-                    <option value="DRP">Doctor/Relative/Patient</option>*@
-                    <option value="Personal">Personal Message</option>
-                    <option value="Holiday1">Holiday Message 1</option>
-                    <option value="Holiday2">Holiday Message 2</option>
-                </select>
+                @Html.EnumDropDownListFor(model => model.SMSTypes, htmlAttributes: new { @class = "form-control", id = "Select_Message" })
+                @Html.ValidationMessageFor(model => model.SMSTypes, "", new { @class = "text-danger" })
             </div>
         </div>
-
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        
-        @*<div class="form-group" id="Follow_Up">
-            @Html.LabelFor(model => model.Message, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <span>Dear </span><b><span>Patient Name</span></b>
-                <span>, Your Appointment has been confirmed with</span>
-                <input type="text" style="max-width: 200px;" placeholder="Doctor Name here"/>
-                <span> at </span>
-                <input type="text" style="max-width: 200px;" placeholder="Hospital Name here" />
-                <span> on </span>
-                <input type="text" style="max-width: 40px;" placeholder="DD" /> <span> / </span>
-                <input type="text" style="max-width: 40px;" placeholder="MM" /> <span> / </span>
-                <input type="text" style="max-width: 60px;" placeholder="YYYY" /><span> at </span>
-                <input type="text" style="max-width: 60px;" placeholder="TIME"/>
-                <span>. Call </span>
-                <input type="number" style="max-width: 200px;" placeholder="Phone Number here" />
-                <span>for any query.</span>
-            </div>
-        </div>
-
-        <div class="form-group" id="D_R_P" style="display:none;">
-            @Html.LabelFor(model => model.Message, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10" id="Message" name="Message">
-                <span>Dear </span><input type="text" style="max-width: 175px;" placeholder="Doctor Name here"/>
-                <span> your referred patient </span>
-                <input type="text" style="max-width: 175px;" placeholder="Patient Name here" />
-                <span> was examined by </span>
-                <input type="text" style="max-width: 200px;" placeholder="Doctor Name here" />
-                <span> at </span>
-                <input type="text" style="max-width: 200px;" placeholder="Hospital Name here" />
-                <span> on </span>
-                <input type="text" style="max-width: 40px;" placeholder="DD" /> <span> / </span>
-                <input type="text" style="max-width: 40px;" placeholder="MM" /> <span> / </span>
-                <input type="text" style="max-width: 60px;" placeholder="YYYY" /><span> / </span>
-                <input type="text" style="max-width: 100px;" placeholder="TIME" />
-                <span>. Thanks for your reference. </span>
-            </div>
-        </div>*@
-
         <div class="form-group" id="Personal">
             @Html.LabelFor(model => model.Message, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -129,11 +84,10 @@
             <div class="col-md-10">
                 <span>Doctor is not available at </span>
                 @System.Web.Configuration.WebConfigurationManager.AppSettings["HospitalName"]
-                @*<input type="text" style="max-width: 200px;" />*@
                 <span> FROM </span>
-                @Html.EditorFor(model => model.FromHolidayDate, new { htmlAttributes = new { @class = "form-control", type = "date", id = "From_Date", placeholder = "From Date Here" } })
+                @Html.EditorFor(model => model.FromHolidayDate, new { htmlAttributes = new { @class = "form-control", type = "date", id = "Holiday1_From_Date", placeholder = "From Date Here" } })
                 <span> TO </span>
-               @Html.EditorFor(model => model.ToHolidayDate, new { htmlAttributes = new { @class = "form-control", type = "date", id = "To_Date", placeholder = "To Date Here" } })
+               @Html.EditorFor(model => model.ToHolidayDate, new { htmlAttributes = new { @class = "form-control", type = "date", id = "Holiday1_To_Date", placeholder = "To Date Here" } })
                 <span>. So please call us for further query.</span>
             </div>
         </div>
@@ -143,31 +97,13 @@
             <div class="col-md-10">
                 <span>Dear all </span>
                 @System.Web.Configuration.WebConfigurationManager.AppSettings["HospitalName"]
-                @*<input type="text" style="max-width: 200px;" />*@
                 <span> will be closed FROM </span>
-               @Html.EditorFor(model => model.FromHolidayDate, new { htmlAttributes = new { @class = "form-control", type = "date", id = "From_Date", placeholder = "From Date Here" } })
+               @Html.EditorFor(model => model.FromHolidayDate2, new { htmlAttributes = new { @class = "form-control", type = "date", id = "Holiday2_From_Date", placeholder = "From Date Here" } })
                 <span> TO </span>
-                @Html.EditorFor(model => model.ToHolidayDate, new { htmlAttributes = new { @class = "form-control", type = "date", id = "To_Date", placeholder = "To Date Here" } })
+                @Html.EditorFor(model => model.ToHolidayDate2, new { htmlAttributes = new { @class = "form-control", type = "date", id = "Holiday2_To_Date", placeholder = "To Date Here" } })
                 <span>. So please call us for further query.</span>
             </div>
         </div>
-
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-
         <div class="form-group" id="Mob_Number" style="display:none;">
             @Html.LabelFor(model => model.MobileNumber, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -176,44 +112,27 @@
             </div>
         </div>
         
-        <div class="form-group" id="From_Date" style="display:none;">
+        <div class="form-group" id="Enter_From_Date" style="display:none;">
             @Html.LabelFor(model => model.FromDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control", type = "date", id="From_Date" } })
+                @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control", type = "date", id="Visit_From_Date" } })
                 @Html.ValidationMessageFor(model => model.FromDate, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group" id="To_Date" style="display:none;">
+        <div class="form-group" id="Enter_To_Date" style="display:none;">
             @Html.LabelFor(model => model.ToData, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ToData, new { htmlAttributes = new { @class = "form-control", type = "date", id = "To_Date" } })
+                @Html.EditorFor(model => model.ToData, new { htmlAttributes = new { @class = "form-control", type = "date", id = "Visit_To_Date" } })
                 @Html.ValidationMessageFor(model => model.ToData, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        @*<div class="form-group" id="Holiday_From_Date" style="display:none;">
-            @Html.LabelFor(model => model.FromHolidayDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FromHolidayDate, new { htmlAttributes = new { @class = "form-control", type = "date", id = "From_Date" } })
-                @Html.ValidationMessageFor(model => model.FromHolidayDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group" id="Holiday_To_Date" style="display:none;">
-            @Html.LabelFor(model => model.ToHolidayDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ToHolidayDate, new { htmlAttributes = new { @class = "form-control", type = "date", id = "To_Date" } })
-                @Html.ValidationMessageFor(model => model.ToHolidayDate, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
-        @Html.ValidationMessageFor(model => model.FromHolidayDate, "", new { @class = "text-danger" })
+       @Html.ValidationMessageFor(model => model.FromHolidayDate, "", new { @class = "text-danger" })
         @Html.ValidationMessageFor(model => model.ToHolidayDate, "", new { @class = "text-danger" })
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Send" class="btn btn-default" onclick="assignmessage()"/>
-                @*<input type="button" value="Send" class="btn btn-default" onclick="assignmessage()" />*@
             </div>
         </div>
     </div>
@@ -227,39 +146,20 @@
     jQuery( "#Select_Message" ).change(function() {
         var s = document.getElementById('Select_Message');
         var item1 = s.options[s.selectedIndex].value;
-        if (item1 == "Personal") {
+        if (item1 == "0") {
             document.getElementById("Personal").style.display = 'block';
-            //document.getElementById("Follow_Up").style.display = 'none';
-            //document.getElementById("D_R_P").style.display = 'none';
             document.getElementById("Holiday_One").style.display = 'none';
             document.getElementById("Holiday_Two").style.display = 'none';
 
         }
-        //else if (item1 == "Followup") {
-        //    document.getElementById("Personal").style.display = 'none';
-        //    document.getElementById("Follow_Up").style.display = 'block';
-        //    document.getElementById("D_R_P").style.display = 'none';
-        //    document.getElementById("Holiday_One").style.display = 'none';
-        //    document.getElementById("Holiday_Two").style.display = 'none';
-        //}
-        //else if (item1 == "DRP") {
-        //    document.getElementById("Personal").style.display = 'none';
-        //    document.getElementById("Follow_Up").style.display = 'none';
-        //    document.getElementById("D_R_P").style.display = 'block';
-        //    document.getElementById("Holiday_One").style.display = 'none';
-        //    document.getElementById("Holiday_Two").style.display = 'none';
-        //}
-        else if (item1 == "Holiday1") {
+        
+        else if (item1 == "1") {
             document.getElementById("Personal").style.display = 'none';
-            //document.getElementById("Follow_Up").style.display = 'none';
-            //document.getElementById("D_R_P").style.display = 'none';
             document.getElementById("Holiday_One").style.display = 'block';
             document.getElementById("Holiday_Two").style.display = 'none';
         }
-        else if (item1 == "Holiday2") {
+        else if (item1 == "2") {
             document.getElementById("Personal").style.display = 'none';
-            //document.getElementById("Follow_Up").style.display = 'none';
-            //document.getElementById("D_R_P").style.display = 'none';
             document.getElementById("Holiday_One").style.display = 'none';
             document.getElementById("Holiday_Two").style.display = 'block';
         }
@@ -269,25 +169,25 @@
         var s = document.getElementById('Select_Number');
         var item1 = s.options[s.selectedIndex].value;
         if (item1 == "3") {
-            document.getElementById("From_Date").style.display = 'block';
-            document.getElementById("To_Date").style.display = 'block';
+            document.getElementById("Enter_From_Date").style.display = 'block';
+            document.getElementById("Enter_To_Date").style.display = 'block';
             document.getElementById("Mob_Number").style.display = 'none';
-            $("#From_Date")[0].setAttribute("required", "true");
-            $("#To_Date").prop('required', true);
+            $("#Visit_From_Date")[0].setAttribute("required", "true");
+            $("#Visit_To_Date").prop('required', true);
         }
         else if (item1 == "4") {
-            document.getElementById("From_Date").style.display = 'none';
-            document.getElementById("To_Date").style.display = 'none';
+            document.getElementById("Enter_From_Date").style.display = 'none';
+            document.getElementById("Enter_To_Date").style.display = 'none';
             document.getElementById("Mob_Number").style.display = 'block';
-            document.getElementById("From_Date").required = false;
-            document.getElementById("To_Date").required = false;
+            document.getElementById("Visit_From_Date").required = false;
+            document.getElementById("Visit_To_Date").required = false;
         }
         else {
-            document.getElementById("From_Date").style.display = 'none';
-            document.getElementById("To_Date").style.display = 'none';
+            document.getElementById("Enter_From_Date").style.display = 'none';
+            document.getElementById("Enter_To_Date").style.display = 'none';
             document.getElementById("Mob_Number").style.display = 'none';
-            document.getElementById("From_Date").required = false;
-            document.getElementById("To_Date").required = false;
+            document.getElementById("Visit_From_Date").required = false;
+            document.getElementById("Visit_To_Date").required = false;
         }
     });
 
@@ -295,16 +195,13 @@
     {
         var s = document.getElementById('Select_Message');
         var item1 = s.options[s.selectedIndex].value;
-        if (item1 == "Holiday1") {
+        if (item1 == "1") {
             var node = document.getElementById('Holiday_One');
-            alert("Holiday_One Content : " + node.textContent);
             document.getElementById("Message").value = node.textContent;
         }
-        else if (item1 == "Holiday2") {
+        else if (item1 == "2") {
             var node = document.getElementById('Holiday_Two');
-            alert("Holiday_Two Content : " + node.textContent);
             document.getElementById("Message").value = node.textContent;
-            alert(document.getElementById("Message").value);
         }
     }
 </script>

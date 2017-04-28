@@ -17,4 +17,14 @@ namespace DoctorWeb.Models.Enums
         [Display(Name = "Enter Phone Number")]
         EnterManually
     }
+
+    public enum SMSTypes
+    {
+        [Display(Name = "Personal Message")]
+        Personal,
+        [Display(Name = "Holiday Message 1")]
+        Holiday1,
+        [Display(Name = "Holiday Message 2")]
+        Holiday2,
+    }
 }

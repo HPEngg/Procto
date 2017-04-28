@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Web;
+using System.Web.Configuration;
 
 namespace DoctorWeb.Models.Tools
 {
@@ -43,9 +44,12 @@ namespace DoctorWeb.Models.Tools
         public static string sendMessage(string phoneNo, string message)
         {
             string url = "http://login.bulksmsgateway.in/sendmessage.php";
+            string user = WebConfigurationManager.AppSettings["SMSUserName"];
+            string pwd = WebConfigurationManager.AppSettings["SMSPwd"];
+            //string senderid = WebConfigurationManager.AppSettings["SMSSenderID"];
             string result = "";
             message = HttpUtility.UrlPathEncode(message);
-            String strPost = "?user=" + HttpUtility.UrlPathEncode("drhirenpatel") + "&password=" + HttpUtility.UrlPathEncode("9428131284") + "&sender=" + HttpUtility.UrlPathEncode("TestID") + "&mobile=" + HttpUtility.UrlPathEncode(phoneNo) + "&type=" + HttpUtility.UrlPathEncode("3") + "&message=" + message;
+            String strPost = "?user=" + HttpUtility.UrlPathEncode(user) + "&password=" + HttpUtility.UrlPathEncode(pwd) + "&sender=" + HttpUtility.UrlPathEncode("TestID") + "&mobile=" + HttpUtility.UrlPathEncode(phoneNo) + "&type=" + HttpUtility.UrlPathEncode("3") + "&message=" + message;
             StreamWriter myWriter = null;
             HttpWebRequest objRequest = (HttpWebRequest)WebRequest.Create(url + strPost);
             objRequest.Method = "POST";

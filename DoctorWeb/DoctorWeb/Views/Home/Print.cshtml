@@ -800,10 +800,11 @@
                                 </div>
                             }
                         }
-                        <span class="fltleft" style="padding:0 5px;">+</span>
+                        
                         @{
                             if (!string.IsNullOrEmpty(Model.Invoice.OtherFromTextbox))
                             {
+                                <span class="fltleft" style="padding:0 5px;">+</span>
                                 <div class="print_heading fltleft">
                                     <label class="print_heading fltleft">Other</label>
                                 </div>
@@ -812,10 +813,11 @@
                                 </div>
                             }
                         }
-                        <span class="fltleft" style="padding:0 5px;"> –</span>
+                        
                         @{
                             if (!string.IsNullOrEmpty(Model.Invoice.Less))
                             {
+                                <span class="fltleft" style="padding:0 5px;"> –</span>
                                 <div class="print_heading fltleft">
                                     @Html.DisplayNameFor(model => model.Invoice.Less)
                                 </div>

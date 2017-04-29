@@ -505,6 +505,8 @@
     <Content Include="Content\Images\gemicon\users.png" />
     <Content Include="Content\Images\glyphicons-halflings-white.png" />
     <Content Include="Content\Images\glyphicons-halflings.png" />
+    <Content Include="Content\Images\Graphic1.png" />
+    <Content Include="Content\Images\Graphic2.png" />
     <Content Include="Content\Images\gray_jean.png" />
     <Content Include="Content\Images\gs.png" />
     <Content Include="Content\Images\iconsweet-icons-white.png" />
@@ -557,6 +559,8 @@
     <Content Include="Content\Images\patient_drawing_image_bg.jpg" />
     <Content Include="Content\Images\patient_drawing_image_bg.png" />
     <Content Include="Content\Images\patient_drawing_image_bg11.png" />
+    <Content Include="Content\Images\patient_drawing_image_bg2%282%29.jpg" />
+    <Content Include="Content\Images\patient_drawing_image_bg2-Copy.jpg" />
     <Content Include="Content\Images\patient_drawing_image_bg2.jpg" />
     <Content Include="Content\Images\patient_drawing_image_bg2.png" />
     <Content Include="Content\Images\preview\audio.png" />

@@ -7,9 +7,9 @@
     {
         var df = "days_flag" + count.ToString();
         <div id="divname_1" class="divnamepresc">
-            
+
             @Html.DropDownList("OINTTypeID", new SelectList((SelectList)ViewBag.OINTTypeIDL, "Value", "Text", item.OINTTypeID), htmlAttributes: new { @class = "pre tabname", @id = "tabname_1", @style = "width: 75px!important; max-width: 70px!important; padding: 0!important;" })
-            
+
             @Html.ValidationMessageFor(modelItem => item.OINTTypeID, "", new { @class = "text-danger" })
 
             @Html.EditorFor(modelItem => item.OINTMore, new { htmlAttributes = new { @id = "Medicine_OINTMore" + count.ToString(), @style = "width:105px;", @class = "pre autocomplete", @type = "textbox", @value = "OINTOINT", @placeholder = "Medicine Name", @Name = "Medicine_OINTMore" } })
@@ -28,24 +28,36 @@
             @Html.DropDownList("DosageID", new SelectList((SelectList)ViewBag.DosageIDL, "Value", "Text", item.DosageID), htmlAttributes: new { @class = "pre", style = "width: 110px!important; padding: 0!important;" })
             @Html.ValidationMessageFor(modelItem => item.DosageID, "", new { @class = "text-danger" })
 
-            @Html.EditorFor(modelItem => item.Quantity, new { htmlAttributes = new { Name = "Medicine_Quantity", @id = "qut_" + count.ToString(), @class = "pre qut", @placeholder = "Qty", @style = "width: 40px;color:#000; padding: 6px;" } })
+            @{ var ttl = 0.0;}
+
+            @if (item.IsDayAffected == true)
+            {
+                ttl = item.Quantity * item.Unit;
+                @Html.EditorFor(modelItem => item.Quantity, new { htmlAttributes = new { Name = "Medicine_Quantity", @id = "qut_" + count.ToString(), @class = "pre qut", @placeholder = "Qty", @style = "width: 40px;color:#000; padding: 6px;" } })
+                <input type="hidden" id="@df" value=true name="@df" />
+            }
+            else
+            {
+                ttl = 0;
+                <input type="text" Name = "Medicine_Quantity" id = @string.Concat("qut_", count.ToString()) class = "pre qut" placeholder = "Qty" style = "width: 40px;color:#000; padding: 6px;" value="0"/>
+                <input type="hidden" id="@df" value=false name="@df" />
+            }
             @Html.ValidationMessageFor(modelItem => item.Quantity, "", new { @class = "text-danger" })
 
             @Html.EditorFor(modelItem => item.Unit, new { htmlAttributes = new { Name = "Medicine_Unit", @id = "unt_" + count.ToString(), @class = "pre qut", @placeholder = "Unit", @style = "width: 40px;color:#000; padding: 6px;", @readonly = "readonly" } })
             @Html.ValidationMessageFor(mmodelItem => item.Unit, "", new { @class = "text-danger" })
 
-            @{ var ttl = item.Quantity * item.Unit; }
-            <input type="text" Name = "Medicine_Total" id = @string.Concat("mtotal_", count.ToString()) class = "pre qut" placeholder = "Total" style = "width: 40px;color:#000; padding: 6px;" readonly = "readonly" value="@ttl"/>
+            <input type="text" Name="Medicine_Total" id=@string.Concat("mtotal_", count.ToString()) class="pre qut" placeholder="Total" style="width: 40px;color:#000; padding: 6px;" readonly="readonly" value="@ttl" />
 
             <input value="+" class="add_field_button plusbutton" type="button" required>
             <a href="#" class="remove_field" style="text-decoration:none;font-weight:bold; float:left;">--</a>
 
-            <input type="hidden" id="@df" value=true name="@df" />
             
-        </div>
-        count++;
-    }
 
-    <input type="hidden" value="@count" id="MedicineCount" />
+        </div>
+                    count++;
+                }
+
+                <input type="hidden" value="@count" id="MedicineCount" />
 
 }

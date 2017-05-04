@@ -638,7 +638,7 @@
                 for (count = 1; count <= i; count++) {
                     var qtyflag = (jQuery("#days_flag" + parseInt(count)).val());
                     var qty = 0;
-
+                    var mtot = 0;
                     if (qtyflag == "true") {
                         var days = document.getElementById("patient_days_presc").value;
                         if ($('option:selected', $("#MorningDozID" + parseInt(count))).text() == "1/2") {
@@ -662,12 +662,14 @@
                         //alert("Days : " + days + ", Morning : " + mor + ", Noon : " + noon + ", Night : " + night);
                         qty = (parseFloat(mor) + parseFloat(noon) + parseFloat(night)) * parseFloat(days);
                         jQuery("#qut_" + parseInt(count)).val(qty);
+                        mtot = jQuery("#unt_" + parseInt(count)).val() * qty;
                     }
                     else {
                         qty = (jQuery("#qut_" + parseInt(count)).val());
+                        mtot = 0;
                         //jQuery("#qut_" + parseInt(count)).val(0);
                     }
-                    var mtot = jQuery("#unt_" + parseInt(count)).val() * qty;
+                    //var mtot = jQuery("#unt_" + parseInt(count)).val() * qty;
                     jQuery("#mtotal_" + parseInt(count)).val(mtot);
                     medicinetotal();
                 }

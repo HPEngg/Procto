@@ -22,39 +22,79 @@ namespace DoctorWeb.Controllers
 
         public ActionResult Search(String PatientName)
         {
-            PatientName = PatientName.Replace('_', ' ');
-            var model = db.Patients.Where(p => p.Name.Contains(PatientName) || p.Address.Contains(PatientName) || p.Contact.Contains(PatientName)).Select(p => new PatientSearch()
+            int invoiceNum = 0;
+            List<PatientSearch> model;
+            if (int.TryParse(PatientName, out invoiceNum))
             {
-                Status = p.Status.ToString(),
-                Name = p.Name,
-                MobileNo = p.Contact,
-                Address = p.Address,
-                DepartmentName = p.DepartmentID.ToString(),
-                Reference = p.ReferredBy.Name,
-                ID = p.ID,
-                RefferalName = p.DoctorID != null ? db.Doctors.Where(w => w.ID == p.DoctorID).Select(s => s.Name).FirstOrDefault() : "Other"//"test"
-            }).ToList();
+                var patientID = db.Prescriptions.Where(w => w.ID == invoiceNum).Select(s => s.PatientID).FirstOrDefault();
+                model = db.Patients.Where(p => p.ID == patientID).Select(p => new PatientSearch()
+                {
+                    Status = p.Status.ToString(),
+                    Name = p.Name,
+                    MobileNo = p.Contact,
+                    Address = p.Address,
+                    DepartmentName = p.DepartmentID.ToString(),
+                    Reference = p.ReferredBy.Name,
+                    ID = p.ID,
+                    RefferalName = p.DoctorID != null ? db.Doctors.Where(w => w.ID == p.DoctorID).Select(s => s.Name).FirstOrDefault() : "Other"//"test"
+                }).ToList();
 
-            foreach(var patient in model)
-            {
-                var latestPrescription = db.Prescriptions.Where(p => p.PatientID == patient.ID).OrderByDescending(d => d.Date).FirstOrDefault();
-                if (latestPrescription != null)
+                foreach (var patient in model)
                 {
-                    patient.InvoiceNo = latestPrescription.ID;
-                    patient.Date = latestPrescription.Date;
-                    patient.Diagnosis = latestPrescription.Diagnosis;
-                    patient.Procedure = latestPrescription.Procedure;
-                    patient.PatientType = latestPrescription.PatientType.PatientTypeName;
-                    patient.NewPatientOrFollowUp = "FollowUP";
-                    //patient.ChargesType = latestPrescription.Charges.FirstOrDefault();
+                    var latestPrescription = db.Prescriptions.Where(p => p.PatientID == patient.ID).OrderByDescending(d => d.Date).FirstOrDefault();
+                    if (latestPrescription != null)
+                    {
+                        patient.InvoiceNo = latestPrescription.ID;
+                        patient.Date = latestPrescription.Date;
+                        patient.Diagnosis = latestPrescription.Diagnosis;
+                        patient.Procedure = latestPrescription.Procedure;
+                        patient.PatientType = latestPrescription.PatientType.PatientTypeName;
+                        patient.NewPatientOrFollowUp = "FollowUP";
+                        //patient.ChargesType = latestPrescription.Charges.FirstOrDefault();
+                    }
+                    else
+                    {
+                        patient.NewPatientOrFollowUp = "New patient";
+                    }
                 }
-                else
-                {
-                    patient.NewPatientOrFollowUp = "New patient";
-                }
+                return PartialView(model.ToList());
             }
-            return PartialView(model.ToList());
-            //return View(model.ToList());
+            else
+            {
+
+                PatientName = PatientName.Replace('_', ' ');
+                model = db.Patients.Where(p => p.Name.Contains(PatientName) || p.Address.Contains(PatientName) || p.Contact.Contains(PatientName)).Select(p => new PatientSearch()
+                {
+                    Status = p.Status.ToString(),
+                    Name = p.Name,
+                    MobileNo = p.Contact,
+                    Address = p.Address,
+                    DepartmentName = p.DepartmentID.ToString(),
+                    Reference = p.ReferredBy.Name,
+                    ID = p.ID,
+                    RefferalName = p.DoctorID != null ? db.Doctors.Where(w => w.ID == p.DoctorID).Select(s => s.Name).FirstOrDefault() : "Other"//"test"
+                }).ToList();
+
+                foreach (var patient in model)
+                {
+                    var latestPrescription = db.Prescriptions.Where(p => p.PatientID == patient.ID).OrderByDescending(d => d.Date).FirstOrDefault();
+                    if (latestPrescription != null)
+                    {
+                        patient.InvoiceNo = latestPrescription.ID;
+                        patient.Date = latestPrescription.Date;
+                        patient.Diagnosis = latestPrescription.Diagnosis;
+                        patient.Procedure = latestPrescription.Procedure;
+                        patient.PatientType = latestPrescription.PatientType.PatientTypeName;
+                        patient.NewPatientOrFollowUp = "FollowUP";
+                        //patient.ChargesType = latestPrescription.Charges.FirstOrDefault();
+                    }
+                    else
+                    {
+                        patient.NewPatientOrFollowUp = "New patient";
+                    }
+                }
+                return PartialView(model.ToList());
+            }
         }
 
         public ActionResult PatientToday()
@@ -433,6 +473,7 @@ namespace DoctorWeb.Controllers
             }
             var model = new PatientHome();
             model.Patient = db.Patients.Find(id);
+            model.PatientHistory = db.PatientHistories.Where(w => w.PatientID == id).OrderByDescending(o => o.ID).FirstOrDefault();
             ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name");
             ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name");
             ViewBag.ReferredByID = new SelectList(db.ReferredBy, "ID", "Name");

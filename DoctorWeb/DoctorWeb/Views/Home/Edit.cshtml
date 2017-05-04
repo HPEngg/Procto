@@ -21,6 +21,7 @@
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="menu">
                             @Html.HiddenFor(model => model.Patient.ID)
+                            @Html.HiddenFor(model => model.Patient.CreatedDate)
                             @Html.LabelFor(model => model.Patient.Status, htmlAttributes: new { @class = "menu_label" })
                             <div class="roundedOne">
                                 <label>G</label>

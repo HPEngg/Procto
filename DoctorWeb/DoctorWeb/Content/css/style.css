@@ -1095,7 +1095,7 @@ td {
 
 .print_text_fltleft {
     float: left;
-    padding-right: 10px;
+    padding-right: 5px;
 }
 
 .fltright {
@@ -1103,8 +1103,8 @@ td {
 }
 
 #PatientPart img {
-    height: 100px;
-    width: 100px;
+    height: 72px;
+    width: 72px;
 }
 
 .print_heading {

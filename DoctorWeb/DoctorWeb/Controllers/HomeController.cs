@@ -540,8 +540,9 @@ namespace DoctorWeb.Controllers
                 printData.Other = prescription.Other;
                 printData.Medicine = prescription.M;
                 printData.Less = prescription.Less;
-                string tot = prescription.Rs.ToString("N0");
-                printData.Total = tot;
+                //string tot = prescription.Rs.ToString("N0");
+                //printData.Total = tot;
+                printData.Total = prescription.Rs.ToString();
             }
 
             return View(printData);
@@ -573,8 +574,9 @@ namespace DoctorWeb.Controllers
                 model.Other = prescription.Other;
                 model.Medicine = prescription.M;
                 model.Less = prescription.Less;
-                string tot = prescription.Rs.ToString("N0");
-                model.Total = tot;
+                //string tot = prescription.Rs.ToString("N0");
+                //model.Total = tot;
+                model.Total = prescription.Rs.ToString();
 
             }
             model.IsHeaderPhotoRequired = true;
@@ -638,8 +640,9 @@ namespace DoctorWeb.Controllers
 
                 model.RX.Medicines = db.PrescriptionMedicines.Where(p => p.PrescriptionID == prescription.ID).ToList();
 
-                model.Compulsory.FollowDate = prescription.FollowDate == null ? string.Empty : prescription.FollowDate.Value.ToShortDateString();
-                
+                //model.Compulsory.FollowDate = prescription.FollowDate == null ? string.Empty : prescription.FollowDate.Value.ToShortDateString();
+                model.Compulsory.FollowDate = prescription.FollowDate == null ? string.Empty : prescription.FollowDate.Value.ToString();
+
                 model.Compulsory.Day = Convert.ToDateTime(model.Compulsory.FollowDate).DayOfWeek.ToString();
                 model.Compulsory.Instructions = db.Instructions.Where(p => p.Prescriptions.Any(q => q.ID == prescription.ID)).ToList();
             }

@@ -1,4 +1,4 @@
-.wPaint-menu{position:absolute !important;display:inline-block;*display:inline;zoom:1;line-height:0;z-index:99;}
+.wPaint-menu{position:relative !important;display:inline-block;*display:inline;zoom:1;line-height:0;z-index:99;padding-left: 35px;}
 .wPaint-menu-behind{z-index:98}
 .wPaint-menu-holder{position:relative;margin:0 1px 1px 0}
 .wPaint-menu-handle{display:inline-block;*display:inline;zoom:1}
@@ -38,7 +38,7 @@
 .wPaint-text-input{border:dotted #00f 1px;background:none}
 .wPaint-modal-img-holder{border:solid #333 1px;-webkit-border-radius:5px;border-radius:5px;margin:3px;padding:2px;cursor:pointer}
 .wPaint-modal-img{width:100px;-webkit-border-radius:4px;border-radius:4px;margin-bottom:0}
-.wPaint-theme-standard .wPaint-menu-holder{-webkit-border-radius:7px;border-radius:7px}
+.wPaint-theme-standard .wPaint-menu-holder{-webkit-border-radius:7px;border-radius:7px;}
 .wPaint-theme-standard .wPaint-menu-select-holder{-webkit-border-radius:5px;border-radius:5px}
 .wPaint-theme-standard .wPaint-menu-icon{-webkit-border-radius:7px;border-radius:7px}
 .wPaint-theme-standard .wPaint-menu-icon-img{margin:6px 5px 5px 6px;width:18px;height:18px;line-height:18px;font-size:12px}
@@ -49,12 +49,12 @@
 .wPaint-theme-standard .wPaint-menu-select-option{max-width:50px;padding:4px 7px}
 .wPaint-theme-standard .wPaint-menu-icon-select-img{width:18px;height:18px}
 .wPaint-theme-standard .wPaint-menu-alignment-horizontal.wPaint-menu-nohandle .wPaint-menu-holder{padding-left:4px}
-.wPaint-theme-standard .wPaint-menu-alignment-horizontal .wPaint-menu-icon{margin:4px 5px 4px 0}
-.wPaint-theme-standard .wPaint-menu-alignment-horizontal .wPaint-menu-handle{width:30px;height:39px;margin-right:5px;border-top-left-radius:7px;border-bottom-left-radius:7px}
+.wPaint-theme-standard .wPaint-menu-alignment-horizontal .wPaint-menu-icon{margin:4px 4px 4px 0}
+.wPaint-theme-standard .wPaint-menu-alignment-horizontal .wPaint-menu-handle{width:30px;height:39px;margin-right:5px;border-top-left-radius:7px;border-bottom-left-radius:7px; display:none;}
 .wPaint-theme-standard .wPaint-menu-alignment-vertical.wPaint-menu-nohandle .wPaint-menu-holder{padding-top:4px}
 .wPaint-theme-standard .wPaint-menu-alignment-vertical .wPaint-menu-icon{margin:0 4px 5px 4px}
 .wPaint-theme-standard .wPaint-menu-alignment-vertical .wPaint-menu-handle{width:39px;height:30px;margin-bottom:5px;border-top-left-radius:7px;border-top-right-radius:7px}
-.wPaint-theme-classic .wPaint-menu-holder{border-color:#dadada;background-color:#f0f0f0}
+.wPaint-theme-classic .wPaint-menu-holder{border-color:#dadada;background-color:#f0f0f0;}
 .wPaint-theme-classic .wPaint-menu-handle{background-color:#dadada;-webkit-box-shadow:inset 1px 1px 3px #fff;box-shadow:inset 1px 1px 3px #fff;border-color:#dadada}
 .wPaint-theme-classic .wPaint-menu-icon{border-color:#b9b9b9;background-color:#b9b9b9;-webkit-box-shadow:inset 2px 2px 3px #eee,1px 1px 2px #666;box-shadow:inset 2px 2px 3px #eee,1px 1px 2px #666}
 .wPaint-theme-classic .wPaint-menu-icon.hover,.wPaint-theme-classic .wPaint-menu-icon.active{border-color:#9cf;background-color:#acf}

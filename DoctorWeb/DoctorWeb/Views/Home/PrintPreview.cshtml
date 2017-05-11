@@ -18,7 +18,7 @@
                         @*@Html.LabelFor(model => model.HeaderRequired, htmlAttributes: new { @class = "control-label col-md-2", style = "float:left;" })*@
                         <label class="arial_heading" style="float:left;">Header</label>
                     </div>
-                    <div class="print_text_fltleft checkbox" >
+                    <div class="print_text_fltleft checkbox">
                         @Html.EditorFor(model => model.HeaderRequired)
                         @Html.ValidationMessageFor(model => model.HeaderRequired, "", new { @class = "text-danger" })
                     </div>
@@ -27,7 +27,7 @@
                 <div class="print_text_padding" style="width:33%;">
                     <div class="print_text_fltleft print_heading checkbox">
                         @*@Html.LabelFor(model => model.PatientRequired, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                        <label class="arial_heading" style="float:left;">Patient Face Photo</label>
+                        <label class="arial_heading" style="float:left;">Face</label>
                     </div>
                     <div class="print_text_fltleft checkbox">
                         @Html.EditorFor(model => model.PatientRequired)
@@ -58,14 +58,14 @@
                 </div>
 
                 @*<div class="print_text_padding" style="width:20%;">
-                <div class="print_text_fltleft print_heading checkbox">
-                    <label class="arial_heading" style="float:left;">Footer</label>
-                </div>
-                <div class="print_text_fltleft checkbox">
-                    @Html.EditorFor(model => model.FooterRequired)
-                    @Html.ValidationMessageFor(model => model.FooterRequired, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
+                        <div class="print_text_fltleft print_heading checkbox">
+                            <label class="arial_heading" style="float:left;">Footer</label>
+                        </div>
+                        <div class="print_text_fltleft checkbox">
+                            @Html.EditorFor(model => model.FooterRequired)
+                            @Html.ValidationMessageFor(model => model.FooterRequired, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
             </div>
         </div>
 
@@ -97,50 +97,51 @@
                             }
                         }
                     </div>
-                    <div class="fltleft" style="width:82%; font-family:Calibri; font-size:10pt;">
-                        @{
-                            if (!string.IsNullOrEmpty(Model.Patient.Name))
-                            {
-                                <div class="print_text_padding " style="width:40%;">
-                                    <div class="print_text_fltleft print_heading">
-                                        @Html.DisplayNameFor(model => model.Patient.Name)
+                    <div style="width:100%">
+                        <div class="fltleft" style="width:74%; font-family:Calibri; font-size:10pt;">
+                            @{
+                                if (!string.IsNullOrEmpty(Model.Patient.Name))
+                                {
+                                    <div class="print_text_padding " style="width:40%;">
+                                        <div class="print_text_fltleft print_heading">
+                                            @Html.DisplayNameFor(model => model.Patient.Name)
+                                        </div>
+                                        <div>
+                                            @Html.DisplayFor(model => model.Patient.Name)
+                                        </div>
                                     </div>
-                                    <div>
-                                        @Html.DisplayFor(model => model.Patient.Name)
-                                    </div>
-                                </div>
+                                }
                             }
-                        }
-                        @{
-                            if (!string.IsNullOrEmpty(Model.Patient.Age.ToString()))
-                            {
-                                <div class="print_text_padding">
-                                    <div class="fltleft">
-                                        @Html.DisplayFor(model => model.Patient.Age)
+                            @{
+                                if (!string.IsNullOrEmpty(Model.Patient.Age.ToString()))
+                                {
+                                    <div class="print_text_padding">
+                                        <div class="fltleft">
+                                            @Html.DisplayFor(model => model.Patient.Age)
+                                        </div>
+                                        <span class="fltleft" style="padding: 0 2px;"> / </span>
+                                        <div class="fltleft">
+                                            @Html.DisplayFor(model => model.Patient.Gender)
+                                        </div>
                                     </div>
-                                    <span class="fltleft" style="padding: 0 2px;"> / </span>
-                                    <div class="fltleft">
-                                        @Html.DisplayFor(model => model.Patient.Gender)
-                                    </div>
-                                </div>
+                                }
                             }
-                        }
 
-                        @{
-                            if (!string.IsNullOrEmpty(Model.Patient.Weight))
-                            {
-                                <div class="print_text_padding">
-                                    <div class="print_text_fltleft print_heading">
-                                        @Html.DisplayNameFor(model => model.Patient.Weight)
+                            @{
+                                if (!string.IsNullOrEmpty(Model.Patient.Weight))
+                                {
+                                    <div class="print_text_padding">
+                                        <div class="print_text_fltleft print_heading">
+                                            @Html.DisplayNameFor(model => model.Patient.Weight)
+                                        </div>
+                                        <div>
+                                            @Html.DisplayFor(model => model.Patient.Weight)<span>Kg</span>
+                                        </div>
                                     </div>
-                                    <div>
-                                        @Html.DisplayFor(model => model.Patient.Weight)<span>Kg</span>
-                                    </div>
-                                </div>
+                                }
                             }
-                        }
-
-                        <div class="print_text_padding">
+                        </div>
+                        <div class="print_text_padding" style="width:14%; float:right;">
                             <div class="print_text_fltleft print_heading">Date</div>
                             <div>@DateTime.Now.ToString("dd/MM/yyyy")</div>
                         </div>
@@ -177,7 +178,7 @@
                                         @Html.DisplayNameFor(model => model.Patient.Contact)
                                     </div>
                                     <div>
-                                        @Html.DisplayFor(model => model.Patient.Contact)<span>,</span>
+                                        @Html.DisplayFor(model => model.Patient.Contact)<span>  </span>
                                     </div>
                                 </div>
                             }
@@ -211,7 +212,7 @@
                             }
                         }
                     </div>
-                    <div class="fltleft" style="width:100%; clear:both;">
+                    <div class="fltleft" style="width:100%; clear:both; padding-top:10px;">
                         @{
                             if (!string.IsNullOrEmpty(Model.Patient.KCO))
                             {
@@ -228,8 +229,8 @@
                             if (!string.IsNullOrEmpty(Model.Patient.ComplainOf))
                             {
                                 <div class="print_text_padding" style="width:50%;">
-                                        <label class="print_text_fltleft print_heading">Complain Of</label>
-                                        @Html.DisplayFor(model => model.Patient.ComplainOf)
+                                    <label class="print_text_fltleft print_heading">Complain Of</label>
+                                    @Html.DisplayFor(model => model.Patient.ComplainOf)
                                 </div>
                             }
                         }
@@ -305,7 +306,7 @@
                         @{
                             if (!string.IsNullOrEmpty(Model.Patient.Pain.ToString()))
                             {
-                                <div style="style="float:left;">
+                                <div style="style=" float:left;">
                                     <div class="print_text_fltleft print_heading">
                                         @Html.DisplayNameFor(model => model.Patient.Pain)
                                     </div>
@@ -325,7 +326,7 @@
                         @{
                             if (!string.IsNullOrEmpty(Model.Patient.Burning.ToString()))
                             {
-                                <div style="style="float:left;">
+                                <div style="style=" float:left;">
                                     <div class="print_text_fltleft print_heading">
                                         @Html.DisplayNameFor(model => model.Patient.Burning)
                                     </div>
@@ -342,7 +343,7 @@
                         @{
                             if (!string.IsNullOrEmpty(Model.Patient.Bleeding.ToString()))
                             {
-                                <div style="style="float:left;">
+                                <div style="style=" float:left;">
                                     <div class="print_text_fltleft print_heading">
                                         @Html.DisplayNameFor(model => model.Patient.Bleeding)
                                     </div>
@@ -359,7 +360,7 @@
                         @{
                             if (!string.IsNullOrEmpty(Model.Patient.Swelling.ToString()))
                             {
-                                <div style="style="float:left;">
+                                <div style="style=" float:left;">
                                     <div class="print_text_fltleft print_heading">
                                         @Html.DisplayNameFor(model => model.Patient.Swelling)
                                     </div>
@@ -376,7 +377,7 @@
 
                             if (!string.IsNullOrEmpty(Model.Patient.SCO))
                             {
-                                <div style="style="float:left;">
+                                <div style="style=" float:left;">
                                     <div class="print_text_fltleft">
                                         <label class="print_text_fltleft print_heading">S/C/O</label>
                                         <span>GRADE </span>@Html.DisplayFor(model => model.Patient.SCO)
@@ -455,7 +456,7 @@
                             }
                         }
                     </div>
-                    <label class="arial_heading">EXAMINATION</label>
+                    <label class="arial_heading" style="padding-top:10px;">EXAMINATION</label>
                     @*IMAGES WILL BE CODED HERE*@
                     <div class="fltleft" style="width:100%; clear:both;">
                         @{
@@ -626,7 +627,7 @@
                         @{
                             if (!string.IsNullOrEmpty(Model.Patient.Diagnosis))
                             {
-                                <div class="print_text_fltleft print_heading" style="text-transform:uppercase;">
+                                <div class="print_text_fltleft print_heading arial_heading" style="text-transform:uppercase;">
                                     @Html.DisplayNameFor(model => model.Patient.Diagnosis)
                                 </div>
                                 <div>
@@ -697,7 +698,7 @@
                     </div>
                 </div>
                 <div id="RxPart">
-                    <label class="arial_heading" style="clear:both; text-decoration:underline;">
+                    <label class="arial_heading" style="clear:both; text-decoration:underline; padding-top:10px;">
                         R/X:
                     </label>
                     <table class="table table-bordered" style="width:auto; font-family:Calibri; font-size:10pt; border:none; margin-bottom:10px;">
@@ -763,10 +764,10 @@
                                     @Html.DisplayFor(model => model.Compulsory.Day)
                                 </div>
                                 @*<div class="arial_heading" style="float:left;">
-                                    @Html.DisplayFor(model => model.Compulsory.FollowDate)
-                                    <span>, </span>
-                                    @Html.DisplayFor(model => model.Compulsory.Day)
-                                </div>*@
+                                        @Html.DisplayFor(model => model.Compulsory.FollowDate)
+                                        <span>, </span>
+                                        @Html.DisplayFor(model => model.Compulsory.Day)
+                                    </div>*@
                             }
                         }
                     </div>
@@ -829,7 +830,7 @@
                             </div>
                         }
                     }
-                  
+
                     @{
                         if (!string.IsNullOrEmpty(Model.Invoice.OtherFromTextbox))
                         {
@@ -842,7 +843,7 @@
                             </div>
                         }
                     }
-                    
+
                     @{
                         if (!string.IsNullOrEmpty(Model.Invoice.Less))
                         {
@@ -898,17 +899,17 @@
                     }
                 </div>
                 @*<div id="FooterPart">
-                    <div class="fltleft" style="width:100%;">
-                        @{
-                            if (Model.Footer.FooterPhoto != null)
-                            {
-                                var base64 = Convert.ToBase64String(Model.Footer.FooterPhoto);
-                                var imgSrchdr = String.Format("data:image/gif;base64,{0}", base64);
-                                <img src="@imgSrchdr" style="height:150px; width:100%;" />
+                        <div class="fltleft" style="width:100%;">
+                            @{
+                                if (Model.Footer.FooterPhoto != null)
+                                {
+                                    var base64 = Convert.ToBase64String(Model.Footer.FooterPhoto);
+                                    var imgSrchdr = String.Format("data:image/gif;base64,{0}", base64);
+                                    <img src="@imgSrchdr" style="height:150px; width:100%;" />
+                                }
                             }
-                        }
-                    </div>
-                </div>*@
+                        </div>
+                    </div>*@
             </div>
             <div class="form-group">
                 <div style="clear:both; display:block;">

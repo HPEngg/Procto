@@ -21,6 +21,7 @@ namespace DoctorWeb.Models.CustomModels
         public bool HeaderRequired { get; set; }
         public Header Header { get; set; }
         public bool PatientRequired { get; set; }
+        public bool UploadedImagesRequired { get; set; }
         public PrintPatient Patient { get; set; }
         public bool RXRequired { get; set; }
         public RX RX { get; set; }

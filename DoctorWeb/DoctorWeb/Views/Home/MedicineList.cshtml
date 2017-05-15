@@ -28,18 +28,20 @@
             @Html.DropDownList("DosageID", new SelectList((SelectList)ViewBag.DosageIDL, "Value", "Text", item.DosageID), htmlAttributes: new { @class = "pre", style = "width: 110px!important; padding: 0!important;" })
             @Html.ValidationMessageFor(modelItem => item.DosageID, "", new { @class = "text-danger" })
 
-            @{ var ttl = 0.0;}
+            @{ var ttl = 0.0;
+                ttl = item.Quantity * item.Unit;
 
+                }
             @if (item.IsDayAffected == true)
             {
-                ttl = item.Quantity * item.Unit;
+                
                 @Html.EditorFor(modelItem => item.Quantity, new { htmlAttributes = new { Name = "Medicine_Quantity", @id = "qut_" + count.ToString(), @class = "pre qut", @placeholder = "Qty", @style = "width: 40px;color:#000; padding: 6px;" } })
                 <input type="hidden" id="@df" value=true name="@df" />
             }
             else
             {
-                ttl = 0;
-                <input type="text" Name = "Medicine_Quantity" id = @string.Concat("qut_", count.ToString()) class = "pre qut" placeholder = "Qty" style = "width: 40px;color:#000; padding: 6px;" value="0"/>
+                //ttl = 0;
+                <input type="text" Name = "Medicine_Quantity" id = @string.Concat("qut_", count.ToString()) class = "pre qut" placeholder = "Qty" style = "width: 40px;color:#000; padding: 6px;" value=@item.Quantity />
                 <input type="hidden" id="@df" value=false name="@df" />
             }
             @Html.ValidationMessageFor(modelItem => item.Quantity, "", new { @class = "text-danger" })

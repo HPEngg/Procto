@@ -666,7 +666,7 @@
                     }
                     else {
                         qty = (jQuery("#qut_" + parseInt(count)).val());
-                        mtot = 0;
+                        mtot = jQuery("#unt_" + parseInt(count)).val() * qty;
                         //jQuery("#qut_" + parseInt(count)).val(0);
                     }
                     //var mtot = jQuery("#unt_" + parseInt(count)).val() * qty;
@@ -815,7 +815,7 @@
                         var current_rec = $(this).attr('id').substring(17);
                         jQuery("#days_flag" + parseInt(i - 1)).val(j.item.term);
                         jQuery("#unt_" + parseInt(i - 1)).val(j.item.unit);
-
+                        jQuery("#qut_" + parseInt(i - 1)).val(j.item.quantity);
                         //if (j.item.term == true) {
                         
                         //flag = true;
@@ -878,6 +878,7 @@
                         var current_rec = $(this).attr('id').substring(17);
                         jQuery("#days_flag" + parseInt(i - 1)).val(j.item.term);
                         jQuery("#unt_" + parseInt(i - 1)).val(j.item.unit);
+                        jQuery("#qut_" + parseInt(i - 1)).val(j.item.quantity);
                         //if (j.item.term == true) {
 
                         //flag = true;

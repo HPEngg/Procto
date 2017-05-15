@@ -73,7 +73,7 @@
                         </div>
                                 }
                     <div style="width:100%">
-                        <div class="fltleft" style="width:74%; font-family:Calibri; font-size:10pt;">
+                        <div class="fltleft" style="width:73%; font-family:Calibri; font-size:10pt;">
                             @{
                                 if (!string.IsNullOrEmpty(Model.Patient.Name))
                                 {
@@ -116,7 +116,7 @@
                                 }
                             }
                         </div>
-                        <div class="print_text_padding" style="width:14%; float:right;">
+                        <div class="print_text_padding" style="width:15%; float:right;">
                             <div class="print_text_fltleft print_heading">Date</div>
                             <div>@DateTime.Now.ToString("dd/MM/yyyy")</div>
                         </div>
@@ -380,9 +380,9 @@
                                 <div class="print_text_fltleft print_heading">
                                     @Html.DisplayNameFor(model => model.Patient.Allergy)
                                 </div>
-                                    <div>
-                                        @Html.DisplayFor(model => model.Patient.Allergy)
-                                    </div>
+                                <div>
+                                    @Html.DisplayFor(model => model.Patient.Allergy)
+                                </div>
                             }
                         }
                     </div>
@@ -393,9 +393,9 @@
                                 <div class="print_text_fltleft print_heading">
                                     @Html.DisplayNameFor(model => model.Patient.History)
                                 </div>
-                                    <div>
-                                        @Html.DisplayFor(model => model.Patient.History)
-                                    </div>
+                                <div>
+                                    @Html.DisplayFor(model => model.Patient.History)
+                                </div>
                             }
                         }
                     </div>
@@ -456,26 +456,6 @@
                         }
 
                         @{
-                            if (Model.Patient.UploadedImage1 != null)
-                            {
-                                var base64 = Convert.ToBase64String(Model.Patient.UploadedImage1);
-                                var imgSrchdr = String.Format("data:image/gif;base64,{0}", base64);
-                                <div class="print_text_padding" style="width:19%; border:1px solid #000; margin-right:5px;">
-                                    <img src="@imgSrchdr" style="height:125px; width:150px;" />
-                                </div>
-                            }
-                        }
-                        @{
-                            if (Model.Patient.UploadedImage2 != null)
-                            {
-                                var base64 = Convert.ToBase64String(Model.Patient.UploadedImage2);
-                                var imgSrchdr = String.Format("data:image/gif;base64,{0}", base64);
-                                <div class="print_text_padding" style="width:19%; border:1px solid #000; margin-right:5px;">
-                                    <img src="@imgSrchdr" style="height:125px; width:150px;" />
-                                </div>
-                            }
-                        }
-                        @{
                             if (Model.Patient.PrescriptionImages != null)
                             {
                                 foreach (var item in Model.Patient.PrescriptionImages)
@@ -488,6 +468,26 @@
                                 }
                             }
                         }
+                        @if (Model.UploadedImagesRequired)
+                        {
+                            if (Model.Patient.UploadedImage1 != null)
+                            {
+                                var base64 = Convert.ToBase64String(Model.Patient.UploadedImage1);
+                                var imgSrchdr = String.Format("data:image/gif;base64,{0}", base64);
+                                <div class="print_text_padding" style="width:19%; border:1px solid #000; margin-right:5px;">
+                                    <img src="@imgSrchdr" style="height:125px; width:150px;" />
+                                </div>
+                            }
+                            if (Model.Patient.UploadedImage2 != null)
+                            {
+                                var base64 = Convert.ToBase64String(Model.Patient.UploadedImage2);
+                                var imgSrchdr = String.Format("data:image/gif;base64,{0}", base64);
+                                <div class="print_text_padding" style="width:19%; border:1px solid #000; margin-right:5px;">
+                                    <img src="@imgSrchdr" style="height:125px; width:150px;" />
+                                </div>
+                            }
+                        }
+
                     </div>
 
                     <div class="fltleft" style="width:100%; clear:both; font-family:Calibri; font-size:11pt;">
@@ -578,9 +578,9 @@
                                 <div class="print_text_fltleft print_heading">
                                     @Html.DisplayNameFor(model => model.Patient.Proctoscopy)
                                 </div>
-                                    <div>
-                                        @Html.DisplayFor(model => model.Patient.Proctoscopy)
-                                    </div>
+                                <div>
+                                    @Html.DisplayFor(model => model.Patient.Proctoscopy)
+                                </div>
                             }
                         }
                     </div>
@@ -591,9 +591,9 @@
                                 <div class="print_text_fltleft print_heading">
                                     @Html.DisplayNameFor(model => model.Patient.Others)
                                 </div>
-                                    <div>
-                                        @Html.DisplayFor(model => model.Patient.Others)
-                                    </div>
+                                <div>
+                                    @Html.DisplayFor(model => model.Patient.Others)
+                                </div>
                             }
                         }
                     </div>
@@ -604,9 +604,9 @@
                                 <div class="print_text_fltleft print_heading arial_heading" style="text-transform:uppercase;">
                                     @Html.DisplayNameFor(model => model.Patient.Diagnosis)
                                 </div>
-                                    <div>
-                                        @Html.DisplayFor(model => model.Patient.Diagnosis)
-                                    </div>
+                                <div>
+                                    @Html.DisplayFor(model => model.Patient.Diagnosis)
+                                </div>
                             }
                         }
                     </div>
@@ -614,7 +614,7 @@
                     @{
                         if (!string.IsNullOrEmpty(Model.Patient.Procedure) || Model.Patient.Investigations.Count() > 0)
                         {
-                            <label class="print_text_fltleft print_heading" style="font-size:9pt;">
+                            <label class="print_text_fltleft print_heading" style="font-size:9pt;line-height:1;">
                                 Advice
                             </label>
                         }
@@ -627,9 +627,9 @@
                                 <div class="print_text_fltleft print_heading">
                                     @Html.DisplayNameFor(model => model.Patient.Procedure)
                                 </div>
-                                    <div>
-                                        @Html.DisplayFor(model => model.Patient.Procedure)
-                                    </div>
+                                <div>
+                                    @Html.DisplayFor(model => model.Patient.Procedure)
+                                </div>
                             }
                         }
                     </div>
@@ -641,29 +641,29 @@
                                 <div class="print_heading fltleft">
                                     @Html.DisplayNameFor(model => model.Patient.Investigations)
                                 </div>
-                                    <div class="fltleft">
+                                <div class="fltleft">
+                                    @foreach (var item in Model.Patient.Investigations)
+                                    {
+                                        <div class="fltleft" style="padding-right:5px; text-align:justify;">
+                                            @Html.DisplayFor(modelItem => item.Name),
+                                        </div>
+                                    }
+                                </div>
+
+                                @*<div>
                                         @foreach (var item in Model.Patient.Investigations)
                                         {
-                                            <div class="fltleft" style="padding-right:5px; text-align:justify;">
-                                                @Html.DisplayFor(modelItem => item.Name),
-                                            </div>
-                                        }
-                                    </div>
-
-                                    @*<div>
-                                            @foreach (var item in Model.Patient.Investigations)
-                                            {
-                                                <div style="clear:both; width:100%">
-                                                    <div class="fltleft" style="width:3%;">
-                                                        <span>@inst_cnt)</span>
-                                                    </div>
-                                                    <div class="fltleft" style="padding-right:5px; text-align:justify;">
-                                                        @Html.DisplayFor(modelItem => item.Name):
-                                                    </div>
+                                            <div style="clear:both; width:100%">
+                                                <div class="fltleft" style="width:3%;">
+                                                    <span>@inst_cnt)</span>
                                                 </div>
-                                                inst_cnt = inst_cnt + 1;
-                                            }
-                                        </div>*@
+                                                <div class="fltleft" style="padding-right:5px; text-align:justify;">
+                                                    @Html.DisplayFor(modelItem => item.Name):
+                                                </div>
+                                            </div>
+                                            inst_cnt = inst_cnt + 1;
+                                        }
+                                    </div>*@
                             }
                         }
                     </div>
@@ -779,7 +779,7 @@
         @{
             if (Model.InvoiceRequired)
             {
-                <div id="InvoicePart">
+                <div id="InvoicePart" style="padding-top:15px;">
                     <label class="arial_heading" style="text-decoration:underline;">INVOICE</label>
                     <div class="fltleft" style="width:100%; font-family:Calibri; font-size:10pt;">
                         @{

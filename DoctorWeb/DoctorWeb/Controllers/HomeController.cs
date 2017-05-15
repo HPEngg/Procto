@@ -508,6 +508,7 @@ namespace DoctorWeb.Controllers
             model.HeaderRequired = true;
             model.InvoiceRequired = true;
             model.PatientRequired = true;
+            model.UploadedImagesRequired = true;
             model.RXRequired = true;
             ViewBag.PatientID = id;
             return View(model);
@@ -593,6 +594,7 @@ namespace DoctorWeb.Controllers
             printData.RXRequired = model.RXRequired;
             printData.FooterRequired = model.FooterRequired;
             printData.InvoiceRequired = model.InvoiceRequired;
+            printData.UploadedImagesRequired = model.UploadedImagesRequired;
             return View(printData);
         }
 

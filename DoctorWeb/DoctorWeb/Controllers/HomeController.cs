@@ -414,28 +414,31 @@ namespace DoctorWeb.Controllers
                     db.SaveChanges();
                 }
 
-                for (int i = 0; i < model.OINTTypeID.Length; i++)
+                if (model.OINTTypeID != null)
                 {
-                    var prescriptionMedicine = new PrescriptionMedicine()
+                    for (int i = 0; i < model.OINTTypeID.Length; i++)
                     {
-                        PrescriptionID = prescroptionObj.ID,
-                        OINTMore = model.Medicine_OINTMore[i],
-                        //MorningDozID = model.MorningDozID[i],
-                        Morning = db.Dozes.Find(model.MorningDozID[i]),
-                        //NoonDozID = model.NoonDozID[i],
-                        Noon = db.Dozes.Find(model.NoonDozID[i]),
-                        //NightDozID = model.NightDozID[i],
-                        Night = db.Dozes.Find(model.NightDozID[i]),
-                        DosageID = model.DosageID[i],
-                        Quantity = model.Medicine_Quantity[i],
-                        Unit = model.Medicine_Unit[i],
-                        Total = model.Medicine_Total[i],
-                        OINTTypeID = model.OINTTypeID[i]
-                    };
-                    db.PrescriptionMedicines.Add(prescriptionMedicine);
+                        var prescriptionMedicine = new PrescriptionMedicine()
+                        {
+                            PrescriptionID = prescroptionObj.ID,
+                            OINTMore = model.Medicine_OINTMore[i],
+                            //MorningDozID = model.MorningDozID[i],
+                            Morning = db.Dozes.Find(model.MorningDozID[i]),
+                            //NoonDozID = model.NoonDozID[i],
+                            Noon = db.Dozes.Find(model.NoonDozID[i]),
+                            //NightDozID = model.NightDozID[i],
+                            Night = db.Dozes.Find(model.NightDozID[i]),
+                            DosageID = model.DosageID[i],
+                            Quantity = model.Medicine_Quantity[i],
+                            Unit = model.Medicine_Unit[i],
+                            Total = model.Medicine_Total[i],
+                            OINTTypeID = model.OINTTypeID[i]
+                        };
+                        db.PrescriptionMedicines.Add(prescriptionMedicine);
+                        db.SaveChanges();
+                    }
                 }
 
-                db.SaveChanges();
                 ViewBag.Message = "Patient Prescription Created Successfully";
                 prescr_success = prescroptionObj.ID;
                 return RedirectToAction("Prescription", new { patientID = model.PatientID });

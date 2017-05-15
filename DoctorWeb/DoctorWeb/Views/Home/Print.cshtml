@@ -779,8 +779,8 @@
         @{
             if (Model.InvoiceRequired)
             {
-                <div id="InvoicePart" style="padding-top:15px;">
-                    <label class="arial_heading" style="text-decoration:underline;">INVOICE</label>
+                <div id="InvoicePart">
+                    <label class="arial_heading" style="padding-top:15px; text-decoration:underline;">INVOICE</label>
                     <div class="fltleft" style="width:100%; font-family:Calibri; font-size:10pt;">
                         @{
                             foreach (var pt in Model.Invoice.PaymentTypes)

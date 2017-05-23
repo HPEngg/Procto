@@ -220,8 +220,8 @@
                         <div class="mystep2all">
                             @*@Html.LabelFor(model => model.PatientHistory.RP, htmlAttributes: new { @class = "control-label col-md-2" })*@
                             <div class="mylabels" style="padding-top:0px; font-weight:bold;">
-                                @Html.RadioButtonFor(model => model.PatientHistory.PR, "R", htmlAttributes: new { style = "width:20px;", @checked = true })R
-                                @Html.RadioButtonFor(model => model.PatientHistory.PR, "P", htmlAttributes: new { style = "width:20px;" })P
+                                @Html.RadioButtonFor(model => model.PatientHistory.RP, "R", htmlAttributes: new { style = "width:20px;", @checked = true })R
+                                @Html.RadioButtonFor(model => model.PatientHistory.RP, "P", htmlAttributes: new { style = "width:20px;" })P
                                 @Html.ValidationMessageFor(model => model.PatientHistory.RP, "", new { @class = "text-danger" })
                             </div>
                             <div>

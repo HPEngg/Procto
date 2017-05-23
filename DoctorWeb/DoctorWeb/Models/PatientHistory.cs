@@ -28,7 +28,7 @@ namespace DoctorWeb.Models
         public int? Burning { get; set; }
         public string BurningMore { get; set; }
         public int? Bleeding { get; set; }
-        public Bleeding BleedingMore { get; set; }
+        public Bleeding? BleedingMore { get; set; }
         public int? Itching { get; set; }
         public string ItchingMore { get; set; }
         [Display(Name = "Pus Drainage")]

@@ -9,7 +9,7 @@ namespace DoctorWeb.Models.CustomModels
     public class PrescriptionHome
     {
         public int ID { get; set; }
-        public int Days { get; set; }
+        public int? Days { get; set; }
         public string Diagnosis { get; set; }
         public string Procedure { get; set; }
         public DateTime DateCreated { get; set; }

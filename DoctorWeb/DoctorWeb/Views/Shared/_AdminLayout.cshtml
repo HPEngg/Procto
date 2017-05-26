@@ -227,6 +227,25 @@
                             <li @if (ctrName == "Chart" && actnName == "ReferenceWisePatient") { <text> class="active" </text>     }><div id="icontitlediv">@Html.ActionLink("Reference", "ReferenceWisePatient", new { controller = "Chart" })</div></li>
                         </ul>
                     </li>
+
+                    @* Expanse category *@
+                    <li class="dropdown">
+                        <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Expanse Category</div></a>
+                        <ul @if ((ctrName == "ExpanseCategory" && actnName == "Create") || (ctrName == "ExpanseCategory" && actnName == "Index")) { <text> style="display:block;" </text>     }>
+                            <li @if (ctrName == "ExpanseCategory" && actnName == "Create") { <text> class="active" </text>      }><div id="icontitlediv">@Html.ActionLink("Add Expanse Category", "Create", "ExpanseCategory")</div></li>
+                            <li @if (ctrName == "ExpanseCategory" && actnName == "Index") { <text> class="active" </text>      }><div id="icontitlediv">@Html.ActionLink("Expanse Category List", "Index", "ExpanseCategory")</div></li>
+                        </ul>
+                    </li>
+
+                    @* Expanse *@
+                    <li class="dropdown">
+                        <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Expanse</div></a>
+                        <ul @if ((ctrName == "Expanse" && actnName == "Create") || (ctrName == "Expanse" && actnName == "Index")) { <text> style="display:block;" </text>     }>
+                            <li @if (ctrName == "Expanse" && actnName == "Create") { <text> class="active" </text>      }><div id="icontitlediv">@Html.ActionLink("Add Expanse", "Create", "Expanse")</div></li>
+                            <li @if (ctrName == "Expanse" && actnName == "Index") { <text> class="active" </text>      }><div id="icontitlediv">@Html.ActionLink("Expanse List", "Index", "Expanse")</div></li>
+                        </ul>
+                    </li>
+
                 </ul>
             </div>
             <!--leftmenu-->

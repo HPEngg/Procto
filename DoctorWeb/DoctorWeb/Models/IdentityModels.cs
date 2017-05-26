@@ -64,15 +64,12 @@ namespace DoctorWeb.Models
         public DbSet<Dosage> Dosages { get; set; }
         public DbSet<Doz> Dozes { get; set; }
         public DbSet<PreImage> PreImages { get; set; }
-
         public DbSet<Department> Departments { get; set; }
-
         public DbSet<ReferredBy> ReferredBy { get; set; }
-
         public DbSet<Investigation> Investigations { get; set; }
-
         public DbSet<SMS> ShortMessages { get; set; }
-
         public System.Data.Entity.DbSet<DoctorWeb.Models.PatientHistory> PatientHistories { get; set; }
+        public DbSet<ExpanseCategory> ExpanseCategories { get; set; }
+        public DbSet<Expanse> Expanses { get; set; }
     }
 }

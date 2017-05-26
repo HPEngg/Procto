@@ -203,6 +203,8 @@
     <Compile Include="Controllers\DoctorController.cs" />
     <Compile Include="Controllers\DosageController.cs" />
     <Compile Include="Controllers\DozController.cs" />
+    <Compile Include="Controllers\ExpanseCategoryController.cs" />
+    <Compile Include="Controllers\ExpanseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstructionController.cs" />
     <Compile Include="Controllers\InvestigationController.cs" />
@@ -260,6 +262,10 @@
     <Compile Include="Migrations\201705201337524_MadeDaysinPrescriptionOpitional.Designer.cs">
       <DependentUpon>201705201337524_MadeDaysinPrescriptionOpitional.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705261031182_AddedExpanseFeature.cs" />
+    <Compile Include="Migrations\201705261031182_AddedExpanseFeature.Designer.cs">
+      <DependentUpon>201705261031182_AddedExpanseFeature.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Charge.cs" />
@@ -290,6 +296,8 @@
     <Compile Include="Models\Enums\PatientStatus.cs" />
     <Compile Include="Models\Enums\ReferredBy.cs" />
     <Compile Include="Models\Enums\SMSToPatients.cs" />
+    <Compile Include="Models\Expanse.cs" />
+    <Compile Include="Models\ExpanseCategory.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Instruction.cs" />
     <Compile Include="Models\Investigation.cs" />
@@ -936,6 +944,16 @@
     <Content Include="Views\Chart\ReferenceWisePatient.cshtml" />
     <Content Include="Views\Home\PrintInvoicePreview.cshtml" />
     <Content Include="Views\Home\PatientToday.cshtml" />
+    <Content Include="Views\ExpanseCategory\Create.cshtml" />
+    <Content Include="Views\ExpanseCategory\Delete.cshtml" />
+    <Content Include="Views\ExpanseCategory\Details.cshtml" />
+    <Content Include="Views\ExpanseCategory\Edit.cshtml" />
+    <Content Include="Views\ExpanseCategory\Index.cshtml" />
+    <Content Include="Views\Expanse\Create.cshtml" />
+    <Content Include="Views\Expanse\Delete.cshtml" />
+    <Content Include="Views\Expanse\Details.cshtml" />
+    <Content Include="Views\Expanse\Edit.cshtml" />
+    <Content Include="Views\Expanse\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -976,6 +994,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705201337524_MadeDaysinPrescriptionOpitional.resx">
       <DependentUpon>201705201337524_MadeDaysinPrescriptionOpitional.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705261031182_AddedExpanseFeature.resx">
+      <DependentUpon>201705261031182_AddedExpanseFeature.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

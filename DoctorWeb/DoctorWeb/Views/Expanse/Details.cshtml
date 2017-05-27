@@ -11,20 +11,22 @@
     <h4>Expanse</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ExpanseCategory.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ExpanseCategory.Name)
-        </dd>
-
+        
         <dt>
             @Html.DisplayNameFor(model => model.Amount)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Amount)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.ExpanseCategory.Name)*@
+            Category
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpanseCategory.Name)
         </dd>
 
         <dt>

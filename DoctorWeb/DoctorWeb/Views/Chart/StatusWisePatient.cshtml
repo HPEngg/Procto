@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "StatusWisePatient";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>StatusWisePatient</h2>
+
+@model DoctorWeb.Models.Chart.ChartModel
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<script src="~/Content/js/canvasjs.min.js"></script>
+<script type="text/javascript">
+
+	window.onload = function () {
+		var chart = new CanvasJS.Chart("chartContainer", {
+			theme: "theme3",
+			animationEnabled: true,
+			title: {
+				text: "Statuswise Patient's List"
+			},
+			//subtitles: [
+			//	{ text: "Try Resizing the Browser" }
+			//],
+			data: [
+			{
+				type: "column", //change type to bar, line, area, pie, etc
+				dataPoints: @Html.Raw(ViewBag.DataPoints),
+			}
+			]
+		});
+		chart.render();
+	};
+</script>
+
+<div id="chartContainer" style="min-height:500px;"></div>
+<style type="text/css">
+    .canvasjs-chart-credit {
+        display: none;
+    }
+</style>

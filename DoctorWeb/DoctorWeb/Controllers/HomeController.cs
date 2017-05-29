@@ -97,6 +97,43 @@ namespace DoctorWeb.Controllers
             }
         }
 
+        public ActionResult FollowupList(DateTime fdate)
+        {
+            List<PatientSearch> model;
+            var patientID = db.Prescriptions.Where(w => DbFunctions.TruncateTime(w.FollowDate) == fdate.Date).Select(s => s.PatientID).FirstOrDefault();
+            model = db.Patients.Where(p => p.ID == patientID).Select(p => new PatientSearch()
+            {
+                Status = p.Status.ToString(),
+                Name = p.Name,
+                MobileNo = p.Contact,
+                Address = p.Address,
+                DepartmentName = p.DepartmentID.ToString(),
+                Reference = p.ReferredBy.Name,
+                ID = p.ID,
+                RefferalName = p.DoctorID != null ? db.Doctors.Where(w => w.ID == p.DoctorID).Select(s => s.Name).FirstOrDefault() : "Other"//"test"
+            }).ToList();
+
+            foreach (var patient in model)
+            {
+                var latestPrescription = db.Prescriptions.Where(p => p.PatientID == patient.ID).OrderByDescending(d => d.Date).FirstOrDefault();
+                if (latestPrescription != null)
+                {
+                    patient.InvoiceNo = latestPrescription.ID;
+                    patient.Date = latestPrescription.Date;
+                    patient.Diagnosis = latestPrescription.Diagnosis;
+                    patient.Procedure = latestPrescription.Procedure;
+                    patient.PatientType = latestPrescription.PatientType.PatientTypeName;
+                    patient.NewPatientOrFollowUp = "FollowUP";
+                    //patient.ChargesType = latestPrescription.Charges.FirstOrDefault();
+                }
+                else
+                {
+                    patient.NewPatientOrFollowUp = "New patient";
+                }
+            }
+            return PartialView(model.ToList());
+        }
+
         public ActionResult PatientToday()
         {
             var todayDate = DateTime.Now.Date;

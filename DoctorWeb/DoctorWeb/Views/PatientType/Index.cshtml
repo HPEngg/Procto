@@ -6,7 +6,10 @@
 }
 
 <h2>List of Patient type</h2>
-
+@if (TempData["ErrorMessage"] != null)
+{
+    <p style="color:red; font-size:16px;">@TempData["ErrorMessage"]</p>
+}
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>

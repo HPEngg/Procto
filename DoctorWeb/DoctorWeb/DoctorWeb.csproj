@@ -954,6 +954,9 @@
     <Content Include="Views\Expanse\Details.cshtml" />
     <Content Include="Views\Expanse\Edit.cshtml" />
     <Content Include="Views\Expanse\Index.cshtml" />
+    <Content Include="Views\Home\FollowupList.cshtml" />
+    <Content Include="Views\Chart\StatusWisePatient.cshtml" />
+    <Content Include="Views\Chart\PatientTypeWisePatient.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

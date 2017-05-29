@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DoctorWeb.Models;
+using System.Data.Entity.Infrastructure;
 
 namespace DoctorWeb.Controllers
 {
@@ -109,9 +110,17 @@ namespace DoctorWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Dosage dosage = db.Dosages.Find(id);
-            db.Dosages.Remove(dosage);
-            db.SaveChanges();
+            try
+            {
+                Dosage dosage = db.Dosages.Find(id);
+                db.Dosages.Remove(dosage);
+                db.SaveChanges();
+            }
+            catch (DbUpdateException ex)
+            {
+                TempData["ErrorMessage"] = "Error: This Dosage is used in existing Prescription, so it can not be deleted.";
+                return RedirectToAction("Index");
+            }
             return RedirectToAction("Index");
         }
 

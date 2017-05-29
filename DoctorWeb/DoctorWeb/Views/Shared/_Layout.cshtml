@@ -64,7 +64,6 @@
                     <a class="okok" href="/Doctor/Index" style="float: left; margin-left:10px;"><button>Admin</button></a>
                     <button style="float: left;" class="okok" data-popup-open="popup-1" href="#" id="search_btn" onclick="followup();">Follow Up</button>
                     <div id="SearchRecords"></div>
-                    <div id="FollowupRecords"></div>
                 </div>
             </div><!---- top part End --->
             <div style="clear:both"></div>
@@ -134,7 +133,7 @@
     function followup() {
         //window.location = "/Home/Search?PatientName=" + document.getElementById("PatientName").value;
         var searchpatient = $.noConflict(true);
-        searchpatient("#FollowupRecords").dialog({
+        searchpatient("#SearchRecords").dialog({
             autoOpen: true,
             position: { my: "center", at: "top", of: window },
             width: 1200,
@@ -143,10 +142,8 @@
             modal: true,
             classname: 'searchdialog',
             open: function () {
-                var patientname = document.getElementById("PatientName").value;
-                var pname = patientname.replace(" ", "_");
-                searchpatient(this).load('@Url.Action("Search", "Home", new { PatientName = "ID"})'.replace("ID", pname));
-                searchpatient('#FollowupRecords').focus();
+                searchpatient(this).load('@Url.Action("FollowupList", "Home", new { fdate = DateTime.Now.Date})');
+                searchpatient('#SearchRecords').focus();
             },
             close: function () {
                 javascript: location.reload(true);

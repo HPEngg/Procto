@@ -190,5 +190,40 @@ namespace DoctorWeb.Controllers
             model.ToDate = DateTime.Now.Date;
             return View(model);
         }
+
+        public ActionResult StatusWisePatient()
+        {
+            List<StringDataPoint> dataPoints = new List<StringDataPoint>();
+            var data1 = from pt in db.Patients
+                         group pt by pt.Status into g
+                         select new StringDataPoint() { label = g.Key.ToString(), y = g.Count() };
+
+            dataPoints = data1.ToList();
+
+            string output = "[";
+            dataPoints.ToList().ForEach((data) => output = output + "{label:\'" + data.label + "\'," + "y:" + data.y + "},");
+            output = output + "]";
+            ViewBag.DataPoints = output;
+
+            return View();
+        }
+
+        public ActionResult PatientTypeWisePatient()
+        {
+            List<StringDataPoint> dataPoints = new List<StringDataPoint>();
+            var data1 = from pr in db.Prescriptions
+                        join pt in db.Patients on pr.PatientID equals pt.ID into all
+                        group all by pr.PatientType into g
+                        select new StringDataPoint() { label = g.Key.ToString(), y = g.Count() };
+
+            dataPoints = data1.ToList();
+
+            string output = "[";
+            dataPoints.ToList().ForEach((data) => output = output + "{label:\'" + data.label + "\'," + "y:" + data.y + "},");
+            output = output + "]";
+            ViewBag.DataPoints = output;
+
+            return View();
+        }
     }
 }

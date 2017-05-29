@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DoctorWeb.Models;
+using System.Data.Entity.Infrastructure;
 
 namespace DoctorWeb.Controllers
 {
@@ -109,10 +110,20 @@ namespace DoctorWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            OINTType oINTType = db.OINTTypes.Find(id);
-            db.OINTTypes.Remove(oINTType);
-            db.SaveChanges();
+            try
+            {
+                OINTType oINTType = db.OINTTypes.Find(id);
+                db.OINTTypes.Remove(oINTType);
+                db.SaveChanges();
+            }
+            catch (DbUpdateException ex)
+            {
+                TempData["ErrorMessage"] = "Error: This Medicine Type is set in one or more existing Prescription, so it can not be deleted.";
+                return RedirectToAction("Index");
+            }
+
             return RedirectToAction("Index");
+
         }
 
         protected override void Dispose(bool disposing)

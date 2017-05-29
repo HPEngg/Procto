@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DoctorWeb.Models;
+using System.Data.Entity.Infrastructure;
 
 namespace DoctorWeb.Controllers
 {
@@ -109,9 +110,17 @@ namespace DoctorWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Doctor doctor = db.Doctors.Find(id);
-            db.Doctors.Remove(doctor);
-            db.SaveChanges();
+            try
+            {
+                Doctor doctor = db.Doctors.Find(id);
+                db.Doctors.Remove(doctor);
+                db.SaveChanges();
+            }
+            catch (DbUpdateException ex)
+            {
+                TempData["ErrorMessage"] = "Error: This Doctor has consulted one or more existing Patients, so it can not be deleted.";
+                return RedirectToAction("Index");
+            }
             return RedirectToAction("Index");
         }
 

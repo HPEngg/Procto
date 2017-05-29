@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DoctorWeb.Models;
+using System.Data.Entity.Infrastructure;
 
 namespace DoctorWeb.Controllers
 {
@@ -109,9 +110,17 @@ namespace DoctorWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ExpanseCategory expanseCategory = db.ExpanseCategories.Find(id);
-            db.ExpanseCategories.Remove(expanseCategory);
-            db.SaveChanges();
+            try
+            {
+                ExpanseCategory expanseCategory = db.ExpanseCategories.Find(id);
+                db.ExpanseCategories.Remove(expanseCategory);
+                db.SaveChanges();
+            }
+            catch (DbUpdateException ex)
+            {
+                TempData["ErrorMessage"] = "Error: This Expense Category is used in existing Expense, so it can not be deleted.";
+                return RedirectToAction("Index");
+            }
             return RedirectToAction("Index");
         }
 

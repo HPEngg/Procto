@@ -134,7 +134,7 @@ namespace DoctorWeb.Controllers
 
             if (id == null && docId != null)
                 patients = db.Patients.Where(p => p.ReferredByID == docId).Select(o => new PatientRefByDoctor() { ID = o.ID, Name = o.Name, Age = o.Age.ToString(), Address = o.Address, Sex = o.Gender.ToString(), Status = o.Status.ToString(), Department = o.DepartmentID.ToString(), Ammount = db.Prescriptions.Where(p => p.PatientID == o.ID).Sum(s => (decimal?)s.Rs) ?? 0 });
-            else if(id != null)
+            else if (id != null)
                 patients = db.Patients.Where(p => p.DoctorID == id).Select(o => new PatientRefByDoctor() { ID = o.ID, Name = o.Name, Age = o.Age.ToString(), Address = o.Address, Sex = o.Gender.ToString(), Status = o.Status.ToString(), Department = o.DepartmentID.ToString(), Ammount = db.Prescriptions.Where(p => p.PatientID == o.ID).Sum(s => (decimal?)s.Rs) ?? 0 });
 
             //ViewBag.DoctorID = id;
@@ -228,11 +228,41 @@ namespace DoctorWeb.Controllers
             db.SaveChanges();
             return Content(result.ToString());
         }
+        [HttpPost]
+        public ActionResult UploadPrescriptionImage(PatientPrescriptionPhoto personData1)
+        {
+            bool result = true;
+            PatientPrescriptionPhoto personData = personData1;
+            PrescriptionMobileImage objData = new Models.PrescriptionMobileImage();
+            Patient patient = db.Patients.Find(personData.Id);
+            if (patient == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                objData.Patient = patient;
+                objData.PatientID = personData.Id;
+                objData.UploadedImage1 = personData.Photo;
+                objData.UploadedImage2 = personData.Photo2;
+                objData.DateCreated = DateTime.Now;
+            }
+
+            db.Entry(objData).State = EntityState.Added;
+            db.SaveChanges();
+            return Content(result.ToString());
+        }
     }
 
     public class PatientPhoto
     {
         public int Id { get; set; }
         public byte[] Photo { get; set; }
+    }
+    public class PatientPrescriptionPhoto
+    {
+        public int Id { get; set; }
+        public byte[] Photo { get; set; }
+        public byte[] Photo2 { get; set; }
     }
 }

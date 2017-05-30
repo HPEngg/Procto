@@ -266,6 +266,10 @@
     <Compile Include="Migrations\201705261031182_AddedExpanseFeature.Designer.cs">
       <DependentUpon>201705261031182_AddedExpanseFeature.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705301019207_AddPrescriptionMobileUploadChanges.cs" />
+    <Compile Include="Migrations\201705301019207_AddPrescriptionMobileUploadChanges.Designer.cs">
+      <DependentUpon>201705301019207_AddPrescriptionMobileUploadChanges.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Charge.cs" />
@@ -314,6 +318,7 @@
     <Compile Include="Models\Prescription.cs" />
     <Compile Include="Models\PrescriptionCategory.cs" />
     <Compile Include="Models\PrescriptionMedicine.cs" />
+    <Compile Include="Models\PrescriptionMobileImage.cs" />
     <Compile Include="Models\ReferredBy.cs" />
     <Compile Include="Models\SMS.cs" />
     <Compile Include="Models\Tools\Extentions.cs" />
@@ -1000,6 +1005,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705261031182_AddedExpanseFeature.resx">
       <DependentUpon>201705261031182_AddedExpanseFeature.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705301019207_AddPrescriptionMobileUploadChanges.resx">
+      <DependentUpon>201705301019207_AddPrescriptionMobileUploadChanges.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

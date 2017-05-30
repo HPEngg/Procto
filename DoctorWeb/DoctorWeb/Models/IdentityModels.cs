@@ -71,5 +71,6 @@ namespace DoctorWeb.Models
         public System.Data.Entity.DbSet<DoctorWeb.Models.PatientHistory> PatientHistories { get; set; }
         public DbSet<ExpanseCategory> ExpanseCategories { get; set; }
         public DbSet<Expanse> Expanses { get; set; }
+        public DbSet<PrescriptionMobileImage> PrescriptionMobileImage { get; set; }
     }
 }

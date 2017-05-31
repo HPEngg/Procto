@@ -270,6 +270,14 @@
     <Compile Include="Migrations\201705301019207_AddPrescriptionMobileUploadChanges.Designer.cs">
       <DependentUpon>201705301019207_AddPrescriptionMobileUploadChanges.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705310629029_PatientTypeNullableInPrescreption.cs" />
+    <Compile Include="Migrations\201705310629029_PatientTypeNullableInPrescreption.Designer.cs">
+      <DependentUpon>201705310629029_PatientTypeNullableInPrescreption.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705311201512_TypeChangedToDecimal.cs" />
+    <Compile Include="Migrations\201705311201512_TypeChangedToDecimal.Designer.cs">
+      <DependentUpon>201705311201512_TypeChangedToDecimal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Charge.cs" />
@@ -962,6 +970,9 @@
     <Content Include="Views\Home\FollowupList.cshtml" />
     <Content Include="Views\Chart\StatusWisePatient.cshtml" />
     <Content Include="Views\Chart\PatientTypeWisePatient.cshtml" />
+    <Content Include="Views\Chart\CategoryWiseExpanse.cshtml" />
+    <Content Include="Views\Chart\Income.cshtml" />
+    <Content Include="Views\Chart\IncomeExpanse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1008,6 +1019,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705301019207_AddPrescriptionMobileUploadChanges.resx">
       <DependentUpon>201705301019207_AddPrescriptionMobileUploadChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705310629029_PatientTypeNullableInPrescreption.resx">
+      <DependentUpon>201705310629029_PatientTypeNullableInPrescreption.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705311201512_TypeChangedToDecimal.resx">
+      <DependentUpon>201705311201512_TypeChangedToDecimal.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

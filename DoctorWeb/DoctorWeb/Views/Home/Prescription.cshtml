@@ -218,7 +218,7 @@
                             @*<div class="form-group">*@
                             @*@Html.LabelFor(model => model.PatientTypeID, "PatientTypeID", htmlAttributes: new { @class = "control-label col-md-2" })*@
                             <div class="pat_type" style="clear:both; display:block; width:49%; float:left;">
-                                @Html.DropDownList("PatientTypeID", null, htmlAttributes: new { @name = "patient_type", @class = "pre", @style = "width: 100%!important; padding: 0!important;color:#000;" })
+                                @Html.DropDownList("PatientTypeID", null, "--Select--", htmlAttributes: new { @name = "patient_type", @class = "pre", @style = "width: 100%!important; padding: 0!important;color:#000;" })
                                 @Html.ValidationMessageFor(model => model.PatientTypeID, "", new { @class = "text-danger" })
                             </div>
 

@@ -23,9 +23,9 @@ namespace DoctorWeb.Models
         //List of payment type will be added here dynamically
         public IEnumerable<Charge> Charges { get; set; }
 
-        public string M { get; set; }
+        public Decimal M { get; set; }
         public int Percent { get; set; }
-        public string Less { get; set; }
+        public Decimal Less { get; set; }
 
         [Display(Name = "Invoiced Rs.")]
         public Decimal Rs { get; set; }
@@ -44,7 +44,7 @@ namespace DoctorWeb.Models
         public ICollection<Instruction> Instructions { get; set; }
         public ICollection<Investigation> Investigations { get; set; }
 
-        public int PatientTypeID { get; set; }
+        public int? PatientTypeID { get; set; }
         public virtual PatientType PatientType { get; set; }
 
         public IEnumerable<PrescriptionMedicine> Medicines { get; set; }
@@ -58,7 +58,7 @@ namespace DoctorWeb.Models
 
         public byte[] UploadedImage2 { get; set; }
 
-        public string Other { get; set; }
+        public Decimal Other { get; set; }
 
         //public int InvestigationID { get; set; }
         //public virtual Investigation Investigation { get; set; }

@@ -214,9 +214,72 @@ namespace DoctorWeb.Controllers
             var data1 = from pr in db.Prescriptions
                         join pt in db.Patients on pr.PatientID equals pt.ID into all
                         group all by pr.PatientType into g
-                        select new StringDataPoint() { label = g.Key.ToString(), y = g.Count() };
+                        select new StringDataPoint() { label = g.Key.PatientTypeName.ToString(), y = g.Count() };
 
             dataPoints = data1.ToList();
+
+            string output = "[";
+            dataPoints.ToList().ForEach((data) => output = output + "{label:\'" + data.label + "\'," + "y:" + data.y + "},");
+            output = output + "]";
+            ViewBag.DataPoints = output;
+
+            return View();
+        }
+
+        public ActionResult CategoryWiseExpanse()
+        {
+            List<StringDataPoint> dataPoints = new List<StringDataPoint>();
+            var data1 = from ex in db.ExpanseCategories
+                        join ec in db.Expanses on ex.ID equals ec.ExpanseCategoryID //into all
+                        group ec by ex.Name into g
+                        select new StringDataPoint() { label = g.Key.ToString(), y = g.Sum(s => (double?)s.Amount) ?? 0 };
+
+            dataPoints = data1.ToList();
+
+            string output = "[";
+            dataPoints.ToList().ForEach((data) => output = output + "{label:\'" + data.label + "\'," + "y:" + data.y + "},");
+            output = output + "]";
+            ViewBag.DataPoints = output;
+
+            return View();
+        }
+
+        public ActionResult Income()
+        {
+            List<StringDataPoint> dataPoints = new List<StringDataPoint>();
+
+            var medicineIncome = db.Prescriptions.Sum(s => s.M);
+            dataPoints.Add(new StringDataPoint() { label = "Medicine", y = Convert.ToDouble(medicineIncome) });
+
+            var otherIncome = db.Prescriptions.Sum(s => s.Other);
+            dataPoints.Add(new StringDataPoint() { label = "Other", y = Convert.ToDouble(otherIncome) });
+
+            //var data1 = from ex in db.ExpanseCategories
+            //            join ec in db.Expanses on ex.ID equals ec.ExpanseCategoryID //into all
+            //            group ec by ex.Name into g
+            //            select new StringDataPoint() { label = g.Key.ToString(), y = g.Sum(s => (double?)s.Amount) ?? 0 };
+
+            //dataPoints = data1.ToList();
+
+            string output = "[";
+            dataPoints.ToList().ForEach((data) => output = output + "{label:\'" + data.label + "\'," + "y:" + data.y + "},");
+            output = output + "]";
+            ViewBag.DataPoints = output;
+
+            return View();
+        }
+
+        public ActionResult IncomeExpanse()
+        {
+            List<StringDataPoint> dataPoints = new List<StringDataPoint>();
+
+            var income = db.Prescriptions.Sum(s => s.Rs);
+            dataPoints.Add(new StringDataPoint() { label = "Income", y = Convert.ToDouble(income) });
+
+            var expanse = db.Expanses.Sum(s => s.Amount);
+            dataPoints.Add(new StringDataPoint() { label = "Expanse", y = Convert.ToDouble(expanse) });
+
+            dataPoints.Add(new StringDataPoint() { label = "Profit/Loss", y = Convert.ToDouble(income - expanse) });
 
             string output = "[";
             dataPoints.ToList().ForEach((data) => output = output + "{label:\'" + data.label + "\'," + "y:" + data.y + "},");

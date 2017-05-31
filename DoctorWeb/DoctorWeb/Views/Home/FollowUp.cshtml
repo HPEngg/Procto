@@ -432,7 +432,16 @@
                             }
                         }
                     </div>
-                    <label class="arial_heading" style="padding-top:10px;">EXAMINATION</label>
+
+                    @{
+                        if ((Model.Patient.DrawenImage1 != null) || (Model.Patient.DrawenImage2 != null) || (Model.Patient.PrescriptionImages.Count > 0) || (Model.Patient.UploadedImage1 != null) || (Model.Patient.UploadedImage2 != null) || (!string.IsNullOrEmpty(Model.Patient.Height)) || (!string.IsNullOrEmpty(Model.Patient.Temprature)) || (!string.IsNullOrEmpty(Model.Patient.Pulse)) || (!string.IsNullOrEmpty(Model.Patient.BP)) || (!string.IsNullOrEmpty(Model.Patient.SPO2)) || (!string.IsNullOrEmpty(Model.Patient.PR)) || (!string.IsNullOrEmpty(Model.Patient.Proctoscopy)) || (!string.IsNullOrEmpty(Model.Patient.Others)) || (!string.IsNullOrEmpty(Model.Patient.Diagnosis)))
+
+                        {
+                            <label class="arial_heading" style="padding-top:10px;">
+                                EXAMINATION
+                            </label>
+                        }
+                    }
                     @*IMAGES WILL BE CODED HERE*@
                     <div class="fltleft" style="width:100%; clear:both;">
                         @{
@@ -670,6 +679,14 @@
                         }
                     </div>
                 </div>
+@{ int rxflag = 0;
+    if (Model.RX.Medicines.Count > 0)
+    {
+        rxflag = 1;
+    }
+}
+@if (rxflag == 1)
+{
                 <div id="RxPart">
                     <label class="arial_heading" style="clear:both; text-decoration:underline; padding-top:10px;">
                         R/X:
@@ -726,6 +743,7 @@
 
 
                 </div>
+}
                 <div id="CompulsoryPart">
                     <div class="fltleft" style="width:100%;">
                         @{

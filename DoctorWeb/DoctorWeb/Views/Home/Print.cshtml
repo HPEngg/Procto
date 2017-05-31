@@ -431,7 +431,15 @@
                             }
                         }
                     </div>
-                    <label class="arial_heading" style="padding-top:10px;">EXAMINATION</label>
+                    @{
+                        if ((Model.Patient.DrawenImage1 != null) || (Model.Patient.DrawenImage2 != null) || (Model.Patient.PrescriptionImages.Count > 0) || (Model.Patient.UploadedImage1 != null) || (Model.Patient.UploadedImage2 != null) || (!string.IsNullOrEmpty(Model.Patient.Height)) || (!string.IsNullOrEmpty(Model.Patient.Temprature)) || (!string.IsNullOrEmpty(Model.Patient.Pulse)) || (!string.IsNullOrEmpty(Model.Patient.BP)) || (!string.IsNullOrEmpty(Model.Patient.SPO2)) || (!string.IsNullOrEmpty(Model.Patient.PR)) || (!string.IsNullOrEmpty(Model.Patient.Proctoscopy)) || (!string.IsNullOrEmpty(Model.Patient.Others)) || (!string.IsNullOrEmpty(Model.Patient.Diagnosis)))
+
+                        {
+                            <label class="arial_heading" style="padding-top:10px;">
+                                EXAMINATION
+                            </label>
+                        }
+                    }
                     @*IMAGES WILL BE CODED HERE*@
                     <div class="fltleft" style="width:100%; clear:both;">
                         @{
@@ -670,7 +678,14 @@
                 </div>
             }
 
-            @{
+            @{ int rxflag = 0;
+                if (Model.RX.Medicines.Count > 0)
+                {
+                    rxflag = 1;
+                }
+            }
+            @if (rxflag == 1)
+            {
                 if (Model.RXRequired)
                 {
                     <div id="RxPart">
@@ -700,33 +715,34 @@
                             </tr>
                             @foreach (var item in Model.RX.Medicines)
                             {
-                                <tr>
-                                    <td style="width:5%; padding-left:0px;">
-                                        @Html.DisplayFor(modelItem => item.OINT.Name)
-                                    </td>
-                                    <td style="width:40%;">
-                                        @Html.DisplayFor(modelItem => item.OINTMore)
-                                    </td>
-                                    <td style="width:5%; text-align:center;">
-                                        @Html.DisplayFor(modelItem => item.Morning.Name)
-                                    </td>
-                                    <td style="width:5%; text-align:center;">
-                                        @Html.DisplayFor(modelItem => item.Noon.Name)
-                                    </td>
-                                    <td style="width:5%; text-align:center;">
-                                        @Html.DisplayFor(modelItem => item.Night.Name)
-                                    </td>
-                                    <td style="width:35%;">
-                                        @Html.DisplayFor(modelItem => item.Dosage.Name)
-                                    </td>
-                                    <td style="width:5%; text-align:center;">
-                                        @Html.DisplayFor(modelItem => item.Quantity)
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td style="width:5%; padding-left:0px;">
+                                    @Html.DisplayFor(modelItem => item.OINT.Name)
+                                </td>
+                                <td style="width:40%;">
+                                    @Html.DisplayFor(modelItem => item.OINTMore)
+                                </td>
+                                <td style="width:5%; text-align:center;">
+                                    @Html.DisplayFor(modelItem => item.Morning.Name)
+                                </td>
+                                <td style="width:5%; text-align:center;">
+                                    @Html.DisplayFor(modelItem => item.Noon.Name)
+                                </td>
+                                <td style="width:5%; text-align:center;">
+                                    @Html.DisplayFor(modelItem => item.Night.Name)
+                                </td>
+                                <td style="width:35%;">
+                                    @Html.DisplayFor(modelItem => item.Dosage.Name)
+                                </td>
+                                <td style="width:5%; text-align:center;">
+                                    @Html.DisplayFor(modelItem => item.Quantity)
+                                </td>
+                            </tr>
                             }
                         </table>
                     </div>
-                } }
+                }
+            }
             <div id="CompulsoryPart">
                 <div class="fltleft" style="width:100%;">
                     @{

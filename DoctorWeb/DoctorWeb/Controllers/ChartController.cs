@@ -183,11 +183,33 @@ namespace DoctorWeb.Controllers
             return View(model);
         }
 
-        public ActionResult PatientTypeWisePatient()
+        public ActionResult PatientTypeWisePatient(ChartQuery? query, DateTime? FromDate, DateTime? ToDate)
         {
             List<StringDataPoint> dataPoints = new List<StringDataPoint>();
+
+            if (query == ChartQuery.DateRange)
+            {
+                if (FromDate == null || ToDate == null)
+                    return View();
+            }
+            else if (query == ChartQuery.ThisWeek)
+            {
+                ToDate = DateTime.Now.Date;
+                FromDate = DateTime.Now.Date.AddDays(-7);
+            }
+            else if (query == ChartQuery.ThisMonth)
+            {
+                ToDate = DateTime.Now.Date;
+                FromDate = DateTime.Now.Date.AddDays(-30);
+            }
+            else if (query == null)
+            {
+                ToDate = DateTime.MaxValue;
+                FromDate = DateTime.MinValue;
+            }
+
             var data1 = from pr in db.Prescriptions
-                        join pt in db.Patients on pr.PatientID equals pt.ID into all
+                        join pt in db.Patients.Where(w => FromDate <= w.CreatedDate && w.CreatedDate <= ToDate) on pr.PatientID equals pt.ID into all
                         group all by pr.PatientType into g
                         select new StringDataPoint() { label = g.Key.PatientTypeName.ToString(), y = g.Count() };
 
@@ -198,7 +220,10 @@ namespace DoctorWeb.Controllers
             output = output + "]";
             ViewBag.DataPoints = output;
 
-            return View();
+            var model = new ChartModel();
+            model.FromDate = DateTime.Now.Date;
+            model.ToDate = DateTime.Now.Date;
+            return View(model);
         }
 
         public ActionResult ReferenceWisePatient(ChartQuery? query, DateTime? FromDate, DateTime? ToDate)
@@ -252,9 +277,30 @@ namespace DoctorWeb.Controllers
             return View(model);
         }
 
-        public ActionResult Income()
+        public ActionResult Income(ChartQuery? query, DateTime? FromDate, DateTime? ToDate)
         {
             List<StringDataPoint> dataPoints = new List<StringDataPoint>();
+
+            if (query == ChartQuery.DateRange)
+            {
+                if (FromDate == null || ToDate == null)
+                    return View();
+            }
+            else if (query == ChartQuery.ThisWeek)
+            {
+                ToDate = DateTime.Now.Date;
+                FromDate = DateTime.Now.Date.AddDays(-7);
+            }
+            else if (query == ChartQuery.ThisMonth)
+            {
+                ToDate = DateTime.Now.Date;
+                FromDate = DateTime.Now.Date.AddDays(-30);
+            }
+            else if (query == null)
+            {
+                ToDate = DateTime.MaxValue;
+                FromDate = DateTime.MinValue;
+            }
 
             var medicineIncome = db.Prescriptions.Sum(s => s.M);
             dataPoints.Add(new StringDataPoint() { label = "Medicine", y = Convert.ToDouble(medicineIncome) });
@@ -274,14 +320,39 @@ namespace DoctorWeb.Controllers
             output = output + "]";
             ViewBag.DataPoints = output;
 
-            return View();
+            var model = new ChartModel();
+            model.FromDate = DateTime.Now.Date;
+            model.ToDate = DateTime.Now.Date;
+            return View(model);
         }
 
-        public ActionResult CategoryWiseExpanse()
+        public ActionResult CategoryWiseExpanse(ChartQuery? query, DateTime? FromDate, DateTime? ToDate)
         {
             List<StringDataPoint> dataPoints = new List<StringDataPoint>();
+
+            if (query == ChartQuery.DateRange)
+            {
+                if (FromDate == null || ToDate == null)
+                    return View();
+            }
+            else if (query == ChartQuery.ThisWeek)
+            {
+                ToDate = DateTime.Now.Date;
+                FromDate = DateTime.Now.Date.AddDays(-7);
+            }
+            else if (query == ChartQuery.ThisMonth)
+            {
+                ToDate = DateTime.Now.Date;
+                FromDate = DateTime.Now.Date.AddDays(-30);
+            }
+            else if (query == null)
+            {
+                ToDate = DateTime.MaxValue;
+                FromDate = DateTime.MinValue;
+            }
+
             var data1 = from ex in db.ExpanseCategories
-                        join ec in db.Expanses on ex.ID equals ec.ExpanseCategoryID //into all
+                        join ec in db.Expanses.Where(w => FromDate <= w.Date && w.Date <= ToDate) on ex.ID equals ec.ExpanseCategoryID //into all
                         group ec by ex.Name into g
                         select new StringDataPoint() { label = g.Key.ToString(), y = g.Sum(s => (double?)s.Amount) ?? 0 };
 
@@ -292,12 +363,36 @@ namespace DoctorWeb.Controllers
             output = output + "]";
             ViewBag.DataPoints = output;
 
-            return View();
+            var model = new ChartModel();
+            model.FromDate = DateTime.Now.Date;
+            model.ToDate = DateTime.Now.Date;
+            return View(model);
         }
 
-        public ActionResult IncomeExpanse()
+        public ActionResult IncomeExpanse(ChartQuery? query, DateTime? FromDate, DateTime? ToDate)
         {
             List<StringDataPoint> dataPoints = new List<StringDataPoint>();
+
+            if (query == ChartQuery.DateRange)
+            {
+                if (FromDate == null || ToDate == null)
+                    return View();
+            }
+            else if (query == ChartQuery.ThisWeek)
+            {
+                ToDate = DateTime.Now.Date;
+                FromDate = DateTime.Now.Date.AddDays(-7);
+            }
+            else if (query == ChartQuery.ThisMonth)
+            {
+                ToDate = DateTime.Now.Date;
+                FromDate = DateTime.Now.Date.AddDays(-30);
+            }
+            else if (query == null)
+            {
+                ToDate = DateTime.MaxValue;
+                FromDate = DateTime.MinValue;
+            }
 
             var income = db.Prescriptions.Sum(s => s.Rs);
             dataPoints.Add(new StringDataPoint() { label = "Income", y = Convert.ToDouble(income) });
@@ -312,7 +407,10 @@ namespace DoctorWeb.Controllers
             output = output + "]";
             ViewBag.DataPoints = output;
 
-            return View();
+            var model = new ChartModel();
+            model.FromDate = DateTime.Now.Date;
+            model.ToDate = DateTime.Now.Date;
+            return View(model);
         }
     }
 }

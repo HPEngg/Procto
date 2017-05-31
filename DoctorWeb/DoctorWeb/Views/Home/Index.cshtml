@@ -143,7 +143,12 @@
                             @Html.LabelFor(model => model.Patient.DOB, htmlAttributes: new { @class = "control-label col-md-2", @style = "padding-left:0px;" })
                             @*<div class="col-md-10">
                             *@
-                            @Html.EditorFor(model => model.Patient.DOB, new { htmlAttributes = new { @class = "my-input", style = "min-width:75%;", placeholder = "DD/MM/YYYY", type = "date" } })
+                            @{
+                                String dobdate = DateTime.Now.Date.ToString("yyyy-MM-dd");
+                                dobdate = dobdate + "T00:00";
+                            }
+                            <input data-val="true" data-val-date="The field FollowDate must be a date." id="Patient_DOB" name="Patient.DOB" class="my-input" placeholder="DD/MM/YYYY" style="min-width:82%;" value=@dobdate type="datetime-local">
+                            @*@Html.EditorFor(model => model.Patient.DOB, new { htmlAttributes = new { @class = "my-input", style = "min-width:75%;", placeholder = "DD/MM/YYYY", type = "date" } })*@
                             @Html.ValidationMessageFor(model => model.Patient.DOB, "", new { @class = "text-danger" })
                             @*
                                 </div>*@
@@ -247,13 +252,23 @@
                         <div class="mystep2all">
                             @*@Html.LabelFor(model => model.PatientHistory.DOA, htmlAttributes: new { @class = "mylabels date_label doa_label", style = "padding-right:5px; width:auto;" })*@
                             <label class="mylabels date_label doa_label" , style="padding-right:5px; width:auto;">D.O.A.</label>
-                            @Html.EditorFor(model => model.PatientHistory.DOA, new { htmlAttributes = new { @class = "form-control", placeholder = "MM/DD/YYYY", style = "width: 80%; height: 25px; padding-left: 3px; padding-bottom: -1px; float: left; text-aligm:center;color:#000;", type = "datetime-local" } })
+                            @{
+                                String doadate = DateTime.Now.Date.ToString("yyyy-MM-dd");
+                                doadate = doadate + "T00:00";
+                            }
+                            <input data-val="true" data-val-date="The field FollowDate must be a date." id="PatientHistory_DOA" name="PatientHistory.DOA" class="form-control" placeholder="DD-MM-YYYY" style="width: 80%; height: 25px; padding-left: 3px; padding-bottom: -1px; float: left; text-align:center;color:#000;" value=@doadate type="datetime-local">
+                            @*@Html.EditorFor(model => model.PatientHistory.DOA, new { htmlAttributes = new { @class = "form-control", placeholder = "MM/DD/YYYY", style = "width: 80%; height: 25px; padding-left: 3px; padding-bottom: -1px; float: left; text-align:center;color:#000;", type = "datetime-local" } })*@
                             @Html.ValidationMessageFor(model => model.PatientHistory.DOA, "", new { @class = "text-danger" })
                         </div>
                         <div class="mystep2all">
                             @*@Html.LabelFor(model => model.PatientHistory.DOD, htmlAttributes: new { @class = "mylabels date_label doa_label", style = "padding-right:5px; width:auto;" })*@
                             <label class="mylabels date_label doa_label" , style="padding-right:5px; width:auto;">D.O.D.</label>
-                            @Html.EditorFor(model => model.PatientHistory.DOD, new { htmlAttributes = new { @class = "form-control", placeholder = "MM/DD/YYYY", style = "width: 80%; height: 25px; padding-left: 3px; padding-bottom: -1px; float: left; text-aligm:center;color:#000;", type = "datetime-local" } })
+                            @{
+                                String doddate = DateTime.Now.Date.ToString("yyyy-MM-dd");
+                                doddate = doddate + "T00:00";
+                            }
+                            <input data-val="true" data-val-date="The field FollowDate must be a date." id="PatientHistory_DOD" name="PatientHistory.DOD" class="form-control" placeholder="DD-MM-YYYY" style="width: 80%; height: 25px; padding-left: 3px; padding-bottom: -1px; float: left; text-align:center;color:#000;" value=@doddate type="datetime-local">
+                            @*@Html.EditorFor(model => model.PatientHistory.DOD, new { htmlAttributes = new { @class = "form-control", placeholder = "MM/DD/YYYY", style = "width: 80%; height: 25px; padding-left: 3px; padding-bottom: -1px; float: left; text-aligm:center;color:#000;", type = "datetime-local" } })*@
                             @Html.ValidationMessageFor(model => model.PatientHistory.DOD, "", new { @class = "text-danger" })
                         </div>
                         @*<div class="mdform my-mdform">

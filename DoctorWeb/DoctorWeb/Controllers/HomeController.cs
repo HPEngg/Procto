@@ -84,7 +84,7 @@ namespace DoctorWeb.Controllers
                         patient.Date = latestPrescription.Date;
                         patient.Diagnosis = latestPrescription.Diagnosis;
                         patient.Procedure = latestPrescription.Procedure;
-                        patient.PatientType = latestPrescription.PatientType.PatientTypeName;
+                        patient.PatientType = latestPrescription.PatientType == null ? string.Empty : latestPrescription.PatientType.PatientTypeName;
                         patient.NewPatientOrFollowUp = "FollowUP";
                         //patient.ChargesType = latestPrescription.Charges.FirstOrDefault();
                     }
@@ -514,10 +514,10 @@ namespace DoctorWeb.Controllers
             var model = new PatientHome();
             model.Patient = db.Patients.Find(id);
             model.PatientHistory = db.PatientHistories.Where(w => w.PatientID == id).OrderByDescending(o => o.ID).FirstOrDefault();
-            ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name");
-            ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name");
-            ViewBag.ReferredByID = new SelectList(db.ReferredBy, "ID", "Name");
-            ViewBag.DepartmentID = new SelectList(db.Departments, "ID", "Name");
+            ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name", model.Patient.DoctorID);
+            ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name", model.Patient.ID);
+            ViewBag.ReferredByID = new SelectList(db.ReferredBy, "ID", "Name", model.Patient.ReferredByID);
+            ViewBag.DepartmentID = new SelectList(db.Departments, "ID", "Name", model.Patient.DepartmentID);
             return View(model);
         }
 
@@ -577,13 +577,13 @@ namespace DoctorWeb.Controllers
                 var paymentTypeIDs = db.Charges.Where(w => w.PrescriptionID == prescription.ID).Select(s => s.PaymentTypeID).ToList();
                 printData.PaymentTypes = db.PaymentTypes.Where(w => paymentTypeIDs.Contains(w.ID)).ToList();
                 ViewBag.PatientID = patient.ID;
-                printData.Total = prescription.Rs.ToString();
+                printData.Total = prescription.Rs;
                 printData.Other = prescription.Other;
                 printData.Medicine = prescription.M;
                 printData.Less = prescription.Less;
                 //string tot = prescription.Rs.ToString("N0");
                 //printData.Total = tot;
-                printData.Total = prescription.Rs.ToString();
+                printData.Total = prescription.Rs;
             }
 
             return View(printData);
@@ -611,14 +611,10 @@ namespace DoctorWeb.Controllers
                 model.Medicines = db.PrescriptionMedicines.Where(p => p.PrescriptionID == prescription.ID).ToList();
                 var paymentTypeIDs = db.Charges.Where(w => w.PrescriptionID == prescription.ID).Select(s => s.PaymentTypeID).ToList();
                 model.PaymentTypes = db.PaymentTypes.Where(w => paymentTypeIDs.Contains(w.ID)).ToList();
-                model.Total = prescription.Rs.ToString();
+                model.Total = prescription.Rs;
                 model.Other = prescription.Other;
                 model.Medicine = prescription.M;
                 model.Less = prescription.Less;
-                //string tot = prescription.Rs.ToString("N0");
-                //model.Total = tot;
-                model.Total = prescription.Rs.ToString();
-
             }
             model.IsHeaderPhotoRequired = true;
             return View(model);
@@ -672,7 +668,7 @@ namespace DoctorWeb.Controllers
                 model.Patient.Diagnosis = prescription.Diagnosis;
                 //model.Patient.Advice =
                 model.Patient.Procedure = prescription.Procedure;
-                model.Patient.Type = prescription.PatientType.PatientTypeName.ToString();
+                model.Patient.Type = prescription.PatientType == null ? string.Empty : prescription.PatientType.PatientTypeName.ToString();
                 model.Patient.Investigations = db.Investigations.Where(p => p.Prescriptions.Any(q => q.ID == prescription.ID)).ToList();
                 model.Patient.DrawenImage1 = prescription.PrescriptionImage1;
                 model.Patient.DrawenImage2 = prescription.PrescriptionImage2;

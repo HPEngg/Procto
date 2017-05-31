@@ -20,10 +20,10 @@ namespace DoctorWeb.Models.CustomModels
         public List<PrescriptionMedicine> Medicines { get; set; }
 
         public List<PaymentType> PaymentTypes { get; set; }
-        public string Medicine { get; set; }
-        public string Other { get; set; }
-        public string Less { get; set; }
-        public string Total { get; set; }
+        public Decimal Medicine { get; set; }
+        public Decimal Other { get; set; }
+        public Decimal Less { get; set; }
+        public Decimal Total { get; set; }
 
     }
 }

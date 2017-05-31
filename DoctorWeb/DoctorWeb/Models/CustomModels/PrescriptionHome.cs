@@ -24,16 +24,16 @@ namespace DoctorWeb.Models.CustomModels
         public List<int> SelectedInstructionsIDs { get; set; }
         public List<int> SelectedInvestigationIDs { get; set; }
 
-        public int PatientTypeID { get; set; }
+        public int? PatientTypeID { get; set; }
 
-        public string M { get; set; }
+        public Decimal M { get; set; }
         public int Percent { get; set; }
-        public string Less { get; set; }
+        public Decimal Less { get; set; }
         public Decimal Rs { get; set; }
         public Decimal Received { get; set; }
         public Decimal Pending { get; set; }
 
-        public string Other { get; set; }
+        public Decimal Other { get; set; }
 
         public IEnumerable<PaymentType> PaymentTypes { get; set; }
 

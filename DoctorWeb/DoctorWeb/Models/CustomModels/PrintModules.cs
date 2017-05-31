@@ -96,13 +96,13 @@ namespace DoctorWeb.Models.CustomModels
         //public string KSProcedure { get; set; }
         //public string Other { get; set; }
         public List<PaymentType> PaymentTypes { get; set; }
-        public string Medicine { get; set; }
-        public string Less { get; set; }
+        public Decimal Medicine { get; set; }
+        public Decimal Less { get; set; }
         public string Net { get; set; }
         public string Total { get; set; }
         public string CashRecived { get; set; }
         public string PendingAmount { get; set; }
-        public string OtherFromTextbox { get; set; }
+        public Decimal OtherFromTextbox { get; set; }
     }
 
     public class Footer

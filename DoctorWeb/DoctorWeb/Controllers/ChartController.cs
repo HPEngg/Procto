@@ -20,6 +20,120 @@ namespace DoctorWeb.Controllers
             return View();
         }
 
+        public ActionResult NewOldPatient(ChartQuery? query, DateTime? FromDate, DateTime? ToDate)
+        {
+            List<StringDataPoint> dataPoints = new List<StringDataPoint>();
+            if (query == ChartQuery.DateRange)
+            {
+                if (FromDate == null || ToDate == null)
+                    return View();
+            }
+            else if (query == ChartQuery.ThisWeek)
+            {
+                ToDate = DateTime.Now.Date;
+                FromDate = DateTime.Now.Date.AddDays(-7);
+            }
+            else if (query == ChartQuery.ThisMonth)
+            {
+                ToDate = DateTime.Now.Date;
+                FromDate = DateTime.Now.Date.AddDays(-30);
+            }
+            else if (query == null)
+            {
+                ToDate = DateTime.MaxValue;
+                FromDate = DateTime.MinValue;
+            }
+
+            //var newPatients = from pt in db.Patients.Where(w => FromDate <= w.CreatedDate && w.CreatedDate <= ToDate)
+            //                  join pr in db.Prescriptions on pt.ID equals pr.PatientID into ptpr
+            //                 group ptpr by pt.ID into grouped
+            //                 where grouped.Count() <= 1
+            //                 select grouped.Key;
+
+            var newPatients = from p in db.Patients.Where(w => FromDate <= w.CreatedDate && w.CreatedDate <= ToDate)
+                              let cCount =
+                             (
+                               from pr in db.Prescriptions
+                               where p.ID == pr.PatientID
+                               select pr
+                             ).Count()
+                              where cCount <= 1
+                              select p;
+
+            //var oldPatients = from pt in db.Patients.Where(w => FromDate <= w.CreatedDate && w.CreatedDate <= ToDate)
+            //                  join pr in db.Prescriptions on pt.ID equals pr.PatientID into ptpr
+            //                  group ptpr by pt.ID into grouped
+            //                  where grouped.Count() > 1
+            //                  select grouped.Key;
+
+            var oldPatients = from p in db.Patients.Where(w => FromDate <= w.CreatedDate && w.CreatedDate <= ToDate)
+                              let cCount =
+                              (
+                                from pr in db.Prescriptions
+                                where p.ID == pr.PatientID
+                                select pr
+                              ).Count()
+                              where cCount > 1
+                              select p;
+
+            dataPoints.Add(new StringDataPoint() { label = "New", y = newPatients.Count() });
+            dataPoints.Add(new StringDataPoint() { label = "Old", y = oldPatients.Count() });
+
+
+            string output = "[";
+            dataPoints.ToList().ForEach((data) => output = output + "{label:\'" + data.label + "\'," + "y:" + data.y + "},");
+            output = output + "]";
+            ViewBag.DataPoints = output;
+
+            var model = new ChartModel();
+            model.FromDate = DateTime.Now.Date;
+            model.ToDate = DateTime.Now.Date;
+            return View(model);
+        }
+
+        public ActionResult StatusWisePatient(ChartQuery? query, DateTime? FromDate, DateTime? ToDate)
+        {
+            List<StringDataPoint> dataPoints = new List<StringDataPoint>();
+            if (query == ChartQuery.DateRange)
+            {
+                if (FromDate == null || ToDate == null)
+                    return View();
+            }
+            else if (query == ChartQuery.ThisWeek)
+            {
+                ToDate = DateTime.Now.Date;
+                FromDate = DateTime.Now.Date.AddDays(-7);
+            }
+            else if (query == ChartQuery.ThisMonth)
+            {
+                ToDate = DateTime.Now.Date;
+                FromDate = DateTime.Now.Date.AddDays(-30);
+            }
+            else if (query == null)
+            {
+                ToDate = DateTime.MaxValue;
+                FromDate = DateTime.MinValue;
+            }
+
+
+            var data1 = from pt in db.Patients.Where(w => FromDate <= w.CreatedDate && w.CreatedDate <= ToDate)
+                        group pt by pt.Status into g
+                        select new StringDataPoint() { label = g.Key.ToString(), y = g.Count() };
+
+            dataPoints = data1.ToList();
+
+            string output = "[";
+            dataPoints.ToList().ForEach((data) => output = output + "{label:\'" + data.label + "\'," + "y:" + data.y + "},");
+            output = output + "]";
+            ViewBag.DataPoints = output;
+
+            var model = new ChartModel();
+            model.FromDate = DateTime.Now.Date;
+            model.ToDate = DateTime.Now.Date;
+            return View(model);
+            //return View();
+        }
+
         public ActionResult DepartmentWisePatient(ChartQuery? query, DateTime? FromDate, DateTime? ToDate)
         {
             IQueryable<StringDataPoint> dataPoints = null;
@@ -69,75 +183,22 @@ namespace DoctorWeb.Controllers
             return View(model);
         }
 
-        public ActionResult NewOldPatient(ChartQuery? query, DateTime? FromDate, DateTime? ToDate)
+        public ActionResult PatientTypeWisePatient()
         {
             List<StringDataPoint> dataPoints = new List<StringDataPoint>();
-            if (query == ChartQuery.DateRange)
-            {
-                if (FromDate == null || ToDate == null)
-                    return View();
-            }
-            else if (query == ChartQuery.ThisWeek)
-            {
-                ToDate = DateTime.Now.Date;
-                FromDate = DateTime.Now.Date.AddDays(-7);
-            }
-            else if (query == ChartQuery.ThisMonth)
-            {
-                ToDate = DateTime.Now.Date;
-                FromDate = DateTime.Now.Date.AddDays(-30);
-            }
-            else if (query == null)
-            {
-                ToDate = DateTime.MaxValue;
-                FromDate = DateTime.MinValue;
-            }
+            var data1 = from pr in db.Prescriptions
+                        join pt in db.Patients on pr.PatientID equals pt.ID into all
+                        group all by pr.PatientType into g
+                        select new StringDataPoint() { label = g.Key.PatientTypeName.ToString(), y = g.Count() };
 
-            //var newPatients = from pt in db.Patients.Where(w => FromDate <= w.CreatedDate && w.CreatedDate <= ToDate)
-            //                  join pr in db.Prescriptions on pt.ID equals pr.PatientID into ptpr
-            //                 group ptpr by pt.ID into grouped
-            //                 where grouped.Count() <= 1
-            //                 select grouped.Key;
-
-            var newPatients = from p in db.Patients.Where(w => FromDate <= w.CreatedDate && w.CreatedDate <= ToDate)
-                              let cCount =
-                             (
-                               from pr in db.Prescriptions
-                               where p.ID == pr.PatientID
-                               select pr
-                             ).Count()
-                             where cCount <= 1
-                             select p;
-
-            //var oldPatients = from pt in db.Patients.Where(w => FromDate <= w.CreatedDate && w.CreatedDate <= ToDate)
-            //                  join pr in db.Prescriptions on pt.ID equals pr.PatientID into ptpr
-            //                  group ptpr by pt.ID into grouped
-            //                  where grouped.Count() > 1
-            //                  select grouped.Key;
-
-            var oldPatients = from p in db.Patients.Where(w => FromDate <= w.CreatedDate && w.CreatedDate <= ToDate)
-                              let cCount =
-                              (
-                                from pr in db.Prescriptions
-                                where p.ID == pr.PatientID
-                                select pr
-                              ).Count()
-                              where cCount > 1
-                              select p;
-
-            dataPoints.Add(new StringDataPoint() { label = "New", y = newPatients.Count() });
-            dataPoints.Add(new StringDataPoint() { label = "Old", y = oldPatients.Count() });
-
+            dataPoints = data1.ToList();
 
             string output = "[";
             dataPoints.ToList().ForEach((data) => output = output + "{label:\'" + data.label + "\'," + "y:" + data.y + "},");
             output = output + "]";
             ViewBag.DataPoints = output;
 
-            var model = new ChartModel();
-            model.FromDate = DateTime.Now.Date;
-            model.ToDate = DateTime.Now.Date;
-            return View(model);
+            return View();
         }
 
         public ActionResult ReferenceWisePatient(ChartQuery? query, DateTime? FromDate, DateTime? ToDate)
@@ -191,32 +252,22 @@ namespace DoctorWeb.Controllers
             return View(model);
         }
 
-        public ActionResult StatusWisePatient()
+        public ActionResult Income()
         {
             List<StringDataPoint> dataPoints = new List<StringDataPoint>();
-            var data1 = from pt in db.Patients
-                         group pt by pt.Status into g
-                         select new StringDataPoint() { label = g.Key.ToString(), y = g.Count() };
 
-            dataPoints = data1.ToList();
+            var medicineIncome = db.Prescriptions.Sum(s => s.M);
+            dataPoints.Add(new StringDataPoint() { label = "Medicine", y = Convert.ToDouble(medicineIncome) });
 
-            string output = "[";
-            dataPoints.ToList().ForEach((data) => output = output + "{label:\'" + data.label + "\'," + "y:" + data.y + "},");
-            output = output + "]";
-            ViewBag.DataPoints = output;
+            var otherIncome = db.Prescriptions.Sum(s => s.Other);
+            dataPoints.Add(new StringDataPoint() { label = "Other", y = Convert.ToDouble(otherIncome) });
 
-            return View();
-        }
+            //var data1 = from ex in db.ExpanseCategories
+            //            join ec in db.Expanses on ex.ID equals ec.ExpanseCategoryID //into all
+            //            group ec by ex.Name into g
+            //            select new StringDataPoint() { label = g.Key.ToString(), y = g.Sum(s => (double?)s.Amount) ?? 0 };
 
-        public ActionResult PatientTypeWisePatient()
-        {
-            List<StringDataPoint> dataPoints = new List<StringDataPoint>();
-            var data1 = from pr in db.Prescriptions
-                        join pt in db.Patients on pr.PatientID equals pt.ID into all
-                        group all by pr.PatientType into g
-                        select new StringDataPoint() { label = g.Key.PatientTypeName.ToString(), y = g.Count() };
-
-            dataPoints = data1.ToList();
+            //dataPoints = data1.ToList();
 
             string output = "[";
             dataPoints.ToList().ForEach((data) => output = output + "{label:\'" + data.label + "\'," + "y:" + data.y + "},");
@@ -235,31 +286,6 @@ namespace DoctorWeb.Controllers
                         select new StringDataPoint() { label = g.Key.ToString(), y = g.Sum(s => (double?)s.Amount) ?? 0 };
 
             dataPoints = data1.ToList();
-
-            string output = "[";
-            dataPoints.ToList().ForEach((data) => output = output + "{label:\'" + data.label + "\'," + "y:" + data.y + "},");
-            output = output + "]";
-            ViewBag.DataPoints = output;
-
-            return View();
-        }
-
-        public ActionResult Income()
-        {
-            List<StringDataPoint> dataPoints = new List<StringDataPoint>();
-
-            var medicineIncome = db.Prescriptions.Sum(s => s.M);
-            dataPoints.Add(new StringDataPoint() { label = "Medicine", y = Convert.ToDouble(medicineIncome) });
-
-            var otherIncome = db.Prescriptions.Sum(s => s.Other);
-            dataPoints.Add(new StringDataPoint() { label = "Other", y = Convert.ToDouble(otherIncome) });
-
-            //var data1 = from ex in db.ExpanseCategories
-            //            join ec in db.Expanses on ex.ID equals ec.ExpanseCategoryID //into all
-            //            group ec by ex.Name into g
-            //            select new StringDataPoint() { label = g.Key.ToString(), y = g.Sum(s => (double?)s.Amount) ?? 0 };
-
-            //dataPoints = data1.ToList();
 
             string output = "[";
             dataPoints.ToList().ForEach((data) => output = output + "{label:\'" + data.label + "\'," + "y:" + data.y + "},");

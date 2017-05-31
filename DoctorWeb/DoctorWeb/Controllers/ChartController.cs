@@ -254,12 +254,12 @@ namespace DoctorWeb.Controllers
             var otherIncome = db.Prescriptions.Sum(s => s.Other);
             dataPoints.Add(new StringDataPoint() { label = "Other", y = Convert.ToDouble(otherIncome) });
 
-            //var data1 = from ex in db.ExpanseCategories
-            //            join ec in db.Expanses on ex.ID equals ec.ExpanseCategoryID //into all
-            //            group ec by ex.Name into g
-            //            select new StringDataPoint() { label = g.Key.ToString(), y = g.Sum(s => (double?)s.Amount) ?? 0 };
+            var data1 = from pt in db.PaymentTypes
+                        join ch in db.Charges on pt.ID equals ch.PaymentTypeID //into all
+                        group pt by pt.PaymentTypeName into g
+                        select new StringDataPoint() { label = g.Key.ToString(), y = g.Sum(s => (double?)s.Rupees) ?? 0 };
 
-            //dataPoints = data1.ToList();
+            dataPoints.AddRange(data1.ToList());
 
             string output = "[";
             dataPoints.ToList().ForEach((data) => output = output + "{label:\'" + data.label + "\'," + "y:" + data.y + "},");

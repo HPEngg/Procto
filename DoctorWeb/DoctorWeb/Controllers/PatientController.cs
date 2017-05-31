@@ -174,11 +174,12 @@ namespace DoctorWeb.Controllers
         public void ExportListFromTsv(int? id)
         {
             IEnumerable<PatientRefByDoctor> patients = null;
-            //ViewBag.Values = new SelectList(db.Doctors, "ID", "Name");
-            //if (id == null)
-            //    patients = db.Patients.Where(p => p.ReferredBy == Models.Enums.ReferredBy.Doctor).Select(o => new PatientRefByDoctor() { ID = o.ID, Name = o.Name, Age = o.Age.ToString(), Address = o.Address, Sex = o.Gender.ToString(), Status = o.Status.ToString(), Department = o.DepartmentID.ToString(), Ammount = db.Prescriptions.Where(p => p.PatientID == o.ID).Sum(s => (decimal?)s.Rs) ?? 0 });
-            //else
-            //    patients = db.Patients.Where(p => p.ReferredBy == Models.Enums.ReferredBy.Doctor && p.DoctorID == id).Select(o => new PatientRefByDoctor() { ID = o.ID, Name = o.Name, Age = o.Age.ToString(), Address = o.Address, Sex = o.Gender.ToString(), Status = o.Status.ToString(), Department = o.DepartmentID.ToString(), Ammount = db.Prescriptions.Where(p => p.PatientID == o.ID).Sum(s => (decimal?)s.Rs) ?? 0 });
+            ViewBag.Values = new SelectList(db.Doctors, "ID", "Name");
+            var doctorID = db.ReferredBy.Where(w => w.Name.Contains("Doctor")).Select(s => s.ID).FirstOrDefault();
+            if (id == null)
+                patients = db.Patients.Where(p => p.ReferredByID == doctorID).Select(o => new PatientRefByDoctor() { ID = o.ID, Name = o.Name, Age = o.Age.ToString(), Address = o.Address, Sex = o.Gender.ToString(), Status = o.Status.ToString(), Department = o.DepartmentID.ToString(), Ammount = db.Prescriptions.Where(p => p.PatientID == o.ID).Sum(s => (decimal?)s.Rs) ?? 0 });
+            else
+                patients = db.Patients.Where(p => p.ReferredByID == doctorID && p.DoctorID == id).Select(o => new PatientRefByDoctor() { ID = o.ID, Name = o.Name, Age = o.Age.ToString(), Address = o.Address, Sex = o.Gender.ToString(), Status = o.Status.ToString(), Department = o.DepartmentID.ToString(), Ammount = db.Prescriptions.Where(p => p.PatientID == o.ID).Sum(s => (decimal?)s.Rs) ?? 0 });
 
             Response.ClearContent();
             Response.AddHeader("content-disposition", "attachment;filename=Patients.xls");

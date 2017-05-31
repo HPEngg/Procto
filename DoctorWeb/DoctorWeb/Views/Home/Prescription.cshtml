@@ -178,7 +178,7 @@
                                     @Html.EditorFor(model => model.Medicine.Quantity, new { htmlAttributes = new { Name = "Medicine_Quantity", @id = "qut_1", @class = "pre qut", @placeholder = "Qty", @style = "width: 40px;color:#000; padding: 6px;" } })
                                     @Html.ValidationMessageFor(model => model.Medicine.Quantity, "", new { @class = "text-danger" })
 
-                                    @Html.EditorFor(model => model.Medicine.Unit, new { htmlAttributes = new { Name = "Medicine_Unit", @id = "unt_1", @class = "pre qut", @placeholder = "Unit", @style = "width: 40px;color:#000; padding: 6px;", @readonly = "readonly", Value=0 } })
+                                    @Html.EditorFor(model => model.Medicine.Unit, new { htmlAttributes = new { Name = "Medicine_Unit", @id = "unt_1", @class = "pre qut", @placeholder = "Unit", @style = "width: 40px;color:#000; padding: 6px;", Value=0 } })
                                     @Html.ValidationMessageFor(model => model.Medicine.Unit, "", new { @class = "text-danger" })
 
                                     <input type="text" Name="Medicine_Total" , id="mtotal_1" , class="pre qut" , placeholder="Total" , style="width: 40px;color:#000; padding: 6px;" , readonly="readonly", Value=0 />

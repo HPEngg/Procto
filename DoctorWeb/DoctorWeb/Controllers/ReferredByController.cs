@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DoctorWeb.Models;
+using System.Data.Entity.Infrastructure;
 
 namespace DoctorWeb.Controllers
 {
@@ -109,9 +110,17 @@ namespace DoctorWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ReferredBy referredBy = db.ReferredBy.Find(id);
-            db.ReferredBy.Remove(referredBy);
-            db.SaveChanges();
+            try
+            {
+                ReferredBy referredBy = db.ReferredBy.Find(id);
+                db.ReferredBy.Remove(referredBy);
+                db.SaveChanges();
+            }
+            catch (DbUpdateException ex)
+            {
+                TempData["ErrorMessage"] = "Error: This referral is already used for one or more patients, so it can not be deleted.";
+                return RedirectToAction("Index");
+            }
             return RedirectToAction("Index");
         }
 

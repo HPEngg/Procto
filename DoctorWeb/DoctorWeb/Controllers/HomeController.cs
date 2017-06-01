@@ -97,6 +97,11 @@ namespace DoctorWeb.Controllers
             }
         }
 
+        public ActionResult FollowupList_Intermediate()
+        {
+            return View();
+        }
+
         public ActionResult FollowupList(DateTime fdate)
         {
             List<PatientSearch> model;

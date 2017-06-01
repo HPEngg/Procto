@@ -1,0 +1,29 @@
+﻿@{
+    Layout = "~/Views/Shared/_LightBoxLayout.cshtml";
+}
+
+@{
+    String fdate = DateTime.Now.Date.ToString("yyyy-MM-dd");
+    fdate = fdate + "T00:00";
+}
+<div id="select_date">
+    Date:<input data-val="true" data-val-date="The field FollowDate must be a date." id="fdate" name="fdate" class="form-control" placeholder="DD-MM-YYYY" value=@fdate type="datetime-local" onchange="reload_dialog(event)">
+</div>
+<div id="load_followupdata">
+    <iframe src='@Url.Action("FollowupList", "Home", new { fdate = fdate })' id="followup-iframe" width="100%" height="2000" frameborder="0"></iframe>
+</div>
+
+
+<script type="text/javascript">
+function reload_dialog(e) {
+        var ffdate = document.getElementById("fdate").value;
+        alert(ffdate);
+    @{ 
+        String flwdate = "31-05-2017 00:00:00";
+    }
+        document.getElementById('followup-iframe').src = ('@Url.Action("FollowupList", "Home", new { fdate = flwdate })');
+    alert("AFTer Error")
+    @*document.getElementById('followup-iframe').src = ('@Url.Action("FollowupList", "Home", new { fdate = "31-05-2017 00:00:00" })'.replace("ID", ffdate))*@
+    //document.getElementById("followup-iframe").contentDocument.location.reload(true);
+}
+</script>

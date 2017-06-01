@@ -142,13 +142,15 @@
             modal: true,
             classname: 'searchdialog',
             open: function () {
-                searchpatient(this).load('@Url.Action("FollowupList", "Home", new { fdate = DateTime.Now.Date})');
+                @*searchpatient(this).load('@Url.Action("FollowupList", "Home", new { fdate = DateTime.Now.Date})');*@
+                searchpatient(this).load('@Url.Action("FollowupList_Intermediate", "Home")');
+
                 searchpatient('#SearchRecords').focus();
             },
             close: function () {
                 javascript: location.reload(true);
                 @*searchpatient(this).load('@Url.Action("Index", "Home")');*@
-                },
+            },
         });
         return false;
     }

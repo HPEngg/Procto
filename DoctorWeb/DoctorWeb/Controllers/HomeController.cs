@@ -443,12 +443,15 @@ namespace DoctorWeb.Controllers
                 // ReaderExecuted method code commented due to below line blocks exicution while adding prescription record
                 db.SaveChanges();
 
-                // Adding charges
-                for(int pt = 0; pt < model.pm_type.Length; pt++)
+                if (model.pm_type != null)
                 {
-                    var preCharge = new Charge() { PaymentTypeID = model.pm_type[pt], PrescriptionID = prescription.ID };
-                    db.Charges.Add(preCharge);
-                    db.SaveChanges();
+                    // Adding charges
+                    for (int pt = 0; pt < model.pm_type.Length; pt++)
+                    {
+                        var preCharge = new Charge() { PaymentTypeID = model.pm_type[pt], PrescriptionID = prescription.ID };
+                        db.Charges.Add(preCharge);
+                        db.SaveChanges();
+                    }
                 }
 
                 if (model.OINTTypeID != null)

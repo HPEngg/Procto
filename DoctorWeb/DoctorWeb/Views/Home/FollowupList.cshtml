@@ -9,10 +9,10 @@
 <script src="~/Content/autocomplete/jquery-ui.js"></script>
 
 @{
-
+    String fdate = DateTime.Now.Date.ToString("yyyy-MM-dd");
+    fdate = fdate + "T00:00";
 }
-Date: <input type="date" name="fdate" onchange="reload_dialog(event)"/>
-
+Date:<input data-val="true" data-val-date="The field FollowDate must be a date." id="fdate" name="fdate" class="form-control" placeholder="DD-MM-YYYY" value=@fdate type="datetime-local" onchange="reload_dialog(event)">
 <table class="table" id="SearchRecords">
     <tr>
         <th>
@@ -110,6 +110,7 @@ Date: <input type="date" name="fdate" onchange="reload_dialog(event)"/>
 <script type="text/javascript">
 
     function reload_dialog(e) {
+        alert("Hi");
         var reloaddialog = jQuery.noConflict(true);
         reloaddialog('#SearchRecords').dialog('destroy');
         showVal(e);

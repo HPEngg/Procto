@@ -135,7 +135,7 @@
                             @*<div class="col-md-10">
                             *@
                             @{
-                                String dobdate = Model.Patient.DOB.Value.ToString("yyyy-MM-dd");
+                                String dobdate = Model.Patient.DOB != null ? Model.Patient.DOB.Value.ToString("yyyy-MM-dd") : DateTime.Now.ToString("yyyy-MM-dd"); ;
                                 dobdate = dobdate + "T00:00";
                             }
                             <input data-val="true" data-val-date="The field FollowDate must be a date." id="Patient_DOB" name="Patient.DOB" class="my-input" placeholder="DD/MM/YYYY" style="min-width:82%;" value=@dobdate type="datetime-local">
@@ -241,7 +241,7 @@
                             @*@Html.LabelFor(model => model.PatientHistory.DOA, htmlAttributes: new { @class = "mylabels date_label doa_label", style = "padding-right:5px; width:auto;" })*@
                             <label class="mylabels date_label doa_label" , style="padding-right:5px; width:auto;">D.O.A.</label>
                             @{
-                                String doadate = Model.PatientHistory.DOA.Value.ToString("yyyy-MM-dd");
+                                String doadate = Model.PatientHistory.DOA != null ? Model.PatientHistory.DOA.Value.ToString("yyyy-MM-dd") : DateTime.Now.ToString("yyyy-MM-dd");
                                 doadate = doadate + "T00:00";
                             }
                             <input data-val="true" data-val-date="The field FollowDate must be a date." id="PatientHistory_DOA" name="PatientHistory.DOA" class="form-control" placeholder="DD-MM-YYYY" style="width: 80%; height: 25px; padding-left: 3px; padding-bottom: -1px; float: left; text-align:center;color:#000;" value=@doadate type="datetime-local">
@@ -252,7 +252,7 @@
                             @*@Html.LabelFor(model => model.PatientHistory.DOD, htmlAttributes: new { @class = "mylabels date_label doa_label", style = "padding-right:5px; width:auto;" })*@
                             <label class="mylabels date_label doa_label" , style="padding-right:5px; width:auto;">D.O.D.</label>
                             @{
-                                String doddate = Model.PatientHistory.DOD.Value.ToString("yyyy-MM-dd");
+                                String doddate = Model.PatientHistory.DOD != null ? Model.PatientHistory.DOD.Value.ToString("yyyy-MM-dd") : DateTime.Now.ToString("yyyy-MM-dd");
                                 doddate = doddate + "T00:00";
                             }
                             <input data-val="true" data-val-date="The field FollowDate must be a date." id="PatientHistory_DOD" name="PatientHistory.DOD" class="form-control" placeholder="DD-MM-YYYY" style="width: 80%; height: 25px; padding-left: 3px; padding-bottom: -1px; float: left; text-align:center;color:#000;" value=@doddate type="datetime-local">

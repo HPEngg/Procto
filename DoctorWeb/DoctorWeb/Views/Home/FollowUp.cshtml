@@ -811,7 +811,7 @@
                         }
                     }
                     @{
-                        if (!string.IsNullOrEmpty(Model.Invoice.Medicine))
+                        if (Model.Invoice.Medicine > 0)
                         {
                             <div class="print_heading fltleft">
                                 @Html.DisplayNameFor(model => model.Invoice.Medicine)
@@ -823,7 +823,7 @@
                     }
 
                     @{
-                        if (!string.IsNullOrEmpty(Model.Invoice.OtherFromTextbox))
+                        if (Model.Invoice.OtherFromTextbox > 0)
                         {
                             <span class="fltleft" style="padding:0 5px;">+</span>
                             <div class="print_heading fltleft">
@@ -836,7 +836,7 @@
                     }
 
                     @{
-                        if (!string.IsNullOrEmpty(Model.Invoice.Less))
+                        if (Model.Invoice.Less > 0)
                         {
                             <span class="fltleft" style="padding:0 5px;"> –</span>
                             <div class="print_heading fltleft">

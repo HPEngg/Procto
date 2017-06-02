@@ -4,107 +4,98 @@
     Layout = "~/Views/Shared/_LightBoxLayout.cshtml";
 }
 
-<script src="~/Content/js/jquery-ui.min.js"></script>
-<script type="text/javascript" src="/Content/js/jquery-1.12.0.min.js"></script>
-<script src="~/Content/autocomplete/jquery-ui.js"></script>
-@*@{
-    String fdate = DateTime.Now.Date.ToString("yyyy-MM-dd");
-    fdate = fdate + "T00:00";
-}*@
-@*Date:<input data-val="true" data-val-date="The field FollowDate must be a date." id="fdate" name="fdate" class="form-control" placeholder="DD-MM-YYYY" value=@fdate type="datetime-local" onchange="reload_dialog(event)">*@
-@*<iframe id="followup-iframe" style="min-height:0; position:relative;">
-    Hello*@
-    <table class="table" id="SearchRecords">
+<link href="~/Content/css/jquery-ui.css" rel="stylesheet" />
+
+<table class="table" id="SearchRecords">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.InvoiceNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MobileNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DepartmentName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RefferalName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reference)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Diagnosis)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Procedure)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PatientType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NewPatientOrFollowUp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChargesType)
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.InvoiceNo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MobileNo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Address)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DepartmentName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RefferalName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Reference)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Diagnosis)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Procedure)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PatientType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NewPatientOrFollowUp)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ChargesType)
-            </th>
+            <td>
+                @Html.DisplayFor(modelItem => item.InvoiceNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MobileNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartmentName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RefferalName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reference)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Diagnosis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Procedure)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PatientType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NewPatientOrFollowUp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChargesType)
+            </td>
         </tr>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.InvoiceNo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MobileNo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Address)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DepartmentName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RefferalName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Reference)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Diagnosis)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Procedure)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PatientType)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NewPatientOrFollowUp)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ChargesType)
-                </td>
-            </tr>
-        }
-    </table>
-@*</iframe>*@
+    }
+</table>

@@ -4,6 +4,7 @@ using DoctorWeb.Models.Enums;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -207,9 +208,9 @@ namespace DoctorWeb.Controllers
                 ToDate = DateTime.MaxValue;
                 FromDate = DateTime.MinValue;
             }
-
+            var patients = db.Patients.Where(w => DbFunctions.TruncateTime(FromDate) <= DbFunctions.TruncateTime(w.CreatedDate) && DbFunctions.TruncateTime(w.CreatedDate) <= DbFunctions.TruncateTime(ToDate)).ToList();
             var data1 = from pr in db.Prescriptions
-                        join pt in db.Patients.Where(w => FromDate <= w.CreatedDate && w.CreatedDate <= ToDate) on pr.PatientID equals pt.ID into all
+                        join pt in db.Patients.Where(w => DbFunctions.TruncateTime(FromDate) <= DbFunctions.TruncateTime(w.CreatedDate) && DbFunctions.TruncateTime(w.CreatedDate) <= DbFunctions.TruncateTime(ToDate)) on pr.PatientID equals pt.ID into all
                         group all by pr.PatientType into g
                         select new StringDataPoint() { label = g.Key.PatientTypeName.ToString(), y = g.Count() };
 
@@ -250,7 +251,7 @@ namespace DoctorWeb.Controllers
                 FromDate = DateTime.MinValue;
             }
 
-            var patients = db.Patients.Where(w => FromDate <= w.CreatedDate && w.CreatedDate <= ToDate).ToList();
+            //var patients = db.Patients.Where(w => FromDate <= w.CreatedDate && w.CreatedDate <= ToDate).ToList();
 
             //dataPoints = from r in db.ReferredBy
             //             join p in db.Patients.Where(w => FromDate <= w.CreatedDate && w.CreatedDate <= ToDate) on r.ID equals p.ReferredByID into rp
@@ -302,10 +303,10 @@ namespace DoctorWeb.Controllers
                 FromDate = DateTime.MinValue;
             }
 
-            var medicineIncome = db.Prescriptions.Where(w => FromDate <= w.Date && w.Date <= ToDate).Sum(s => s.M);
+            var medicineIncome = db.Prescriptions.Where(w => FromDate <= w.Date && w.Date <= ToDate).Sum(s => (double?)s.M) ?? 0;
             dataPoints.Add(new StringDataPoint() { label = "Medicine", y = Convert.ToDouble(medicineIncome) });
 
-            var otherIncome = db.Prescriptions.Where(w => FromDate <= w.Date && w.Date <= ToDate).Sum(s => s.Other);
+            var otherIncome = db.Prescriptions.Where(w => FromDate <= w.Date && w.Date <= ToDate).Sum(s => (double?)s.Other) ?? 0;
             dataPoints.Add(new StringDataPoint() { label = "Other", y = Convert.ToDouble(otherIncome) });
 
             var data1 = from pt in db.PaymentTypes
@@ -395,10 +396,10 @@ namespace DoctorWeb.Controllers
                 FromDate = DateTime.MinValue;
             }
 
-            var income = db.Prescriptions.Where(w => FromDate <= w.Date && w.Date <= ToDate).Sum(s => s.Rs);
+            var income = db.Prescriptions.Where(w => FromDate <= w.Date && w.Date <= ToDate).Sum(s => (double?)s.Rs) ?? 0;
             dataPoints.Add(new StringDataPoint() { label = "Income", y = Convert.ToDouble(income) });
 
-            var expanse = db.Expanses.Where(w => FromDate <= w.Date && w.Date <= ToDate).Sum(s => s.Amount);
+            var expanse = db.Expanses.Where(w => FromDate <= w.Date && w.Date <= ToDate).Sum(s => (double?)s.Amount) ?? 0;
             dataPoints.Add(new StringDataPoint() { label = "Expanse", y = Convert.ToDouble(expanse) });
 
             dataPoints.Add(new StringDataPoint() { label = "Profit/Loss", y = Convert.ToDouble(income - expanse) });

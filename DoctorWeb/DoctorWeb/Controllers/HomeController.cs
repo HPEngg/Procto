@@ -105,8 +105,8 @@ namespace DoctorWeb.Controllers
         public ActionResult FollowupList(DateTime fdate)
         {
             List<PatientSearch> model;
-            var patientID = db.Prescriptions.Where(w => DbFunctions.TruncateTime(w.FollowDate) == fdate.Date).Select(s => s.PatientID).FirstOrDefault();
-            model = db.Patients.Where(p => p.ID == patientID).Select(p => new PatientSearch()
+            var patientIDs = db.Prescriptions.Where(w => DbFunctions.TruncateTime(w.FollowDate) == fdate.Date).Select(s => s.PatientID).ToList();
+            model = db.Patients.Where(p => patientIDs.Contains(p.ID)).Select(p => new PatientSearch()
             {
                 Status = p.Status.ToString(),
                 Name = p.Name,

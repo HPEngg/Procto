@@ -127,7 +127,7 @@ namespace DoctorWeb.Controllers
                     patient.Date = latestPrescription.Date;
                     patient.Diagnosis = latestPrescription.Diagnosis;
                     patient.Procedure = latestPrescription.Procedure;
-                    patient.PatientType = latestPrescription.PatientType.PatientTypeName;
+                    patient.PatientType = latestPrescription.PatientType == null ? string.Empty : latestPrescription.PatientType.PatientTypeName;
                     patient.NewPatientOrFollowUp = "FollowUP";
                     //patient.ChargesType = latestPrescription.Charges.FirstOrDefault();
                 }
@@ -193,6 +193,7 @@ namespace DoctorWeb.Controllers
                 using (MemoryStream ms = new MemoryStream(imgarr))
                 {
                     image = Image.FromStream(ms);
+                  //  image = ScaleImage(image, 150, 125);
                     string imageFileName = patientID + "PatientImage" + imageID + ".png";
                     string path = Server.MapPath(Url.Content("~/Content/Images/" + imageFileName));
                     image.Save(path);
@@ -200,6 +201,23 @@ namespace DoctorWeb.Controllers
             }
             return PartialView();
         }
+
+        //public static Image ScaleImage(Image image, int maxWidth, int maxHeight)
+        //{
+        //    var ratioX = (double)maxWidth / image.Width;
+        //    var ratioY = (double)maxHeight / image.Height;
+        //    var ratio = Math.Min(ratioX, ratioY);
+
+        //    var newWidth = (int)(image.Width * ratio);
+        //    var newHeight = (int)(image.Height * ratio);
+
+        //    var newImage = new Bitmap(newWidth, newHeight);
+
+        //    using (var graphics = Graphics.FromImage(newImage))
+        //        graphics.DrawImage(image, 0, 0, newWidth, newHeight);
+
+        //    return newImage;
+        //}
 
         public ActionResult DrawImage()
         {

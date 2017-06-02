@@ -107,40 +107,4 @@
             </tr>
         }
     </table>
-</iframe>
-<script type="text/javascript">
-
-    function reload_dialog(e) {
-        document.getElementById("followup-iframe").contentDocument.location.reload(true);
-        //var reloaddialog = jQuery.noConflict(true);
-        //reloaddialog('#SearchRecords').dialog('destroy');
-        //showVal(e);
-    }
-
-    function showVal(e) {
-        //window.location = "/Home/Search?PatientName=" + document.getElementById("PatientName").value;
-        var searchpatient = $.noConflict(true);
-        searchpatient("#SearchRecords").dialog({
-            autoOpen: true,
-            position: { my: "center", at: "top", of: window },
-            width: 1200,
-            //resizable: false,
-            title: 'Followup Patients',
-            modal: true,
-            classname: 'searchdialog',
-            open: function (e) {
-                var fdt = e.target.value;
-                alert(fdt);
-                searchpatient(this).load('@Url.Action("FollowupList", "Home", new { fdate = "fdt"})');
-                searchpatient('#SearchRecords').focus();
-            },
-
-            close: function () {
-                javascript: location.reload(true);
-                @*searchpatient(this).load('@Url.Action("Index", "Home")');*@
-                },
-        });
-        return false;
-    }
-
-</script>
+@*</iframe>*@

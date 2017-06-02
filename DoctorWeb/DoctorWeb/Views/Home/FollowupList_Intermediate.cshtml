@@ -17,12 +17,11 @@
 <script type="text/javascript">
 function reload_dialog(e) {
         var ffdate = document.getElementById("fdate").value;
-        alert(ffdate);
-    @{ 
-        String flwdate = "31-05-2017 00:00:00";
+    @{
+        DateTime flwdate = Convert.ToDateTime("31-05-2017 00:00:00");
     }
-        document.getElementById('followup-iframe').src = ('@Url.Action("FollowupList", "Home", new { fdate = flwdate })');
-    alert("AFTer Error")
+    document.getElementById('followup-iframe').src = ('@Url.Action("FollowupList", "Home", new { fdate = "ID" })'.replace("ID", ffdate));
+    alert(document.getElementById('followup-iframe').src);
     @*document.getElementById('followup-iframe').src = ('@Url.Action("FollowupList", "Home", new { fdate = "31-05-2017 00:00:00" })'.replace("ID", ffdate))*@
     //document.getElementById("followup-iframe").contentDocument.location.reload(true);
 }

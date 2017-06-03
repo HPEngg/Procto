@@ -208,12 +208,21 @@ namespace DoctorWeb.Controllers
                 ToDate = DateTime.MaxValue;
                 FromDate = DateTime.MinValue;
             }
-            var patients = db.Patients.Where(w => DbFunctions.TruncateTime(FromDate) <= DbFunctions.TruncateTime(w.CreatedDate) && DbFunctions.TruncateTime(w.CreatedDate) <= DbFunctions.TruncateTime(ToDate)).ToList();
+            //var patients = db.Patients.Where(w => FromDate.Value <= w.CreatedDate && w.CreatedDate <= ToDate.Value).ToList();
+            //var q = db.Prescriptions.Where
             var data1 = from pr in db.Prescriptions
-                        join pt in db.Patients.Where(w => DbFunctions.TruncateTime(FromDate) <= DbFunctions.TruncateTime(w.CreatedDate) && DbFunctions.TruncateTime(w.CreatedDate) <= DbFunctions.TruncateTime(ToDate)) on pr.PatientID equals pt.ID into all
-                        group all by pr.PatientType into g
+                        join pt in db.Patients.Where(w => FromDate <= w.CreatedDate && w.CreatedDate <= ToDate) on pr.PatientID equals pt.ID
+                        //join ptMaster in db.PatientTypes on pr.PatientTypeID equals ptMaster.ID
+                        group pr by pr.PatientType into g
                         select new StringDataPoint() { label = g.Key.PatientTypeName.ToString(), y = g.Count() };
 
+            //var q1 = db.Patients.Where(p => p.CreatedDate >= FromDate.Value && p.CreatedDate <= ToDate.Value).SelectMany(q => q.Prescriptions).GroupBy(q => q.PatientTypeID);
+            //var data1 = from pr in db.Prescriptions
+            //            join pt in db.Patients.Where(w => FromDate <= w.CreatedDate && w.CreatedDate <= ToDate) on pr.PatientID equals pt.ID into all
+            //            join ptMaster in db.PatientTypes on pr.PatientTypeID equals ptMaster.ID
+            //            group all by pr.PatientType into g
+            //            select new StringDataPoint() { label = g.Key.PatientTypeName.ToString(), y = g.Count() };
+            //var d = q1.ToList();
             dataPoints = data1.ToList();
 
             string output = "[";

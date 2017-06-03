@@ -46,7 +46,8 @@
             }
             @Html.ValidationMessageFor(modelItem => item.Quantity, "", new { @class = "text-danger" })
 
-            @Html.EditorFor(modelItem => item.Unit, new { htmlAttributes = new { Name = "Medicine_Unit", @id = "unt_" + count.ToString(), @class = "pre qut", @placeholder = "Unit", @style = "width: 40px;color:#000; padding: 6px;", @readonly = "readonly" } })
+            @Html.EditorFor(modelItem => item.Unit, new { htmlAttributes = new { Name = "Medicine_Unit", @id = "unt_" + count.ToString(), @class = "pre qut", @placeholder = "Unit", @style = "width: 40px;color:#000; padding: 6px;" } })
+            @*@Html.EditorFor(modelItem => item.Unit, new { htmlAttributes = new { Name = "Medicine_Unit", @id = "unt_" + count.ToString(), @class = "pre qut", @placeholder = "Unit", @style = "width: 40px;color:#000; padding: 6px;", @readonly = "readonly" } })*@
             @Html.ValidationMessageFor(mmodelItem => item.Unit, "", new { @class = "text-danger" })
 
             <input type="text" Name="Medicine_Total" id=@string.Concat("mtotal_", count.ToString()) class="pre qut" placeholder="Total" style="width: 40px;color:#000; padding: 6px;" readonly="readonly" value="@ttl" />

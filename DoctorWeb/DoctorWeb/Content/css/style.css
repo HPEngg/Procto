@@ -1079,6 +1079,7 @@ td {
     max-width: 700px;
     width: 100%;
     line-height: 1.5;
+    padding-left:30px;
 }
 
 .print_text_padding {

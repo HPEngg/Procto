@@ -27,7 +27,7 @@ namespace DoctorWeb.Controllers
             if (int.TryParse(PatientName, out invoiceNum))
             {
                 var patientID = db.Prescriptions.Where(w => w.ID == invoiceNum).Select(s => s.PatientID).FirstOrDefault();
-                model = db.Patients.Where(p => p.ID == patientID).Select(p => new PatientSearch()
+                model = db.Patients.Where(p => p.ID == patientID || p.ID == invoiceNum).Select(p => new PatientSearch()
                 {
                     Status = p.Status.ToString(),
                     Name = p.Name,
@@ -48,7 +48,8 @@ namespace DoctorWeb.Controllers
                         patient.Date = latestPrescription.Date;
                         patient.Diagnosis = latestPrescription.Diagnosis;
                         patient.Procedure = latestPrescription.Procedure;
-                        patient.PatientType = latestPrescription.PatientType.PatientTypeName;
+                        //patient.PatientType = latestPrescription.PatientType.PatientTypeName;
+                        patient.PatientType = latestPrescription.PatientType == null ? string.Empty : latestPrescription.PatientType.PatientTypeName;
                         patient.NewPatientOrFollowUp = "FollowUP";
                         //patient.ChargesType = latestPrescription.Charges.FirstOrDefault();
                     }

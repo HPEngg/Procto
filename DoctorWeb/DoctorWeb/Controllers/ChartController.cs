@@ -39,7 +39,7 @@ namespace DoctorWeb.Controllers
                 ToDate = DateTime.Now.Date;
                 FromDate = DateTime.Now.Date.AddDays(-30);
             }
-            else if (query == null)
+            else if (query == ChartQuery.All || query == null)
             {
                 ToDate = DateTime.MaxValue;
                 FromDate = DateTime.MinValue;
@@ -110,7 +110,7 @@ namespace DoctorWeb.Controllers
                 ToDate = DateTime.Now.Date;
                 FromDate = DateTime.Now.Date.AddDays(-30);
             }
-            else if (query == null)
+            else if (query == ChartQuery.All || query == null)
             {
                 ToDate = DateTime.MaxValue;
                 FromDate = DateTime.MinValue;
@@ -153,7 +153,7 @@ namespace DoctorWeb.Controllers
                 ToDate = DateTime.Now.Date;
                 FromDate = DateTime.Now.Date.AddDays(-30);
             }
-            else if (query == null)
+            else if (query == ChartQuery.All || query == null)
             {
                 ToDate = DateTime.MaxValue;
                 FromDate = DateTime.MinValue;
@@ -203,7 +203,7 @@ namespace DoctorWeb.Controllers
                 ToDate = DateTime.Now.Date;
                 FromDate = DateTime.Now.Date.AddDays(-30);
             }
-            else if (query == null)
+            else if (query == ChartQuery.All || query == null)
             {
                 ToDate = DateTime.MaxValue;
                 FromDate = DateTime.MinValue;
@@ -214,7 +214,7 @@ namespace DoctorWeb.Controllers
                         join pt in db.Patients.Where(w => FromDate <= w.CreatedDate && w.CreatedDate <= ToDate) on pr.PatientID equals pt.ID
                         //join ptMaster in db.PatientTypes on pr.PatientTypeID equals ptMaster.ID
                         group pr by pr.PatientType into g
-                        select new StringDataPoint() { label = g.Key.PatientTypeName.ToString(), y = g.Count() };
+                        select new StringDataPoint() { label = g.Key.PatientTypeName.ToString() == "" ? "None" : g.Key.PatientTypeName.ToString(), y = g.Count() };
 
             //var q1 = db.Patients.Where(p => p.CreatedDate >= FromDate.Value && p.CreatedDate <= ToDate.Value).SelectMany(q => q.Prescriptions).GroupBy(q => q.PatientTypeID);
             //var data1 = from pr in db.Prescriptions
@@ -223,10 +223,12 @@ namespace DoctorWeb.Controllers
             //            group all by pr.PatientType into g
             //            select new StringDataPoint() { label = g.Key.PatientTypeName.ToString(), y = g.Count() };
             //var d = q1.ToList();
+
+            //dataPoints.wh
             dataPoints = data1.ToList();
 
             string output = "[";
-            dataPoints.ToList().ForEach((data) => output = output + "{label:\'" + data.label + "\'," + "y:" + data.y + "},");
+            dataPoints.ToList().ForEach((data) => output = output + "{label:\'" + data.label  + "\'," + "y:" + data.y + "},");
             output = output + "]";
             ViewBag.DataPoints = output;
 
@@ -254,7 +256,7 @@ namespace DoctorWeb.Controllers
                 ToDate = DateTime.Now.Date;
                 FromDate = DateTime.Now.Date.AddDays(-30);
             }
-            else if (query == null)
+            else if (query == ChartQuery.All || query == null)
             {
                 ToDate = DateTime.MaxValue;
                 FromDate = DateTime.MinValue;
@@ -306,7 +308,7 @@ namespace DoctorWeb.Controllers
                 ToDate = DateTime.Now.Date;
                 FromDate = DateTime.Now.Date.AddDays(-30);
             }
-            else if (query == null)
+            else if (query == ChartQuery.All || query == null)
             {
                 ToDate = DateTime.MaxValue;
                 FromDate = DateTime.MinValue;
@@ -356,7 +358,7 @@ namespace DoctorWeb.Controllers
                 ToDate = DateTime.Now.Date;
                 FromDate = DateTime.Now.Date.AddDays(-30);
             }
-            else if (query == null)
+            else if (query == ChartQuery.All || query == null)
             {
                 ToDate = DateTime.MaxValue;
                 FromDate = DateTime.MinValue;
@@ -399,7 +401,7 @@ namespace DoctorWeb.Controllers
                 ToDate = DateTime.Now.Date;
                 FromDate = DateTime.Now.Date.AddDays(-30);
             }
-            else if (query == null)
+            else if (query == ChartQuery.All || query == null)
             {
                 ToDate = DateTime.MaxValue;
                 FromDate = DateTime.MinValue;

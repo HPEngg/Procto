@@ -122,7 +122,7 @@
                             @*@Html.LabelFor(model => model.Patient.DoctorID, "DoctorID", htmlAttributes: new { @class = "control-label col-md-2" })*@
                             @*<div class="col-md-10">
                             *@
-                            @Html.DropDownList("DoctorID", null, htmlAttributes: new { @class = "form-control", id = "Referred_Doctor", style = "display:block;" })
+                            @Html.DropDownList("DoctorID", null, "--Select--", htmlAttributes: new { @class = "form-control", id = "Referred_Doctor", style = "display:block;" })
                             @Html.ValidationMessageFor(model => model.Patient.DoctorID, "", new { @class = "text-danger" })
                             @*
                                 </div>*@
@@ -307,9 +307,9 @@
             <fieldset class="left_part_form2 div_scrollbar">
                 <div>
                     <h2 class="fs-title fs-title_cmplnfrm" style="color:blue; float:left; width:70%;">Complain Form</h2>
-                    <div style="float:left;">
-                        <a style="float:left; padding-right:10px;" href="@Url.Action("FollowUpMessage", "SMS")" class="webcam_img"><img src="/Content/Images/message-icon.png" title="Follow Up Message" alt="Follow Up Message"/></a>
-                        <a style="float:left;" href="@Url.Action("PatientToday", "Home")" target="_blank" class="webcam_img"><img src="/Content/Images/profilepic.png" title="Patient's List" alt="Patient's List" height="30px" width="30px"/></a>
+                    <div style="float:right;">
+                        @*<a style="float:left; padding-right:10px;" href="@Url.Action("FollowUpMessage", "SMS")" class="webcam_img"><img src="/Content/Images/message-icon.png" title="Follow Up Message" alt="Follow Up Message"/></a>*@
+                        <a style="float:right;" href="@Url.Action("PatientToday", "Home")" target="_blank" class="webcam_img"><img src="/Content/Images/profilepic.png" title="Patient's List" alt="Patient's List" height="30px" width="30px"/></a>
                     </div>
                 </div>
                 <div class="mdform my-mdform">

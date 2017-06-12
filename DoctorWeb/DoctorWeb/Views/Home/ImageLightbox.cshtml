@@ -186,6 +186,10 @@
             padding-top: 0px;
         }
 
+        .wPaint-canvas-bg {
+            background-color:#fff;
+        }
+        
         .wPaint-canvas {
             /*background: url("/Content/Images/patient_drawing_image_bg.png") no-repeat;*/
             text-align: center;
@@ -196,14 +200,17 @@
             margin: 0 auto;
             padding: 0;
             width: 100%;
+            /*margin-top:10px;*/
         }
+
+
         #wPaint .wPaint-canvas {
-            background: url("/Content/Images/patient_drawing_image_bg.jpg") no-repeat;
+            background: url("/Content/Images/patient_drawing_image_bg2(2).jpg") no-repeat;
             background-color: #fff;
             background-position: center;
         }
         #wPaint2 .wPaint-canvas {
-            background: url("/Content/Images/patient_drawing_image_bg2.jpg") no-repeat;
+            background: url("/Content/Images/patient_drawing_image_bg2-Copy.jpg") no-repeat;
             background-color: #fff;
             background-position: center;
         }
@@ -225,7 +232,8 @@
                         <canvas id="canvasss" width="235" height="235" style=" position:relative;border:2px solid;"></canvas>
                     </div>*@
 
-                    <div id="wPaint" style="position:relative; width:500px; height:200px; background-color:#7a7a7a; margin:70px auto 20px auto;"></div>
+                    @*<div id="wPaint" style="position:relative; width:200px; height:200px; background-color:#7a7a7a; margin:70px auto 20px auto;"></div>*@
+                    <div id="wPaint" style="position:relative; width:200px; height:200px; background-color:#7a7a7a; margin:0px;"></div>
                     @*<center style="margin-bottom: 50px;">
                         <input type="button" value="toggle menu" onclick="console.log($('#wPaint').wPaint('menuOrientation')); $('#wPaint').wPaint('menuOrientation', $('#wPaint').wPaint('menuOrientation') === 'vertical' ? 'horizontal' : 'vertical');" />
                     </center>*@
@@ -237,7 +245,8 @@
             <div id="content">
                 <div class="content-box">
                     @*<img id="canvas_second_background" width="500" height="200" src="~/Content/Images/patient_drawing_image_bg2.jpg" alt="Canvas background" style="display:none;">*@
-                    <div id="wPaint2" style="position:relative; width:500px; height:200px; background-color:#7a7a7a; margin:70px auto 20px auto;"></div>
+                    @*<div id="wPaint2" style="position:relative; width:200px; height:200px; background-color:#7a7a7a; margin:70px auto 20px auto;"></div>*@
+                    <div id="wPaint2" style="position:relative; width:200px; height:200px; background-color:#7a7a7a; margin:0px;"></div>
                     @*<center style="margin-bottom: 50px;">
                         <input type="button" value="toggle menu" onclick="console.log($('#wPaint2').wPaint('menuOrientation')); $('#wPaint2').wPaint('menuOrientation', $('#wPaint2').wPaint('menuOrientation') === 'vertical' ? 'horizontal' : 'vertical');" />
                     </center>*@

@@ -8,7 +8,7 @@
 
 <div class="print_margin fonts_candara">
     <div id="printableArea">
-        <div id="except_invoice" style="min-height:1030px;">
+        <div id="except_invoice" style="min-height:985px;">
             @{
                 if (Model.HeaderRequired)
                 {
@@ -796,7 +796,7 @@
             if (Model.InvoiceRequired)
             {
                 <div id="InvoicePart">
-                    <label class="arial_heading" style="padding-top:15px; text-decoration:underline;">INVOICE</label>
+                    <label class="arial_heading" style="padding-top:0px; text-decoration:underline;">INVOICE</label>
                     <div class="fltleft" style="width:100%; font-family:Calibri; font-size:10pt;">
                         @{
                             foreach (var pt in Model.Invoice.PaymentTypes)

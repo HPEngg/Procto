@@ -38,7 +38,7 @@ namespace DoctorWeb.Controllers
                 doctors = doctors.Where(s => s.Name.Contains(searchString));
             }
 
-            int pageSize = 3;
+            int pageSize = 1;
             int pageNumber = (page ?? 1);
             return View(doctors.OrderBy(i => i.ID).ToPagedList(pageNumber, pageSize));
         }

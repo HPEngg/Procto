@@ -1,4 +1,7 @@
-﻿@model IEnumerable<DoctorWeb.Models.Prescription>
+﻿@*@model IEnumerable<DoctorWeb.Models.Prescription>*@
+@model PagedList.IPagedList<DoctorWeb.Models.Prescription>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewBag.Title = "Daily";
@@ -14,25 +17,32 @@
     <tr>
         <th>Invoice No</th>
         <th>
-            @Html.DisplayNameFor(model => model.Date)
+            @*@Html.DisplayNameFor(model => model.Date)*@
+            Date
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Patient.Name)
+            @*@Html.DisplayNameFor(model => model.Patient.Name)*@
+            Patient's Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Patient.Age)
+            @*@Html.DisplayNameFor(model => model.Patient.Age)*@
+            Age
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Patient.Gender)
+            @*@Html.DisplayNameFor(model => model.Patient.Gender)*@
+            Sex
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Patient.Address)
+            @*@Html.DisplayNameFor(model => model.Patient.Address)*@
+            Address
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Patient.DepartmentID)
+            @*@Html.DisplayNameFor(model => model.Patient.DepartmentID)*@
+            Department
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Patient.Status)
+            @*@Html.DisplayNameFor(model => model.Patient.Status)*@
+            Status
         </th>
         @*<th>
         @Html.DisplayNameFor(model => model.Patient.ReferredBy)
@@ -41,10 +51,12 @@
         @Html.DisplayNameFor(model => model.Doctor.Name)
     </th>*@
         <th>
-            @Html.DisplayNameFor(model => model.Rs)
+            @*@Html.DisplayNameFor(model => model.Rs)*@
+            Invoiced Rs.
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FollowDate)
+            @*@Html.DisplayNameFor(model => model.FollowDate)*@
+            Follow Date
         </th>
         <th>Actions</th>
     </tr>
@@ -96,3 +108,7 @@
 }
 
 </table>
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Daily",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using DoctorWeb.Models;
 using System.Data.Entity.Core.Objects;
+using PagedList;
 
 namespace DoctorWeb.Controllers
 {
@@ -16,30 +17,102 @@ namespace DoctorWeb.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Invoice Daily
-        public ActionResult Daily()
+        //public ActionResult Daily()
+        //{
+        //    var prescriptions = db.Prescriptions.Where(p => DbFunctions.TruncateTime(p.Date) == DateTime.Today.Date).Include(p => p.Doctor).Include(p => p.Instructions).Include(p => p.Patient).Include(p => p.PatientType);
+        //    return View(prescriptions.ToList());
+        //}
+        public ActionResult Daily(string currentFilter, string searchString, int? page)
         {
-            var prescriptions = db.Prescriptions.Where(p => DbFunctions.TruncateTime(p.Date) == DateTime.Today.Date).Include(p => p.Doctor).Include(p => p.Instructions).Include(p => p.Patient).Include(p => p.PatientType);
-            return View(prescriptions.ToList());
-        }
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
 
+            ViewBag.CurrentFilter = searchString;
+
+            var prescriptions = db.Prescriptions.Where(p => DbFunctions.TruncateTime(p.Date) == DateTime.Today.Date).Include(p => p.Doctor).Include(p => p.Instructions).Include(p => p.Patient).Include(p => p.PatientType);
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                prescriptions = prescriptions.Where(s => s.Patient.Name.Contains(searchString));
+            }
+
+            int pageSize = 1;
+            int pageNumber = (page ?? 1);
+            return View(prescriptions.OrderBy(i => i.ID).ToPagedList(pageNumber, pageSize));
+        }
         // GET: Invoice Weekly
-        public ActionResult Weekly()
+        //public ActionResult Weekly()
+        //{
+        //    var dateBefore7days = DateTime.Today.AddDays(-7).Date;
+        //    var prescriptions = db.Prescriptions.Where(p => DbFunctions.TruncateTime(p.Date) >= dateBefore7days).Include(p => p.Doctor).Include(p => p.Instructions).Include(p => p.Patient).Include(p => p.PatientType);
+        //    return View(prescriptions.ToList());
+        //}
+        public ActionResult Weekly(string currentFilter, string searchString, int? page)
         {
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
             var dateBefore7days = DateTime.Today.AddDays(-7).Date;
             var prescriptions = db.Prescriptions.Where(p => DbFunctions.TruncateTime(p.Date) >= dateBefore7days).Include(p => p.Doctor).Include(p => p.Instructions).Include(p => p.Patient).Include(p => p.PatientType);
-            return View(prescriptions.ToList());
-        }
 
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                prescriptions = prescriptions.Where(s => s.Patient.Name.Contains(searchString));
+            }
+
+            int pageSize = 1;
+            int pageNumber = (page ?? 1);
+            return View(prescriptions.OrderBy(i => i.ID).ToPagedList(pageNumber, pageSize));
+        }
 
         // GET: Invoice Monthly
-        public ActionResult Monthly(int month, int year)
+        //public ActionResult Monthly(int month, int year)
+        //{
+        //    //var dateBefore30Days = DateTime.Today.AddDays(-30).Date;
+        //    var prescriptions = db.Prescriptions.Include(p => p.Doctor).Where(p => p.Date.Year == year && p.Date.Month == month).Include(p => p.Instructions).Include(p => p.Patient).Include(p => p.PatientType);
+        //    return View(prescriptions.ToList());
+        //}
+
+        public ActionResult Monthly(string currentFilter, string searchString, int? page, int month, int year)
         {
-            //var dateBefore30Days = DateTime.Today.AddDays(-30).Date;
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
             var prescriptions = db.Prescriptions.Include(p => p.Doctor).Where(p => p.Date.Year == year && p.Date.Month == month).Include(p => p.Instructions).Include(p => p.Patient).Include(p => p.PatientType);
-            return View(prescriptions.ToList());
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                prescriptions = prescriptions.Where(s => s.Patient.Name.Contains(searchString));
+            }
+
+            ViewBag.Month = month;
+            ViewBag.Year = year;
+            int pageSize = 1;
+            int pageNumber = (page ?? 1);
+            return View(prescriptions.OrderBy(i => i.ID).ToPagedList(pageNumber, pageSize));
         }
-
-
         //// GET: Invoice
         //public ActionResult Monthly()
         //{

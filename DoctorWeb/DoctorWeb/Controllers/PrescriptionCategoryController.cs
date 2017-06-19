@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using DoctorWeb.Models;
 using System.Data.Entity.Infrastructure;
+using PagedList;
 
 namespace DoctorWeb.Controllers
 {
@@ -16,12 +17,35 @@ namespace DoctorWeb.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: PrescriptionCategory
-        public ActionResult Index()
+        public ActionResult Index(string currentFilter, string searchString, int? page)
         {
             if (TempData["ErrorMessage"] != null)
                 ViewBag.ErrorMessage = TempData["ErrorMessage"].ToString();
 
-            return View(db.PrescriptionCategories.ToList());
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var prescriptioncategories = from s in db.PrescriptionCategories
+                          select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                prescriptioncategories = prescriptioncategories.Where(s => s.Name.Contains(searchString));
+            }
+
+            int pageSize = 1;
+            int pageNumber = (page ?? 1);
+            return View(prescriptioncategories.OrderBy(i => i.ID).ToPagedList(pageNumber, pageSize));
+
+            //return View(db.PrescriptionCategories.ToList());
         }
 
         // GET: PrescriptionCategory/Details/5

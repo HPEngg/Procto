@@ -294,7 +294,7 @@ namespace DoctorWeb.Controllers
             ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name");
             ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name");
             ViewBag.ReferredByID = new SelectList(db.ReferredBy, "ID", "Name");
-            ViewBag.DepartmentID = new SelectList(db.Departments, "ID", "Name");
+            ViewBag.DepartmentID = new SelectList(db.Departments.OrderBy(i => i.SortOrder), "ID", "Name");
             ViewBag.PatientCount = db.Patients.Count() + 1;
             return View();
         }
@@ -337,7 +337,7 @@ namespace DoctorWeb.Controllers
 
             ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name", patient.DoctorID);
             ViewBag.ReferredByID = new SelectList(db.ReferredBy, "ID", "Name");
-            ViewBag.DepartmentID = new SelectList(db.Departments, "ID", "Name");
+            ViewBag.DepartmentID = new SelectList(db.Departments.OrderBy(i => i.SortOrder), "ID", "Name");
 
             var patientHistory = model.PatientHistory;
             patientHistory.PatientID = p.ID;
@@ -544,7 +544,7 @@ namespace DoctorWeb.Controllers
             ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name", model.Patient.DoctorID);
             ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name", model.Patient.ID);
             ViewBag.ReferredByID = new SelectList(db.ReferredBy, "ID", "Name", model.Patient.ReferredByID);
-            ViewBag.DepartmentID = new SelectList(db.Departments, "ID", "Name", model.Patient.DepartmentID);
+            ViewBag.DepartmentID = new SelectList(db.Departments.OrderBy(i => i.SortOrder), "ID", "Name", model.Patient.DepartmentID);
             return View(model);
         }
 

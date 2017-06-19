@@ -29,18 +29,19 @@ namespace DoctorWeb.Controllers
             }
 
             ViewBag.CurrentFilter = searchString;
+            ViewBag.Page = page;
 
-            var doctors = from s in db.Departments
+            var departments = from s in db.Departments
                           select s;
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                doctors = doctors.Where(s => s.Name.Contains(searchString));
+                departments = departments.Where(s => s.Name.Contains(searchString));
             }
 
-            int pageSize = 1;
+            int pageSize = 3;
             int pageNumber = (page ?? 1);
-            return View(doctors.OrderBy(i => i.ID).ToPagedList(pageNumber, pageSize));
+            return View(departments.OrderBy(i => i.SortOrder).ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Department/Details/5
@@ -58,6 +59,64 @@ namespace DoctorWeb.Controllers
             return View(department);
         }
 
+        public ActionResult Up(int? id, string currentFilter, string searchString, int? page)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Department department = db.Departments.Find(id);
+
+            var departments = from s in db.Departments
+                              select s;
+
+            if (!String.IsNullOrEmpty(currentFilter))
+            {
+                departments = departments.Where(s => s.Name.Contains(currentFilter));
+            }
+
+            var secondLastId = departments.Where(w => w.SortOrder < department.SortOrder).Max(m => m.SortOrder);
+            Department secondLast = departments.Where(w => w.SortOrder == secondLastId).FirstOrDefault();
+            if(secondLast != null)
+            {
+                long tempId = department.SortOrder;
+                department.SortOrder = secondLast.SortOrder;
+                secondLast.SortOrder = tempId;
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Index", new { id = id, page = page, currentFilter = currentFilter, searchString = searchString });
+        }
+
+        public ActionResult Down(int? id, string currentFilter, string searchString, int? page)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Department department = db.Departments.Find(id);
+
+            var departments = from s in db.Departments
+                              select s;
+
+            if (!String.IsNullOrEmpty(currentFilter))
+            {
+                departments = departments.Where(s => s.Name.Contains(currentFilter));
+            }
+
+            var secondLastId = departments.Where(w => w.SortOrder > department.SortOrder).Min(m => m.SortOrder);
+            Department secondLast = departments.Where(w => w.SortOrder == secondLastId).FirstOrDefault();
+            if (secondLast != null)
+            {
+                long tempId = department.SortOrder;
+                department.SortOrder = secondLast.SortOrder;
+                secondLast.SortOrder = tempId;
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Index", new { id = id, page = page, currentFilter = currentFilter, searchString = searchString });
+        }
+
         // GET: Department/Create
         public ActionResult Create()
         {
@@ -73,6 +132,7 @@ namespace DoctorWeb.Controllers
         {
             if (ModelState.IsValid)
             {
+                department.SortOrder = Convert.ToInt64(DateTime.Now.ToString("yyyyMMddHHmmss"));
                 db.Departments.Add(department);
                 db.SaveChanges();
                 return RedirectToAction("Index");

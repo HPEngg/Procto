@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using DoctorWeb.Models;
 using System.Data.Entity.Infrastructure;
+using PagedList;
 
 namespace DoctorWeb.Controllers
 {
@@ -16,9 +17,30 @@ namespace DoctorWeb.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: PatientType
-        public ActionResult Index()
+        public ActionResult Index(string currentFilter, string searchString, int? page)
         {
-            return View(db.PatientTypes.ToList());
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var patienttypes = from s in db.PatientTypes
+                          select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                patienttypes = patienttypes.Where(s => s.PatientTypeName.Contains(searchString));
+            }
+
+            int pageSize = 1;
+            int pageNumber = (page ?? 1);
+            return View(patienttypes.OrderBy(i => i.ID).ToPagedList(pageNumber, pageSize));
         }
 
         // GET: PatientType/Details/5

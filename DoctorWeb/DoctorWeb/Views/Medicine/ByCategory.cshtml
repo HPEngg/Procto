@@ -1,4 +1,6 @@
-﻿@model IEnumerable<DoctorWeb.Models.Medicine>
+﻿@model PagedList.IPagedList<DoctorWeb.Models.Medicine>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "Medicine by categories";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -10,8 +12,14 @@
 {
 
     <div style="float:left; padding-top:10px; padding-bottom:10px;">
-        <label style="float:left;padding-right:5px;">Prescription Category</label>
+        <label style="float:left;padding-right:5px;padding-top:5px;">Prescription Category</label>
         @Html.DropDownList("ID", (SelectList)ViewBag.Values, "Select Category", new { onchange = "this.form.submit();" })
+    </div>
+    <div style="float:left; padding-top:10px; padding-bottom:10px; padding-left:10px;">
+        <p>
+            <label style="float:left;padding-right:5px;padding-top:5px;"> Find by Name: </label> @Html.TextBox("SearchString")
+                <input type="submit" value="Search" />
+</p>
     </div>
 }
 </br></br>
@@ -22,7 +30,8 @@
             Type
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.OINTMore)
+            @*@Html.DisplayNameFor(model => model.OINTMore)*@
+            Name
         </th>
         <th>
             @*@Html.DisplayNameFor(model => model.Morning.Name)*@
@@ -41,53 +50,60 @@
             Dosage
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IsDayAffected)
+            @*@Html.DisplayNameFor(model => model.IsDayAffected)*@
+            Is Days Affected
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Unit)
+            @*@Html.DisplayNameFor(model => model.Unit)*@
+            Unit
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Quantity)
+            @*@Html.DisplayNameFor(model => model.Quantity)*@
+            Quantity
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model)
-{
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.OINT.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OINTMore)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Morning.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Noon.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Night.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Dosage.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsDayAffected)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Unit)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Quantity)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OINT.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OINTMore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Morning.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Noon.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Night.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dosage.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsDayAffected)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Unit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
 
 </table>
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("ByCategory",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilterm, id= ViewBag.ID }))

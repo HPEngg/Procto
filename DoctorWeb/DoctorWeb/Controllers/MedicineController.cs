@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using DoctorWeb.Models;
 using DoctorWeb.Models.CustomModels;
 using System.Data.Entity.Infrastructure;
+using PagedList;
 
 namespace DoctorWeb.Controllers
 {
@@ -17,23 +18,78 @@ namespace DoctorWeb.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Medicine
-        public ActionResult Index()
+        //public ActionResult Index()
+        //{
+        //    if (TempData["ErrorMessage"] != null)
+        //        ViewBag.ErrorMessage = TempData["ErrorMessage"].ToString();
+
+        //    var medicines = db.Medicines.Include(m => m.Dosage).Include(m => m.Morning).Include(m => m.Night).Include(m => m.Noon).Include(m => m.OINT);
+        //    return View(medicines.ToList());
+        //}
+
+        public ActionResult Index(string currentFilter, string searchString, int? page)
         {
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
             if (TempData["ErrorMessage"] != null)
                 ViewBag.ErrorMessage = TempData["ErrorMessage"].ToString();
 
             var medicines = db.Medicines.Include(m => m.Dosage).Include(m => m.Morning).Include(m => m.Night).Include(m => m.Noon).Include(m => m.OINT);
-            return View(medicines.ToList());
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                medicines = medicines.Where(s => s.OINTMore.Contains(searchString));
+            }
+
+            int pageSize = 1;
+            int pageNumber = (page ?? 1);
+            return View(medicines.OrderBy(i => i.ID).ToPagedList(pageNumber, pageSize));
         }
 
-        public ActionResult ByCategory(int? id)
+        //public ActionResult ByCategory(int? id)
+        //{
+        //    if (TempData["ErrorMessage"] != null)
+        //        ViewBag.ErrorMessage = TempData["ErrorMessage"].ToString();
+
+        //    ViewBag.Values = new SelectList(db.PrescriptionCategories, "ID", "Name");
+        //    var medicines = db.Medicines.Where(p => p.PrescriptionCategories.Any(t => t.ID == id)).Include(m => m.Dosage).Include(m => m.Morning).Include(m => m.Night).Include(m => m.Noon).Include(m => m.OINT);
+        //    return View(medicines.ToList());
+        //}
+
+        public ActionResult ByCategory(string currentFilter, string searchString, int? page, int? id)
         {
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
             if (TempData["ErrorMessage"] != null)
                 ViewBag.ErrorMessage = TempData["ErrorMessage"].ToString();
 
             ViewBag.Values = new SelectList(db.PrescriptionCategories, "ID", "Name");
             var medicines = db.Medicines.Where(p => p.PrescriptionCategories.Any(t => t.ID == id)).Include(m => m.Dosage).Include(m => m.Morning).Include(m => m.Night).Include(m => m.Noon).Include(m => m.OINT);
-            return View(medicines.ToList());
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                medicines = medicines.Where(s => s.OINTMore.Contains(searchString));
+            }
+            ViewBag.ID = id;
+            int pageSize = 1;
+            int pageNumber = (page ?? 1);
+            return View(medicines.OrderBy(i => i.ID).ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Medicine/Details/5

@@ -1,4 +1,6 @@
-﻿@model IEnumerable<DoctorWeb.Models.Expanse>
+﻿@model PagedList.IPagedList<DoctorWeb.Models.Expanse>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewBag.Title = "Index";
@@ -10,21 +12,31 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+@using (Html.BeginForm())
+{
+    <p>
+        Find by Category: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}
 <table class="table">
     <tr>
         
         <th>
-            @Html.DisplayNameFor(model => model.Amount)
+            @*@Html.DisplayNameFor(model => model.Amount)*@
+            Amount
         </th>
         <th>
             @*@Html.DisplayNameFor(model => model.ExpanseCategory.Name)*@
             Category
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            @*@Html.DisplayNameFor(model => model.Description)*@
+            Description
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Date)
+            @*@Html.DisplayNameFor(model => model.Date)*@
+            Date
         </th>
         <th></th>
     </tr>
@@ -52,3 +64,7 @@
 }
 
 </table>
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

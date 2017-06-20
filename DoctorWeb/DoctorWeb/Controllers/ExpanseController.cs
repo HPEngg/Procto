@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DoctorWeb.Models;
+using PagedList;
 
 namespace DoctorWeb.Controllers
 {
@@ -15,10 +16,34 @@ namespace DoctorWeb.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Expanse
-        public ActionResult Index()
+        //public ActionResult Index()
+        //{
+        //    var expanses = db.Expanses.Include(e => e.ExpanseCategory);
+        //    return View(expanses.ToList());
+        //}
+        public ActionResult Index(string currentFilter, string searchString, int? page)
         {
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
             var expanses = db.Expanses.Include(e => e.ExpanseCategory);
-            return View(expanses.ToList());
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                expanses = expanses.Where(s => s.ExpanseCategory.Name.Contains(searchString));
+            }
+
+            int pageSize = 1;
+            int pageNumber = (page ?? 1);
+            return View(expanses.OrderBy(i => i.ID).ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Expanse/Details/5

@@ -13,14 +13,22 @@
     @Html.ActionLink("Create New", "Create")
 </p>*@
 
+@using (Html.BeginForm())
+{
+    <p>
+        Month: @Html.DropDownList("Month", Enumerable.Range(1, 12).Select(x => new SelectListItem { Text = x.ToString(), Selected = (x == DateTime.Today.Month) }), "Month", new { @onchange = "showVal()" })
+        Year: @Html.DropDownList("Year", Enumerable.Range(DateTime.Now.Year - 25, 26).Select(x => new SelectListItem { Text = x.ToString(), Selected = (x == DateTime.Today.Year) }), "Year", new { @onchange = "showVal()" })
+        Find by Patient's name: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}
 
 @{
     int[] months = Enumerable.Range(1, 12).ToArray();
     int curMonth = DateTime.Today.Month;
 }
 
-Month: @Html.DropDownList("Month", Enumerable.Range(1, 12).Select(x => new SelectListItem { Text = x.ToString(), Selected = (x == DateTime.Today.Month) }), "Month", new { @onchange = "showVal()" })
-Year: @Html.DropDownList("Year", Enumerable.Range(DateTime.Now.Year - 25, 26).Select(x => new SelectListItem { Text = x.ToString(), Selected = (x == DateTime.Today.Year) }), "Year", new { @onchange = "showVal()" })
+
 
 <table class="table">
     <tr>

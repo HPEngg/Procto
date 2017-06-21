@@ -40,12 +40,12 @@ namespace DoctorWeb.Controllers
 
             int pageSize = 1;
             int pageNumber = (page ?? 1);
-            return View(prescriptionimages.OrderBy(i => i.ID).ToPagedList(pageNumber, pageSize));
+            return View(prescriptionimages.OrderBy(i => i.Label).ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult Select()
         {
-            return View(db.PreImages.ToList());
+            return View(db.PreImages.OrderBy(o => o.Label).ToList());
         }
 
         // GET: PreImage/Details/5

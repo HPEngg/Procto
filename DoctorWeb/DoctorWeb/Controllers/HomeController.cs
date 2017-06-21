@@ -143,8 +143,8 @@ namespace DoctorWeb.Controllers
         public ActionResult PatientToday()
         {
             var todayDate = DateTime.Now.Date;
-            var query = from p in db.Patients.Where(w => DbFunctions.TruncateTime(w.CreatedDate) == todayDate)
-                       where !db.Prescriptions.Any(a => p.ID == a.PatientID)
+            var query = from p in db.Patients.Where(w => DbFunctions.TruncateTime(w.LastUpdatedDate) == todayDate)
+                       where !db.Prescriptions.Where(w => DbFunctions.TruncateTime(w.Date) == todayDate).Any(a => p.ID == a.PatientID)
                        select p;
             var model = new List<PatientToday>();
 
@@ -315,6 +315,7 @@ namespace DoctorWeb.Controllers
             //This line is temporary fix
             Patient p = new Patient();
             patient.CreatedDate = DateTime.Now.Date;
+            patient.LastUpdatedDate = patient.CreatedDate;
             patient.DoctorID = model.DoctorID == 0 ? null : model.DoctorID;
             patient.ReferredByID = model.ReferredByID;
             patient.DepartmentID = model.DepartmentID;
@@ -556,6 +557,7 @@ namespace DoctorWeb.Controllers
             model.Patient.DoctorID = model.DoctorID;
             model.Patient.ReferredByID = model.ReferredByID;
             model.Patient.DepartmentID = model.DepartmentID;
+            model.Patient.LastUpdatedDate = DateTime.Now.Date;
             if (ModelState.IsValid)
             {
                 db.Entry(model.Patient).State = EntityState.Modified;

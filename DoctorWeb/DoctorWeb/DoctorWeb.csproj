@@ -290,6 +290,10 @@
     <Compile Include="Migrations\201706191737145_AddedSortOrderInDepartment.Designer.cs">
       <DependentUpon>201706191737145_AddedSortOrderInDepartment.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706211210079_addedLastUpdatedDateColumn.cs" />
+    <Compile Include="Migrations\201706211210079_addedLastUpdatedDateColumn.Designer.cs">
+      <DependentUpon>201706211210079_addedLastUpdatedDateColumn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Charge.cs" />
@@ -1042,6 +1046,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706191737145_AddedSortOrderInDepartment.resx">
       <DependentUpon>201706191737145_AddedSortOrderInDepartment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706211210079_addedLastUpdatedDateColumn.resx">
+      <DependentUpon>201706211210079_addedLastUpdatedDateColumn.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

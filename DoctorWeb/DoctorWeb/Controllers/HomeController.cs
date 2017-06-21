@@ -33,7 +33,7 @@ namespace DoctorWeb.Controllers
                     Name = p.Name,
                     MobileNo = p.Contact,
                     Address = p.Address,
-                    DepartmentName = p.DepartmentID.ToString(),
+                    DepartmentName = p.Department.Name.ToString(),
                     Reference = p.ReferredBy.Name,
                     ID = p.ID,
                     RefferalName = p.DoctorID != null ? db.Doctors.Where(w => w.ID == p.DoctorID).Select(s => s.Name).FirstOrDefault() : "Other"//"test"
@@ -70,7 +70,7 @@ namespace DoctorWeb.Controllers
                     Name = p.Name,
                     MobileNo = p.Contact,
                     Address = p.Address,
-                    DepartmentName = p.DepartmentID.ToString(),
+                    DepartmentName = p.Department.Name.ToString(),
                     Reference = p.ReferredBy.Name,
                     ID = p.ID,
                     RefferalName = p.DoctorID != null ? db.Doctors.Where(w => w.ID == p.DoctorID).Select(s => s.Name).FirstOrDefault() : "Other"//"test"
@@ -302,7 +302,7 @@ namespace DoctorWeb.Controllers
         [HttpPost]
         public JsonResult AutoComplete(string MedicineName)
         {
-            var model = db.Medicines.Where(m => m.OINTMore.Contains(MedicineName)).Select(m => new { m.OINTMore, m.IsDayAffected, m.Quantity, m.Unit }).ToList();
+            var model = db.Medicines.Where(m => m.OINTMore.Contains(MedicineName)).Select(m => new { m.OINTMore, m.IsDayAffected, m.Morning, m.Noon, m.Night, m.Quantity, m.Unit }).ToList();
             return Json(model);
         }
 

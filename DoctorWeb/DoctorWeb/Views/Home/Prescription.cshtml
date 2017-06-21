@@ -784,6 +784,9 @@
                                         label: item.OINTMore,
                                         value: item.OINTMore,
                                         term: item.IsDayAffected,
+                                        mor: item.Morning.ID,
+                                        noon: item.Noon.ID,
+                                        night: item.Night.ID,
                                         quantity:item.Quantity,
                                         unit: item.Unit
                                     }
@@ -816,6 +819,10 @@
                         jQuery("#days_flag" + parseInt(i - 1)).val(j.item.term);
                         jQuery("#unt_" + parseInt(i - 1)).val(j.item.unit);
                         jQuery("#qut_" + parseInt(i - 1)).val(j.item.quantity);
+
+                        jQuery("#MorningDozID" + parseInt(i - 1)).val(j.item.mor);
+                        jQuery("#NoonDozID" + parseInt(i - 1)).val(j.item.noon);
+                        jQuery("#NightDozID" + parseInt(i - 1)).val(j.item.night);
                         //if (j.item.term == true) {
                         
                         //flag = true;
@@ -846,6 +853,9 @@
                                         label: item.OINTMore,
                                         value: item.OINTMore,
                                         term: item.IsDayAffected,
+                                        mor: item.Morning.ID,
+                                        noon: item.Noon.ID,
+                                        night: item.Night.ID,
                                         quantity: item.Quantity,
                                         unit: item.Unit
                                     }
@@ -879,6 +889,11 @@
                         jQuery("#days_flag" + parseInt(i - 1)).val(j.item.term);
                         jQuery("#unt_" + parseInt(i - 1)).val(j.item.unit);
                         jQuery("#qut_" + parseInt(i - 1)).val(j.item.quantity);
+
+                        jQuery("#MorningDozID" + parseInt(i - 1)).val(j.item.mor);
+                        jQuery("#NoonDozID" + parseInt(i - 1)).val(j.item.noon);
+                        jQuery("#NightDozID" + parseInt(i - 1)).val(j.item.night);
+
                         //if (j.item.term == true) {
 
                         //flag = true;

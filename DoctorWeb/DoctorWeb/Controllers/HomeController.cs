@@ -293,7 +293,13 @@ namespace DoctorWeb.Controllers
             ViewBag.Message = TempData["Message"] ?? string.Empty;
             ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name");
             ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name");
-            ViewBag.ReferredByID = new SelectList(db.ReferredBy, "ID", "Name");
+
+            var refbyDefault = db.ReferredBy.OrderBy(o => o.ID).Skip(1).Take(1).FirstOrDefault();
+            if(refbyDefault != null)
+                ViewBag.ReferredByID = new SelectList(db.ReferredBy, "ID", "Name", refbyDefault.ID);
+            else
+                ViewBag.ReferredByID = new SelectList(db.ReferredBy, "ID", "Name");
+
             ViewBag.DepartmentID = new SelectList(db.Departments.OrderBy(i => i.SortOrder), "ID", "Name");
             ViewBag.PatientCount = db.Patients.Count() + 1;
             return View();

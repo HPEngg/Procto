@@ -51,7 +51,7 @@ namespace DoctorWeb.Controllers
 
             int pageSize = 1;
             int pageNumber = (page ?? 1);
-            return View(medicines.OrderBy(i => i.ID).ToPagedList(pageNumber, pageSize));
+            return View(medicines.OrderBy(i => i.OINTMore).ToPagedList(pageNumber, pageSize));
         }
 
         //public ActionResult ByCategory(int? id)
@@ -79,7 +79,7 @@ namespace DoctorWeb.Controllers
             if (TempData["ErrorMessage"] != null)
                 ViewBag.ErrorMessage = TempData["ErrorMessage"].ToString();
 
-            ViewBag.Values = new SelectList(db.PrescriptionCategories, "ID", "Name");
+            ViewBag.Values = new SelectList(db.PrescriptionCategories.OrderBy(o => o.Name), "ID", "Name");
             var medicines = db.Medicines.Where(p => p.PrescriptionCategories.Any(t => t.ID == id)).Include(m => m.Dosage).Include(m => m.Morning).Include(m => m.Night).Include(m => m.Noon).Include(m => m.OINT);
 
             if (!String.IsNullOrEmpty(searchString))
@@ -89,7 +89,7 @@ namespace DoctorWeb.Controllers
             ViewBag.ID = id;
             int pageSize = 1;
             int pageNumber = (page ?? 1);
-            return View(medicines.OrderBy(i => i.ID).ToPagedList(pageNumber, pageSize));
+            return View(medicines.OrderBy(i => i.OINTMore).ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Medicine/Details/5
@@ -114,10 +114,10 @@ namespace DoctorWeb.Controllers
             ViewBag.MorningDozID = new SelectList(db.Dozes, "ID", "Name");
             ViewBag.NightDozID = new SelectList(db.Dozes, "ID", "Name");
             ViewBag.NoonDozID = new SelectList(db.Dozes, "ID", "Name");
-            ViewBag.OINTTypeID = new SelectList(db.OINTTypes, "ID", "Name");
+            ViewBag.OINTTypeID = new SelectList(db.OINTTypes.OrderBy(o => o.Name), "ID", "Name");
 
             var model = new MedicineViewModel() { };
-            var allCategories = db.PrescriptionCategories.ToList();
+            var allCategories = db.PrescriptionCategories.OrderBy(o => o.Name).ToList();
             model.PrescriptionsCategories = allCategories.Select(o => new SelectListItem() { Text = o.Name, Value = o.ID.ToString(), Selected = false });
             return View(model);
         }
@@ -147,7 +147,7 @@ namespace DoctorWeb.Controllers
             ViewBag.MorningDozID = new SelectList(db.Dozes, "ID", "Name", model.Medicine.MorningDozID);
             ViewBag.NightDozID = new SelectList(db.Dozes, "ID", "Name", model.Medicine.NightDozID);
             ViewBag.NoonDozID = new SelectList(db.Dozes, "ID", "Name", model.Medicine.NoonDozID);
-            ViewBag.OINTTypeID = new SelectList(db.OINTTypes, "ID", "Name", model.Medicine.OINTTypeID);
+            ViewBag.OINTTypeID = new SelectList(db.OINTTypes.OrderBy(o => o.Name), "ID", "Name", model.Medicine.OINTTypeID);
             return View(model.Medicine);
         }
 
@@ -163,7 +163,7 @@ namespace DoctorWeb.Controllers
             if (model.Medicine == null)
                 return HttpNotFound();
 
-            var allCategories = db.PrescriptionCategories.ToList();
+            var allCategories = db.PrescriptionCategories.OrderBy(o => o.Name).ToList();
 
             model.PrescriptionsCategories = allCategories.Select(o => new SelectListItem() { Text = o.Name, Value = o.ID.ToString(), Selected = model.Medicine.PrescriptionCategories.Contains(o) });
 
@@ -171,7 +171,7 @@ namespace DoctorWeb.Controllers
             ViewBag.MorningDozID = new SelectList(db.Dozes, "ID", "Name", model.Medicine.MorningDozID);
             ViewBag.NightDozID = new SelectList(db.Dozes, "ID", "Name", model.Medicine.NightDozID);
             ViewBag.NoonDozID = new SelectList(db.Dozes, "ID", "Name", model.Medicine.NoonDozID);
-            ViewBag.OINTTypeID = new SelectList(db.OINTTypes, "ID", "Name", model.Medicine.OINTTypeID);
+            ViewBag.OINTTypeID = new SelectList(db.OINTTypes.OrderBy(o => o.Name), "ID", "Name", model.Medicine.OINTTypeID);
             return View(model);
         }
 
@@ -226,7 +226,7 @@ namespace DoctorWeb.Controllers
             ViewBag.MorningDozID = new SelectList(db.Dozes, "ID", "Name", model.Medicine.MorningDozID);
             ViewBag.NightDozID = new SelectList(db.Dozes, "ID", "Name", model.Medicine.NightDozID);
             ViewBag.NoonDozID = new SelectList(db.Dozes, "ID", "Name", model.Medicine.NoonDozID);
-            ViewBag.OINTTypeID = new SelectList(db.OINTTypes, "ID", "Name", model.Medicine.OINTTypeID);
+            ViewBag.OINTTypeID = new SelectList(db.OINTTypes.OrderBy(o => o.Name), "ID", "Name", model.Medicine.OINTTypeID);
             return View(model);
         }
 

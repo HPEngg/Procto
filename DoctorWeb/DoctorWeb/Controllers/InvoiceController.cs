@@ -182,7 +182,7 @@ namespace DoctorWeb.Controllers
             ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name", prescription.DoctorID);
             //ViewBag.InstructionID = new SelectList(db.Instructions, "ID", "Name", prescription.InstructionID);
             ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name", prescription.PatientID);
-            ViewBag.PatientTypeID = new SelectList(db.PatientTypes, "ID", "PatientTypeName", prescription.PatientTypeID);
+            ViewBag.PatientTypeID = new SelectList(db.PatientTypes.OrderBy(o => o.PatientTypeName), "ID", "PatientTypeName", prescription.PatientTypeID);
             return View(prescription);
         }
 
@@ -202,7 +202,7 @@ namespace DoctorWeb.Controllers
             ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name", prescription.DoctorID);
             //ViewBag.InstructionID = new SelectList(db.Instructions, "ID", "Name", prescription.InstructionID);
             ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name", prescription.PatientID);
-            ViewBag.PatientTypeID = new SelectList(db.PatientTypes, "ID", "PatientTypeName", prescription.PatientTypeID);
+            ViewBag.PatientTypeID = new SelectList(db.PatientTypes.OrderBy(o => o.PatientTypeName), "ID", "PatientTypeName", prescription.PatientTypeID);
             return View(prescription);
         }
 

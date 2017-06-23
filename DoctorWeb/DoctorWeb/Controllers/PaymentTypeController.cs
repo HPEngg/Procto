@@ -40,7 +40,7 @@ namespace DoctorWeb.Controllers
 
             int pageSize = 1;
             int pageNumber = (page ?? 1);
-            return View(paymenttypes.OrderBy(i => i.ID).ToPagedList(pageNumber, pageSize));
+            return View(paymenttypes.OrderBy(i => i.PaymentTypeName).ToPagedList(pageNumber, pageSize));
         }
 
         // GET: PaymentType/Details/5

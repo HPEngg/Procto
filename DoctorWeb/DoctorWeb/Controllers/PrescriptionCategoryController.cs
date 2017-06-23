@@ -32,6 +32,7 @@ namespace DoctorWeb.Controllers
             }
 
             ViewBag.CurrentFilter = searchString;
+            ViewBag.Page = page;
 
             var prescriptioncategories = from s in db.PrescriptionCategories
                           select s;
@@ -43,9 +44,67 @@ namespace DoctorWeb.Controllers
 
             int pageSize = 1;
             int pageNumber = (page ?? 1);
-            return View(prescriptioncategories.OrderBy(i => i.ID).ToPagedList(pageNumber, pageSize));
+            return View(prescriptioncategories.OrderBy(i => i.SortOrder).ToPagedList(pageNumber, pageSize));
 
             //return View(db.PrescriptionCategories.ToList());
+        }
+
+        public ActionResult Up(int? id, string currentFilter, string searchString, int? page)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PrescriptionCategory prescriptioncategory = db.PrescriptionCategories.Find(id);
+
+            var prescriptioncategories = from s in db.PrescriptionCategories
+                              select s;
+
+            if (!String.IsNullOrEmpty(currentFilter))
+            {
+                prescriptioncategories = prescriptioncategories.Where(s => s.Name.Contains(currentFilter));
+            }
+
+            var secondLastId = prescriptioncategories.Where(w => w.SortOrder < prescriptioncategory.SortOrder).Max(m => m.SortOrder);
+            PrescriptionCategory secondLast = prescriptioncategories.Where(w => w.SortOrder == secondLastId).FirstOrDefault();
+            if (secondLast != null)
+            {
+                long tempId = prescriptioncategory.SortOrder;
+                prescriptioncategory.SortOrder = secondLast.SortOrder;
+                secondLast.SortOrder = tempId;
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Index", new { id = id, page = page, currentFilter = currentFilter, searchString = searchString });
+        }
+
+        public ActionResult Down(int? id, string currentFilter, string searchString, int? page)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PrescriptionCategory prescriptioncategory = db.PrescriptionCategories.Find(id);
+
+            var prescriptioncategories = from s in db.PrescriptionCategories
+                              select s;
+
+            if (!String.IsNullOrEmpty(currentFilter))
+            {
+                prescriptioncategories = prescriptioncategories.Where(s => s.Name.Contains(currentFilter));
+            }
+
+            var secondLastId = prescriptioncategories.Where(w => w.SortOrder > prescriptioncategory.SortOrder).Min(m => m.SortOrder);
+            PrescriptionCategory secondLast = prescriptioncategories.Where(w => w.SortOrder == secondLastId).FirstOrDefault();
+            if (secondLast != null)
+            {
+                long tempId = prescriptioncategory.SortOrder;
+                prescriptioncategory.SortOrder = secondLast.SortOrder;
+                secondLast.SortOrder = tempId;
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Index", new { id = id, page = page, currentFilter = currentFilter, searchString = searchString });
         }
 
         // GET: PrescriptionCategory/Details/5
@@ -78,6 +137,7 @@ namespace DoctorWeb.Controllers
         {
             if (ModelState.IsValid)
             {
+                prescriptionCategory.SortOrder = Convert.ToInt64(DateTime.Now.ToString("yyyyMMddHHmmss"));
                 db.PrescriptionCategories.Add(prescriptionCategory);
                 db.SaveChanges();
                 return RedirectToAction("Index");

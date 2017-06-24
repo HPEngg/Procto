@@ -69,10 +69,11 @@
                         <div style="width:100%; clear:both;">
                             <label title="Rx" class="rx_label rx_label_right">Rx</label>
                             <div style="width: auto; padding-top:10px; padding-right: 8px; float:left;" class="btn_box">
-                                @foreach (var item in Model.Categories)
+                                @Html.DropDownList("PrescriptionCategories", null, htmlAttributes: new { @class = "pre tabname", @id = "pre_categories", @style = "width: 75px!important; max-width: 70px!important; padding: 0!important;" })
+                                @*@foreach (var item in Model.Categories)
                                 {
                                     <input type="button" id="btnp1" readonly style="border: 1px solid rgb(69,117,212);color:rgb(69,117,212)" class="btn_p a" value="@Html.DisplayFor(modelItem => item.Name)" content="0;U">
-                                }
+                                }*@
                                 <input style="height:25px !important; width:25px !important; float:right; margin-left:5px !important; padding-top:3px !important;" value="+" class="plusbutton" type="button" required>
 
                             </div>
@@ -163,7 +164,7 @@
                                         @Html.LabelFor(model => model.Medicine.DozTiming, htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-10">
                                     *@
-                                    @Html.DropDownList("DosageID", null, htmlAttributes: new { @class = "pre", style = "width: 110px!important; padding: 0!important;" })
+                                    @Html.DropDownList("DosageID", null, htmlAttributes: new { @id = "DosageID1", @class = "pre", style = "width: 110px!important; padding: 0!important;" })
                                     @Html.ValidationMessageFor(model => model.Medicine.DosageID, "", new { @class = "text-danger" })
                                     @*@Html.EnumDropDownListFor(model => model.Medicine.Dosage, htmlAttributes: new { @class = "pre", style = "width: 90px!important; padding: 0!important;" })
                                         @Html.ValidationMessageFor(model => model.Medicine.Dosage, "", new { @class = "text-danger" })*@
@@ -362,10 +363,11 @@
         //jQuery.noConflict();
         document.addEventListener('DOMContentLoaded', function () {
             var i = 2;
-            $(".btn_p").click(function (event) {
+            //$(".btn_p").click(function (event) {
+            $("#pre_categories").on('change', function (event) {
                 $.ajax({
                     url: '@Url.Action("MedicineList", "Home")',
-                    data: { id: $(this).val() /* add other additional parameters */ },
+                    data: { id: $("#pre_categories option:selected").text() /* add other additional parameters */ },
                     cache: false,
                     type: "POST",
                     dataType: "html",
@@ -409,10 +411,12 @@
                 //var a = parseInt(id - 1);
                 //    newhtmlstring = newhtmlstring.replace("tabname_1", "tabname_1" + id);
                 //    newhtmlstring = newhtmlstring.replace("Medicine_OINTMore", "Medicine_OINTMore" + id);
+                newhtmlstring = newhtmlstring.replace("tabname_1", "tabname_" + id);
                 newhtmlstring = newhtmlstring.replace("Medicine_OINTMore1", "Medicine_OINTMore" + id);
                 newhtmlstring = newhtmlstring.replace("MorningDozID1", "MorningDozID" + id);
                 newhtmlstring = newhtmlstring.replace("NoonDozID1", "NoonDozID" + id);
                 newhtmlstring = newhtmlstring.replace("NightDozID1", "NightDozID" + id);
+                newhtmlstring = newhtmlstring.replace("DosageID1", "DosageID" + id);
                 newhtmlstring = newhtmlstring.replace("days_flag1", "days_flag" + id);
 
                 //    newhtmlstring = newhtmlstring.replace("DosageID", "DosageID" + id);
@@ -784,9 +788,11 @@
                                         label: item.OINTMore,
                                         value: item.OINTMore,
                                         term: item.IsDayAffected,
+                                        meditype: item.OINTTypeID,
                                         mor: item.Morning.ID,
                                         noon: item.Noon.ID,
                                         night: item.Night.ID,
+                                        dosage: item.Dosage.ID,
                                         quantity:item.Quantity,
                                         unit: item.Unit
                                     }
@@ -820,9 +826,13 @@
                         jQuery("#unt_" + parseInt(i - 1)).val(j.item.unit);
                         jQuery("#qut_" + parseInt(i - 1)).val(j.item.quantity);
 
+                        
+                        jQuery("#tabname_" + parseInt(i - 1)).val(j.item.mor);
                         jQuery("#MorningDozID" + parseInt(i - 1)).val(j.item.mor);
                         jQuery("#NoonDozID" + parseInt(i - 1)).val(j.item.noon);
                         jQuery("#NightDozID" + parseInt(i - 1)).val(j.item.night);
+                        jQuery("#DosageID" + parseInt(i - 1)).val(j.item.night);
+                        
                         //if (j.item.term == true) {
                         
                         //flag = true;
@@ -853,9 +863,11 @@
                                         label: item.OINTMore,
                                         value: item.OINTMore,
                                         term: item.IsDayAffected,
+                                        meditype: item.OINTTypeID,
                                         mor: item.Morning.ID,
                                         noon: item.Noon.ID,
                                         night: item.Night.ID,
+                                        dosage: item.Dosage.ID,
                                         quantity: item.Quantity,
                                         unit: item.Unit
                                     }
@@ -890,9 +902,11 @@
                         jQuery("#unt_" + parseInt(i - 1)).val(j.item.unit);
                         jQuery("#qut_" + parseInt(i - 1)).val(j.item.quantity);
 
+                        jQuery("#tabname_" + parseInt(i - 1)).val(j.item.mor);
                         jQuery("#MorningDozID" + parseInt(i - 1)).val(j.item.mor);
                         jQuery("#NoonDozID" + parseInt(i - 1)).val(j.item.noon);
                         jQuery("#NightDozID" + parseInt(i - 1)).val(j.item.night);
+                        jQuery("#DosageID" + parseInt(i - 1)).val(j.item.night);
 
                         //if (j.item.term == true) {
 

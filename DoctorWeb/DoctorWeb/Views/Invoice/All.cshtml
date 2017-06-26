@@ -3,32 +3,40 @@
 @using PagedList.Mvc;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
-    ViewBag.Title = "Monthly";
+    ViewBag.Title = "All";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
-<h2>Monthly Invoices</h2>
-
+<h2>All Invoices</h2>
 @*<p>
-    @Html.ActionLink("Create New", "Create")
-</p>*@
-
-@using (Html.BeginForm())
-{
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+@using (Html.BeginForm()) {
     <p>
-        Month: @Html.DropDownList("Month", Enumerable.Range(1, 12).Select(x => new SelectListItem { Text = x.ToString(), Selected = (x == DateTime.Today.Month) }), "Month", new { @onchange = "showVal()" })
-        Year: @Html.DropDownList("Year", Enumerable.Range(DateTime.Now.Year - 25, 26).Select(x => new SelectListItem { Text = x.ToString(), Selected = (x == DateTime.Today.Year) }), "Year", new { @onchange = "showVal()" })
+        @{
+            string fromDateText = null;
+            string toDateText = null;
+            if (ViewBag.FromDate != null && ViewBag.ToDate != null)
+            {
+                ViewBag.FromDate = ViewBag.FromDate + "T00:00";
+                ViewBag.ToDate = ViewBag.ToDate + "T00:00";
+
+                fromDateText = "From Date:<input type='datetime-local' name='fromDate' id='fromDate' value='" + ViewBag.FromDate + "' />";
+                toDateText = "To Date:<input type='datetime-local' name='toDate' id='toDate' value='" + ViewBag.ToDate + "' />";
+            }
+            else
+            {
+                fromDateText = "From Date:<input type='date' name='fromDate' id='fromDate' />";
+                toDateText = "From Date:<input type='date' name='toDate' id='toDate' />";
+            }
+        }
+
+        @Html.Raw(fromDateText)
+        @Html.Raw(toDateText)
+
         Find by Patient's name: @Html.TextBox("SearchString")
         <input type="submit" value="Search" />
     </p>
 }
-
-@{
-    int[] months = Enumerable.Range(1, 12).ToArray();
-    int curMonth = DateTime.Today.Month;
-}
-
-
 
 <table class="table">
     <tr>
@@ -77,7 +85,6 @@
         </th>
         <th>Actions</th>
     </tr>
-
     @foreach (var item in Model)
     {
         <tr>
@@ -100,17 +107,17 @@
                 @Html.DisplayFor(modelItem => item.Patient.Address)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Patient.Department.Name)
+                @Html.DisplayFor(modelItem => item.Patient.DepartmentID)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Patient.Status)
             </td>
             @*<td>
-        @Html.DisplayFor(modelItem => item.Patient.ReferredBy)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Doctor.Name)
-    </td>*@
+                    @Html.DisplayFor(modelItem => item.Patient.ReferredBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Doctor.Name)
+                </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Rs)
             </td>
@@ -124,19 +131,13 @@
             </td>
         </tr>
     }
-
 </table>
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
-@Html.PagedListPager(Model, page => Url.Action("Monthly",
-    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, Month = ViewBag.Month, Year = ViewBag.Year}))
-
+@Html.PagedListPager(Model, page => Url.Action("All",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, fromDate = ViewBag.FromDate, toDate = ViewBag.ToDate }))
 <script src="Content/Script/jquery-1.10.2.min.js"></script>
 <script type="text/javascript">
 
-    function showVal() {
-        $("#Month").find("option").eq(0).remove();
-        $("#Year").find("option").eq(0).remove();
-        window.location = "/Invoice/Monthly?Month=" + $("#Month").val() + "&Year=" + $("#Year").val();
-    }
+  
 </script>

@@ -40,7 +40,7 @@ namespace DoctorWeb.Controllers
 
             int pageSize = 1;
             int pageNumber = (page ?? 1);
-            return View(patienttypes.OrderBy(i => i.PatientTypeName).ToPagedList(pageNumber, pageSize));
+            return View(patienttypes.OrderBy(i => i.ID).ToPagedList(pageNumber, pageSize));
         }
 
         // GET: PatientType/Details/5

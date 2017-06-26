@@ -230,7 +230,7 @@
                                 @Html.ValidationMessageFor(model => model.PatientHistory.RP, "", new { @class = "text-danger" })
                             </div>
                             <div>
-                                @Html.EditorFor(model => model.PatientHistory.KCO, new { htmlAttributes = new { @class = "my-input", style = "min-width:60%;", placeholder = "K/C/O" } })
+                                @Html.EditorFor(model => model.PatientHistory.KCO, new { htmlAttributes = new { @class = "my-input", style = "min-width:60%; color:red;", placeholder = "K/C/O" } })
                                 @Html.ValidationMessageFor(model => model.PatientHistory.KCO, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -239,7 +239,7 @@
                             @*@Html.LabelFor(model => model.Patient.RemindMeAbout, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                             *@
-                            @Html.EditorFor(model => model.Patient.RemindMeAbout, new { htmlAttributes = new { @class = "form-control", placeholder = "Remind me about" } })
+                            @Html.EditorFor(model => model.Patient.RemindMeAbout, new { htmlAttributes = new { @class = "form-control", placeholder = "Remind me about", style= "color:red;"} })
                             @Html.ValidationMessageFor(model => model.Patient.RemindMeAbout, "", new { @class = "text-danger" })
                             @*
             </div>*@
@@ -655,6 +655,11 @@
 </div>
 
 <script type="text/javascript">
+
+    jQuery(document).ready(function () {
+        jQuery("#Referred_Doctor").css("display", "none");
+        jQuery("#Referred_Relative").css("display", "none");
+    });
     jQuery("#ReferredBy").change(function () {
         if (jQuery("#ReferredBy").val() == "1") {
             jQuery("#Referred_Doctor").css("display", "block");

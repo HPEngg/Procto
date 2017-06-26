@@ -308,7 +308,7 @@ namespace DoctorWeb.Controllers
         [HttpPost]
         public JsonResult AutoComplete(string MedicineName)
         {
-            var model = db.Medicines.Where(m => m.OINTMore.Contains(MedicineName)).Select(m => new { m.OINTMore, m.IsDayAffected, m.Morning, m.Noon, m.Night, m.Quantity, m.Unit }).ToList();
+            var model = db.Medicines.Where(m => m.OINTMore.Contains(MedicineName)).Select(m => new { m.OINTTypeID, m.OINTMore, m.IsDayAffected, m.Morning, m.Noon, m.Night, m.Dosage, m.Quantity, m.Unit }).ToList();
             return Json(model);
         }
 
@@ -371,17 +371,19 @@ namespace DoctorWeb.Controllers
                 prescr_success = 0;
             }
             var model = new PrescriptionHome();
-            model.Categories = db.PrescriptionCategories.OrderBy(o => o.Name);
-            model.PaymentTypes = db.PaymentTypes.OrderBy(o => o.PaymentTypeName);
+            //model.Categories = db.PrescriptionCategories.OrderBy(o => o.Name);
+            model.PaymentTypes = db.PaymentTypes.OrderBy(o => o.ID);
 
             ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name");
             //ViewBag.InstructionID = new SelectList(db.Instructions, "ID", "Name");
             ViewBag.PatientID = patientID;
 
             int? prescriptionID = db.Prescriptions.Where(p => p.PatientID == patientID).OrderByDescending(o => o.Date).Select(s => s.ID).FirstOrDefault();
-            ViewBag.PrescriptionID = prescriptionID == null ? 0 : prescriptionID;               
-            ViewBag.PatientTypeID = new SelectList(db.PatientTypes.OrderBy(o => o.PatientTypeName), "ID", "PatientTypeName");
+            ViewBag.PrescriptionID = prescriptionID == null ? 0 : prescriptionID;
+            ViewBag.PatientTypeID = new SelectList(db.PatientTypes.OrderBy(o => o.ID), "ID", "PatientTypeName");
 
+
+            ViewBag.PrescriptionCategories = new SelectList(db.PrescriptionCategories, "ID", "Name");
             ViewBag.DosageID = new SelectList(db.Dosages, "ID", "Name");
             ViewBag.MorningDozID = new SelectList(db.Dozes, "ID", "Name");
             ViewBag.NightDozID = new SelectList(db.Dozes, "ID", "Name");
@@ -397,6 +399,7 @@ namespace DoctorWeb.Controllers
 
             return View(model);
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -518,7 +521,7 @@ namespace DoctorWeb.Controllers
             ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name", prescription.DoctorID);
             //ViewBag.InstructionID = new SelectList(db.Instructions, "ID", "Name", prescription.InstructionID);
             ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name", prescription.PatientID);
-            ViewBag.PatientTypeID = new SelectList(db.PatientTypes.OrderBy(o => o.PatientTypeName), "ID", "PatientTypeName", prescription.PatientTypeID);
+            ViewBag.PatientTypeID = new SelectList(db.PatientTypes.OrderBy(o => o.ID), "ID", "PatientTypeName", prescription.PatientTypeID);
             ViewBag.InvestigationID = new SelectList(db.Investigations.OrderBy(o => o.Name), "ID", "Name");
 
             return RedirectToAction("Prescription", new { patientID = model.PatientID });
@@ -610,7 +613,7 @@ namespace DoctorWeb.Controllers
                 printData.InvoiceNo = prescription.ID;
                 printData.Medicines = db.PrescriptionMedicines.Where(p => p.PrescriptionID == prescription.ID).ToList();
                 var paymentTypeIDs = db.Charges.Where(w => w.PrescriptionID == prescription.ID).Select(s => s.PaymentTypeID).ToList();
-                printData.PaymentTypes = db.PaymentTypes.OrderBy(o => o.PaymentTypeName).Where(w => paymentTypeIDs.Contains(w.ID)).ToList();
+                printData.PaymentTypes = db.PaymentTypes.OrderBy(o => o.ID).Where(w => paymentTypeIDs.Contains(w.ID)).ToList();
                 ViewBag.PatientID = patient.ID;
                 printData.Total = prescription.Rs;
                 printData.Other = prescription.Other;
@@ -645,7 +648,7 @@ namespace DoctorWeb.Controllers
                 model.InvoiceNo = prescription.ID;
                 model.Medicines = db.PrescriptionMedicines.Where(p => p.PrescriptionID == prescription.ID).ToList();
                 var paymentTypeIDs = db.Charges.Where(w => w.PrescriptionID == prescription.ID).Select(s => s.PaymentTypeID).ToList();
-                model.PaymentTypes = db.PaymentTypes.OrderBy(o => o.PaymentTypeName).Where(w => paymentTypeIDs.Contains(w.ID)).ToList();
+                model.PaymentTypes = db.PaymentTypes.OrderBy(o => o.ID).Where(w => paymentTypeIDs.Contains(w.ID)).ToList();
                 model.Total = prescription.Rs;
                 model.Other = prescription.Other;
                 model.Medicine = prescription.M;
@@ -779,7 +782,7 @@ namespace DoctorWeb.Controllers
                 }
 
                 var paymentTypeIDs = db.Charges.Where(w => w.PrescriptionID == prescription.ID).Select(s => s.PaymentTypeID).ToList();
-                model.Invoice.PaymentTypes = db.PaymentTypes.OrderBy(o => o.PaymentTypeName).Where(w => paymentTypeIDs.Contains(w.ID)).ToList();
+                model.Invoice.PaymentTypes = db.PaymentTypes.OrderBy(o => o.ID).Where(w => paymentTypeIDs.Contains(w.ID)).ToList();
 
                 model.Invoice.Medicine = prescription.M;
                 model.Invoice.OtherFromTextbox = prescription.Other;

@@ -995,6 +995,7 @@
     <Content Include="Views\Chart\Income.cshtml" />
     <Content Include="Views\Chart\IncomeExpanse.cshtml" />
     <Content Include="Views\Home\FollowupList_Intermediate.cshtml" />
+    <Content Include="Views\Invoice\All.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

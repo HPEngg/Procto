@@ -71,6 +71,7 @@
                             <li @if (ctrName == "Invoice" && actnName == "Daily") { <text> class="active" </text>   }><div id="icontitlediv">@Html.ActionLink("Daily List", "Daily", "Invoice")</div></li>
                             <li @if (ctrName == "Invoice" && actnName == "Weekly") { <text> class="active" </text>   }><div id="icontitlediv">@Html.ActionLink("Weekly List", "Weekly", "Invoice")</div></li>
                             <li @if (ctrName == "Invoice" && actnName == "Monthly") { <text> class="active" </text>    }><div id="icontitlediv">@Html.ActionLink("Monthly List", "Monthly", "Invoice", new { month = Convert.ToInt32(DateTime.Now.Month), year = Convert.ToInt32(DateTime.Now.Year) }, null)</div></li>
+                            <li @if (ctrName == "Invoice" && actnName == "All") { <text> class="active" </text>     }><div id="icontitlediv">@Html.ActionLink("All", "All", "Invoice", new { fromDate = DateTime.MinValue.Date, toDate = DateTime.MaxValue.Date }, null)</div></li>
                         </ul>
                     </li>
 

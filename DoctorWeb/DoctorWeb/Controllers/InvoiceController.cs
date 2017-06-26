@@ -113,6 +113,42 @@ namespace DoctorWeb.Controllers
             int pageNumber = (page ?? 1);
             return View(prescriptions.OrderBy(i => i.ID).ToPagedList(pageNumber, pageSize));
         }
+
+        public ActionResult All(string currentFilter, string searchString, int? page, DateTime? fromDate, DateTime? toDate)
+        {
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var prescriptions = db.Prescriptions.Include(p => p.Doctor).Include(p => p.Instructions).Include(p => p.Patient).Include(p => p.PatientType);
+
+            if(fromDate != null && toDate != null)
+            {
+
+                prescriptions = prescriptions.Where(w => fromDate <= DbFunctions.TruncateTime(w.Date) && DbFunctions.TruncateTime(w.Date) <= toDate);
+                ViewBag.FromDate = fromDate.Value.Date.ToString("yyyy-MM-dd");
+                ViewBag.ToDate = toDate.Value.Date.ToString("yyyy-MM-dd");
+
+            }
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                prescriptions = prescriptions.Where(s => s.Patient.Name.Contains(searchString));
+            }
+
+            
+
+            int pageSize = 1;
+            int pageNumber = (page ?? 1);
+            return View(prescriptions.OrderBy(i => i.ID).ToPagedList(pageNumber, pageSize));
+        }
         //// GET: Invoice
         //public ActionResult Monthly()
         //{
@@ -182,7 +218,7 @@ namespace DoctorWeb.Controllers
             ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name", prescription.DoctorID);
             //ViewBag.InstructionID = new SelectList(db.Instructions, "ID", "Name", prescription.InstructionID);
             ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name", prescription.PatientID);
-            ViewBag.PatientTypeID = new SelectList(db.PatientTypes.OrderBy(o => o.PatientTypeName), "ID", "PatientTypeName", prescription.PatientTypeID);
+            ViewBag.PatientTypeID = new SelectList(db.PatientTypes.OrderBy(o => o.ID), "ID", "PatientTypeName", prescription.PatientTypeID);
             return View(prescription);
         }
 
@@ -202,7 +238,7 @@ namespace DoctorWeb.Controllers
             ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name", prescription.DoctorID);
             //ViewBag.InstructionID = new SelectList(db.Instructions, "ID", "Name", prescription.InstructionID);
             ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name", prescription.PatientID);
-            ViewBag.PatientTypeID = new SelectList(db.PatientTypes.OrderBy(o => o.PatientTypeName), "ID", "PatientTypeName", prescription.PatientTypeID);
+            ViewBag.PatientTypeID = new SelectList(db.PatientTypes.OrderBy(o => o.ID), "ID", "PatientTypeName", prescription.PatientTypeID);
             return View(prescription);
         }
 

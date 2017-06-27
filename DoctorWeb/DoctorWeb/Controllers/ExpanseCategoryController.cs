@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using DoctorWeb.Models;
 using System.Data.Entity.Infrastructure;
 using PagedList;
+using System.Web.Configuration;
 
 namespace DoctorWeb.Controllers
 {
@@ -38,7 +39,7 @@ namespace DoctorWeb.Controllers
                 expensecategories = expensecategories.Where(s => s.Name.Contains(searchString));
             }
 
-            int pageSize = 1;
+            int pageSize = Convert.ToInt32(WebConfigurationManager.AppSettings["PageSize"]);
             int pageNumber = (page ?? 1);
             return View(expensecategories.OrderBy(i => i.ID).ToPagedList(pageNumber, pageSize));
         }

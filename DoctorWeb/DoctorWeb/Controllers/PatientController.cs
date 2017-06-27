@@ -11,6 +11,9 @@ using DoctorWeb.Models.CustomModels;
 using System.IO;
 using System.ComponentModel;
 using System.Web.Script.Serialization;
+using PagedList;
+using DoctorWeb.Extension;
+using System.Web.Configuration;
 
 namespace DoctorWeb.Controllers
 {
@@ -125,20 +128,56 @@ namespace DoctorWeb.Controllers
         }
 
         // GET: Patient
-        public ActionResult Refered(int? id)
+        public ActionResult Refered(int? id, string currentFilter, string searchString, int? page, DateTime? fromDate, DateTime? toDate, string search, string export)
         {
-            IEnumerable<PatientRefByDoctor> patients = null;
-            ViewBag.Values = new SelectList(db.Doctors, "ID", "Name");
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
 
-            int? docId = db.ReferredBy.Where(w => w.Name == "Doctor").Select(s => s.ID).FirstOrDefault();
+            ViewBag.CurrentFilter = searchString;
+            ViewBag.Page = page;
+            ViewBag.DoctorID = id;
+
+            IEnumerable<PatientRefByDoctor> patients = null;
+
+            int? docId = db.ReferredBy.Where(w => w.ID == 1).Select(s => s.ID).FirstOrDefault();
 
             if (id == null && docId != null)
-                patients = db.Patients.Where(p => p.ReferredByID == docId).Select(o => new PatientRefByDoctor() { ID = o.ID, Name = o.Name, Age = o.Age.ToString(), Address = o.Address, Sex = o.Gender.ToString(), Status = o.Status.ToString(), Department = o.DepartmentID.ToString(), Ammount = db.Prescriptions.Where(p => p.PatientID == o.ID).Sum(s => (decimal?)s.Rs) ?? 0 });
-            else if (id != null)
-                patients = db.Patients.Where(p => p.DoctorID == id).Select(o => new PatientRefByDoctor() { ID = o.ID, Name = o.Name, Age = o.Age.ToString(), Address = o.Address, Sex = o.Gender.ToString(), Status = o.Status.ToString(), Department = o.DepartmentID.ToString(), Ammount = db.Prescriptions.Where(p => p.PatientID == o.ID).Sum(s => (decimal?)s.Rs) ?? 0 });
+                patients = db.Patients.Where(p => p.ReferredByID == docId).Select(o => new PatientRefByDoctor() { CreatedDate = o.CreatedDate, ID = o.ID, Name = o.Name, Age = o.Age.ToString(), Address = o.Address, Sex = o.Gender.ToString(), Status = o.Status.ToString(), Department = o.Department.Name, Ammount = db.Prescriptions.Where(p => p.PatientID == o.ID).Sum(s => (decimal?)s.Rs) ?? 0 });
+            else if (id != null && docId != null)
+                patients = db.Patients.Where(p => p.DoctorID == id && p.ReferredByID == docId).Select(o => new PatientRefByDoctor() { CreatedDate = o.CreatedDate, ID = o.ID, Name = o.Name, Age = o.Age.ToString(), Address = o.Address, Sex = o.Gender.ToString(), Status = o.Status.ToString(), Department = o.Department.Name, Ammount = db.Prescriptions.Where(p => p.PatientID == o.ID).Sum(s => (decimal?)s.Rs) ?? 0 });
 
-            //ViewBag.DoctorID = id;
-            return View(patients.ToList());
+            if (fromDate != null && toDate != null)
+            {
+                patients = patients.Where(w => fromDate <= w.CreatedDate && w.CreatedDate <= toDate);
+                ViewBag.FromDate = fromDate.Value.Date.ToString("yyyy-MM-dd");
+                ViewBag.ToDate = toDate.Value.Date.ToString("yyyy-MM-dd");
+            }
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                patients = patients.Where(s => s.Name.CaseInsensitiveContains(searchString));
+            }
+
+            ViewBag.Values = new SelectList(db.Doctors, "ID", "Name");
+
+            if(!string.IsNullOrEmpty(export))
+            {
+                Response.ClearContent();
+                Response.AddHeader("content-disposition", "attachment;filename=Patients.xls");
+                Response.AddHeader("Content-Type", "application/vnd.ms-excel");
+                WriteTsv(patients, Response.Output);
+                Response.End();
+            }
+
+            int pageSize = Convert.ToInt32(WebConfigurationManager.AppSettings["PageSize"]);
+            int pageNumber = (page ?? 1);
+            return View(patients.OrderBy(i => i.ID).ToPagedList(pageNumber, pageSize));
         }
 
         protected override void Dispose(bool disposing)
@@ -169,23 +208,6 @@ namespace DoctorWeb.Controllers
                 }
                 output.WriteLine();
             }
-        }
-
-        public void ExportListFromTsv(int? id)
-        {
-            IEnumerable<PatientRefByDoctor> patients = null;
-            ViewBag.Values = new SelectList(db.Doctors, "ID", "Name");
-            var doctorID = db.ReferredBy.Where(w => w.Name.Contains("Doctor")).Select(s => s.ID).FirstOrDefault();
-            if (id == null)
-                patients = db.Patients.Where(p => p.ReferredByID == doctorID).Select(o => new PatientRefByDoctor() { ID = o.ID, Name = o.Name, Age = o.Age.ToString(), Address = o.Address, Sex = o.Gender.ToString(), Status = o.Status.ToString(), Department = o.DepartmentID.ToString(), Ammount = db.Prescriptions.Where(p => p.PatientID == o.ID).Sum(s => (decimal?)s.Rs) ?? 0 });
-            else
-                patients = db.Patients.Where(p => p.ReferredByID == doctorID && p.DoctorID == id).Select(o => new PatientRefByDoctor() { ID = o.ID, Name = o.Name, Age = o.Age.ToString(), Address = o.Address, Sex = o.Gender.ToString(), Status = o.Status.ToString(), Department = o.DepartmentID.ToString(), Ammount = db.Prescriptions.Where(p => p.PatientID == o.ID).Sum(s => (decimal?)s.Rs) ?? 0 });
-
-            Response.ClearContent();
-            Response.AddHeader("content-disposition", "attachment;filename=Patients.xls");
-            Response.AddHeader("Content-Type", "application/vnd.ms-excel");
-            WriteTsv(patients, Response.Output);
-            Response.End();
         }
 
         //[HttpPost]

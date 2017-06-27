@@ -17,6 +17,9 @@
     <tr>
         <th></th>
         <th>
+            Patient No.
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.InvoiceNo)
         </th>
         <th>
@@ -64,6 +67,9 @@
         <tr>
             <td>
                 @Html.ActionLink("Select", "Edit", new { id = item.ID })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.InvoiceNo)

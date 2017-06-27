@@ -16,6 +16,8 @@ namespace DoctorWeb.Models.CustomModels
         public string Department { get; set; }
         public string Status { get; set; }
 
+        public DateTime CreatedDate { get; set; }
+
         [Display(Name = "Amount")]
         public decimal Ammount { get; set; }
     }

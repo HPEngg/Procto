@@ -33,7 +33,7 @@
         @Html.Raw(fromDateText)
         @Html.Raw(toDateText)
 
-        Find by Patient's name: @Html.TextBox("SearchString")
+        Find by Patient's name: <input type="text" name="SearchString" id="SearchString" value="@ViewBag.CurrentFilter" />
         <input type="submit" value="Search" />
     </p>
 }
@@ -107,7 +107,7 @@
                 @Html.DisplayFor(modelItem => item.Patient.Address)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Patient.DepartmentID)
+                @Html.DisplayFor(modelItem => item.Patient.Department.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Patient.Status)

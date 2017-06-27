@@ -231,6 +231,7 @@
     <Compile Include="Controllers\PrescriptionMedicineController.cs" />
     <Compile Include="Controllers\ReferredByController.cs" />
     <Compile Include="Controllers\SMSController.cs" />
+    <Compile Include="Extension\Extensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

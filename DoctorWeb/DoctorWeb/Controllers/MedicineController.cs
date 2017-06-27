@@ -10,6 +10,7 @@ using DoctorWeb.Models;
 using DoctorWeb.Models.CustomModels;
 using System.Data.Entity.Infrastructure;
 using PagedList;
+using System.Web.Configuration;
 
 namespace DoctorWeb.Controllers
 {
@@ -49,7 +50,7 @@ namespace DoctorWeb.Controllers
                 medicines = medicines.Where(s => s.OINTMore.Contains(searchString));
             }
 
-            int pageSize = 1;
+            int pageSize = Convert.ToInt32(WebConfigurationManager.AppSettings["PageSize"]);
             int pageNumber = (page ?? 1);
             return View(medicines.OrderBy(i => i.OINTMore).ToPagedList(pageNumber, pageSize));
         }
@@ -87,7 +88,7 @@ namespace DoctorWeb.Controllers
                 medicines = medicines.Where(s => s.OINTMore.Contains(searchString));
             }
             ViewBag.ID = id;
-            int pageSize = 1;
+            int pageSize = Convert.ToInt32(WebConfigurationManager.AppSettings["PageSize"]);
             int pageNumber = (page ?? 1);
             return View(medicines.OrderBy(i => i.OINTMore).ToPagedList(pageNumber, pageSize));
         }

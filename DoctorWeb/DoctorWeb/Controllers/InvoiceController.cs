@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using DoctorWeb.Models;
 using System.Data.Entity.Core.Objects;
 using PagedList;
+using DoctorWeb.Models.Enums;
+using System.Web.Configuration;
 
 namespace DoctorWeb.Controllers
 {
@@ -42,7 +44,7 @@ namespace DoctorWeb.Controllers
                 prescriptions = prescriptions.Where(s => s.Patient.Name.Contains(searchString));
             }
 
-            int pageSize = 1;
+            int pageSize = Convert.ToInt32(WebConfigurationManager.AppSettings["PageSize"]);
             int pageNumber = (page ?? 1);
             return View(prescriptions.OrderBy(i => i.ID).ToPagedList(pageNumber, pageSize));
         }
@@ -74,7 +76,7 @@ namespace DoctorWeb.Controllers
                 prescriptions = prescriptions.Where(s => s.Patient.Name.Contains(searchString));
             }
 
-            int pageSize = 1;
+            int pageSize = Convert.ToInt32(WebConfigurationManager.AppSettings["PageSize"]);
             int pageNumber = (page ?? 1);
             return View(prescriptions.OrderBy(i => i.ID).ToPagedList(pageNumber, pageSize));
         }
@@ -109,7 +111,7 @@ namespace DoctorWeb.Controllers
 
             ViewBag.Month = month;
             ViewBag.Year = year;
-            int pageSize = 1;
+            int pageSize = Convert.ToInt32(WebConfigurationManager.AppSettings["PageSize"]);
             int pageNumber = (page ?? 1);
             return View(prescriptions.OrderBy(i => i.ID).ToPagedList(pageNumber, pageSize));
         }
@@ -140,12 +142,24 @@ namespace DoctorWeb.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                prescriptions = prescriptions.Where(s => s.Patient.Name.Contains(searchString));
+                //PatientStatus status;
+                //Enum.TryParse<PatientStatus>(searchString, out status);
+                //if (Enum.IsDefined(typeof(PatientStatus), status))
+                //{
+                //    prescriptions = prescriptions.Where(w => w.Patient.Status == status);
+                //}
+                
+                //var department = db.Departments.Where(w => w.Name.Contains(searchString)).FirstOrDefault();
+                //if (department != null)
+                //{
+                //    prescriptions = prescriptions.Where(s => s.Patient.DepartmentID == department.ID);
+                //}
+                prescriptions = prescriptions.Where(s => s.Patient.Name.Contains(searchString) || s.Patient.Address.Contains(searchString) || s.Patient.Department.Name.Contains(searchString) || s.Patient.Status.ToString().Contains(searchString));
             }
 
             
 
-            int pageSize = 1;
+            int pageSize = Convert.ToInt32(WebConfigurationManager.AppSettings["PageSize"]);
             int pageNumber = (page ?? 1);
             return View(prescriptions.OrderBy(i => i.ID).ToPagedList(pageNumber, pageSize));
         }

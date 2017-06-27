@@ -1,4 +1,6 @@
-﻿@model IEnumerable<DoctorWeb.Models.CustomModels.PatientRefByDoctor>
+﻿@model PagedList.IPagedList<DoctorWeb.Models.CustomModels.PatientRefByDoctor>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewBag.Title = "Refered";
@@ -9,38 +11,71 @@
 
 @using (Html.BeginForm("Refered", "Patient"))
 {
+    string fromDateText = null;
+    string toDateText = null;
+    if (ViewBag.FromDate != null && ViewBag.ToDate != null)
+    {
+        ViewBag.FromDate = ViewBag.FromDate + "T00:00";
+        ViewBag.ToDate = ViewBag.ToDate + "T00:00";
+
+        fromDateText = "From Date <input type='datetime-local' name='fromDate' id='fromDate' value='" + ViewBag.FromDate + "' />";
+        toDateText = "To Date <input type='datetime-local' name='toDate' id='toDate' value='" + ViewBag.ToDate + "' />";
+    }
+    else
+    {
+        fromDateText = "From Date <input type='date' name='fromDate' id='fromDate' />";
+        toDateText = "To Date <input type='date' name='toDate' id='toDate' />";
+    }
     
     <div style="float:left;">
-        <label style="float:left;padding-right:5px;">ReferredBy</label>
+        <span style="float:left;padding:5px 5px 0 0;">Referred by</span>
         @Html.DropDownList("ID", (SelectList)ViewBag.Values, "Select Doctor", new { onchange = "this.form.submit();" })
+        <span style="padding-left:5px;">Find by Name</span>
+        @Html.TextBox("SearchString")
+        
     </div>
+    <div style="padding:10px 0px; clear:both; display:block;float:left;">
+        <span>@Html.Raw(fromDateText)</span>
+        <span style="padding:0px 5px;">@Html.Raw(toDateText)</span>
+        <input type="submit" value="Search"  name="search"/>
+        
+    </div>
+
     <div style="float:right;">
-        @Html.ActionLink("Export to Excel", "ExportListFromTsv", new { id = ViewBag.DoctorID })
+        <input type="submit" value="Export" name="export" class="btn btn-success" style="font-family:Calibri; text-transform:uppercase;"/>
     </div>
 }
 </br></br>
+
 <table class="table table-bordered">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @*@Html.DisplayNameFor(model => model.Name)*@
+            Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Age)
+            @*@Html.DisplayNameFor(model => model.Age)*@
+            Age
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Sex)
+            @*@Html.DisplayNameFor(model => model.Sex)*@
+            Sex
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Address)
+            @*@Html.DisplayNameFor(model => model.Address)*@
+            Address
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Department)
+            @*@Html.DisplayNameFor(model => model.Department)*@
+            Department
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Status)
+            @*@Html.DisplayNameFor(model => model.Status)*@
+            Status
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Ammount)
+            @*@Html.DisplayNameFor(model => model.Ammount)*@
+            Amount
         </th>
        
       
@@ -136,3 +171,7 @@
 }
 
 </table>
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Refered",
+    new { id = ViewBag.DoctorID, currentFilter = ViewBag.CurrentFilter, page, fromDate = ViewBag.FromDate, toDate = ViewBag.ToDate }))

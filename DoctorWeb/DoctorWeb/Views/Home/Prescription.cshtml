@@ -69,7 +69,7 @@
                         <div style="width:100%; clear:both;">
                             <label title="Rx" class="rx_label rx_label_right">Rx</label>
                             <div style="width: auto; padding-top:10px; padding-right: 8px; float:left;" class="btn_box">
-                                @Html.DropDownList("PrescriptionCategories", null, htmlAttributes: new { @class = "pre tabname", @id = "pre_categories", @style = "width: 75px!important; max-width: 70px!important; padding: 0!important;" })
+                                @Html.DropDownList("PrescriptionCategories", null, "--Select--", htmlAttributes: new { @class = "pre tabname", @id = "pre_categories", @style = "width: 100px!important; max-width: 100px!important; padding: 0!important;" })
                                 @*@foreach (var item in Model.Categories)
                                 {
                                     <input type="button" id="btnp1" readonly style="border: 1px solid rgb(69,117,212);color:rgb(69,117,212)" class="btn_p a" value="@Html.DisplayFor(modelItem => item.Name)" content="0;U">
@@ -827,11 +827,11 @@
                         jQuery("#qut_" + parseInt(i - 1)).val(j.item.quantity);
 
                         
-                        jQuery("#tabname_" + parseInt(i - 1)).val(j.item.mor);
+                        jQuery("#tabname_" + parseInt(i - 1)).val(j.item.meditype);
                         jQuery("#MorningDozID" + parseInt(i - 1)).val(j.item.mor);
                         jQuery("#NoonDozID" + parseInt(i - 1)).val(j.item.noon);
                         jQuery("#NightDozID" + parseInt(i - 1)).val(j.item.night);
-                        jQuery("#DosageID" + parseInt(i - 1)).val(j.item.night);
+                        jQuery("#DosageID" + parseInt(i - 1)).val(j.item.dosage);
                         
                         //if (j.item.term == true) {
                         
@@ -902,11 +902,11 @@
                         jQuery("#unt_" + parseInt(i - 1)).val(j.item.unit);
                         jQuery("#qut_" + parseInt(i - 1)).val(j.item.quantity);
 
-                        jQuery("#tabname_" + parseInt(i - 1)).val(j.item.mor);
+                        jQuery("#tabname_" + parseInt(i - 1)).val(j.item.meditype);
                         jQuery("#MorningDozID" + parseInt(i - 1)).val(j.item.mor);
                         jQuery("#NoonDozID" + parseInt(i - 1)).val(j.item.noon);
                         jQuery("#NightDozID" + parseInt(i - 1)).val(j.item.night);
-                        jQuery("#DosageID" + parseInt(i - 1)).val(j.item.night);
+                        jQuery("#DosageID" + parseInt(i - 1)).val(j.item.dosage);
 
                         //if (j.item.term == true) {
 

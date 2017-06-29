@@ -12,6 +12,8 @@ namespace DoctorWeb.Models.CustomModels
         public int ID { get; set; }
         public int No { get; set; }
         public int InvoiceNo { get; set; }
+
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm tt}")]
         public DateTime Date { get; set; }
         public string Status { get; set; }
         public string Name { get; set; }

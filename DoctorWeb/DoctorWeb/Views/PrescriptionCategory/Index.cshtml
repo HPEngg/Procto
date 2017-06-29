@@ -42,9 +42,19 @@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
             @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID }) |
-            @Html.ActionLink("Up", "Up", new { id = item.ID, page = ViewBag.Page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }) |
-            @Html.ActionLink("Down", "Down", new { id = item.ID, page = ViewBag.Page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @{
+                if (item.SortOrder != ViewBag.First)
+                {
+                    <span>|</span>
+                    @Html.ActionLink("Up", "Up", new { id = item.ID, page = ViewBag.Page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+                }
+                if (item.SortOrder != ViewBag.Last)
+                {
+                    <span>|</span>
+                    @Html.ActionLink("Down", "Down", new { id = item.ID, page = ViewBag.Page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+                }
+            }
         </td>
     </tr>
 }

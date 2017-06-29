@@ -43,6 +43,9 @@ namespace DoctorWeb.Controllers
                 prescriptioncategories = prescriptioncategories.Where(s => s.Name.Contains(searchString));
             }
 
+            ViewBag.First = prescriptioncategories.Min(m => m.SortOrder);
+            ViewBag.Last = prescriptioncategories.Max(m => m.SortOrder);
+
             int pageSize = Convert.ToInt32(WebConfigurationManager.AppSettings["PageSize"]);
             int pageNumber = (page ?? 1);
             return View(prescriptioncategories.OrderBy(i => i.SortOrder).ToPagedList(pageNumber, pageSize));

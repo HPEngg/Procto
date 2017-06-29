@@ -83,6 +83,7 @@ namespace DoctorWeb.Models.CustomModels
     public class Compulsory
     {
         [Display(Name = "Follow Date")]
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm tt}")]
         public string FollowDate { get; set; }
         public string Day { get; set; }
         public List<Instruction> Instructions { get; set; }

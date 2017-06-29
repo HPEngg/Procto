@@ -40,6 +40,9 @@ namespace DoctorWeb.Controllers
                 departments = departments.Where(s => s.Name.Contains(searchString));
             }
 
+            ViewBag.First = departments.Min(m => m.SortOrder);
+            ViewBag.Last = departments.Max(m => m.SortOrder);
+
             int pageSize = Convert.ToInt32(WebConfigurationManager.AppSettings["PageSize"]);
             int pageNumber = (page ?? 1);
             return View(departments.OrderBy(i => i.SortOrder).ToPagedList(pageNumber, pageSize));

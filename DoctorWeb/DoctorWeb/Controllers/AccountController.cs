@@ -139,7 +139,15 @@ namespace DoctorWeb.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            int userCount = 0;
+            using (var db = new ApplicationDbContext())
+            {
+                userCount = db.Users.Count();
+            }
+            if (userCount == 0)
+                return View();
+            else
+                return RedirectToAction("Login");
         }
 
         //

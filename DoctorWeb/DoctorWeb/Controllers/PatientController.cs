@@ -17,6 +17,7 @@ using System.Web.Configuration;
 
 namespace DoctorWeb.Controllers
 {
+    [Authorize]
     public class PatientController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

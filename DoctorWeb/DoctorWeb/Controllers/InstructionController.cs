@@ -13,6 +13,7 @@ using System.Web.Configuration;
 
 namespace DoctorWeb.Controllers
 {
+    [Authorize]
     public class InstructionController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

@@ -10,6 +10,7 @@ using DoctorWeb.Models;
 
 namespace DoctorWeb.Controllers
 {
+    [Authorize]
     public class PatientHistoryController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

@@ -13,6 +13,7 @@ using System.Text.RegularExpressions;
 
 namespace DoctorWeb.Controllers
 {
+    [Authorize]
     public class SMSController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

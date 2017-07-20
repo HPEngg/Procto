@@ -13,6 +13,7 @@ using System.Web.Configuration;
 
 namespace DoctorWeb.Controllers
 {
+    [Authorize]
     public class PaymentTypeController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

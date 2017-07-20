@@ -24,6 +24,7 @@ namespace DoctorWeb.Controllers
         //    var prescriptions = db.Prescriptions.Where(p => DbFunctions.TruncateTime(p.Date) == DateTime.Today.Date).Include(p => p.Doctor).Include(p => p.Instructions).Include(p => p.Patient).Include(p => p.PatientType);
         //    return View(prescriptions.ToList());
         //}
+        [Authorize]
         public ActionResult Daily(string currentFilter, string searchString, int? page)
         {
             if (searchString != null)
@@ -55,6 +56,7 @@ namespace DoctorWeb.Controllers
         //    var prescriptions = db.Prescriptions.Where(p => DbFunctions.TruncateTime(p.Date) >= dateBefore7days).Include(p => p.Doctor).Include(p => p.Instructions).Include(p => p.Patient).Include(p => p.PatientType);
         //    return View(prescriptions.ToList());
         //}
+        [Authorize]
         public ActionResult Weekly(string currentFilter, string searchString, int? page)
         {
             if (searchString != null)
@@ -88,7 +90,7 @@ namespace DoctorWeb.Controllers
         //    var prescriptions = db.Prescriptions.Include(p => p.Doctor).Where(p => p.Date.Year == year && p.Date.Month == month).Include(p => p.Instructions).Include(p => p.Patient).Include(p => p.PatientType);
         //    return View(prescriptions.ToList());
         //}
-
+        [Authorize]
         public ActionResult Monthly(string currentFilter, string searchString, int? page, int month, int year)
         {
             if (searchString != null)
@@ -115,7 +117,7 @@ namespace DoctorWeb.Controllers
             int pageNumber = (page ?? 1);
             return View(prescriptions.OrderBy(i => i.ID).ToPagedList(pageNumber, pageSize));
         }
-
+        [Authorize]
         public ActionResult All(string currentFilter, string searchString, int? page, DateTime? fromDate, DateTime? toDate)
         {
             if (searchString != null)
@@ -170,7 +172,7 @@ namespace DoctorWeb.Controllers
         //    var prescriptions = db.Prescriptions.Include(p => p.Doctor).Where(p => DbFunctions.TruncateTime(p.Date) >= dateBefore30Days).Include(p => p.Instruction).Include(p => p.Patient).Include(p => p.PatientType);
         //    return View(prescriptions.ToList());
         //}
-
+        [Authorize]
         // GET: Invoice/Details/5
         public ActionResult Details(int? id)
         {
@@ -216,7 +218,7 @@ namespace DoctorWeb.Controllers
         //    ViewBag.PatientTypeID = new SelectList(db.PatientTypes, "ID", "PatientTypeName", prescription.PatientTypeID);
         //    return View(prescription);
         //}
-
+        [Authorize]
         // GET: Invoice/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -239,6 +241,7 @@ namespace DoctorWeb.Controllers
         // POST: Invoice/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Days,Diagnosis,Procedure,Date,FollowDate,M,Percent,Less,Rs,Received,Pending,DoctorID,PatientID,InstructionID,PatientTypeID")] Prescription prescription)
@@ -255,7 +258,7 @@ namespace DoctorWeb.Controllers
             ViewBag.PatientTypeID = new SelectList(db.PatientTypes.OrderBy(o => o.ID), "ID", "PatientTypeName", prescription.PatientTypeID);
             return View(prescription);
         }
-
+        [Authorize]
         // GET: Invoice/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -272,6 +275,7 @@ namespace DoctorWeb.Controllers
         }
 
         // POST: Invoice/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -281,7 +285,7 @@ namespace DoctorWeb.Controllers
             db.SaveChanges();
             return RedirectToAction("/Daily");
         }
-
+        [Authorize]
         protected override void Dispose(bool disposing)
         {
             if (disposing)

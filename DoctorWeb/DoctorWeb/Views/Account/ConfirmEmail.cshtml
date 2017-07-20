@@ -1,10 +1,22 @@
 ﻿@{
     ViewBag.Title = "Confirm Email";
+    Layout = null;
 }
 
-<h2>@ViewBag.Title.</h2>
-<div>
-    <p>
-        Thank you for confirming your email. Please @Html.ActionLink("Click here to Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
-    </p>
-</div>
+<link href="~/Content/Login screen/Login_Register.css" rel="stylesheet" />
+<link href="~/Content/Login screen/mybootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/Login screen/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/Login screen/ionicons.min.css" rel="stylesheet" />
+<link href="~/Content/Login screen/AdminLTE.min.css" rel="stylesheet" />
+<link href="~/Content/Login screen/blue.css" rel="stylesheet" />
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="login-logo">
+            <img src="~/Content/Images/logo.png" />
+        </div>
+        <!-- /.login-logo -->
+        <div class="login-box-body">
+            <p class="login-box-msg"><b>@ViewBag.Title</b></br/></br/>Thank you for confirming your email. Please @Html.ActionLink("Click here to Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</p>
+        </div>
+    </div>
+</body>

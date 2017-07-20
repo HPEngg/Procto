@@ -1,41 +1,64 @@
-﻿@model DoctorWeb.Models.RegisterViewModel
+﻿@using System.Web.Configuration;
+@model DoctorWeb.Models.RegisterViewModel
 @{
     ViewBag.Title = "Register";
+    Layout = null;
 }
-
-<h2>@ViewBag.Title.</h2>
-
+<link href="~/Content/Login screen/Login_Register.css" rel="stylesheet" />
+<link href="~/Content/Login screen/mybootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/Login screen/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/Login screen/ionicons.min.css" rel="stylesheet" />
+<link href="~/Content/Login screen/AdminLTE.min.css" rel="stylesheet" />
+<link href="~/Content/Login screen/blue.css" rel="stylesheet" />
+<link href="~/Content/Login screen/googleapi.css" rel="stylesheet" />
+<link href="~/Content/Login screen/glyphicons.less" rel="stylesheet" />
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Content/Login screen/jquery.min.js"></script>
+<script src="~/Content/Login screen/icheck.min.js"></script>
+<body class="hold-transition register-page">
+    <div class="register-box">
+        <div class="register-logo">
+            <img src="~/Content/Images/logo.png" />
+        </div>
+        <div class="register-box-body">
+            <p class="login-box-msg">Register a new membership</p>
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
-        </div>
-    </div>
+                <div class="form-group has-feedback">
+                    @*<input type="email" class="form-control" placeholder="Email">*@
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", type="email", placeholder = "Email" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group has-feedback">
+                    @*<input type="password" class="form-control" placeholder="Password">*@
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", type="password", placeholder="Password" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group has-feedback">
+                    @*<input type="password" class="form-control" placeholder="Retype password">*@
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", type = "password", placeholder = "Confirm Password" })
+                    @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                </div>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <a href="@Url.Action("Login","Account")" class="btn btn-primary btn-block btn-flat">Login</a>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-xs-4">
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-xs-4">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
 }
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+        </div>
+        <!-- /.form-box -->
+    </div>
+    <!-- /.register-box -->
+    </body>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

@@ -729,6 +729,16 @@
     <Content Include="Content\js\webcam.js" />
     <Content Include="Content\js\webtrends.min.js" />
     <Content Include="Content\js\wysiwyg.js" />
+    <Content Include="Content\Login screen\AdminLTE.min.css" />
+    <Content Include="Content\Login screen\blue.css" />
+    <Content Include="Content\Login screen\bootstrap.min.css" />
+    <Content Include="Content\Login screen\font-awesome.min.css" />
+    <Content Include="Content\Login screen\googleapi.css" />
+    <Content Include="Content\Login screen\icheck.min.js" />
+    <Content Include="Content\Login screen\ionicons.min.css" />
+    <Content Include="Content\Login screen\jquery.min.js" />
+    <Content Include="Content\Login screen\Login_Register.css" />
+    <Content Include="Content\Login screen\mybootstrap.min.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -801,6 +811,8 @@
     <Content Include="Content\fonts\CANDARA.eot" />
     <Content Include="Content\fonts\CANDARA.ttf" />
     <Content Include="Content\fonts\CANDARA.woff" />
+    <Content Include="Content\Login screen\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\Login screen\glyphicons.less" />
     <None Include="Properties\PublishProfiles\pubish.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-1.10.2.js1" />

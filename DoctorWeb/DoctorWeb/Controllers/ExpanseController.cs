@@ -12,6 +12,7 @@ using System.Web.Configuration;
 
 namespace DoctorWeb.Controllers
 {
+    [Authorize]
     public class ExpanseController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

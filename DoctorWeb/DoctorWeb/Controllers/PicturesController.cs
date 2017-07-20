@@ -11,6 +11,7 @@ using System.IO;
 
 namespace DoctorWeb.Controllers
 {
+    [Authorize]
     public class PicturesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

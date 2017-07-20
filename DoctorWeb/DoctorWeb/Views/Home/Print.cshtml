@@ -750,9 +750,14 @@
                         {
                             <div class="print_text_fltleft arial_heading">
                                 <label class="arial_heading" style="float:left; padding-right:5px;">FOLLOW UP DATE:</label>
-                                @Html.DisplayFor(model => model.Compulsory.FollowDate)
-                                <span>, </span>
-                                @Html.DisplayFor(model => model.Compulsory.Day)
+                              @{
+                                  DateTime fdt = Convert.ToDateTime(Model.Compulsory.FollowDate);
+                                  string fdt1 = fdt.ToString("d MMMM yyyy HH:mm:ss");
+                            }
+                            @fdt1
+                            @*@Html.DisplayFor(model => model.Compulsory.FollowDate)*@
+                            <span>, </span>
+                            @Html.DisplayFor(model => model.Compulsory.Day)
                             </div>
                             @*<div class="arial_heading" style="float:left;">
                                     @Html.DisplayFor(model => model.Compulsory.FollowDate)

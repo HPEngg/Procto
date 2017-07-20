@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace DoctorWeb.Controllers
 {
+    [Authorize]
     public class CertificateController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

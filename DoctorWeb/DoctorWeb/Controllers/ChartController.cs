@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace DoctorWeb.Controllers
 {
+    [Authorize]
     public class ChartController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

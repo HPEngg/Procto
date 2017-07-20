@@ -19,7 +19,7 @@ namespace DoctorWeb.Controllers
     public class HomeController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
+        [Authorize]
         public ActionResult Search(String PatientName)
         {
             int invoiceNum = 0;
@@ -97,12 +97,12 @@ namespace DoctorWeb.Controllers
                 return PartialView(model.ToList());
             }
         }
-
+        [Authorize]
         public ActionResult FollowupList_Intermediate()
         {
             return View();
         }
-
+        [Authorize]
         public ActionResult FollowupList(DateTime fdate)
         {
             List<PatientSearch> model;
@@ -139,7 +139,7 @@ namespace DoctorWeb.Controllers
             }
             return PartialView(model.ToList());
         }
-
+        [Authorize]
         public ActionResult PatientToday()
         {
             var todayDate = DateTime.Now.Date;
@@ -176,13 +176,13 @@ namespace DoctorWeb.Controllers
             }
             return View(model.ToList());
         }
-
+        [Authorize]
         public ActionResult ImageLightbox(int id)
         {
             ViewBag.PatientID = id;
             return PartialView();
         }
-
+        [Authorize]
         [HttpPost]
         public ActionResult ImageLightbox(string data, int patientID, int imageID)
         {
@@ -219,13 +219,14 @@ namespace DoctorWeb.Controllers
 
         //    return newImage;
         //}
-
+        [Authorize]
         public ActionResult DrawImage()
         {
             return PartialView();
             //return View(model.ToList());
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult DrawImage(string data)
         {
@@ -241,7 +242,7 @@ namespace DoctorWeb.Controllers
             //return View(model.ToList());
         }
 
-
+        [Authorize]
         public ActionResult Webcam(int id)
         {
             ViewBag.PatientID = id;
@@ -258,7 +259,7 @@ namespace DoctorWeb.Controllers
             }
             return bytes;
         }
-
+        [Authorize]
         // Captures patient.photo from webcam
         public ActionResult CaptureImage(int id)
         {
@@ -287,7 +288,7 @@ namespace DoctorWeb.Controllers
             string path = "http://localhost:50409/Content/PatientImages/test.png";
             return Json(path, JsonRequestBehavior.AllowGet);
         }
-
+        [Authorize]
         public ActionResult Index()
         {
             ViewBag.Message = TempData["Message"] ?? string.Empty;
@@ -304,7 +305,7 @@ namespace DoctorWeb.Controllers
             ViewBag.PatientCount = db.Patients.Count() + 1;
             return View();
         }
-
+        [Authorize]
         [HttpPost]
         public JsonResult AutoComplete(string MedicineName)
         {
@@ -313,6 +314,7 @@ namespace DoctorWeb.Controllers
         }
 
         static int patient_success = 0;
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Index(PatientHome model)
@@ -335,7 +337,7 @@ namespace DoctorWeb.Controllers
                     string hDoc_web = WebConfigurationManager.AppSettings["HDoctorName"];
                     string hospitalName = WebConfigurationManager.AppSettings["HospitalName"];
                     var doctor = db.Doctors.Where(w => w.ID == patient.DoctorID).FirstOrDefault();
-                    string patientDetails = patient.Name + "," + patient.Age + "//" + patient.Gender + "//" + patient.Address;
+                    string patientDetails = patient.Name + "," + patient.Age + ", " + patient.Gender + ", " + patient.Address;
                     string message = "Dear "+ doctor.Name +" your referred  patient " + patientDetails + " was examined by "+ hDoc_web + " at " + hospitalName + " on " + DateTime.Now.Date + ". Thanks for your reference.";
                     SMSHelper.sendMessage(doctor.Contact, message);
                 }
@@ -362,6 +364,7 @@ namespace DoctorWeb.Controllers
         }
 
         static int prescr_success = 0;
+        [Authorize]
         public ActionResult Prescription(int patientID)
         {
             //ViewBag.Message = "Your application description page.";
@@ -400,7 +403,7 @@ namespace DoctorWeb.Controllers
             return View(model);
         }
 
-
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Prescription(PrescriptionHome model, HttpPostedFileBase preImage1, HttpPostedFileBase preImage2)
@@ -526,21 +529,21 @@ namespace DoctorWeb.Controllers
 
             return RedirectToAction("Prescription", new { patientID = model.PatientID });
         }
-
+        [Authorize]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
 
             return View();
         }
-
+        [Authorize]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
 
             return View();
         }
-
+        [Authorize]
         public ActionResult Edit(int id)
         {
             if (patient_success == 1)
@@ -557,7 +560,7 @@ namespace DoctorWeb.Controllers
             ViewBag.DepartmentID = new SelectList(db.Departments.OrderBy(i => i.SortOrder), "ID", "Name", model.Patient.DepartmentID);
             return View(model);
         }
-
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(PatientHome model)
@@ -577,7 +580,7 @@ namespace DoctorWeb.Controllers
             ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name", model.Patient.DoctorID);
             return View(model);
         }
-
+        [Authorize]
         public ActionResult PrintPreview(int id)
         {
             int prescriptionID = db.Prescriptions.Where(p => p.PatientID == id).OrderByDescending(o => o.Date).Select(s => s.ID).FirstOrDefault();
@@ -591,7 +594,7 @@ namespace DoctorWeb.Controllers
             ViewBag.PatientID = id;
             return View(model);
         }
-
+        [Authorize]
         [HttpPost]
         public ActionResult PrintInvoice(PrintInvoice model)
         {
@@ -627,7 +630,7 @@ namespace DoctorWeb.Controllers
             return View(printData);
 
         }
-
+        [Authorize]
         public ActionResult PrintInvoicePreview(int id)
         {
             var model = new PrintInvoice();
@@ -657,7 +660,7 @@ namespace DoctorWeb.Controllers
             model.IsHeaderPhotoRequired = true;
             return View(model);
         }
-
+        [Authorize]
         [HttpPost]
         public ActionResult Print(PrintModel model)
         {
@@ -671,7 +674,7 @@ namespace DoctorWeb.Controllers
             printData.UploadedImagesRequired = model.UploadedImagesRequired;
             return View(printData);
         }
-
+        [Authorize]
         public ActionResult FollowUp(int patientID, int id)
         {
             var model = GetPatientPriscription(id);
@@ -679,7 +682,7 @@ namespace DoctorWeb.Controllers
             ViewBag.Values = new SelectList(db.Prescriptions.Where(p => p.PatientID == patientID), "ID", "Date");
             return View(model);
         }
-
+        [Authorize]
         public ActionResult MedicineList(string id)
         {
             var model = db.Medicines.Where(p => p.PrescriptionCategories.Any(q => q.Name == id)).ToList();
@@ -695,7 +698,7 @@ namespace DoctorWeb.Controllers
             ViewBag.PrescriptionCategoryIDL = new SelectList(db.PrescriptionCategories.OrderBy(o => o.Name), "ID", "Name");
             return PartialView(model);
         }
-
+        [Authorize]
         private PrintModel GetPatientPriscription(int prescriptionID)
         {
             var model = new PrintModel();

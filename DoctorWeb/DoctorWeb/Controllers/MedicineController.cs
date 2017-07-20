@@ -14,6 +14,7 @@ using System.Web.Configuration;
 
 namespace DoctorWeb.Controllers
 {
+
     public class MedicineController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -27,7 +28,7 @@ namespace DoctorWeb.Controllers
         //    var medicines = db.Medicines.Include(m => m.Dosage).Include(m => m.Morning).Include(m => m.Night).Include(m => m.Noon).Include(m => m.OINT);
         //    return View(medicines.ToList());
         //}
-
+        [Authorize]
         public ActionResult Index(string currentFilter, string searchString, int? page)
         {
             if (searchString != null)
@@ -64,7 +65,7 @@ namespace DoctorWeb.Controllers
         //    var medicines = db.Medicines.Where(p => p.PrescriptionCategories.Any(t => t.ID == id)).Include(m => m.Dosage).Include(m => m.Morning).Include(m => m.Night).Include(m => m.Noon).Include(m => m.OINT);
         //    return View(medicines.ToList());
         //}
-
+        [Authorize]
         public ActionResult ByCategory(string currentFilter, string searchString, int? page, int? id)
         {
             if (searchString != null)
@@ -94,6 +95,7 @@ namespace DoctorWeb.Controllers
         }
 
         // GET: Medicine/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -109,6 +111,7 @@ namespace DoctorWeb.Controllers
         }
 
         // GET: Medicine/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.DosageID = new SelectList(db.Dosages, "ID", "Name");
@@ -126,6 +129,7 @@ namespace DoctorWeb.Controllers
         // POST: Medicine/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(MedicineViewModel model)//[Bind(Include = "ID,OINTTypeID,OINTMore,MorningDozID,NoonDozID,NightDozID,DosageID,IsDayAffected,Quantity")] Medicine medicine)
@@ -153,6 +157,7 @@ namespace DoctorWeb.Controllers
         }
 
         // GET: Medicine/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -179,6 +184,7 @@ namespace DoctorWeb.Controllers
         // POST: Medicine/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(MedicineViewModel model)//[Bind(Include = "ID,OINTTypeID,OINTMore,MorningDozID,NoonDozID,NightDozID,DosageID,IsDayAffected,Quantity")] Medicine medicine)
@@ -232,6 +238,7 @@ namespace DoctorWeb.Controllers
         }
 
         // GET: Medicine/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -247,6 +254,7 @@ namespace DoctorWeb.Controllers
         }
 
         // POST: Medicine/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -264,7 +272,7 @@ namespace DoctorWeb.Controllers
                 return RedirectToAction("Index");
             }
         }
-
+        [Authorize]
         protected override void Dispose(bool disposing)
         {
             if (disposing)

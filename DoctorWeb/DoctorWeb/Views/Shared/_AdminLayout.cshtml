@@ -20,10 +20,10 @@
     <script type="text/javascript" src="~/Content/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="~/Content/js/jquery.cookie.js"></script>
     <script type="text/javascript" src="~/Content/js/custom.js"></script>
-        
+
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/Site.css" rel="stylesheet" />
-   
+
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
@@ -65,188 +65,188 @@
                     @*Invoice*@
                     <li class="dropdown">
                         <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Invoice List</div></a>
-                        <ul @if (ctrName == "Invoice" && actnName == "Index") { <text> style="display:block;" </text>   }>
-                            <li @if (ctrName == "Invoice" && actnName == "Daily") { <text> class="active" </text>   }><div id="icontitlediv">@Html.ActionLink("Daily List", "Daily", "Invoice")</div></li>
-                            <li @if (ctrName == "Invoice" && actnName == "Weekly") { <text> class="active" </text>   }><div id="icontitlediv">@Html.ActionLink("Weekly List", "Weekly", "Invoice")</div></li>
-                            <li @if (ctrName == "Invoice" && actnName == "Monthly") { <text> class="active" </text>    }><div id="icontitlediv">@Html.ActionLink("Monthly List", "Monthly", "Invoice", new { month = Convert.ToInt32(DateTime.Now.Month), year = Convert.ToInt32(DateTime.Now.Year) }, null)</div></li>
-                            <li @if (ctrName == "Invoice" && actnName == "All") { <text> class="active" </text>     }><div id="icontitlediv">@Html.ActionLink("All", "All", "Invoice", new { fromDate = DateTime.MinValue.Date, toDate = DateTime.MaxValue.Date }, null)</div></li>
+                        <ul @if (ctrName == "Invoice" && actnName == "Index") { <text> style="display:block;" </text>     }>
+                            <li @if (ctrName == "Invoice" && actnName == "Daily") { <text> class="active" </text>     }><div id="icontitlediv">@Html.ActionLink("Daily List", "Daily", "Invoice")</div></li>
+                            <li @if (ctrName == "Invoice" && actnName == "Weekly") { <text> class="active" </text>     }><div id="icontitlediv">@Html.ActionLink("Weekly List", "Weekly", "Invoice")</div></li>
+                            <li @if (ctrName == "Invoice" && actnName == "Monthly") { <text> class="active" </text>      }><div id="icontitlediv">@Html.ActionLink("Monthly List", "Monthly", "Invoice", new { month = Convert.ToInt32(DateTime.Now.Month), year = Convert.ToInt32(DateTime.Now.Year) }, null)</div></li>
+                            <li @if (ctrName == "Invoice" && actnName == "All") { <text> class="active" </text>       }><div id="icontitlediv">@Html.ActionLink("All", "All", "Invoice", new { fromDate = DateTime.MinValue.Date, toDate = DateTime.MaxValue.Date }, null)</div></li>
                         </ul>
                     </li>
 
                     @* MEDICINE *@
                     <li class="dropdown">
                         <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Medicine</div></a>
-                        <ul @if ((ctrName == "Medicine" && actnName == "Create") || (ctrName == "Medicine" && actnName == "Index")) { <text> style="display:block;" </text>  }>
-                            <li @if (ctrName == "Medicine" && actnName == "Create") { <text> class="active" </text>   }><div id="icontitlediv">@Html.ActionLink("Add Medicine", "Create", "Medicine")</div></li>
-                            <li @if (ctrName == "Medicine" && actnName == "Index") { <text> class="active" </text>   }><div id="icontitlediv">@Html.ActionLink("Medicine List", "Index", "Medicine")</div></li>
-                            <li @if (ctrName == "Medicine" && actnName == "ByCategory") { <text> class="active" </text>    }><div id="icontitlediv">@Html.ActionLink("Medicine By Category", "ByCategory", "Medicine")</div></li>
+                        <ul @if ((ctrName == "Medicine" && actnName == "Create") || (ctrName == "Medicine" && actnName == "Index")) { <text> style="display:block;" </text>    }>
+                            <li @if (ctrName == "Medicine" && actnName == "Create") { <text> class="active" </text>     }><div id="icontitlediv">@Html.ActionLink("Add Medicine", "Create", "Medicine")</div></li>
+                            <li @if (ctrName == "Medicine" && actnName == "Index") { <text> class="active" </text>     }><div id="icontitlediv">@Html.ActionLink("Medicine List", "Index", "Medicine")</div></li>
+                            <li @if (ctrName == "Medicine" && actnName == "ByCategory") { <text> class="active" </text>      }><div id="icontitlediv">@Html.ActionLink("Medicine By Category", "ByCategory", "Medicine")</div></li>
                         </ul>
                     </li>
 
                     @* PRESCRIPTION CATEGORY *@
                     <li class="dropdown">
                         <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Medicine Protocol</div></a>
-                        <ul @if ((ctrName == "PrescriptionCategory" && actnName == "Create") || (ctrName == "PrescriptionCategory" && actnName == "Index")) { <text> style="display:block;" </text>   }>
-                            <li @if (ctrName == "PrescriptionCategory" && actnName == "Create") { <text> class="active" </text>    }><div id="icontitlediv">@Html.ActionLink("Add Medicine Protocol", "Create", "PrescriptionCategory")</div></li>
-                            <li @if (ctrName == "PrescriptionCategory" && actnName == "Index") { <text> class="active" </text>    }><div id="icontitlediv">@Html.ActionLink("Medicine Protocol List", "Index", "PrescriptionCategory")</div></li>
+                        <ul @if ((ctrName == "PrescriptionCategory" && actnName == "Create") || (ctrName == "PrescriptionCategory" && actnName == "Index")) { <text> style="display:block;" </text>     }>
+                            <li @if (ctrName == "PrescriptionCategory" && actnName == "Create") { <text> class="active" </text>      }><div id="icontitlediv">@Html.ActionLink("Add Medicine Protocol", "Create", "PrescriptionCategory")</div></li>
+                            <li @if (ctrName == "PrescriptionCategory" && actnName == "Index") { <text> class="active" </text>      }><div id="icontitlediv">@Html.ActionLink("Medicine Protocol List", "Index", "PrescriptionCategory")</div></li>
                         </ul>
                     </li>
 
                     @* MEDICINE TYPE *@
                     <li class="dropdown">
                         <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Medicine Type</div></a>
-                        <ul @if ((ctrName == "OINTtype" && actnName == "Create") || (ctrName == "OINTtype" && actnName == "Index")) { <text> style="display:block;" </text>    }>
-                            <li @if (ctrName == "OINTtype" && actnName == "Create") { <text> class="active" </text>     }><div id="icontitlediv">@Html.ActionLink("Add Medicine Type", "Create", "OINTtype")</div></li>
-                            <li @if (ctrName == "OINTtype" && actnName == "Index") { <text> class="active" </text>     }><div id="icontitlediv">@Html.ActionLink("List of Types", "Index", "OINTtype")</div></li>
+                        <ul @if ((ctrName == "OINTtype" && actnName == "Create") || (ctrName == "OINTtype" && actnName == "Index")) { <text> style="display:block;" </text>      }>
+                            <li @if (ctrName == "OINTtype" && actnName == "Create") { <text> class="active" </text>       }><div id="icontitlediv">@Html.ActionLink("Add Medicine Type", "Create", "OINTtype")</div></li>
+                            <li @if (ctrName == "OINTtype" && actnName == "Index") { <text> class="active" </text>       }><div id="icontitlediv">@Html.ActionLink("List of Types", "Index", "OINTtype")</div></li>
                         </ul>
                     </li>
 
                     @* Doz Values *@
                     <li class="dropdown">
                         <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Dosage Values</div></a>
-                        <ul @if ((ctrName == "Doz" && actnName == "Create") || (ctrName == "Doz" && actnName == "Index")) { <text> style="display:block;" </text>      }>
-                            <li @if (ctrName == "Doz" && actnName == "Create") { <text> class="active" </text>       }><div id="icontitlediv">@Html.ActionLink("Add Dosage Value", "Create", "Doz")</div></li>
-                            <li @if (ctrName == "Doz" && actnName == "Index") { <text> class="active" </text>       }><div id="icontitlediv">@Html.ActionLink("List of Dosage Values", "Index", "Doz")</div></li>
+                        <ul @if ((ctrName == "Doz" && actnName == "Create") || (ctrName == "Doz" && actnName == "Index")) { <text> style="display:block;" </text>        }>
+                            <li @if (ctrName == "Doz" && actnName == "Create") { <text> class="active" </text>         }><div id="icontitlediv">@Html.ActionLink("Add Dosage Value", "Create", "Doz")</div></li>
+                            <li @if (ctrName == "Doz" && actnName == "Index") { <text> class="active" </text>         }><div id="icontitlediv">@Html.ActionLink("List of Dosage Values", "Index", "Doz")</div></li>
                         </ul>
                     </li>
 
                     @* MEDICINE DOSAGE *@
                     <li class="dropdown">
                         <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Dosage</div></a>
-                        <ul @if ((ctrName == "Dosage" && actnName == "Create") || (ctrName == "Dosage" && actnName == "Index")) { <text> style="display:block;" </text>     }>
-                            <li @if (ctrName == "Dosage" && actnName == "Create") { <text> class="active" </text>      }><div id="icontitlediv">@Html.ActionLink("Add Dosage", "Create", "Dosage")</div></li>
-                            <li @if (ctrName == "Dosage" && actnName == "Index") { <text> class="active" </text>      }><div id="icontitlediv">@Html.ActionLink("List of Dosage", "Index", "Dosage")</div></li>
+                        <ul @if ((ctrName == "Dosage" && actnName == "Create") || (ctrName == "Dosage" && actnName == "Index")) { <text> style="display:block;" </text>       }>
+                            <li @if (ctrName == "Dosage" && actnName == "Create") { <text> class="active" </text>        }><div id="icontitlediv">@Html.ActionLink("Add Dosage", "Create", "Dosage")</div></li>
+                            <li @if (ctrName == "Dosage" && actnName == "Index") { <text> class="active" </text>        }><div id="icontitlediv">@Html.ActionLink("List of Dosage", "Index", "Dosage")</div></li>
                         </ul>
                     </li>
 
                     @* Department *@
                     <li class="dropdown">
                         <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Department</div></a>
-                        <ul @if ((ctrName == "Department" && actnName == "Create") || (ctrName == "Department" && actnName == "Index")) { <text> style="display:block;" </text>    }>
-                            <li @if (ctrName == "Department" && actnName == "Create") { <text> class="active" </text>     }><div id="icontitlediv">@Html.ActionLink("Add Department", "Create", "Department")</div></li>
-                            <li @if (ctrName == "Department" && actnName == "Index") { <text> class="active" </text>     }><div id="icontitlediv">@Html.ActionLink("Department List", "Index", "Department")</div></li>
+                        <ul @if ((ctrName == "Department" && actnName == "Create") || (ctrName == "Department" && actnName == "Index")) { <text> style="display:block;" </text>      }>
+                            <li @if (ctrName == "Department" && actnName == "Create") { <text> class="active" </text>       }><div id="icontitlediv">@Html.ActionLink("Add Department", "Create", "Department")</div></li>
+                            <li @if (ctrName == "Department" && actnName == "Index") { <text> class="active" </text>       }><div id="icontitlediv">@Html.ActionLink("Department List", "Index", "Department")</div></li>
                         </ul>
                     </li>
 
                     @* PATIENT TYPE *@
                     <li class="dropdown">
                         <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Patient Type</div></a>
-                        <ul @if ((ctrName == "PatientType" && actnName == "Create") || (ctrName == "PatientType" && actnName == "Index")) { <text> style="display:block;" </text>   }>
-                            <li @if (ctrName == "PatientType" && actnName == "Create") { <text> class="active" </text>    }><div id="icontitlediv">@Html.ActionLink("Add Patient Type", "Create", "PatientType")</div></li>
-                            <li @if (ctrName == "PatientType" && actnName == "Index") { <text> class="active" </text>    }><div id="icontitlediv">@Html.ActionLink("Patient Type List", "Index", "PatientType")</div></li>
+                        <ul @if ((ctrName == "PatientType" && actnName == "Create") || (ctrName == "PatientType" && actnName == "Index")) { <text> style="display:block;" </text>     }>
+                            <li @if (ctrName == "PatientType" && actnName == "Create") { <text> class="active" </text>      }><div id="icontitlediv">@Html.ActionLink("Add Patient Type", "Create", "PatientType")</div></li>
+                            <li @if (ctrName == "PatientType" && actnName == "Index") { <text> class="active" </text>      }><div id="icontitlediv">@Html.ActionLink("Patient Type List", "Index", "PatientType")</div></li>
                         </ul>
                     </li>
 
                     @* PAYMENT TYPE *@
                     <li class="dropdown">
                         <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Charges Type</div></a>
-                        <ul @if ((ctrName == "PaymentType" && actnName == "Create") || (ctrName == "PaymentType" && actnName == "Index")) { <text> style="display:block;" </text>   }>
-                            <li @if (ctrName == "PaymentType" && actnName == "Create") { <text> class="active" </text>    }><div id="icontitlediv">@Html.ActionLink("Add Charge Type", "Create", "PaymentType")</div></li>
-                            <li @if (ctrName == "PaymentType" && actnName == "Index") { <text> class="active" </text>    }><div id="icontitlediv">@Html.ActionLink("Charges Type List", "Index", "PaymentType")</div></li>
+                        <ul @if ((ctrName == "PaymentType" && actnName == "Create") || (ctrName == "PaymentType" && actnName == "Index")) { <text> style="display:block;" </text>     }>
+                            <li @if (ctrName == "PaymentType" && actnName == "Create") { <text> class="active" </text>      }><div id="icontitlediv">@Html.ActionLink("Add Charge Type", "Create", "PaymentType")</div></li>
+                            <li @if (ctrName == "PaymentType" && actnName == "Index") { <text> class="active" </text>      }><div id="icontitlediv">@Html.ActionLink("Charges Type List", "Index", "PaymentType")</div></li>
                         </ul>
                     </li>
 
                     @* INSTRUCTION *@
                     <li class="dropdown">
                         <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Instruction</div></a>
-                        <ul @if ((ctrName == "Instruction" && actnName == "Create") || (ctrName == "Instruction" && actnName == "Index")) { <text> style="display:block;" </text>   }>
-                            <li @if (ctrName == "Instruction" && actnName == "Create") { <text> class="active" </text>    }><div id="icontitlediv">@Html.ActionLink("Add Instruction", "Create", "Instruction")</div></li>
-                            <li @if (ctrName == "Instruction" && actnName == "Index") { <text> class="active" </text>    }><div id="icontitlediv">@Html.ActionLink("Instruction List", "Index", "Instruction")</div></li>
+                        <ul @if ((ctrName == "Instruction" && actnName == "Create") || (ctrName == "Instruction" && actnName == "Index")) { <text> style="display:block;" </text>     }>
+                            <li @if (ctrName == "Instruction" && actnName == "Create") { <text> class="active" </text>      }><div id="icontitlediv">@Html.ActionLink("Add Instruction", "Create", "Instruction")</div></li>
+                            <li @if (ctrName == "Instruction" && actnName == "Index") { <text> class="active" </text>      }><div id="icontitlediv">@Html.ActionLink("Instruction List", "Index", "Instruction")</div></li>
                         </ul>
                     </li>
 
-                    <li @if (ctrName == "Patient" && actnName == "Refered") { <text> class="active" </text>   }><div id="icondiv"><span class="icon-align-justify"></span></div><div id="icontitlediv">@Html.ActionLink("Patients reffered by Doctor", "Refered", "Patient")</div></li>
+                    <li @if (ctrName == "Patient" && actnName == "Refered") { <text> class="active" </text>     }><div id="icondiv"><span class="icon-align-justify"></span></div><div id="icontitlediv">@Html.ActionLink("Patients reffered by Doctor", "Refered", "Patient")</div></li>
 
                     @* ReferredBy *@
                     <li class="dropdown">
                         <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">ReferredBy</div></a>
-                        <ul @if ((ctrName == "ReferredBy" && actnName == "Create") || (ctrName == "ReferredBy" && actnName == "Index")) { <text> style="display:block;" </text>     }>
-                            <li @if (ctrName == "ReferredBy" && actnName == "Create") { <text> class="active" </text>      }><div id="icontitlediv">@Html.ActionLink("Add ReferredBy", "Create", "ReferredBy")</div></li>
-                            <li @if (ctrName == "ReferredBy" && actnName == "Index") { <text> class="active" </text>      }><div id="icontitlediv">@Html.ActionLink("ReferredBy List", "Index", "ReferredBy")</div></li>
+                        <ul @if ((ctrName == "ReferredBy" && actnName == "Create") || (ctrName == "ReferredBy" && actnName == "Index")) { <text> style="display:block;" </text>       }>
+                            <li @if (ctrName == "ReferredBy" && actnName == "Create") { <text> class="active" </text>        }><div id="icontitlediv">@Html.ActionLink("Add ReferredBy", "Create", "ReferredBy")</div></li>
+                            <li @if (ctrName == "ReferredBy" && actnName == "Index") { <text> class="active" </text>        }><div id="icontitlediv">@Html.ActionLink("ReferredBy List", "Index", "ReferredBy")</div></li>
                         </ul>
                     </li>
 
                     @* DOCTOR *@
                     <li class="dropdown">
                         <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Doctor</div></a>
-                        <ul @if ((ctrName == "Doctor" && actnName == "Create") || (ctrName == "Doctor" && actnName == "Index")) { <text> style="display:block;" </text>   }>
-                            <li @if (ctrName == "Doctor" && actnName == "Create") { <text> class="active" </text>    }><div id="icontitlediv">@Html.ActionLink("Add Doctor", "Create", "Doctor")</div></li>
-                            <li @if (ctrName == "Doctor" && actnName == "Index") { <text> class="active" </text>    }><div id="icontitlediv">@Html.ActionLink("Doctors List", "Index", "Doctor")</div></li>
+                        <ul @if ((ctrName == "Doctor" && actnName == "Create") || (ctrName == "Doctor" && actnName == "Index")) { <text> style="display:block;" </text>     }>
+                            <li @if (ctrName == "Doctor" && actnName == "Create") { <text> class="active" </text>      }><div id="icontitlediv">@Html.ActionLink("Add Doctor", "Create", "Doctor")</div></li>
+                            <li @if (ctrName == "Doctor" && actnName == "Index") { <text> class="active" </text>      }><div id="icontitlediv">@Html.ActionLink("Doctors List", "Index", "Doctor")</div></li>
                         </ul>
                     </li>
 
                     @* Prescription Images *@
                     <li class="dropdown">
                         <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Prescription Images</div></a>
-                        <ul @if (ctrName == "PreImage" && actnName == "Index") { <text> style="display:block;" </text>    }>
-                            <li @if (ctrName == "PreImage" && actnName == "Create") { <text> class="active" </text>    }><div id="icontitlediv">@Html.ActionLink("Add Image", "Create", "PreImage")</div></li>
-                            <li @if (ctrName == "PreImage" && actnName == "Index") { <text> class="active" </text>    }><div id="icontitlediv">@Html.ActionLink("List all", "Index", "PreImage")</div></li>
+                        <ul @if (ctrName == "PreImage" && actnName == "Index") { <text> style="display:block;" </text>      }>
+                            <li @if (ctrName == "PreImage" && actnName == "Create") { <text> class="active" </text>      }><div id="icontitlediv">@Html.ActionLink("Add Image", "Create", "PreImage")</div></li>
+                            <li @if (ctrName == "PreImage" && actnName == "Index") { <text> class="active" </text>      }><div id="icontitlediv">@Html.ActionLink("List all", "Index", "PreImage")</div></li>
                         </ul>
                     </li>
 
                     @* Header footer *@
-                    <li @if (ctrName == "Pictures" && actnName == "Index") { <text> class="active" </text>  }><div id="icondiv"><span class="icon-align-justify"></span></div><div id="icontitlediv">@Html.ActionLink("Header & Footer images", "Index", "Pictures")</div></li>
+                    <li @if (ctrName == "Pictures" && actnName == "Index") { <text> class="active" </text>    }><div id="icondiv"><span class="icon-align-justify"></span></div><div id="icontitlediv">@Html.ActionLink("Header & Footer images", "Index", "Pictures")</div></li>
 
                     @* Investigation *@
                     <li class="dropdown">
                         <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Investigation</div></a>
-                        <ul @if ((ctrName == "Investigation" && actnName == "Create") || (ctrName == "Investigation" && actnName == "Index")) { <text> style="display:block;" </text>     }>
-                            <li @if (ctrName == "Investigation" && actnName == "Create") { <text> class="active" </text>      }><div id="icontitlediv">@Html.ActionLink("Add Investigation", "Create", "Investigation")</div></li>
-                            <li @if (ctrName == "Investigation" && actnName == "Index") { <text> class="active" </text>      }><div id="icontitlediv">@Html.ActionLink("Investigations List", "Index", "Investigation")</div></li>
+                        <ul @if ((ctrName == "Investigation" && actnName == "Create") || (ctrName == "Investigation" && actnName == "Index")) { <text> style="display:block;" </text>       }>
+                            <li @if (ctrName == "Investigation" && actnName == "Create") { <text> class="active" </text>        }><div id="icontitlediv">@Html.ActionLink("Add Investigation", "Create", "Investigation")</div></li>
+                            <li @if (ctrName == "Investigation" && actnName == "Index") { <text> class="active" </text>        }><div id="icontitlediv">@Html.ActionLink("Investigations List", "Index", "Investigation")</div></li>
                         </ul>
                     </li>
-                    
+
                     @* Certificate *@
                     <li class="dropdown">
                         <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Certificates</div></a>
-                            <ul @if ((ctrName == "Certificate" && actnName == "Blank") || (ctrName == "Certificate" && actnName == "Fit") || (ctrName == "Certificate" && actnName == "Unfit") || (ctrName == "Certificate" && actnName == "Discharge") || (ctrName == "Certificate" && actnName == "Bill")) { <text> style="display:block;" </text>     }>
-                                <li @if (ctrName == "Certificate" && actnName == "Blank") { <text> class="active" </text> }><div id="icontitlediv">@Html.ActionLink("Blank", "Blank", new { controller = "Certificate" }, new { target = "_blank" })</div></li>
-                                <li @if (ctrName == "Certificate" && actnName == "Fit") { <text> class="active" </text>  }><div id="icontitlediv">@Html.ActionLink("Fit", "Fit", new { controller = "Certificate" }, new { target = "_blank" })</div></li>
-                                <li @if (ctrName == "Certificate" && actnName == "Unfit") { <text> class="active" </text>  }><div id="icontitlediv">@Html.ActionLink("Unfit", "Unfit", new { controller = "Certificate" }, new { target = "_blank" })</div></li>
-                                <li @if (ctrName == "Certificate" && actnName == "Discharge") { <text> class="active" </text>  }><div id="icontitlediv">@Html.ActionLink("Discharge", "Discharge", new { controller = "Certificate" }, new { target = "_blank" })</div></li>
-                                <li @if (ctrName == "Certificate" && actnName == "Bill") { <text> class="active" </text>   }><div id="icontitlediv">@Html.ActionLink("Bill", "Bill", new { controller = "Certificate" }, new { target = "_blank" })</div></li>
-                            </ul>    
+                        <ul @if ((ctrName == "Certificate" && actnName == "Blank") || (ctrName == "Certificate" && actnName == "Fit") || (ctrName == "Certificate" && actnName == "Unfit") || (ctrName == "Certificate" && actnName == "Discharge") || (ctrName == "Certificate" && actnName == "Bill")) { <text> style="display:block;" </text>       }>
+                            <li @if (ctrName == "Certificate" && actnName == "Blank") { <text> class="active" </text>   }><div id="icontitlediv">@Html.ActionLink("Blank", "Blank", new { controller = "Certificate" }, new { target = "_blank" })</div></li>
+                            <li @if (ctrName == "Certificate" && actnName == "Fit") { <text> class="active" </text>    }><div id="icontitlediv">@Html.ActionLink("Fit", "Fit", new { controller = "Certificate" }, new { target = "_blank" })</div></li>
+                            <li @if (ctrName == "Certificate" && actnName == "Unfit") { <text> class="active" </text>    }><div id="icontitlediv">@Html.ActionLink("Unfit", "Unfit", new { controller = "Certificate" }, new { target = "_blank" })</div></li>
+                            <li @if (ctrName == "Certificate" && actnName == "Discharge") { <text> class="active" </text>    }><div id="icontitlediv">@Html.ActionLink("Discharge", "Discharge", new { controller = "Certificate" }, new { target = "_blank" })</div></li>
+                            <li @if (ctrName == "Certificate" && actnName == "Bill") { <text> class="active" </text>     }><div id="icontitlediv">@Html.ActionLink("Bill", "Bill", new { controller = "Certificate" }, new { target = "_blank" })</div></li>
+                        </ul>
                     </li>
 
                     @* SMS *@
                     <li class="dropdown">
                         <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">SMS Service</div></a>
-                        <ul @if ((ctrName == "SMS" && actnName == "Create") || (ctrName == "SMS" && actnName == "Index")) { <text> style="display:block;" </text>      }>
-                            <li @if (ctrName == "SMS" && actnName == "Create") { <text> class="active" </text>  }><div id="icontitlediv">@Html.ActionLink("Send SMS", "Create", new { controller = "SMS" })</div></li>
-                            <li @if (ctrName == "SMS" && actnName == "Index") { <text> class="active" </text>   }><div id="icontitlediv">@Html.ActionLink("SMS History", "Index", new { controller = "SMS" })</div></li>
+                        <ul @if ((ctrName == "SMS" && actnName == "Create") || (ctrName == "SMS" && actnName == "Index")) { <text> style="display:block;" </text>        }>
+                            <li @if (ctrName == "SMS" && actnName == "Create") { <text> class="active" </text>    }><div id="icontitlediv">@Html.ActionLink("Send SMS", "Create", new { controller = "SMS" })</div></li>
+                            <li @if (ctrName == "SMS" && actnName == "Index") { <text> class="active" </text>     }><div id="icontitlediv">@Html.ActionLink("SMS History", "Index", new { controller = "SMS" })</div></li>
                         </ul>
                     </li>
 
                     @* Chart *@
                     <li class="dropdown">
                         <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Graphical Data</div></a>
-                        <ul @if ((ctrName == "Chart" && actnName == "Create") || (ctrName == "Chart" && actnName == "Index")) { <text> style="display:block;" </text>       }>
-                            <li @if (ctrName == "Chart" && actnName == "NewOldPatient") { <text> class="active" </text>     }><div id="icontitlediv">@Html.ActionLink("New/Old", "NewOldPatient", new { controller = "Chart" })</div></li>
-                            <li @if (ctrName == "Chart" && actnName == "StatusWisePatient") { <text> class="active" </text>       }><div id="icontitlediv">@Html.ActionLink("Status", "StatusWisePatient", new { controller = "Chart" })</div></li>
-                            <li @if (ctrName == "Chart" && actnName == "DepartmentWisePatient") { <text> class="active" </text>   }><div id="icontitlediv">@Html.ActionLink("Department", "DepartmentWisePatient", new { controller = "Chart" })</div></li>
-                            <li @if (ctrName == "Chart" && actnName == "PatientTypeWisePatient") { <text> class="active" </text>       }><div id="icontitlediv">@Html.ActionLink("Patient Type", "PatientTypeWisePatient", new { controller = "Chart" })</div></li>
-                            <li @if (ctrName == "Chart" && actnName == "ReferenceWisePatient") { <text> class="active" </text>     }><div id="icontitlediv">@Html.ActionLink("Reference", "ReferenceWisePatient", new { controller = "Chart" })</div></li>
-                            <li @if (ctrName == "Chart" && actnName == "Income") { <text> class="active" </text>       }><div id="icontitlediv">@Html.ActionLink("Income", "Income", new { controller = "Chart" })</div></li>
-                            <li @if (ctrName == "Chart" && actnName == "CategoryWiseExpanse") { <text> class="active" </text>      }><div id="icontitlediv">@Html.ActionLink("Expense", "CategoryWiseExpanse", new { controller = "Chart" })</div></li>                           
-                            <li @if (ctrName == "Chart" && actnName == "IncomeExpanse") { <text> class="active" </text>       }><div id="icontitlediv">@Html.ActionLink("Income/Expense", "IncomeExpanse", new { controller = "Chart" })</div></li>
+                        <ul @if ((ctrName == "Chart" && actnName == "Create") || (ctrName == "Chart" && actnName == "Index")) { <text> style="display:block;" </text>         }>
+                            <li @if (ctrName == "Chart" && actnName == "NewOldPatient") { <text> class="active" </text>       }><div id="icontitlediv">@Html.ActionLink("New/Old", "NewOldPatient", new { controller = "Chart" })</div></li>
+                            <li @if (ctrName == "Chart" && actnName == "StatusWisePatient") { <text> class="active" </text>         }><div id="icontitlediv">@Html.ActionLink("Status", "StatusWisePatient", new { controller = "Chart" })</div></li>
+                            <li @if (ctrName == "Chart" && actnName == "DepartmentWisePatient") { <text> class="active" </text>     }><div id="icontitlediv">@Html.ActionLink("Department", "DepartmentWisePatient", new { controller = "Chart" })</div></li>
+                            <li @if (ctrName == "Chart" && actnName == "PatientTypeWisePatient") { <text> class="active" </text>         }><div id="icontitlediv">@Html.ActionLink("Patient Type", "PatientTypeWisePatient", new { controller = "Chart" })</div></li>
+                            <li @if (ctrName == "Chart" && actnName == "ReferenceWisePatient") { <text> class="active" </text>       }><div id="icontitlediv">@Html.ActionLink("Reference", "ReferenceWisePatient", new { controller = "Chart" })</div></li>
+                            <li @if (ctrName == "Chart" && actnName == "Income") { <text> class="active" </text>         }><div id="icontitlediv">@Html.ActionLink("Income", "Income", new { controller = "Chart" })</div></li>
+                            <li @if (ctrName == "Chart" && actnName == "CategoryWiseExpanse") { <text> class="active" </text>        }><div id="icontitlediv">@Html.ActionLink("Expense", "CategoryWiseExpanse", new { controller = "Chart" })</div></li>
+                            <li @if (ctrName == "Chart" && actnName == "IncomeExpanse") { <text> class="active" </text>         }><div id="icontitlediv">@Html.ActionLink("Income/Expense", "IncomeExpanse", new { controller = "Chart" })</div></li>
                         </ul>
                     </li>
 
                     @* Expanse category *@
                     <li class="dropdown">
                         <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Expanse Category</div></a>
-                        <ul @if ((ctrName == "ExpanseCategory" && actnName == "Create") || (ctrName == "ExpanseCategory" && actnName == "Index")) { <text> style="display:block;" </text>     }>
-                            <li @if (ctrName == "ExpanseCategory" && actnName == "Create") { <text> class="active" </text>      }><div id="icontitlediv">@Html.ActionLink("Add Expanse Category", "Create", "ExpanseCategory")</div></li>
-                            <li @if (ctrName == "ExpanseCategory" && actnName == "Index") { <text> class="active" </text>      }><div id="icontitlediv">@Html.ActionLink("Expanse Category List", "Index", "ExpanseCategory")</div></li>
+                        <ul @if ((ctrName == "ExpanseCategory" && actnName == "Create") || (ctrName == "ExpanseCategory" && actnName == "Index")) { <text> style="display:block;" </text>       }>
+                            <li @if (ctrName == "ExpanseCategory" && actnName == "Create") { <text> class="active" </text>        }><div id="icontitlediv">@Html.ActionLink("Add Expanse Category", "Create", "ExpanseCategory")</div></li>
+                            <li @if (ctrName == "ExpanseCategory" && actnName == "Index") { <text> class="active" </text>        }><div id="icontitlediv">@Html.ActionLink("Expanse Category List", "Index", "ExpanseCategory")</div></li>
                         </ul>
                     </li>
 
                     @* Expanse *@
                     <li class="dropdown">
                         <a href=""><div id="icondiv"><span class="icon-briefcase"></span></div> <div id="icontitlediv">Expanse</div></a>
-                        <ul @if ((ctrName == "Expanse" && actnName == "Create") || (ctrName == "Expanse" && actnName == "Index")) { <text> style="display:block;" </text>     }>
-                            <li @if (ctrName == "Expanse" && actnName == "Create") { <text> class="active" </text>      }><div id="icontitlediv">@Html.ActionLink("Add Expanse", "Create", "Expanse")</div></li>
-                            <li @if (ctrName == "Expanse" && actnName == "Index") { <text> class="active" </text>      }><div id="icontitlediv">@Html.ActionLink("Expanse List", "Index", "Expanse")</div></li>
+                        <ul @if ((ctrName == "Expanse" && actnName == "Create") || (ctrName == "Expanse" && actnName == "Index")) { <text> style="display:block;" </text>       }>
+                            <li @if (ctrName == "Expanse" && actnName == "Create") { <text> class="active" </text>        }><div id="icontitlediv">@Html.ActionLink("Add Expanse", "Create", "Expanse")</div></li>
+                            <li @if (ctrName == "Expanse" && actnName == "Index") { <text> class="active" </text>        }><div id="icontitlediv">@Html.ActionLink("Expanse List", "Index", "Expanse")</div></li>
                         </ul>
                     </li>
 
@@ -263,12 +263,20 @@
 
             <div class="headerpanel">
                 <a href="" class="showmenu"></a>
+                @if (Request.IsAuthenticated)
+                {
+                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <a href="javascript:document.getElementById('logoutForm').submit()" style="color:#fff; float:left; margin-left:10px; padding:15px 20px 0 0;">Sign out</a>
+                    }
+                }
+
             </div>
             <!--headerpanel-->
-
             @*<div class="pagetitle">
-                <h1>@ViewBag.Title</h1>
-            </div>*@
+                    <h1>@ViewBag.Title</h1>
+                </div>*@
             <!--pagetitle-->
             <div class="maincontent">
 
@@ -295,98 +303,97 @@
         <!--footer-->
     </div>
     <script type="text/javascript">
-jQuery(document).ready(function(){
+        jQuery(document).ready(function () {
 
-        $("#red").click(function () {
-            $("#step4").css("display", "block");
+            $("#red").click(function () {
+                $("#step4").css("display", "block");
+            });
+            $("#green").click(function () {
+                $("#step4").css("display", "none");
+            });
+            $("#yellow").click(function () {
+                $("#step4").css("display", "none");
+            });
+
+            // basic chart
+            var flash = [[0, 2], [1, 6], [2, 3], [3, 8], [4, 5], [5, 13], [6, 8]];
+            var html5 = [[0, 5], [1, 4], [2, 4], [3, 1], [4, 9], [5, 10], [6, 13]];
+
+            function showTooltip(x, y, contents) {
+                jQuery('<div id="tooltip" class="tooltipflot">' + contents + '</div>').css({
+                    position: 'absolute',
+                    display: 'none',
+                    top: y + 5,
+                    left: x + 5
+                }).appendTo("body").fadeIn(200);
+            }
+
+
+            var plot = jQuery.plot(jQuery("#chartplace2"),
+                   [{ data: flash, label: "Flash(x)", color: "#fb6409" }, { data: html5, label: "HTML5(x)", color: "#096afb" }], {
+                       series: {
+                           lines: { show: true, fill: true, fillColor: { colors: [{ opacity: 0.05 }, { opacity: 0.15 }] } },
+                           points: { show: true }
+                       },
+                       legend: { position: 'nw' },
+                       grid: { hoverable: true, clickable: true, borderColor: '#ccc', borderWidth: 1, labelMargin: 10 },
+                       yaxis: { min: 0, max: 15 }
+                   });
+
+            var previousPoint = null;
+            jQuery("#chartplace2").bind("plothover", function (event, pos, item) {
+                jQuery("#x").text(pos.x.toFixed(2));
+                jQuery("#y").text(pos.y.toFixed(2));
+
+                if (item) {
+                    if (previousPoint != item.dataIndex) {
+                        previousPoint = item.dataIndex;
+
+                        jQuery("#tooltip").remove();
+                        var x = item.datapoint[0].toFixed(2),
+                        y = item.datapoint[1].toFixed(2);
+
+                        showTooltip(item.pageX, item.pageY,
+                                        item.series.label + " of " + x + " = " + y);
+                    }
+
+                } else {
+                    jQuery("#tooltip").remove();
+                    previousPoint = null;
+                }
+
+            });
+
+            jQuery("#chartplace2").bind("plotclick", function (event, pos, item) {
+                if (item) {
+                    jQuery("#clickdata").text("You clicked point " + item.dataIndex + " in " + item.series.label + ".");
+                    plot.highlight(item.series, item.datapoint);
+                }
+            });
+
+
+            // bar graph
+            var d2 = [];
+            for (var i = 0; i <= 10; i += 1)
+                d2.push([i, parseInt(Math.random() * 30)]);
+
+            var stack = 0, bars = true, lines = false, steps = false;
+            jQuery.plot(jQuery("#bargraph2"), [d2], {
+                series: {
+                    stack: stack,
+                    lines: { show: lines, fill: true, steps: steps },
+                    bars: { show: bars, barWidth: 0.6 }
+                },
+                grid: { hoverable: true, clickable: true, borderColor: '#bbb', borderWidth: 1, labelMargin: 10 },
+                colors: ["#06c"]
+            });
+
+            // calendar
+            jQuery('#calendar').datepicker();
+
+
         });
-        $("#green").click(function () {
-            $("#step4").css("display", "none");
-        });
-        $("#yellow").click(function () {
-            $("#step4").css("display", "none");
-        });
-
-		// basic chart
-		var flash = [[0, 2], [1, 6], [2,3], [3, 8], [4, 5], [5, 13], [6, 8]];
-		var html5 = [[0, 5], [1, 4], [2,4], [3, 1], [4, 9], [5, 10], [6, 13]];
-
-		function showTooltip(x, y, contents) {
-			jQuery('<div id="tooltip" class="tooltipflot">' + contents + '</div>').css( {
-				position: 'absolute',
-				display: 'none',
-				top: y + 5,
-				left: x + 5
-			}).appendTo("body").fadeIn(200);
-		}
-
-
-		var plot = jQuery.plot(jQuery("#chartplace2"),
-			   [ { data: flash, label: "Flash(x)", color: "#fb6409"}, { data: html5, label: "HTML5(x)", color: "#096afb"} ], {
-				   series: {
-					   lines: { show: true, fill: true, fillColor: { colors: [ { opacity: 0.05 }, { opacity: 0.15 } ] } },
-					   points: { show: true }
-				   },
-				   legend: { position: 'nw'},
-				   grid: { hoverable: true, clickable: true, borderColor: '#ccc', borderWidth: 1, labelMargin: 10 },
-				   yaxis: { min: 0, max: 15 }
-				 });
-
-		var previousPoint = null;
-		jQuery("#chartplace2").bind("plothover", function (event, pos, item) {
-			jQuery("#x").text(pos.x.toFixed(2));
-			jQuery("#y").text(pos.y.toFixed(2));
-
-			if(item) {
-				if (previousPoint != item.dataIndex) {
-					previousPoint = item.dataIndex;
-
-					jQuery("#tooltip").remove();
-					var x = item.datapoint[0].toFixed(2),
-					y = item.datapoint[1].toFixed(2);
-
-					showTooltip(item.pageX, item.pageY,
-									item.series.label + " of " + x + " = " + y);
-				}
-
-			} else {
-			   jQuery("#tooltip").remove();
-			   previousPoint = null;
-			}
-
-		});
-
-		jQuery("#chartplace2").bind("plotclick", function (event, pos, item) {
-			if (item) {
-				jQuery("#clickdata").text("You clicked point " + item.dataIndex + " in " + item.series.label + ".");
-				plot.highlight(item.series, item.datapoint);
-			}
-		});
-
-
-		// bar graph
-		var d2 = [];
-		for (var i = 0; i <= 10; i += 1)
-			d2.push([i, parseInt(Math.random() * 30)]);
-
-		var stack = 0, bars = true, lines = false, steps = false;
-		jQuery.plot(jQuery("#bargraph2"), [ d2 ], {
-			series: {
-				stack: stack,
-				lines: { show: lines, fill: true, steps: steps },
-				bars: { show: bars, barWidth: 0.6 }
-			},
-			grid: { hoverable: true, clickable: true, borderColor: '#bbb', borderWidth: 1, labelMargin: 10 },
-			colors: ["#06c"]
-		});
-
-		// calendar
-		jQuery('#calendar').datepicker();
-
-
-});
     </script>
-    
+
 </body>
 </html>
-

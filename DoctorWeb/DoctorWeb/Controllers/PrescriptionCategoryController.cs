@@ -18,6 +18,7 @@ namespace DoctorWeb.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: PrescriptionCategory
+        [Authorize]
         public ActionResult Index(string currentFilter, string searchString, int? page)
         {
             if (TempData["ErrorMessage"] != null)
@@ -52,7 +53,7 @@ namespace DoctorWeb.Controllers
 
             //return View(db.PrescriptionCategories.ToList());
         }
-
+        [Authorize]
         public ActionResult Up(int? id, string currentFilter, string searchString, int? page)
         {
             if (id == null)
@@ -81,7 +82,7 @@ namespace DoctorWeb.Controllers
 
             return RedirectToAction("Index", new { id = id, page = page, currentFilter = currentFilter, searchString = searchString });
         }
-
+        [Authorize]
         public ActionResult Down(int? id, string currentFilter, string searchString, int? page)
         {
             if (id == null)
@@ -110,7 +111,7 @@ namespace DoctorWeb.Controllers
 
             return RedirectToAction("Index", new { id = id, page = page, currentFilter = currentFilter, searchString = searchString });
         }
-
+        [Authorize]
         // GET: PrescriptionCategory/Details/5
         public ActionResult Details(int? id)
         {
@@ -125,7 +126,7 @@ namespace DoctorWeb.Controllers
             }
             return View(prescriptionCategory);
         }
-
+        [Authorize]
         // GET: PrescriptionCategory/Create
         public ActionResult Create()
         {
@@ -135,6 +136,7 @@ namespace DoctorWeb.Controllers
         // POST: PrescriptionCategory/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Name")] PrescriptionCategory prescriptionCategory)
@@ -149,7 +151,7 @@ namespace DoctorWeb.Controllers
 
             return View(prescriptionCategory);
         }
-
+        [Authorize]
         // GET: PrescriptionCategory/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -168,6 +170,7 @@ namespace DoctorWeb.Controllers
         // POST: PrescriptionCategory/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Name")] PrescriptionCategory prescriptionCategory)
@@ -182,6 +185,7 @@ namespace DoctorWeb.Controllers
         }
 
         // GET: PrescriptionCategory/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -197,6 +201,7 @@ namespace DoctorWeb.Controllers
         }
 
         // POST: PrescriptionCategory/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -214,7 +219,7 @@ namespace DoctorWeb.Controllers
                 return RedirectToAction("Index");
             }
         }
-
+        [Authorize]
         protected override void Dispose(bool disposing)
         {
             if (disposing)

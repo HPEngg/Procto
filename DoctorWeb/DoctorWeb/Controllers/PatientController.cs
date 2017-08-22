@@ -265,9 +265,7 @@ namespace DoctorWeb.Controllers
             return Content(result.ToString());
         }
 
-        [Authorize]
         [HttpPost]
-
         public ActionResult UploadPrescriptionImage(PatientPrescriptionPhoto personData1)
         {
             bool result = true;

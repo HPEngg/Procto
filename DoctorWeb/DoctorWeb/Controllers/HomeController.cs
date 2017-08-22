@@ -64,7 +64,7 @@ namespace DoctorWeb.Controllers
             {
 
                 PatientName = PatientName.Replace('_', ' ');
-                model = db.Patients.Where(p => p.Name.Contains(PatientName) || p.Address.Contains(PatientName) || p.Contact.Contains(PatientName)).Select(p => new PatientSearch()
+                model = db.Patients.Where(p => p.Name.Contains(PatientName) || p.Address.Contains(PatientName) || p.Department.Name.Contains(PatientName) || p.Status.ToString().Contains(PatientName) || p.Contact.Contains(PatientName)).Select(p => new PatientSearch()
                 {
                     Status = p.Status.ToString(),
                     Name = p.Name,

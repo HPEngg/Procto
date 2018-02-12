@@ -10,6 +10,7 @@ using DoctorWeb.Models;
 using System.Data.Entity.Infrastructure;
 using PagedList;
 using System.Web.Configuration;
+using System.Text;
 
 namespace DoctorWeb.Controllers
 {
@@ -32,8 +33,11 @@ namespace DoctorWeb.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
+            //var prescriptionimages = from s in db.PreImages
+            //               select s;
+
             var prescriptionimages = from s in db.PreImages
-                           select s;
+                                     select s;
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -82,12 +86,14 @@ namespace DoctorWeb.Controllers
             {
                 if (preImage != null && preImage.ContentLength > 0)
                 {
-                    using (var reader = new System.IO.BinaryReader(preImage.InputStream))
-                    {
-                        preImg.Image = reader.ReadBytes(preImage.ContentLength);
-                    }
+                    //using (var reader = new System.IO.BinaryReader(preImage.InputStream))
+                    //{
+                    //    preImg.Image = reader.ReadBytes(preImage.ContentLength);
+                    //}
+                    preImg.Image = Encoding.ASCII.GetBytes(preImage.FileName);
                     db.PreImages.Add(preImg);
                     db.SaveChanges();
+                    preImage.SaveAs(Server.MapPath(Url.Content("~/Content/Images/PreImages/" + preImage.FileName)));
                     return RedirectToAction("Index");
                 }
                 else
@@ -153,8 +159,14 @@ namespace DoctorWeb.Controllers
             try
             {
                 PreImage preImage = db.PreImages.Find(id);
+                string fileName = Server.MapPath(Url.Content("~/Content/Images/PreImages/" + Encoding.ASCII.GetString(preImage.Image))) ;
                 db.PreImages.Remove(preImage);
                 db.SaveChanges();
+
+                if ((System.IO.File.Exists(fileName)))
+                {
+                    System.IO.File.Delete(fileName);
+                }
             }
             catch (DbUpdateException ex)
             {

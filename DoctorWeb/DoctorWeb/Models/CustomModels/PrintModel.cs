@@ -31,5 +31,11 @@ namespace DoctorWeb.Models.CustomModels
         public bool FooterRequired { get; set; }
         public Footer Footer { get; set; }
         public int PatientID { get; set; }
+
+        public string PatientPhotoPath { get; set; }
+        public string PatientUploadedImage1 { get; set; }
+        public string PatientUploadedImage2 { get; set; }
+        public string PatientDrawnImage1 { get; set; }
+        public string PatientDrawnImage2 { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿@model DoctorWeb.Models.PreImage
+@using System.Text;
 
 @{
     ViewBag.Title = "Delete";
@@ -15,7 +16,8 @@
         </dt>
         
         <dd>
-            @Html.Raw("<img src=\"data:image/jpeg;base64," + Convert.ToBase64String(Model.Image) + "\" width=100 height=100/>")
+            @*@Html.Raw("<img src=\"data:image/jpeg;base64," + Convert.ToBase64String(Model.Image) + "\" width=100 height=100/>")*@
+            @Html.Raw("<img src=" + @Url.Content("~/Content/Images/PreImages/" + Encoding.ASCII.GetString(Model.Image)) + " width='100' height='100'/>")
         </dd>
 
         <dt>

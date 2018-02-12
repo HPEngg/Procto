@@ -13,6 +13,7 @@ using System.IO;
 using System.Web.Services;
 using System.Web.Configuration;
 using DoctorWeb.Models.Tools;
+using System.Text;
 
 namespace DoctorWeb.Controllers
 {
@@ -194,9 +195,10 @@ namespace DoctorWeb.Controllers
                 using (MemoryStream ms = new MemoryStream(imgarr))
                 {
                     image = Image.FromStream(ms);
-                  //  image = ScaleImage(image, 150, 125);
-                    string imageFileName = patientID + "PatientImage" + imageID + ".png";
-                    string path = Server.MapPath(Url.Content("~/Content/Images/" + imageFileName));
+                    string imageFileName = "PatientDrawnImage" + imageID + ".png";
+                    string path = Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patientID + "/"  + imageFileName));
+                    System.IO.FileInfo file = new System.IO.FileInfo(path);
+                    file.Directory.Create(); // If the directory already exists, this method does nothing.
                     image.Save(path);
                 }
             }
@@ -268,14 +270,33 @@ namespace DoctorWeb.Controllers
 
             if (ModelState.IsValid)
             {
-                var patient = db.Patients.Find(id);
                 using (var reader = new StreamReader(stream))
                 {
+                    var path = Server.MapPath(Url.Content("~/Content/Images/PatImages/" + id + "/PatientImage.jpg"));
+
+                    System.IO.FileInfo file = new System.IO.FileInfo(path);
+                    file.Directory.Create(); // If the directory already exists, this method does nothing.
+
                     dump = reader.ReadToEnd();
-                    patient.Photo = String_To_Bytes2(dump);
+                    System.IO.File.WriteAllBytes(path, String_To_Bytes2(dump));
                 }
-                db.Entry(patient).State = EntityState.Modified;
-                db.SaveChanges();
+
+                //using (var fileStream = new FileStream(Server.MapPath(Url.Content("~/Content/Images/PatImages/" + id + "/PatientImage.jpg")), FileMode.Create, FileAccess.Write))
+                //{
+                //    Request.InputStream.Seek(0, SeekOrigin.Begin);
+                //    Request.InputStream.CopyTo(fileStream);
+                //}
+
+                //var patient = db.Patients.Find(id);
+                //using (var reader = new StreamReader(stream))
+                //{
+                //    dump = reader.ReadToEnd();
+                //    patient.Photo = String_To_Bytes2(dump);
+
+
+                //}
+                //db.Entry(patient).State = EntityState.Modified;
+                //db.SaveChanges();
                 return View();
             }
 
@@ -425,45 +446,15 @@ namespace DoctorWeb.Controllers
                 Received = model.Received,
                 Rs = model.Rs,
                 M = model.M,
-                //PrescriptionImage1 = System.IO.File.ReadAllBytes(Server.MapPath("~") + @"Content\Images\" + model.PatientID + "PatientImage1.png"),
+                UploadedImage1 = Encoding.ASCII.GetBytes("UploadedPatientPrescriptionImage1.png"),
+                UploadedImage2 = Encoding.ASCII.GetBytes("UploadedPatientPrescriptionImage2.png"),
+                PrescriptionImage1 = Encoding.ASCII.GetBytes("PatientDrawnImage1.png"),
+                PrescriptionImage2 = Encoding.ASCII.GetBytes("PatientDrawnImage2.png"),
                 //PrescriptionImage2 = Convert.FromBase64String(model.PatientImage2.Remove(0, 22)),
                 //Investigation = model.Investigation
                 //InvestigationID = model.InvestigationID,
                 Other = model.Other
             };
-
-            //string imageFile1 = "C:/test/" + model.PatientID + "PatientImage1.png"; //Server.MapPath("~") + @"Content\Images\" + model.PatientID + "PatientImage1.png";
-            //string imageFile2 = "C:/test/" + model.PatientID + "PatientImage2.png"; //Server.MapPath("~") + @"Content\Images\" + model.PatientID + "PatientImage2.png";
-
-            string imageFile1 = Server.MapPath(Url.Content("~/Content/Images/" + model.PatientID + "PatientImage1.png"));
-            string imageFile2 = Server.MapPath(Url.Content("~/Content/Images/" + model.PatientID + "PatientImage2.png"));
-
-            if (System.IO.File.Exists(imageFile1))
-            {
-                prescription.PrescriptionImage1 = System.IO.File.ReadAllBytes(imageFile1);
-                System.IO.File.Delete(imageFile1);
-            }
-            if (System.IO.File.Exists(imageFile2))
-            {
-                prescription.PrescriptionImage2 = System.IO.File.ReadAllBytes(imageFile2);
-                System.IO.File.Delete(imageFile2);
-            }
-
-            if (preImage1 != null && preImage1.ContentLength > 0)
-            {
-                using (var reader = new System.IO.BinaryReader(preImage1.InputStream))
-                {
-                    prescription.UploadedImage1 = reader.ReadBytes(preImage1.ContentLength);
-                }
-            }
-
-            if (preImage2 != null && preImage2.ContentLength > 0)
-            {
-                using (var reader = new System.IO.BinaryReader(preImage2.InputStream))
-                {
-                    prescription.UploadedImage2 = reader.ReadBytes(preImage2.ContentLength);
-                }
-            }
 
             if (ModelState.IsValid)
             {
@@ -479,6 +470,43 @@ namespace DoctorWeb.Controllers
                 var prescroptionObj = db.Prescriptions.Add(prescription);
                 // ReaderExecuted method code commented due to below line blocks exicution while adding prescription record
                 db.SaveChanges();
+
+                System.IO.FileInfo file = new System.IO.FileInfo(Server.MapPath(Url.Content("~/Content/Images/PatImages/" + model.PatientID + "/" + prescroptionObj.ID + "/UploadedPatientPrescriptionImage1.png")));
+                file.Directory.Create(); // If the directory already exists, this method does nothing.
+
+                if (preImage1 != null && preImage1.ContentLength > 0)
+                {
+                    //using (var reader = new System.IO.BinaryReader(preImage1.InputStream))
+                    //{
+                    //    prescription.UploadedImage1 = reader.ReadBytes(preImage1.ContentLength);
+                    //}
+                    preImage1.SaveAs(Server.MapPath(Url.Content("~/Content/Images/PatImages/" + model.PatientID + "/" + prescroptionObj.ID + "/UploadedPatientPrescriptionImage1.png")));
+                }
+
+                if (preImage2 != null && preImage2.ContentLength > 0)
+                {
+                    //using (var reader = new System.IO.BinaryReader(preImage2.InputStream))
+                    //{
+                    //    prescription.UploadedImage2 = reader.ReadBytes(preImage2.ContentLength);
+                    //}
+                    preImage2.SaveAs(Server.MapPath(Url.Content("~/Content/Images/PatImages/" + model.PatientID + "/" + prescroptionObj.ID + "/UploadedPatientPrescriptionImage2.png")));
+                }
+
+                string imageFile1 = Server.MapPath(Url.Content("~/Content/Images/PatImages/" + model.PatientID + "/PatientDrawnImage1.png"));
+                string imageFile2 = Server.MapPath(Url.Content("~/Content/Images/PatImages/" + model.PatientID + "/PatientDrawnImage2.png"));
+
+                if (System.IO.File.Exists(imageFile1))
+                {
+                    //prescription.PrescriptionImage1 = Encoding.ASCII.GetBytes(imageFile1);
+                    //System.IO.File.Delete(imageFile1);
+                    System.IO.File.Move(imageFile1, Server.MapPath(Url.Content("~/Content/Images/PatImages/" + model.PatientID + "/" + prescroptionObj.ID + "/UploadedPatientPrescriptionImage1.png")));
+                }
+                if (System.IO.File.Exists(imageFile2))
+                {
+                    //prescription.PrescriptionImage2 = Encoding.ASCII.GetBytes(imageFile2);
+                    //System.IO.File.Delete(imageFile2);
+                    System.IO.File.Move(imageFile2, Server.MapPath(Url.Content("~/Content/Images/PatImages/" + model.PatientID + "/" + prescroptionObj.ID + "/UploadedPatientPrescriptionImage2.png")));
+                }
 
                 if (model.pm_type != null)
                 {
@@ -711,10 +739,10 @@ namespace DoctorWeb.Controllers
                 model.Patient.Procedure = prescription.Procedure;
                 model.Patient.Type = prescription.PatientType == null ? string.Empty : prescription.PatientType.PatientTypeName.ToString();
                 model.Patient.Investigations = db.Investigations.OrderBy(o => o.Name).Where(p => p.Prescriptions.Any(q => q.ID == prescription.ID)).ToList();
-                model.Patient.DrawenImage1 = prescription.PrescriptionImage1;
-                model.Patient.DrawenImage2 = prescription.PrescriptionImage2;
-                model.Patient.UploadedImage1 = prescription.UploadedImage1;
-                model.Patient.UploadedImage2 = prescription.UploadedImage2;
+                //model.Patient.DrawenImage1 = prescription.PrescriptionImage1;
+                //model.Patient.DrawenImage2 = prescription.PrescriptionImage2;
+                //model.Patient.UploadedImage1 = prescription.UploadedImage1;
+                //model.Patient.UploadedImage2 = prescription.UploadedImage2;
                 model.Patient.PrescriptionImages = db.PreImages.OrderBy(o => o.Label).Where(p => p.Prescriptions.Any(q => q.ID == prescription.ID)).Select(t => t.Image).ToList();
 
                 model.RX.Medicines = db.PrescriptionMedicines.Where(p => p.PrescriptionID == prescription.ID).ToList();
@@ -736,7 +764,12 @@ namespace DoctorWeb.Controllers
             if (patient != null)
             {
                 model.Patient.ID = patient.ID;
-                model.Patient.Photo = patient.Photo;
+                //model.Patient.Photo = patient.Photo;
+                model.PatientPhotoPath = System.IO.File.Exists(Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patient.ID + "/PatientImage.jpg"))) ? Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patient.ID + "/PatientImage.jpg")) : string.Empty;
+                model.PatientUploadedImage1 = System.IO.File.Exists(Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patient.ID + "/" + prescriptionID + "/UploadedPatientPrescriptionImage1.png"))) ? Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patient.ID + "/" + prescriptionID + "/UploadedPatientPrescriptionImage1.png")) : string.Empty;
+                model.PatientUploadedImage2 = System.IO.File.Exists(Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patient.ID + "/" + prescriptionID + "/UploadedPatientPrescriptionImage2.png"))) ? Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patient.ID + "/" + prescriptionID + "/UploadedPatientPrescriptionImage2.png")) : string.Empty;
+                model.PatientDrawnImage1 = System.IO.File.Exists(Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patient.ID + "/" + prescriptionID + "/PatientDrawnImage1.png"))) ? Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patient.ID + "/" + prescriptionID + "/PatientDrawnImage1.png")) : string.Empty;
+                model.PatientDrawnImage1 = System.IO.File.Exists(Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patient.ID + "/" + prescriptionID + "/PatientDrawnImage1.png"))) ? Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patient.ID + "/" + prescriptionID + "/PatientDrawnImage2.png")) : string.Empty;
                 model.Patient.Name = patient.Name;
                 model.Patient.Age = patient.Age;
                 model.Patient.Gender = patient.Gender.ToString();

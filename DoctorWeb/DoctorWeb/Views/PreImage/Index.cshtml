@@ -1,5 +1,6 @@
 ﻿@model PagedList.IPagedList<DoctorWeb.Models.PreImage>
 @using PagedList.Mvc;
+@using System.Text;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
@@ -39,7 +40,9 @@
     <tr>
         <td>
             @*@Html.DisplayFor(modelItem => item.Image)*@
-            @Html.Raw("<img src=\"data:image/jpeg;base64," + Convert.ToBase64String(item.Image) + "\" width='100' height='100'/>")
+            @*@Html.Raw("<img src=\"data:image/jpeg;base64," + Convert.ToBase64String(item.Image) + "\" width='100' height='100'/>")*@
+
+            @Html.Raw("<img src=" + @Url.Content("~/Content/Images/PreImages/" + Encoding.ASCII.GetString(item.Image)) + " width='100' height='100'/>")
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Label)

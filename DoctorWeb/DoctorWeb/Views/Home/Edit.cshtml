@@ -285,6 +285,7 @@
                             @Html.EditorFor(model => model.PatientHistory.Comment, new { htmlAttributes = new { @class = "discharge_comment", placeholder = "Comments", name = "comment_for_patient" } })
                             @Html.ValidationMessageFor(model => model.PatientHistory.Comment, "", new { @class = "text-danger" })
                         </div>
+                        
                         @*
                             </div>*@
                     </section>
@@ -625,7 +626,11 @@
                             </div>*@
                         @*@Html.HiddenFor(model => model.PatientHistory.PatientID)*@
 
+                       
+
                         <input type="submit" value="Submit Query" class="next action-button" />
+                        <input type="button" onclick="subquery();" value="Submit Query2" class="next action-button" />
+                        
                     </div>
                 </div>
             </fieldset>
@@ -702,6 +707,66 @@
         }
     }
 
+    function subquery()
+    {
+        debugger;
+        var url = "@Url.Action("EditPatientHistory", "Home")";
+        debugger;
+        var model = {
+            "Allergy": $("#PatientHistory_Allergy").val(),
+            "History": $("#PatientHistory_History").val(),
+            "RP": $("#PatientHistory_RP").val(),
+            "KCO": $("#PatientHistory_KCO").val(),
+            "DOA": $("#PatientHistory_DOA").val(),
+            "DOD": $("#PatientHistory_DOD").val(),
+            "Dignosis": $("#PatientHistory_Dignosis").val(),
+            "Procedure": $("#PatientHistory_Procedure").val(),
+            "Comment": $("#PatientHistory_Comment").val(),
+            "CO": $("#PatientHistory_CO").val(),
+            "ComplainForm": $("#PatientHistory_ComplainForm").val(),
+            "Constipation": $("#PatientHistory_Constipation").val(),
+            "ConstipationMore": $("#PatientHistory_ConstipationMore").val(),
+            "Acidity": $("#PatientHistory_Acidity").val(),
+            "AcidityMore": $("#PatientHistory_AcidityMore").val(),
+            "Gas": $("#PatientHistory_Gas").val(),
+            "GasMore": $("#PatientHistory_GasMore").val(),
+            "Pain": $("#PatientHistory_Pain").val(),
+            "PainMore": $("#PatientHistory_PainMore").val(),
+            "Burning": $("#PatientHistory_Burning").val(),
+            "BurningMore": $("#PatientHistory_BurningMore").val(),
+            "Bleeding": $("#PatientHistory_Bleeding").val(),
+            "BleedingMore": $("#PatientHistory_BleedingMore").val(),
+            "Itching": $("#PatientHistory_Itching").val(),
+            "ItchingMore": $("#PatientHistory_ItchingMore").val(),
+            "PusDrainage": $("#PatientHistory_PusDrainage").val(),
+            "PusDrainageMore": $("#PatientHistory_PusDrainageMore").val(),
+            "Swelling": $("#PatientHistory_Swelling").val(),
+            "SwellingMore": $("#PatientHistory_SwellingMore").val(),
+            "SCO": $("#PatientHistory_SCO").val(),
+            "ACO": $("#PatientHistory_ACO").val(),
+            "Weight": $("#PatientHistory_Weight").val(),
+            "Height": $("#PatientHistory_Height").val(),
+            "T": $("#PatientHistory_T").val(),
+            "PR": $("#PatientHistory_PR").val(),
+            "BP": $("#PatientHistory_BP").val(),
+            "SPO2": $("#PatientHistory_SPO2").val(),
+            "PRR": $("#PatientHistory_PRR").val(),
+            "Proctoscopy": $("#PatientHistory_Proctoscopy").val(),
+            "LightOnOff": $("#PatientHistory_LightOnOff").val(),
+            "Other": $("#PatientHistory_Other").val(),
+            "PatientId": $("#Patient_ID").val(),
+        }
+ 
+        $.ajax({
+            type: "POST",
+            data: JSON.stringify(model),
+            url: url,
+            contentType: "application/json"
+        }).done(function (res) {
+            alert(res);
+        });
+        return false;
+    }
 </script>
 
 @section Scripts {

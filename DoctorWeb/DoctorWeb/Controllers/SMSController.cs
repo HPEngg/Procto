@@ -13,18 +13,20 @@ using System.Text.RegularExpressions;
 
 namespace DoctorWeb.Controllers
 {
-    [Authorize]
+   
     public class SMSController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: SMS
+        
         public ActionResult Index()
         {
             return View(db.ShortMessages.OrderByDescending(o => o.Date).ToList());
         }
 
         // GET: SMS/Details/5
+        
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -38,7 +40,7 @@ namespace DoctorWeb.Controllers
             }
             return View(sMS);
         }
-
+        
         // GET: SMS/Create
         public ActionResult Create()
         {
@@ -52,6 +54,7 @@ namespace DoctorWeb.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+         
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,MobileNumber,Message,Status,Date,FromDate,ToData,FromHolidayDate,ToHolidayDate,FromHolidayDate2,ToHolidayDate2,Patients,SMSTypes")] SMS sMS)
         {
@@ -124,9 +127,11 @@ namespace DoctorWeb.Controllers
             return View(sMS);
         }
 
+         
+        [AllowAnonymous]
         public ActionResult FollowUpMessage()
         {
-            var tomorowDate = DateTime.Today.Date.AddDays(1);
+            var tomorowDate = Extension.CultureDate.ConvertUTCBasedOnCuture(DateTime.UtcNow.Date).Date.AddDays(1);
             var patients = from pt in db.Patients
                         join pr in db.Prescriptions on pt.ID equals pr.PatientID
                         where DbFunctions.TruncateTime(pr.FollowDate) == DbFunctions.TruncateTime(tomorowDate)
@@ -149,6 +154,7 @@ namespace DoctorWeb.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+         
         // GET: SMS/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -168,6 +174,7 @@ namespace DoctorWeb.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+       
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,MobileNumber,Message,Status,Date,FromDate,ToData,Patients")] SMS sMS)
         {
@@ -180,6 +187,7 @@ namespace DoctorWeb.Controllers
             return View(sMS);
         }
 
+        
         // GET: SMS/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -197,6 +205,7 @@ namespace DoctorWeb.Controllers
 
         // POST: SMS/Delete/5
         [HttpPost, ActionName("Delete")]
+        
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {

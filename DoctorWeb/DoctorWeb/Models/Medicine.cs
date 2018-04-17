@@ -44,7 +44,7 @@ namespace DoctorWeb.Models
 
         [Display(Name = "Affect to Qty.")]
         public bool IsDayAffected { get; set; }
-
+        [Display(Name = "INR")]
         public float Unit { get; set; }
 
         public float Quantity { get; set; }

@@ -3,3 +3,6 @@
 ################################################################################
 
 /DoctorWeb/DoctorWeb/obj/Debug
+/DoctorWeb/DoctorWeb/bin
+/DoctorWeb/DoctorWeb/Content/Images
+/DoctorWeb/packages/Grid.Mvc.3.0.0

@@ -14,6 +14,7 @@ using System.Web.Script.Serialization;
 using PagedList;
 using DoctorWeb.Extension;
 using System.Web.Configuration;
+using System.Drawing;
 
 namespace DoctorWeb.Controllers
 {
@@ -23,7 +24,7 @@ namespace DoctorWeb.Controllers
 
 
         // GET: Patient
-        [Authorize]
+         
         public ActionResult Index()
         {
             var patients = db.Patients.Include(p => p.Doctor);
@@ -32,7 +33,7 @@ namespace DoctorWeb.Controllers
 
 
         // GET: Patient/Details/5
-        [Authorize]
+        
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -48,7 +49,7 @@ namespace DoctorWeb.Controllers
         }
 
         // GET: Patient/Create
-        [Authorize]
+        
         public ActionResult Create()
         {
             ViewBag.DoctorID = new SelectList(db.Doctors, "ID", "Name");
@@ -58,7 +59,7 @@ namespace DoctorWeb.Controllers
         // POST: Patient/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize]
+         
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Status,Name,Age,Gender,Address,ReferredBy,DepartmentID,DOB,Contact,Email,Occupation,Habit,FoodPreference,RemindMeAbout,DoctorID")] Patient patient)
@@ -75,7 +76,7 @@ namespace DoctorWeb.Controllers
         }
 
         // GET: Patient/Edit/5
-        [Authorize]
+        
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -94,7 +95,7 @@ namespace DoctorWeb.Controllers
         // POST: Patient/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize]
+         
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Status,Name,Age,Gender,Address,ReferredBy,DepartmentID,DOB,Contact,Email,Occupation,Habit,FoodPreference,RemindMeAbout,DoctorID")] Patient patient)
@@ -110,7 +111,7 @@ namespace DoctorWeb.Controllers
         }
 
         // GET: Patient/Delete/5
-        [Authorize]
+       
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -126,7 +127,7 @@ namespace DoctorWeb.Controllers
         }
 
         // POST: Patient/Delete/5
-        [Authorize]
+        
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -138,7 +139,7 @@ namespace DoctorWeb.Controllers
         }
 
         // GET: Patient
-        [Authorize]
+        
         public ActionResult Refered(int? id, string currentFilter, string searchString, int? page, DateTime? fromDate, DateTime? toDate, string search, string export)
         {
             if (searchString != null)
@@ -191,7 +192,7 @@ namespace DoctorWeb.Controllers
             return View(patients.OrderBy(i => i.ID).ToPagedList(pageNumber, pageSize));
         }
 
-        [Authorize]
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -201,7 +202,7 @@ namespace DoctorWeb.Controllers
             base.Dispose(disposing);
         }
 
-        [Authorize]
+        
         public void WriteTsv<T>(IEnumerable<T> data, TextWriter output)
         {
             PropertyDescriptorCollection props = TypeDescriptor.GetProperties(typeof(T));
@@ -245,6 +246,7 @@ namespace DoctorWeb.Controllers
         //}
 
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult UploadPatientImage(PatientPhoto personData1)
         {
             bool result = true;
@@ -258,14 +260,39 @@ namespace DoctorWeb.Controllers
             }
             else
             {
-                patient.Photo = personData.Photo;
+                var path = Server.MapPath(Url.Content("~/Content/Images/PatImages/" + personData.Id + "/PatientImage.jpg"));
+
+                System.IO.FileInfo file = new System.IO.FileInfo(path);
+                file.Directory.Create(); // If the directory already exists, this method does nothing.
+                MemoryStream inputMemoryStream = new MemoryStream(personData.Photo);
+                Image fullsizeImage = Image.FromStream(inputMemoryStream);
+                Image scaleImage = ScaleImage(fullsizeImage, 200, 300);
+                scaleImage.Save(path, System.Drawing.Imaging.ImageFormat.Jpeg);
+                //System.IO.File.WriteAllBytes(path, personData.Photo);
+                patient.Photo = System.Text.Encoding.ASCII.GetBytes("PatientImage.jpg");
             }
             db.Entry(patient).State = EntityState.Modified;
             db.SaveChanges();
             return Content(result.ToString());
         }
+        public Image ScaleImage(Image image, int maxWidth, int maxHeight)
+        {
+            var ratioX = (double)maxWidth / image.Width;
+            var ratioY = (double)maxHeight / image.Height;
+            var ratio = Math.Min(ratioX, ratioY);
 
+            var newWidth = (int)(image.Width * ratio);
+            var newHeight = (int)(image.Height * ratio);
+
+            var newImage = new Bitmap(newWidth, newHeight);
+
+            using (var graphics = Graphics.FromImage(newImage))
+                graphics.DrawImage(image, 0, 0, newWidth, newHeight);
+
+            return newImage;
+        }
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult UploadPrescriptionImage(PatientPrescriptionPhoto personData1)
         {
             bool result = true;
@@ -291,14 +318,14 @@ namespace DoctorWeb.Controllers
         }
     }
 
-    [Authorize]
+     
     public class PatientPhoto
     {
         public int Id { get; set; }
         public byte[] Photo { get; set; }
     }
 
-    [Authorize]
+    
     public class PatientPrescriptionPhoto
     {
         public int Id { get; set; }

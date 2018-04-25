@@ -160,7 +160,7 @@
                         </div>
                         <div class="print_text_padding" style="width:15%; float:right;">
                             <div class="print_text_fltleft print_heading">Date</div>
-                            <div>@DateTime.Now.ToString("dd/MM/yyyy")</div>
+                            <div>@DoctorWeb.Extension.CultureDate.ConvertUTCBasedOnCuture(DateTime.UtcNow.Date).ToString("dd/MM/yyyy")</div>
                         </div>
                     </div>
                     <div class="fltleft" style="width:82%; font-family:Calibri; font-size:10pt;">
@@ -495,9 +495,9 @@
                             }*@
                         if (!string.IsNullOrEmpty(Model.PatientDrawnImage1))
                         {
-                            
-                            <div class="print_text_padding" style="width:19%; border:1px solid #000; margin-right:5px; background: url('../../Content/Images/patient_drawing_image_bg2(2).jpg'); background-size:100px 100px; background-position:center; background-repeat:no-repeat;">
-                            @Html.Raw("<img src=" + Model.PatientDrawnImage1 + " width='100' height='100'/>")
+
+                            <div class="print_text_padding" style="width:130px !important;height:125px !important; border:1px solid #000; margin-right:5px; background: url('../../Content/Images/patient_drawing_image_bg2(2).jpg'); background-size:130px 125px; background-position:center; background-repeat:no-repeat;">
+                                @Html.Raw("<img src=" + Model.PatientDrawnImage1 + " style='width: 125px !important; height: 120px !important;'/>")
                             </div>
                         }
                         }
@@ -512,9 +512,9 @@
                             }*@
                         if (!string.IsNullOrEmpty(Model.PatientDrawnImage2))
                         {
-                            
-                            <div class="print_text_padding" style="width:19%; border:1px solid #000; margin-right:5px; background: url('../../Content/Images/patient_drawing_image_bg2-Copy.jpg'); background-size:100px 100px; background-position:center; background-repeat:no-repeat;">
-                            @Html.Raw("<img src=" + Model.PatientDrawnImage2 + " width='100' height='100'/>")
+
+                            <div class="print_text_padding" style="width:130px !important;height:125px !important; border:1px solid #000; margin-right:5px; background: url('../../Content/Images/patient_drawing_image_bg2-Copy.jpg'); background-size:130px 125px; background-position:center; background-repeat:no-repeat;">
+                                @Html.Raw("<img src=" + Model.PatientDrawnImage2 + " style='width: 125px !important; height: 120px !important;'/>")
                             </div>
                         }
                         }
@@ -542,7 +542,7 @@
                             }*@
                         if (!string.IsNullOrEmpty(Model.PatientUploadedImage1))
                         {
-                            @Html.Raw("<img src=" + Model.PatientUploadedImage1 + " width='100' height='100'/>")
+                            @Html.Raw("<img src=" + Model.PatientUploadedImage1 + "  style='height: 125px !important; width: 120px !important; ' />")
                         }
                         }
                         @{
@@ -556,7 +556,7 @@
                             }*@
                         if (!string.IsNullOrEmpty(Model.PatientUploadedImage2))
                         {
-                            @Html.Raw("<img src=" + Model.PatientUploadedImage2 + " width='100' height='100'/>")
+                            @Html.Raw("<img src=" + Model.PatientUploadedImage2 + "  style='height: 125px !important; width: 120px !important; ' />")
                         }
                         }
 

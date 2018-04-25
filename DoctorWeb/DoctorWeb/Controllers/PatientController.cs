@@ -316,6 +316,7 @@ namespace DoctorWeb.Controllers
             db.SaveChanges();
             return Content(result.ToString());
         }
+        
     }
 
      

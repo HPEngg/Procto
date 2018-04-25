@@ -4,11 +4,7 @@
     //ViewBag.Title = "Prescription";
     Layout = "~/Views/Shared/_PrescriptionLayout.cshtml";
 }
-@*
-    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.10.0.min.js" type="text/javascript"></script>
-    <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/jquery-ui.min.js" type="text/javascript"></script>
-    <link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/themes/blitzer/jquery-ui.css"
-          rel="Stylesheet" type="text/css" />*@
+ 
 
 @if (ViewBag.Message != null)
 {
@@ -1092,176 +1088,16 @@
             return false;
         }
     </script>
-    @*function printform() {
-            jQuery("#PrintForm").dialog({
-                autoOpen: true,
-                position: { my: "top", at: "top", of: window },
-                //width: 1200,
-                //resizable: false,
-                title: 'Print',
-                modal: true,
-                classname: 'searchdialog',
-                open: function () {
-                    jQuery(this).load('@Url.Action("Print", "Home", new { id = @ViewBag.PatientID })');
-                    jQuery('#PrintForm').focus();
-                },
-                close: function () {
-                    //javascript: location.reload(true);
-                    //searchpatient(this).load('@Url.Action("Index", "Home")');
-                    },
-            });
-            return false;
-        }*@
 
 
+        <!-- wColorPicker -->
+                                <link href="~/Content/drawimage/lib/wColorPicker.min.css" rel="stylesheet" />
+                             
 
-
-
-    @*<script type="text/javascript">
-
-            document.addEventListener('DOMContentLoaded', function () {
-                init();
-            });
-            var canvas, ctx, flag = false,
-            prevX = 0,
-            currX = 0,
-            prevY = 0,
-            currY = 0,
-            dot_flag = false;
-
-            var x = "red",
-                y = 5;
-
-            function init() {
-                canvas = document.getElementById('canvasss');
-                ctx = canvas.getContext("2d");
-                w = canvas.width;
-                h = canvas.height;
-
-                var img = document.getElementById("canvac_background");
-                //ctx.drawImage(img, 0, 0);
-
-                canvas.addEventListener("mousemove", function (e) {
-                    findxy('move', e)
-                }, false);
-                canvas.addEventListener("mousedown", function (e) {
-                    findxy('down', e)
-                }, false);
-                canvas.addEventListener("mouseup", function (e) {
-                    findxy('up', e)
-                }, false);
-                canvas.addEventListener("mouseout", function (e) {
-                    findxy('out', e)
-                }, false);
-            }
-
-            function color(obj) {
-                switch (obj.id) {
-                    case "green":
-                        x = "green";
-                        break;
-                    case "blue":
-                        x = "blue";
-                        break;
-                    case "red":
-                        x = "red";
-                        break;
-                    case "yellow":
-                        x = "yellow";
-                        break;
-                    case "orange":
-                        x = "orange";
-                        break;
-                    case "black":
-                        x = "black";
-                        break;
-                    case "white":
-                        x = "white";
-                        break;
-                }
-                if (x == "white") y = 14;
-                else y = 5;
-
-            }
-
-            function draw() {
-                ctx.beginPath();
-                ctx.moveTo(prevX, prevY);
-                ctx.lineTo(currX, currY);
-                ctx.strokeStyle = x;
-                ctx.lineWidth = y;
-                ctx.stroke();
-                ctx.closePath();
-            }
-
-            function erase() {
-                var m = confirm("Want to clear");
-                if (m) {
-                    ctx.clearRect(0, 0, w, h);
-                    document.getElementById("canvasimg").style.display = "none";
-                }
-            }
-
-            function save() {
-                document.getElementById("canvasimg").style.border = "2px solid";
-                var dataURL = canvas.toDataURL();
-                document.getElementById("canvasimg").src = dataURL;
-                //document.getElementById("canvasimg").style.display = "inline";
-            }
-
-            function findxy(res, e) {
-                if (res == 'down') {
-                    prevX = currX;
-                    prevY = currY;
-                    currX = e.clientX - canvas.offsetLeft;
-                    currY = e.clientY - canvas.offsetTop;
-
-                    flag = true;
-                    dot_flag = true;
-                    if (dot_flag) {
-                        ctx.beginPath();
-                        ctx.fillStyle = x;
-                        ctx.fillRect(currX, currY, 2, 2);
-                        ctx.closePath();
-                        dot_flag = false;
-                    }
-                }
-                if (res == 'up' || res == "out") {
-                    flag = false;
-                }
-                if (res == 'move') {
-                    if (flag) {
-                        prevX = currX;
-                        prevY = currY;
-                        currX = e.clientX - canvas.offsetLeft;
-                        currY = e.clientY - canvas.offsetTop;
-                        draw();
-                    }
-                }
-            }
-            //var dataURL = canvas.toDataURL();
-            function saveimage() {
-                //document.getElementById("PatientImage").style.border = "2px solid";
-                var dataURL = canvas.toDataURL();
-                //document.getElementById("PatientImage").src = dataURL;
-                document.getElementById("PatientImage").value = dataURL;
-                document.getElementById("PatientImage").value = dataURL;
-
-                //$.ajax({
-                //    type: "POST",
-                //    url: "/Home/DrawImage/?data="+dataURL.toString(),
-                //    data: {
-                //        imgBase64: dataURL
-                //    }
-                //}).done(function (o) {
-                //    alert("Saved");
-                //    // If you want the file to be visible in the browser
-                //    // - please modify the callback in javascript. All you
-                //    // need is to return the url to the file, you just saved
-                //    // and than put the image in your browser.
-                //});
-            }
-        </script>*@
+                                <link href="~/Content/drawimage/wPaint.min.css" rel="stylesheet" />
+                                 
+                                <link href="~/Content/drawimage/demo/demo.css" rel="stylesheet" />
+                                <link href="~/Content/autocomplete/jquery-ui.css" rel="stylesheet" />
 
 
     @section Scripts {

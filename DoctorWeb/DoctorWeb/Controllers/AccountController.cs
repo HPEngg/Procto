@@ -9,6 +9,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using DoctorWeb.Models;
+using System.Data.Entity;
+using System.Web.Configuration;
+using DoctorWeb.Models.Tools;
 
 namespace DoctorWeb.Controllers
 {
@@ -410,7 +413,34 @@ namespace DoctorWeb.Controllers
         {
             return View();
         }
+        [AllowAnonymous]
+        public void FollowUpMessage()
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                var tomorowDate = Extension.CultureDate.ConvertUTCBasedOnCuture(DateTime.UtcNow.Date).Date.AddDays(0);
+                var patients = from pt in db.Patients
+                               join pr in db.Prescriptions on pt.ID equals pr.PatientID
+                               where DbFunctions.TruncateTime(pr.FollowDate) == DbFunctions.TruncateTime(tomorowDate)
+                               select pt;
 
+                foreach (Patient p in patients)
+                {
+                    if (!string.IsNullOrEmpty(p.Contact))
+                    {
+                        string hDoc_web = WebConfigurationManager.AppSettings["HDoctorName"];
+                        string hospitalName = WebConfigurationManager.AppSettings["HospitalName"];
+                        string mobileNumber = WebConfigurationManager.AppSettings["HDocMobile"];
+                        var visitDate = db.Prescriptions.Where(w => w.PatientID == p.ID).Max(m => m.Date);
+                        string message = "Dear " + p.Name + ", Your Appointment has been confirmed with " + hDoc_web + "  at " + hospitalName + "  on " + visitDate.Date.ToShortDateString() + " at " + visitDate.Date.ToShortTimeString() + ". Call " + mobileNumber + " for any query.";
+                        SMSHelper.sendMessage(p.Contact, message);
+                    }
+                }
+
+                 
+                
+            }
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

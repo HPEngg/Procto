@@ -131,7 +131,7 @@ namespace DoctorWeb.Controllers
         [AllowAnonymous]
         public ActionResult FollowUpMessage()
         {
-            var tomorowDate = Extension.CultureDate.ConvertUTCBasedOnCuture(DateTime.UtcNow.Date).Date.AddDays(1);
+            var tomorowDate = Extension.CultureDate.ConvertUTCBasedOnCuture(DateTime.UtcNow.Date).Date.AddDays(0);
             var patients = from pt in db.Patients
                         join pr in db.Prescriptions on pt.ID equals pr.PatientID
                         where DbFunctions.TruncateTime(pr.FollowDate) == DbFunctions.TruncateTime(tomorowDate)

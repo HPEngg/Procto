@@ -19,92 +19,95 @@ namespace DoctorWeb.Controllers
 {
     public class HomeController : Controller
     {
-     
+
         private ApplicationDbContext db = new ApplicationDbContext();
-        [Authorize]
+     
         public ActionResult Search(String PatientName)
         {
-            int invoiceNum = 0;
-            List<PatientSearch> model;
-            if (int.TryParse(PatientName, out invoiceNum))
+            using (db = new ApplicationDbContext())
             {
-                var patientID = db.Prescriptions.Where(w => w.ID == invoiceNum).Select(s => s.PatientID).FirstOrDefault();
-                model = db.Patients.Where(p => p.ID == patientID || p.ID == invoiceNum).Select(p => new PatientSearch()
+                int invoiceNum = 0;
+                List<PatientSearch> model;
+                if (int.TryParse(PatientName, out invoiceNum))
                 {
-                    Status = p.Status.ToString(),
-                    Name = p.Name,
-                    MobileNo = p.Contact,
-                    Address = p.Address,
-                    DepartmentName = p.Department.Name.ToString(),
-                    Reference = p.ReferredBy.Name,
-                    ID = p.ID,
-                    RefferalName = p.DoctorID != null ? db.Doctors.Where(w => w.ID == p.DoctorID).Select(s => s.Name).FirstOrDefault() : "Other"//"test"
-                }).ToList();
+                    var patientID = db.Prescriptions.Where(w => w.ID == invoiceNum).Select(s => s.PatientID).FirstOrDefault();
+                    model = db.Patients.Where(p => p.ID == patientID || p.ID == invoiceNum).Select(p => new PatientSearch()
+                    {
+                        Status = p.Status.ToString(),
+                        Name = p.Name,
+                        MobileNo = p.Contact,
+                        Address = p.Address,
+                        DepartmentName = p.Department.Name.ToString(),
+                        Reference = p.ReferredBy.Name,
+                        ID = p.ID,
+                        RefferalName = p.DoctorID != null ? db.Doctors.Where(w => w.ID == p.DoctorID).Select(s => s.Name).FirstOrDefault() : "Other"//"test"
+                    }).ToList();
 
-                foreach (var patient in model)
-                {
-                    var latestPrescription = db.Prescriptions.Where(p => p.PatientID == patient.ID).OrderByDescending(d => d.Date).FirstOrDefault();
-                    if (latestPrescription != null)
+                    foreach (var patient in model)
                     {
-                        patient.InvoiceNo = latestPrescription.ID;
-                        patient.Date = latestPrescription.Date;
-                        patient.Diagnosis = latestPrescription.Diagnosis;
-                        patient.Procedure = latestPrescription.Procedure;
-                        //patient.PatientType = latestPrescription.PatientType.PatientTypeName;
-                        patient.PatientType = latestPrescription.PatientType == null ? string.Empty : latestPrescription.PatientType.PatientTypeName;
-                        patient.NewPatientOrFollowUp = "FollowUP";
-                        //patient.ChargesType = latestPrescription.Charges.FirstOrDefault();
+                        var latestPrescription = db.Prescriptions.Where(p => p.PatientID == patient.ID).OrderByDescending(d => d.Date).FirstOrDefault();
+                        if (latestPrescription != null)
+                        {
+                            patient.InvoiceNo = latestPrescription.ID;
+                            patient.Date = latestPrescription.Date;
+                            patient.Diagnosis = latestPrescription.Diagnosis;
+                            patient.Procedure = latestPrescription.Procedure;
+                            //patient.PatientType = latestPrescription.PatientType.PatientTypeName;
+                            patient.PatientType = latestPrescription.PatientType == null ? string.Empty : latestPrescription.PatientType.PatientTypeName;
+                            patient.NewPatientOrFollowUp = "FollowUP";
+                            //patient.ChargesType = latestPrescription.Charges.FirstOrDefault();
+                        }
+                        else
+                        {
+                            patient.NewPatientOrFollowUp = "New patient";
+                        }
                     }
-                    else
-                    {
-                        patient.NewPatientOrFollowUp = "New patient";
-                    }
+                    return PartialView(model.ToList());
                 }
-                return PartialView(model.ToList());
-            }
-            else
-            {
-
-                PatientName = PatientName.Replace('_', ' ');
-                model = db.Patients.Where(p => p.Name.Contains(PatientName) || p.Address.Contains(PatientName) || p.Department.Name.Contains(PatientName) || p.Status.ToString().Contains(PatientName) || p.Contact.Contains(PatientName)).Select(p => new PatientSearch()
+                else
                 {
-                    Status = p.Status.ToString(),
-                    Name = p.Name,
-                    MobileNo = p.Contact,
-                    Address = p.Address,
-                    DepartmentName = p.Department.Name.ToString(),
-                    Reference = p.ReferredBy.Name,
-                    ID = p.ID,
-                    RefferalName = p.DoctorID != null ? db.Doctors.Where(w => w.ID == p.DoctorID).Select(s => s.Name).FirstOrDefault() : "Other"//"test"
-                }).ToList();
 
-                foreach (var patient in model)
-                {
-                    var latestPrescription = db.Prescriptions.Where(p => p.PatientID == patient.ID).OrderByDescending(d => d.Date).FirstOrDefault();
-                    if (latestPrescription != null)
+                    PatientName = PatientName.Replace('_', ' ');
+                    model = db.Patients.Where(p => p.Name.Contains(PatientName) || p.Address.Contains(PatientName) || p.Department.Name.Contains(PatientName) || p.Status.ToString().Contains(PatientName) || p.Contact.Contains(PatientName)).Select(p => new PatientSearch()
                     {
-                        patient.InvoiceNo = latestPrescription.ID;
-                        patient.Date = latestPrescription.Date;
-                        patient.Diagnosis = latestPrescription.Diagnosis;
-                        patient.Procedure = latestPrescription.Procedure;
-                        patient.PatientType = latestPrescription.PatientType == null ? string.Empty : latestPrescription.PatientType.PatientTypeName;
-                        patient.NewPatientOrFollowUp = "FollowUP";
-                        //patient.ChargesType = latestPrescription.Charges.FirstOrDefault();
-                    }
-                    else
-                    {
-                        patient.NewPatientOrFollowUp = "New patient";
-                    }
+                        Status = p.Status.ToString(),
+                        Name = p.Name,
+                        MobileNo = p.Contact,
+                        Address = p.Address,
+                        DepartmentName = p.Department.Name.ToString(),
+                        Reference = p.ReferredBy.Name,
+                        ID = p.ID,
+                        RefferalName = p.DoctorID != null ? db.Doctors.Where(w => w.ID == p.DoctorID).Select(s => s.Name).FirstOrDefault() : "Other"//"test"
+                    }).ToList();
+
+                    //foreach (var patient in model)
+                    //{
+                    //    var latestPrescription = db.Prescriptions.Where(p => p.PatientID == patient.ID).OrderByDescending(d => d.Date).FirstOrDefault();
+                    //    if (latestPrescription != null)
+                    //    {
+                    //        patient.InvoiceNo = latestPrescription.ID;
+                    //        patient.Date = latestPrescription.Date;
+                    //        patient.Diagnosis = latestPrescription.Diagnosis;
+                    //        patient.Procedure = latestPrescription.Procedure;
+                    //        patient.PatientType = latestPrescription.PatientType == null ? string.Empty : latestPrescription.PatientType.PatientTypeName;
+                    //        patient.NewPatientOrFollowUp = "FollowUP";
+                    //        //patient.ChargesType = latestPrescription.Charges.FirstOrDefault();
+                    //    }
+                    //    else
+                    //    {
+                    //        patient.NewPatientOrFollowUp = "New patient";
+                    //    }
+                    //}
+                    return PartialView(model.ToList());
                 }
-                return PartialView(model.ToList());
             }
         }
-        [Authorize]
+      
         public ActionResult FollowupList_Intermediate()
         {
             return View();
         }
-        [Authorize]
+        
         public ActionResult FollowupList(DateTime fdate)
         {
             List<PatientSearch> model;
@@ -146,8 +149,8 @@ namespace DoctorWeb.Controllers
         {
             var todayDate = DoctorWeb.Extension.CultureDate.ConvertUTCBasedOnCuture(DateTime.UtcNow.Date).Date;
             var query = from p in db.Patients.Where(w => DbFunctions.TruncateTime(w.LastUpdatedDate) == todayDate)
-                       where !db.Prescriptions.Where(w => DbFunctions.TruncateTime(w.Date) == todayDate).Any(a => p.ID == a.PatientID)
-                       select p;
+                        where !db.Prescriptions.Where(w => DbFunctions.TruncateTime(w.Date) == todayDate).Any(a => p.ID == a.PatientID)
+                        select p;
             var model = new List<PatientToday>();
 
             foreach (var p in query.ToList())
@@ -157,11 +160,11 @@ namespace DoctorWeb.Controllers
                     Status = p.Status.ToString(),
                     Name = p.Name,
                     Age = p.Age,
-                    MobileNo = p.Contact == null ?string.Empty : p.Contact,
+                    MobileNo = p.Contact == null ? string.Empty : p.Contact,
                     Address = p.Address,
                     DOB = p.DOB == null ? string.Empty : p.DOB.Value.ToShortDateString(),
                     DepartmentName = p.Department == null ? string.Empty : p.Department.Name.ToString(),
-                    Reference = p.ReferredBy == null ? string.Empty  : p.ReferredBy.Name,
+                    Reference = p.ReferredBy == null ? string.Empty : p.ReferredBy.Name,
                     ID = p.ID,
                     RefferalName = p.DoctorID != null ? db.Doctors.Where(w => w.ID == p.DoctorID).Select(s => s.Name).FirstOrDefault() : "Other"//"test"
                 };
@@ -178,18 +181,18 @@ namespace DoctorWeb.Controllers
             }
             return View(model.ToList());
         }
-        [Authorize]
+       
         public ActionResult ImageLightbox(int id)
         {
             ViewBag.PatientID = id;
             return PartialView();
         }
-        [Authorize]
+        
         [HttpPost]
         public ActionResult ImageLightbox(string data, int patientID, int imageID)
         {
             Patient p = db.Patients.Find(patientID);
-            if(p != null)
+            if (p != null)
             {
                 byte[] imgarr = Convert.FromBase64String(data.Remove(0, 22));
                 Image image;
@@ -197,7 +200,7 @@ namespace DoctorWeb.Controllers
                 {
                     image = Image.FromStream(ms);
                     string imageFileName = "PatientDrawnImage" + imageID + ".png";
-                    string path = Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patientID + "/"  + imageFileName));
+                    string path = Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patientID + "/" + imageFileName));
                     System.IO.FileInfo file = new System.IO.FileInfo(path);
                     file.Directory.Create(); // If the directory already exists, this method does nothing.
                     image.Save(path);
@@ -222,14 +225,14 @@ namespace DoctorWeb.Controllers
 
         //    return newImage;
         //}
-        [Authorize]
+     
         public ActionResult DrawImage()
         {
             return PartialView();
             //return View(model.ToList());
         }
 
-        [Authorize]
+         
         [HttpPost]
         public ActionResult DrawImage(string data)
         {
@@ -245,7 +248,7 @@ namespace DoctorWeb.Controllers
             //return View(model.ToList());
         }
 
-        [Authorize]
+       
         public ActionResult Webcam(int id)
         {
             ViewBag.PatientID = id;
@@ -262,7 +265,7 @@ namespace DoctorWeb.Controllers
             }
             return bytes;
         }
-        [Authorize]
+         
         // Captures patient.photo from webcam
         public ActionResult CaptureImage(int id)
         {
@@ -323,7 +326,7 @@ namespace DoctorWeb.Controllers
             ViewBag.PatientID = new SelectList(db.Patients, "ID", "Name");
 
             var refbyDefault = db.ReferredBy.OrderBy(o => o.ID).Skip(1).Take(1).FirstOrDefault();
-            if(refbyDefault != null)
+            if (refbyDefault != null)
                 ViewBag.ReferredByID = new SelectList(db.ReferredBy, "ID", "Name", refbyDefault.ID);
             else
                 ViewBag.ReferredByID = new SelectList(db.ReferredBy, "ID", "Name");
@@ -332,7 +335,7 @@ namespace DoctorWeb.Controllers
             ViewBag.PatientCount = db.Patients.Count() + 1;
             return View();
         }
-        [Authorize]
+      
         [HttpPost]
         public JsonResult AutoComplete(string MedicineName)
         {
@@ -359,13 +362,13 @@ namespace DoctorWeb.Controllers
                 p = db.Patients.Add(patient);
                 db.SaveChanges();
 
-                if(patient.DoctorID != null)
+                if (patient.DoctorID != null)
                 {
                     string hDoc_web = WebConfigurationManager.AppSettings["HDoctorName"];
                     string hospitalName = WebConfigurationManager.AppSettings["HospitalName"];
                     var doctor = db.Doctors.Where(w => w.ID == patient.DoctorID).FirstOrDefault();
                     string patientDetails = patient.Name + "," + patient.Age + ", " + patient.Gender + ", " + patient.Address;
-                    string message = "Dear "+ doctor.Name +" your referred  patient " + patientDetails + " was examined by "+ hDoc_web + " at " + hospitalName + " on " + DoctorWeb.Extension.CultureDate.ConvertUTCBasedOnCuture(DateTime.UtcNow.Date).Date + ". Thanks for your reference.";
+                    string message = "Dear " + doctor.Name + " your referred  patient " + patientDetails + " was examined by " + hDoc_web + " at " + hospitalName + " on " + DoctorWeb.Extension.CultureDate.ConvertUTCBasedOnCuture(DateTime.UtcNow.Date).Date + ". Thanks for your reference.";
                     SMSHelper.sendMessage(doctor.Contact, message);
                 }
                 //return RedirectToAction("Index");
@@ -391,7 +394,7 @@ namespace DoctorWeb.Controllers
         }
 
         static int prescr_success = 0;
-        [Authorize]
+        
         public ActionResult Prescription(int patientID)
         {
             //ViewBag.Message = "Your application description page.";
@@ -491,7 +494,7 @@ namespace DoctorWeb.Controllers
                 }
                 else
                 {
-                    
+
                     if (objData != null)
                     {
                         TimeSpan dtMinutes = DateTime.Now.Subtract(objData.DateCreated);
@@ -502,9 +505,9 @@ namespace DoctorWeb.Controllers
                             System.IO.FileInfo fileMobile1 = new System.IO.FileInfo(path);
                             fileMobile1.Directory.Create(); // If the directory already exists, this method does nothing.
                             System.IO.File.WriteAllBytes(path, objData.UploadedImage1);
-                             
+
                         }
-                       
+
                     }
                 }
 
@@ -524,7 +527,7 @@ namespace DoctorWeb.Controllers
                         TimeSpan dtMinutes = DateTime.Now.Subtract(objData.DateCreated);
                         if (dtMinutes.Minutes <= 15 && objData.UploadedImage2 != null)
                         {
-                            var path = Server.MapPath(Url.Content("~/Content/Images/PatImages/" + model.PatientID + "/" + prescroptionObj.ID + "/UploadedPatientPrescriptionImage1.png"));
+                            var path = Server.MapPath(Url.Content("~/Content/Images/PatImages/" + model.PatientID + "/" + prescroptionObj.ID + "/UploadedPatientPrescriptionImage2.png"));
 
                             System.IO.FileInfo fileMobile1 = new System.IO.FileInfo(path);
                             fileMobile1.Directory.Create(); // If the directory already exists, this method does nothing.
@@ -656,9 +659,9 @@ namespace DoctorWeb.Controllers
             return View(model);
         }
 
-        
+
         [HttpPost]
-         
+
         public JsonResult EditPatientHistory(PatientHistory model)
         {
             try
@@ -673,16 +676,19 @@ namespace DoctorWeb.Controllers
 
                 return Json("Error Sucess", JsonRequestBehavior.AllowGet);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return Json("Error Sucess", JsonRequestBehavior.AllowGet);
             }
-            
+
         }
         [Authorize]
         public ActionResult PrintPreview(int id)
         {
+
+
             int prescriptionID = db.Prescriptions.Where(p => p.PatientID == id).OrderByDescending(o => o.Date).Select(s => s.ID).FirstOrDefault();
+            
             var model = GetPatientPriscription(prescriptionID);
             model.FooterRequired = true;
             model.HeaderRequired = true;
@@ -692,6 +698,7 @@ namespace DoctorWeb.Controllers
             model.RXRequired = true;
             ViewBag.PatientID = id;
             return View(model);
+
         }
         [Authorize]
         [HttpPost]
@@ -763,7 +770,10 @@ namespace DoctorWeb.Controllers
         [HttpPost]
         public ActionResult Print(PrintModel model)
         {
-            int prescriptionID = db.Prescriptions.Where(p => p.PatientID == model.PatientID).OrderByDescending(o => o.Date).Select(s => s.ID).FirstOrDefault();
+            int prescriptionID = 0;
+            
+                prescriptionID = db.Prescriptions.Where(p => p.PatientID == model.PatientID).OrderByDescending(o => o.Date).Select(s => s.ID).FirstOrDefault();
+            
             var printData = GetPatientPriscription(prescriptionID);
             printData.HeaderRequired = model.HeaderRequired;
             printData.PatientRequired = model.PatientRequired;
@@ -772,6 +782,7 @@ namespace DoctorWeb.Controllers
             printData.InvoiceRequired = model.InvoiceRequired;
             printData.UploadedImagesRequired = model.UploadedImagesRequired;
             return View(printData);
+
         }
         [Authorize]
         public ActionResult FollowUp(int patientID, int id)
@@ -785,7 +796,7 @@ namespace DoctorWeb.Controllers
         public ActionResult MedicineList(string id)
         {
             var model = db.Medicines.Where(p => p.PrescriptionCategories.Any(q => q.Name == id)).ToList();
-            foreach(var med in model)
+            foreach (var med in model)
             {
 
             }
@@ -800,122 +811,134 @@ namespace DoctorWeb.Controllers
         [Authorize]
         private PrintModel GetPatientPriscription(int prescriptionID)
         {
-            var model = new PrintModel();
+            
+                var model = new PrintModel();
 
-            var prescription = db.Prescriptions.Where(p => p.ID == prescriptionID).FirstOrDefault();
-            if (prescription != null)
-            {
-                model.Patient.Diagnosis = prescription.Diagnosis;
-                //model.Patient.Advice =
-                model.Patient.Procedure = prescription.Procedure;
-                model.Patient.Type = prescription.PatientType == null ? string.Empty : prescription.PatientType.PatientTypeName.ToString();
-                model.Patient.Investigations = db.Investigations.OrderBy(o => o.Name).Where(p => p.Prescriptions.Any(q => q.ID == prescription.ID)).ToList();
-
-                model.PatientDrawnImage1 = System.IO.File.Exists(Server.MapPath(Url.Content("~/Content/Images/PatImages/" + model.Patient.ID + "/" + prescriptionID + "/PatientDrawnImage1.png"))) ? "/Content/Images/PatImages/" + model.Patient.ID + "/" + prescriptionID + "/PatientDrawnImage1.png" : string.Empty;
-                model.PatientDrawnImage2 = System.IO.File.Exists(Server.MapPath(Url.Content("~/Content/Images/PatImages/" + model.Patient.ID + "/" + prescriptionID + "/PatientDrawnImage2.png"))) ? "/Content/Images/PatImages/" + model.Patient.ID + "/" + prescriptionID + "/PatientDrawnImage2.png" : string.Empty;
-
-                //model.Patient.DrawenImage1 = prescription.PrescriptionImage1;
-                //model.Patient.DrawenImage2 = prescription.PrescriptionImage2;
-                //model.Patient.UploadedImage1 = prescription.UploadedImage1;
-                //model.Patient.UploadedImage2 = prescription.UploadedImage2;
-                model.Patient.PrescriptionImages = db.PreImages.OrderBy(o => o.Label).Where(p => p.Prescriptions.Any(q => q.ID == prescription.ID)).Select(t => t.Image).ToList();
-              
-                model.PatientUploadedImage1 = System.IO.File.Exists(Server.MapPath(Url.Content("~/Content/Images/PatImages/" + model.Patient.ID + "/" + prescriptionID + "/UploadedPatientPrescriptionImage1.png"))) ? "/Content/Images/PatImages/" + model.Patient.ID + "/" + prescriptionID + "/UploadedPatientPrescriptionImage1.png" : string.Empty;
-                model.PatientUploadedImage2 = System.IO.File.Exists(Server.MapPath(Url.Content("~/Content/Images/PatImages/" + model.Patient.ID + "/" + prescriptionID + "/UploadedPatientPrescriptionImage2.png"))) ? "/Content/Images/PatImages/" + model.Patient.ID + "/" + prescriptionID + "/UploadedPatientPrescriptionImage2.png" : string.Empty;
-
-                model.RX.Medicines = db.PrescriptionMedicines.Where(p => p.PrescriptionID == prescription.ID).ToList();
-
-                //model.Compulsory.FollowDate = prescription.FollowDate == null ? string.Empty : prescription.FollowDate.Value.ToShortDateString();
-                model.Compulsory.FollowDate = prescription.FollowDate == null ? string.Empty : prescription.FollowDate.Value.ToString();
-                if(model.Compulsory.FollowDate != string.Empty)
-                { 
-                    model.Compulsory.Day = Convert.ToDateTime(model.Compulsory.FollowDate).DayOfWeek.ToString();
-                }
-                model.Compulsory.Instructions = db.Instructions.Where(p => p.Prescriptions.Any(q => q.ID == prescription.ID)).ToList();
-            }
-
-
-            model.Header.HeaderPhoto = db.Pictures.Select(p => p.Header).FirstOrDefault();
-
-            int patientID = prescription.PatientID;
-            Patient patient = db.Patients.Find(patientID);
-            if (patient != null)
-            {
-                model.Patient.ID = patient.ID;
-                //model.Patient.Photo = patient.Photo;
-                //model.PatientPhotoPath = System.IO.File.Exists(Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patient.ID + "/PatientImage.jpg"))) ? Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patient.ID + "/PatientImage.jpg")) : string.Empty;
-                //model.PatientUploadedImage1 = System.IO.File.Exists(Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patient.ID + "/" + prescriptionID + "/UploadedPatientPrescriptionImage1.png"))) ? Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patient.ID + "/" + prescriptionID + "/UploadedPatientPrescriptionImage1.png")) : string.Empty;
-                //model.PatientUploadedImage2 = System.IO.File.Exists(Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patient.ID + "/" + prescriptionID + "/UploadedPatientPrescriptionImage2.png"))) ? Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patient.ID + "/" + prescriptionID + "/UploadedPatientPrescriptionImage2.png")) : string.Empty;
-                //model.PatientDrawnImage1 = System.IO.File.Exists(Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patient.ID + "/" + prescriptionID + "/PatientDrawnImage1.png"))) ? Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patient.ID + "/" + prescriptionID + "/PatientDrawnImage1.png")) : string.Empty;
-                //model.PatientDrawnImage1 = System.IO.File.Exists(Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patient.ID + "/" + prescriptionID + "/PatientDrawnImage1.png"))) ? Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patient.ID + "/" + prescriptionID + "/PatientDrawnImage2.png")) : string.Empty;
-
-                model.PatientPhotoPath = System.IO.File.Exists(Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patient.ID + "/PatientImage.jpg"))) ?  "/Content/Images/PatImages/" + patient.ID + "/PatientImage.jpg"  : string.Empty;
-                model.PatientUploadedImage1 = System.IO.File.Exists(Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patient.ID + "/" + prescriptionID + "/UploadedPatientPrescriptionImage1.png"))) ?   "/Content/Images/PatImages/" + patient.ID + "/" + prescriptionID + "/UploadedPatientPrescriptionImage1.png"  : string.Empty;
-                model.PatientUploadedImage2 = System.IO.File.Exists(Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patient.ID + "/" + prescriptionID + "/UploadedPatientPrescriptionImage2.png"))) ?  "/Content/Images/PatImages/" + patient.ID + "/" + prescriptionID + "/UploadedPatientPrescriptionImage2.png"  : string.Empty;
-                model.PatientDrawnImage1 = System.IO.File.Exists(Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patient.ID + "/" + prescriptionID + "/PatientDrawnImage1.png"))) ?  "/Content/Images/PatImages/" + patient.ID + "/" + prescriptionID + "/PatientDrawnImage1.png"  : string.Empty;
-                model.PatientDrawnImage2 = System.IO.File.Exists(Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patient.ID + "/" + prescriptionID + "/PatientDrawnImage2.png"))) ?  "/Content/Images/PatImages/" + patient.ID + "/" + prescriptionID + "/PatientDrawnImage2.png"  : string.Empty;
-
-                model.Patient.Name = patient.Name;
-                model.Patient.Age = patient.Age;
-                model.Patient.Gender = patient.Gender.ToString();
-                model.Patient.TodayDate = DoctorWeb.Extension.CultureDate.ConvertUTCBasedOnCuture(DateTime.UtcNow.Date).Date.ToShortDateString();
-                model.Patient.No = patient.ID.ToString();
-                model.Patient.Department = patient.Department.Name.ToString();
-                model.Patient.Contact = patient.Contact;
-                model.Patient.Email = patient.Email;
-                model.Patient.Address = patient.Address;
-                model.Patient.Habbit = patient.Habit.ToString();
-                model.Patient.Diet = patient.FoodPreference.ToString();
-
-                var patientHistory = db.PatientHistories.Where(p => p.PatientID == patientID).OrderByDescending(q => q.ID).FirstOrDefault();
-                if (patientHistory != null)
+                var prescription = db.Prescriptions.Where(p => p.ID == prescriptionID).FirstOrDefault();
+                if (prescription != null)
                 {
-                    model.Patient.Weight = patientHistory.Weight.ToString();
-                    model.Patient.KCO = patientHistory.KCO;
-                    model.Patient.ComplainOf = patientHistory.CO;
-                    model.Patient.Since = patientHistory.ComplainForm;
-                    model.Patient.Constipation = patientHistory.Constipation;
-                    model.Patient.ConstipationMore = patientHistory.ConstipationMore;
-                    model.Patient.GAS = patientHistory.Gas;
-                    model.Patient.GASMore = patientHistory.GasMore;
-                    model.Patient.Acidity = patientHistory.Acidity;
-                    model.Patient.AcidityMore = patientHistory.AcidityMore;
-                    model.Patient.Pain = patientHistory.Pain;
-                    model.Patient.PainMore = patientHistory.PainMore;
-                    model.Patient.Burning = patientHistory.Burning;
-                    model.Patient.BurningMore = patientHistory.BurningMore;
-                    model.Patient.Bleeding = patientHistory.Bleeding;
-                    model.Patient.BleedingMore = patientHistory.BleedingMore.ToString();
-                    model.Patient.Swelling = patientHistory.Swelling;
-                    model.Patient.SwellingMore = patientHistory.SwellingMore;
-                    model.Patient.SCO = patientHistory.SCO;
-                    model.Patient.ACO = patientHistory.ACO;
-                    model.Patient.Allergy = patientHistory.Allergy;
-                    model.Patient.History = patientHistory.History;
-                    model.Patient.Height = patientHistory.Height.ToString();
-                    model.Patient.Temprature = patientHistory.T.ToString();
-                    model.Patient.Pulse = patientHistory.PR;
-                    model.Patient.BP = patientHistory.BP;
-                    model.Patient.SPO2 = patientHistory.SPO2;
-                    model.Patient.PR = patientHistory.PRR;
-                    model.Patient.Proctoscopy = patientHistory.Proctoscopy;
-                    model.Patient.Others = patientHistory.Other;
+                    model.Patient.Diagnosis = prescription.Diagnosis;
+                    //model.Patient.Advice =
+                    model.Patient.Procedure = prescription.Procedure;
+                    model.Patient.Type = prescription.PatientType == null ? string.Empty : prescription.PatientType.PatientTypeName.ToString();
+                    model.Patient.Investigations = db.Investigations.OrderBy(o => o.Name).Where(p => p.Prescriptions.Any(q => q.ID == prescription.ID)).ToList();
+
+                    model.PatientDrawnImage1 = System.IO.File.Exists(Server.MapPath(Url.Content("~/Content/Images/PatImages/" + model.Patient.ID + "/" + prescriptionID + "/PatientDrawnImage1.png"))) ? "/Content/Images/PatImages/" + model.Patient.ID + "/" + prescriptionID + "/PatientDrawnImage1.png" : string.Empty;
+                    model.PatientDrawnImage2 = System.IO.File.Exists(Server.MapPath(Url.Content("~/Content/Images/PatImages/" + model.Patient.ID + "/" + prescriptionID + "/PatientDrawnImage2.png"))) ? "/Content/Images/PatImages/" + model.Patient.ID + "/" + prescriptionID + "/PatientDrawnImage2.png" : string.Empty;
+                    model.PatientPhotoPath = System.IO.File.Exists(Server.MapPath(Url.Content("~/Content/Images/PatImages/" + model.Patient.ID + "/PatientImage.jpg"))) ? "/Content/Images/PatImages/" + model.Patient.ID + "/PatientImage.jpg" : string.Empty;
+                    //model.Patient.DrawenImage1 = prescription.PrescriptionImage1;
+                    //model.Patient.DrawenImage2 = prescription.PrescriptionImage2;
+                    //model.Patient.UploadedImage1 = prescription.UploadedImage1;
+                    //model.Patient.UploadedImage2 = prescription.UploadedImage2;
+                    model.Patient.PrescriptionImages = db.PreImages.OrderBy(o => o.Label).Where(p => p.Prescriptions.Any(q => q.ID == prescription.ID)).Select(t => t.Image).ToList();
+
+                    model.PatientUploadedImage1 = System.IO.File.Exists(Server.MapPath(Url.Content("~/Content/Images/PatImages/" + model.Patient.ID + "/" + prescriptionID + "/UploadedPatientPrescriptionImage1.png"))) ? "/Content/Images/PatImages/" + model.Patient.ID + "/" + prescriptionID + "/UploadedPatientPrescriptionImage1.png" : string.Empty;
+                    model.PatientUploadedImage2 = System.IO.File.Exists(Server.MapPath(Url.Content("~/Content/Images/PatImages/" + model.Patient.ID + "/" + prescriptionID + "/UploadedPatientPrescriptionImage2.png"))) ? "/Content/Images/PatImages/" + model.Patient.ID + "/" + prescriptionID + "/UploadedPatientPrescriptionImage2.png" : string.Empty;
+
+                    model.RX.Medicines = db.PrescriptionMedicines.Where(p => p.PrescriptionID == prescription.ID).ToList();
+
+                    //model.Compulsory.FollowDate = prescription.FollowDate == null ? string.Empty : prescription.FollowDate.Value.ToShortDateString();
+                    model.Compulsory.FollowDate = prescription.FollowDate == null ? string.Empty : prescription.FollowDate.Value.ToString();
+                    if (model.Compulsory.FollowDate != string.Empty)
+                    {
+                        model.Compulsory.Day = Convert.ToDateTime(model.Compulsory.FollowDate).DayOfWeek.ToString();
+                    }
+                    model.Compulsory.Instructions = db.Instructions.Where(p => p.Prescriptions.Any(q => q.ID == prescription.ID)).ToList();
                 }
 
-                var paymentTypeIDs = db.Charges.Where(w => w.PrescriptionID == prescription.ID).Select(s => s.PaymentTypeID).ToList();
-                model.Invoice.PaymentTypes = db.PaymentTypes.OrderBy(o => o.ID).Where(w => paymentTypeIDs.Contains(w.ID)).ToList();
 
-                model.Invoice.Medicine = prescription.M;
-                model.Invoice.OtherFromTextbox = prescription.Other;
-                model.Invoice.Less = prescription.Less;
-                model.Invoice.Total = Convert.ToString(prescription.Rs);
-                model.Invoice.CashRecived = prescription.Received.ToString();
-                model.Invoice.PendingAmount = prescription.Pending.ToString();
+                model.Header.HeaderPhoto = db.Pictures.Select(p => p.Header).FirstOrDefault();
 
-                model.Footer.FooterPhoto = db.Pictures.Select(p => p.Footer).FirstOrDefault();
+                int patientID = prescription.PatientID;
+                Patient patient = db.Patients.Find(patientID);
+                if (patient != null)
+                {
+                    model.Patient.ID = patient.ID;
+                    //model.Patient.Photo = patient.Photo;
+                    //model.PatientPhotoPath = System.IO.File.Exists(Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patient.ID + "/PatientImage.jpg"))) ? Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patient.ID + "/PatientImage.jpg")) : string.Empty;
+                    //model.PatientUploadedImage1 = System.IO.File.Exists(Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patient.ID + "/" + prescriptionID + "/UploadedPatientPrescriptionImage1.png"))) ? Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patient.ID + "/" + prescriptionID + "/UploadedPatientPrescriptionImage1.png")) : string.Empty;
+                    //model.PatientUploadedImage2 = System.IO.File.Exists(Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patient.ID + "/" + prescriptionID + "/UploadedPatientPrescriptionImage2.png"))) ? Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patient.ID + "/" + prescriptionID + "/UploadedPatientPrescriptionImage2.png")) : string.Empty;
+                    //model.PatientDrawnImage1 = System.IO.File.Exists(Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patient.ID + "/" + prescriptionID + "/PatientDrawnImage1.png"))) ? Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patient.ID + "/" + prescriptionID + "/PatientDrawnImage1.png")) : string.Empty;
+                    //model.PatientDrawnImage1 = System.IO.File.Exists(Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patient.ID + "/" + prescriptionID + "/PatientDrawnImage1.png"))) ? Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patient.ID + "/" + prescriptionID + "/PatientDrawnImage2.png")) : string.Empty;
+
+                    model.PatientPhotoPath = System.IO.File.Exists(Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patient.ID + "/PatientImage.jpg"))) ? "/Content/Images/PatImages/" + patient.ID + "/PatientImage.jpg" : string.Empty;
+                    model.PatientUploadedImage1 = System.IO.File.Exists(Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patient.ID + "/" + prescriptionID + "/UploadedPatientPrescriptionImage1.png"))) ? "/Content/Images/PatImages/" + patient.ID + "/" + prescriptionID + "/UploadedPatientPrescriptionImage1.png" : string.Empty;
+                    model.PatientUploadedImage2 = System.IO.File.Exists(Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patient.ID + "/" + prescriptionID + "/UploadedPatientPrescriptionImage2.png"))) ? "/Content/Images/PatImages/" + patient.ID + "/" + prescriptionID + "/UploadedPatientPrescriptionImage2.png" : string.Empty;
+                    model.PatientDrawnImage1 = System.IO.File.Exists(Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patient.ID + "/" + prescriptionID + "/PatientDrawnImage1.png"))) ? "/Content/Images/PatImages/" + patient.ID + "/" + prescriptionID + "/PatientDrawnImage1.png" : string.Empty;
+                    model.PatientDrawnImage2 = System.IO.File.Exists(Server.MapPath(Url.Content("~/Content/Images/PatImages/" + patient.ID + "/" + prescriptionID + "/PatientDrawnImage2.png"))) ? "/Content/Images/PatImages/" + patient.ID + "/" + prescriptionID + "/PatientDrawnImage2.png" : string.Empty;
+
+                    model.Patient.Name = patient.Name;
+                    model.Patient.Age = patient.Age;
+                    model.Patient.Gender = patient.Gender.ToString();
+                    model.Patient.TodayDate = DoctorWeb.Extension.CultureDate.ConvertUTCBasedOnCuture(DateTime.UtcNow.Date).Date.ToShortDateString();
+                    model.Patient.No = patient.ID.ToString();
+                    model.Patient.Department = patient.Department.Name.ToString();
+                    model.Patient.Contact = patient.Contact;
+                    model.Patient.Email = patient.Email;
+                    model.Patient.Address = patient.Address;
+                    model.Patient.Habbit = patient.Habit.ToString();
+                    model.Patient.Diet = patient.FoodPreference.ToString();
+
+                    var patientHistory = db.PatientHistories.Where(p => p.PatientID == patientID).OrderByDescending(q => q.ID).FirstOrDefault();
+                    if (patientHistory != null)
+                    {
+                        model.Patient.Weight = patientHistory.Weight.ToString();
+                        model.Patient.KCO = patientHistory.KCO;
+                        model.Patient.ComplainOf = patientHistory.CO;
+                        model.Patient.Since = patientHistory.ComplainForm;
+                        model.Patient.Constipation = patientHistory.Constipation;
+                        model.Patient.ConstipationMore = patientHistory.ConstipationMore;
+                        model.Patient.GAS = patientHistory.Gas;
+                        model.Patient.GASMore = patientHistory.GasMore;
+                        model.Patient.Acidity = patientHistory.Acidity;
+                        model.Patient.AcidityMore = patientHistory.AcidityMore;
+                        model.Patient.Pain = patientHistory.Pain;
+                        model.Patient.PainMore = patientHistory.PainMore;
+                        model.Patient.Burning = patientHistory.Burning;
+                        model.Patient.BurningMore = patientHistory.BurningMore;
+                        model.Patient.Bleeding = patientHistory.Bleeding;
+                        model.Patient.BleedingMore = patientHistory.BleedingMore.ToString();
+                        model.Patient.Swelling = patientHistory.Swelling;
+                        model.Patient.SwellingMore = patientHistory.SwellingMore;
+                        model.Patient.SCO = patientHistory.SCO;
+                        model.Patient.ACO = patientHistory.ACO;
+                        model.Patient.Allergy = patientHistory.Allergy;
+                        model.Patient.History = patientHistory.History;
+                        model.Patient.Height = patientHistory.Height.ToString();
+                        model.Patient.Temprature = patientHistory.T.ToString();
+                        model.Patient.Pulse = patientHistory.PR;
+                        model.Patient.BP = patientHistory.BP;
+                        model.Patient.SPO2 = patientHistory.SPO2;
+                        model.Patient.PR = patientHistory.PRR;
+                        model.Patient.Proctoscopy = patientHistory.Proctoscopy;
+                        model.Patient.Others = patientHistory.Other;
+                    }
+
+                    var paymentTypeIDs = db.Charges.Where(w => w.PrescriptionID == prescription.ID).Select(s => s.PaymentTypeID).ToList();
+                    model.Invoice.PaymentTypes = db.PaymentTypes.OrderBy(o => o.ID).Where(w => paymentTypeIDs.Contains(w.ID)).ToList();
+
+                    model.Invoice.Medicine = prescription.M;
+                    model.Invoice.OtherFromTextbox = prescription.Other;
+                    model.Invoice.Less = prescription.Less;
+                    model.Invoice.Total = Convert.ToString(prescription.Rs);
+                    model.Invoice.CashRecived = prescription.Received.ToString();
+                    model.Invoice.PendingAmount = prescription.Pending.ToString();
+
+                    model.Footer.FooterPhoto = db.Pictures.Select(p => p.Footer).FirstOrDefault();
+                }
+
+                return model;
+             
+        }
+
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
             }
-
-            return model;
+            base.Dispose(disposing);
         }
     }
 }

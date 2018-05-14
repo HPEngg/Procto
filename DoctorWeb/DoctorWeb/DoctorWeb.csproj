@@ -231,6 +231,7 @@
     <Compile Include="Controllers\PrescriptionMedicineController.cs" />
     <Compile Include="Controllers\ReferredByController.cs" />
     <Compile Include="Controllers\SMSController.cs" />
+    <Compile Include="Extension\CheckDBNull.cs" />
     <Compile Include="Extension\Extensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -380,6 +381,7 @@
     <Content Include="Content\css\certi_font-awesome.min.css" />
     <Content Include="Content\css\colorbox.css" />
     <Content Include="Content\css\colorpicker.css" />
+    <Content Include="Content\css\DoctorWebCommon.css" />
     <Content Include="Content\css\editor.css" />
     <Content Include="Content\css\examples.css" />
     <Content Include="Content\css\font-awesome-ie7.css" />

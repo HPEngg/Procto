@@ -33,16 +33,14 @@
     <body>
         <div class="container">
             <div class="top">
-                <!---- top part start --->
-            <div style="color:green; font-weight:bold; text-align:center;"> Few issues are resolved more details please check Trello whose status is done.
-                    please clear cache <a href="https://support.google.com/accounts/answer/32050?co=GENIE.Platform%3DDesktop&hl=en" target="_blank">Instruction</a></div>
+         
                 <div class="logo">
                     <a href="/Home/Index"><img src="/Content/Images/logo.png"></a>
                   
                 </div>
-                <div class="reslogo">
+                @*<div class="reslogo">
                     <a href="/Home/Index"><img src="/Content/Images/res_logo.png"></a>
-                </div>
+                </div>*@
                 <div class="search">
                     @*<form method="get" action="Home/Search">
                             <input class="search_text" type="textbox" name="PatientName" ID="PatientName">
@@ -84,7 +82,9 @@
 
     function patientsearch() {
         //window.location = "/Home/Search?PatientName=" + document.getElementById("PatientName").value;
-        var searchpatient = $.noConflict(true);
+        try {
+            var searchpatient = $.noConflict(true);
+        } catch (e) { }
         searchpatient("#SearchRecords").dialog({
             autoOpen: true,
             position: { my: "center", at: "top", of: window },
@@ -109,7 +109,9 @@
 
     function followup() {
         //window.location = "/Home/Search?PatientName=" + document.getElementById("PatientName").value;
-        var searchpatient = $.noConflict(true);
+        try {
+            var searchpatient = $.noConflict(true);
+        } catch (e) { }
         searchpatient("#SearchRecords").dialog({
             autoOpen: true,
             position: { my: "center", at: "top", of: window },

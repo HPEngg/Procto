@@ -62,5 +62,7 @@ namespace DoctorWeb.Models
         public virtual ReferredBy ReferredBy { get; set; }
 
         public byte[] Photo { get; set; }
+
+ 
     }
 }

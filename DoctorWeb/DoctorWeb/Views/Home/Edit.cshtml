@@ -135,7 +135,7 @@
                             @*<div class="col-md-10">
                             *@
                             @{
-                                String dobdate = Model.Patient.DOB != null ? Model.Patient.DOB.Value.ToString("yyyy-MM-dd") : DateTime.Now.ToString("yyyy-MM-dd"); ;
+                                String dobdate = Model.Patient.DOB != null ? Model.Patient.DOB.Value.ToString("yyyy-MM-dd") : null ;
                                 dobdate = dobdate + "T00:00";
                             }
                             <input data-val="true" data-val-date="The field FollowDate must be a date." id="Patient_DOB" name="Patient.DOB" class="my-input" placeholder="DD/MM/YYYY" style="min-width:82%;" value=@dobdate type="datetime-local">
@@ -233,7 +233,10 @@
                             @*
                                 </div>*@
                         </div>
-                    </div>
+                        <div class="form-group">
+                            SMS Send to Refer Dr.:  @Html.CheckBoxFor(model => model.IsDrSMS)
+                                                </div>
+                        </div>
 
                     <section id="step4" style="display: none;">
                         <h2 class="fs-title fs-title_cmplnfrm cmplain_title_color" style="color:blue;">Discharge Card</h2>

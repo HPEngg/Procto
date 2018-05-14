@@ -11,19 +11,19 @@
 
     <!-- filestart -->
     @*<link rel="icon" type="image/vnd.microsoft.icon" href="./demo/img/favicon.ico" />*@
-    <link href="~/Content/drawimage/demo/demo.css" rel="stylesheet" />
-    <script src="~/Content/drawimage/lib/jquery.1.10.2.min.js"></script>
+    @*<link href="~/Content/drawimage/demo/demo.css" rel="stylesheet" />*@
+    @*<script src="~/Content/drawimage/lib/jquery.1.10.2.min.js"></script>*@
     <!-- fileend -->
     <!-- SCRIPT FOR TABS STARTS -->
-    <script src="~/Content/autocomplete/jquery-1.12.4.js"></script>
+    @*<script src="~/Content/autocomplete/jquery-1.12.4.js"></script>
     <script src="~/Content/autocomplete/jquery-1.12.0.js"></script>
-    <script src="~/Content/autocomplete/jquery-ui.js"></script>
-    <link href="~/Content/autocomplete/jquery-ui.css" rel="stylesheet" />
-    <script type="text/javascript">
+    <script src="~/Content/autocomplete/jquery-ui.js"></script>*@
+    @*<link href="~/Content/autocomplete/jquery-ui.css" rel="stylesheet" />*@
+    @*<script type="text/javascript">
         jQuery( function() {
             jQuery( "#tabs" ).tabs();
         } );
-    </script>
+    </script>*@
     <!-- SCRIPT FOR TABS ENDS -->
     <!-- SCRIPT FOR IMAGE DRAWING STARTS -->
     <!-- jQuery UI -->
@@ -34,11 +34,11 @@
     <script src="~/Content/drawimage/lib/jquery.ui.draggable.1.10.3.min.js"></script>
 
     <!-- wColorPicker -->
-    <link href="~/Content/drawimage/lib/wColorPicker.min.css" rel="stylesheet" />
+    @*<link href="~/Content/drawimage/lib/wColorPicker.min.css" rel="stylesheet" />*@
     <script src="~/Content/drawimage/lib/wColorPicker.min.js"></script>
     <!-- wPaint -->
-
-    <link href="~/Content/drawimage/wPaint.min.css" rel="stylesheet" />
+    <link href="~/Content/css/DoctorWebCommon.css" rel="stylesheet" />
+    @*<link href="~/Content/drawimage/wPaint.min.css" rel="stylesheet" />*@
     <script src="~/Content/drawimage/wPaint.min.js"></script>
     
     <script src="~/Content/drawimage/plugins/main/wPaint.menu.main.min.js"></script>
@@ -49,6 +49,7 @@
     <script src="~/Content/drawimage/plugins/file/wPaint.menu.main.file.min.js"></script>
 
     <script type="text/javascript">
+        var tab =1;
         var images = [
           'Content/drawimage/test/uploads/wPaint.png',
         ];
@@ -56,11 +57,9 @@
 
         function saveImg(image) {
             var _this = this;
-
-            var activeTabIdx = $('#tabs').tabs('option','active');
-            var selector = '#tabs > ul > li > a';
-            var activeTabID = $(selector).eq(activeTabIdx).attr('href');
-            activeTabID = activeTabID[activeTabID.length -1];
+            debugger;
+           
+            activeTabID =tab;
             //alert(activeTabID);
             var dataURL = $("#wPaint").wPaint("image");
             //alert(dataURL);
@@ -90,10 +89,8 @@
            // alert("Second Image");
             var _this = this;
 
-            var activeTabIdx = $('#tabs').tabs('option','active');
-            var selector = '#tabs > ul > li > a';
-            var activeTabID = $(selector).eq(activeTabIdx).attr('href');
-            activeTabID = activeTabID[activeTabID.length -1];
+            
+            activeTabID = tab;
            // alert(activeTabID);
             var dataURL = $("#wPaint2").wPaint("image");
            // alert(dataURL);
@@ -119,38 +116,11 @@
                 }
             });
         }
-        //  $.ajax({
-        //    type: 'POST',
-        //    url: './Content/drawimage/test/upload.php',
-        //    data: {image: image},
-        //    success: function (resp) {
-
-        //      // internal function for displaying status messages in the canvas
-        //      _this._displayStatus('Image saved successfully');
-
-        //      // doesn't have to be json, can be anything
-        //      // returned from server after upload as long
-        //      // as it contains the path to the image url
-        //      // or a base64 encoded png, either will work
-        //      resp = $.parseJSON(resp);
-
-        //      // update images array / object or whatever
-        //      // is being used to keep track of the images
-        //      // can store path or base64 here (but path is better since it's much smaller)
-        //      images.push(resp.img);
-
-        //      // do something with the image
-        //      $('#wPaint-img').attr('src', image);
-        //    }
-        //  });
-        //}
+       
 
         function loadImgBg() {
 
-            // internal function for displaying background images modal
-            // where images is an array of images (base64 or url path)
-            // NOTE: that if you can't see the bg image changing it's probably
-            // becasue the foregroud image is not transparent.
+         
             this._showFileModal('bg', images);
         }
 
@@ -215,206 +185,108 @@
             background-position: center;
         }
     </style>
+    <style>
+        
+
+        /* Style the tab */
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+        }
+
+            /* Style the buttons inside the tab */
+            .tab button {
+                background-color: inherit;
+                float: left;
+                border: none;
+                outline: none;
+                cursor: pointer;
+                padding: 14px 16px;
+                transition: 0.3s;
+                font-size: 17px;
+            }
+
+                /* Change background color of buttons on hover */
+                .tab button:hover {
+                    background-color: #ddd;
+                }
+
+                /* Create an active/current tablink class */
+                .tab button.active {
+                    background-color: #ccc;
+                }
+
+        /* Style the tab content */
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+    </style>
 </head>
 <body>
-    <div id="tabs">
-        <ul>
-            <li><a href="#tabs-1">First Image</a></li>
-            <li><a href="#tabs-2">Second Image</a></li>
-        </ul>
-        <span id="current"></span>
-        <div id="tabs-1">
+    <div class="tab">
+        <button class="tablinks active" onclick="openCity(event, 'tabs-1')">First Image</button>
+        <button class="tablinks" onclick="openCity(event, 'tabs-2')">Second Image</button>
+    </div>
+        <div id="tabs-1" class="tabcontent" style="display: block;">
             <div id="content">
                 <div class="content-box">
                     @*<img id="canvas_first_background" width="500" height="200" src="~/Content/Images/patient_drawing_image_bg.jpg" alt="Canvas background" style="display:none;">*@
                     @*<div style="background:url('/Content/Images/patient_drawing_image_bg.png') no-repeat;"></div>*@
                     @*<div style="background:url('/Content/Images/patient_drawing_image_bg.jpg') no-repeat;">
-                        <canvas id="canvasss" width="235" height="235" style=" position:relative;border:2px solid;"></canvas>
-                    </div>*@
+                            <canvas id="canvasss" width="235" height="235" style=" position:relative;border:2px solid;"></canvas>
+                        </div>*@
 
                     @*<div id="wPaint" style="position:relative; width:200px; height:200px; background-color:#7a7a7a; margin:70px auto 20px auto;"></div>*@
                     <div id="wPaint" style="position:relative; width:200px; height:200px; background-color:#7a7a7a; margin:0px;"></div>
                     @*<center style="margin-bottom: 50px;">
-                        <input type="button" value="toggle menu" onclick="console.log($('#wPaint').wPaint('menuOrientation')); $('#wPaint').wPaint('menuOrientation', $('#wPaint').wPaint('menuOrientation') === 'vertical' ? 'horizontal' : 'vertical');" />
-                    </center>*@
+                            <input type="button" value="toggle menu" onclick="console.log($('#wPaint').wPaint('menuOrientation')); $('#wPaint').wPaint('menuOrientation', $('#wPaint').wPaint('menuOrientation') === 'vertical' ? 'horizontal' : 'vertical');" />
+                        </center>*@
                     <center id="wPaint-img"></center>
                 </div>
             </div>
         </div>
-        <div id="tabs-2">
+
+        <div id="tabs-2" class="tabcontent" style="display: none;">
             <div id="content">
                 <div class="content-box">
                     @*<img id="canvas_second_background" width="500" height="200" src="~/Content/Images/patient_drawing_image_bg2.jpg" alt="Canvas background" style="display:none;">*@
                     @*<div id="wPaint2" style="position:relative; width:200px; height:200px; background-color:#7a7a7a; margin:70px auto 20px auto;"></div>*@
                     <div id="wPaint2" style="position:relative; width:200px; height:200px; background-color:#7a7a7a; margin:0px;"></div>
                     @*<center style="margin-bottom: 50px;">
-                        <input type="button" value="toggle menu" onclick="console.log($('#wPaint2').wPaint('menuOrientation')); $('#wPaint2').wPaint('menuOrientation', $('#wPaint2').wPaint('menuOrientation') === 'vertical' ? 'horizontal' : 'vertical');" />
-                    </center>*@
+                            <input type="button" value="toggle menu" onclick="console.log($('#wPaint2').wPaint('menuOrientation')); $('#wPaint2').wPaint('menuOrientation', $('#wPaint2').wPaint('menuOrientation') === 'vertical' ? 'horizontal' : 'vertical');" />
+                        </center>*@
                     <center id="wPaint-img"></center>
                 </div>
             </div>
         </div>
-    </div>
     
-    @*<script type="text/javascript">
-            var c=document.getElementsByClassName("wPaint-canvas")[0];
-            var ctx=c.getContext("2d");
-            var img=document.getElementById("canvas_first_background");
-            ctx.drawImage(img,0,0);
-
-            var second=document.getElementsByClassName("wPaint-canvas")[1];
-            var ctx1=second.getContext("2d");
-            var img1=document.getElementById("canvas_second_background");
-            ctx1.drawImage(img1,0,0);
-
-    </script>*@
-
-    <!-- headstart -->
-    @*<header>
-        <a id="header-logo" href="http://websanova.com"></a>
-        <div id="header-links">
-            <a href="http://websanova.com">Blog</a>
-            <a href="http://websanova.com/plugins">Plugins</a>
-            <a href="http://websanova.com/extensions">Extensions</a>
-            <a href="http://websanova.com/services">Services</a>
-        </div>
-    </header>*@
-    <!-- headend -->
-    @*<div id="content">
-        <div class="content-box">
-            <!-- jQuery UI -->
-            <script src="~/Content/drawimage/lib/jquery.ui.core.1.10.3.min.js"></script>
-
-            <script src="~/Content/drawimage/lib/jquery.ui.widget.1.10.3.min.js"></script>
-            <script src="~/Content/drawimage/lib/jquery.ui.mouse.1.10.3.min.js"></script>
-            <script src="~/Content/drawimage/lib/jquery.ui.draggable.1.10.3.min.js"></script>
-
-            <!-- wColorPicker -->
-            <link href="~/Content/drawimage/lib/wColorPicker.min.css" rel="stylesheet" />
-            <script src="~/Content/drawimage/lib/wColorPicker.min.js"></script>
-            <!-- wPaint -->
-
-            <script src="~/Content/drawimage/wPaint.min.js"></script>
-            <link href="~/Content/drawimage/wPaint.min.css" rel="stylesheet" />
-
-
-            <script src="~/Content/drawimage/plugins/main/wPaint.menu.main.min.js"></script>
-
-            <script src="~/Content/drawimage/plugins/text/wPaint.menu.text.min.js"></script>
-
-            <script src="~/Content/drawimage/plugins/shapes/wPaint.menu.main.shapes.min.js"></script>
-            <script src="~/Content/drawimage/plugins/file/wPaint.menu.main.file.min.js"></script>
-            <div id="Select_Images">
-                <input type="radio" Name="image1" id="First_Image" value="First Image" />First Name
-                <input type="radio" Name="image1" id="Second_Image" value="First Image" />Second Name
-            </div>
-            <div id="wPaint" style="position:relative; width:500px; height:200px; background-color:#7a7a7a; margin:70px auto 20px auto;"></div>
-            <center style="margin-bottom: 50px;">
-                <input type="button" value="toggle menu" onclick="console.log($('#wPaint').wPaint('menuOrientation')); $('#wPaint').wPaint('menuOrientation', $('#wPaint').wPaint('menuOrientation') === 'vertical' ? 'horizontal' : 'vertical');" />
-            </center>
-            <center id="wPaint-img"></center>
-
-            <script type="text/javascript">
-                var images = [
-                  './Content/drawimage/test/uploads/wPaint.png',
-                ];
-
-                function saveImg(image) {
-
-                    var _this = this;
-                    var dataURL = $("#wPaint").wPaint("image");
-                    alert(dataURL);
-                    $.ajax({
-                        type: "POST",
-                        url: "/Home/DrawImage/?data=" + dataURL.toString() + "&imgID=" + @ViewBag.imgID,
-                        data: {
-                            imgBase64: dataURL
-                        },
-                        success: function (resp) {
-                            // internal function for displaying status messages in the canvas
-                            _this._displayStatus('Image saved successfully');
-
-                            // doesn't have to be json, can be anything
-                            // returned from server after upload as long
-                            // as it contains the path to the image url
-                            // or a base64 encoded png, either will work
-                            resp = $.parseJSON(resp);
-                            // update images array / object or whatever
-                            // is being used to keep track of the images
-                            // can store path or base64 here (but path is better since it's much smaller)
-                            images.push(resp.img);
-                            // do something with the image
-                            $('#wPaint-img').attr('src', image);
-                        }
-                    });
-                }
-
-
-                //  $.ajax({
-                //    type: 'POST',
-                //    url: './Content/drawimage/test/upload.php',
-                //    data: {image: image},
-                //    success: function (resp) {
-
-                //      // internal function for displaying status messages in the canvas
-                //      _this._displayStatus('Image saved successfully');
-
-                //      // doesn't have to be json, can be anything
-                //      // returned from server after upload as long
-                //      // as it contains the path to the image url
-                //      // or a base64 encoded png, either will work
-                //      resp = $.parseJSON(resp);
-
-                //      // update images array / object or whatever
-                //      // is being used to keep track of the images
-                //      // can store path or base64 here (but path is better since it's much smaller)
-                //      images.push(resp.img);
-
-                //      // do something with the image
-                //      $('#wPaint-img').attr('src', image);
-                //    }
-                //  });
-                //}
-
-                function loadImgBg() {
-
-                    // internal function for displaying background images modal
-                    // where images is an array of images (base64 or url path)
-                    // NOTE: that if you can't see the bg image changing it's probably
-                    // becasue the foregroud image is not transparent.
-                    this._showFileModal('bg', images);
-                }
-
-                function loadImgFg() {
-
-                    // internal function for displaying foreground images modal
-                    // where images is an array of images (base64 or url path)
-                    this._showFileModal('fg', images);
-                }
-
-                // init wPaint
-                $('#wPaint').wPaint({
-                    menuOffsetLeft: -35,
-                    menuOffsetTop: -50,
-                    saveImg: saveImg,
-                    loadImgBg: loadImgBg,
-                    loadImgFg: loadImgFg
-                });
-            </script>
-        </div>
-    </div>*@
-    <!-- footstart -->
-    @*<footer>
-        <div id="footer-icons">
-            <a id="stumbleupon-icon" href="http://websanova.com/stumbleupon" target="_blank"></a>
-            <a id="linkedin-icon" href="http://websanova.com/linkedin" target="_blank"></a>
-            <a id="facebook-icon" href="http://websanova.com/facebook" target="_blank"></a>
-            <a id="googleplus-icon" href="http://websanova.com/googleplus" target="_blank"></a>
-            <a id="twitter-icon" href="http://websanova.com/twitter" target="_blank"></a>
-            <a id="github-icon" href="http://websanova.com/github" target="_blank"></a>
-            <a id="rss-icon" href="http://websanova.com/feed" target="_blank"></a>
-        </div>
-    </footer>*@
-    <!-- footend -->
+    <script>
+function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+    if (cityName =="tab-1")
+    {
+        tab=1;
+    }
+    else 
+    {
+        tab=2;
+    }
+}
+    </script>
+    
 </body>
 </html>

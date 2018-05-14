@@ -144,10 +144,9 @@
                             @*<div class="col-md-10">
                             *@
                             @{
-                                String dobdate = DateTime.Now.Date.ToString("yyyy-MM-dd");
-                                dobdate = dobdate + "T00:00";
+                                
                             }
-                            <input data-val="true" data-val-date="The field FollowDate must be a date." id="Patient_DOB" name="Patient.DOB" class="my-input" placeholder="DD/MM/YYYY" style="min-width:82%;" value=@dobdate type="datetime-local">
+                            <input data-val="true" data-val-date="The field FollowDate must be a date." id="Patient_DOB" name="Patient.DOB" class="my-input" placeholder="DD/MM/YYYY" style="min-width:82%;"   type="datetime-local">
                             @*@Html.EditorFor(model => model.Patient.DOB, new { htmlAttributes = new { @class = "my-input", style = "min-width:75%;", placeholder = "DD/MM/YYYY", type = "date" } })*@
                             @Html.ValidationMessageFor(model => model.Patient.DOB, "", new { @class = "text-danger" })
                             @*

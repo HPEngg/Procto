@@ -15,7 +15,7 @@ using DoctorWeb.Models.Tools;
 
 namespace DoctorWeb.Controllers
 {
-    [Authorize]
+    
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -25,6 +25,7 @@ namespace DoctorWeb.Controllers
         {
         }
 
+      
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {
             UserManager = userManager;
@@ -418,7 +419,7 @@ namespace DoctorWeb.Controllers
         {
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                var tomorowDate = Extension.CultureDate.ConvertUTCBasedOnCuture(DateTime.UtcNow.Date).Date.AddDays(0);
+                var tomorowDate = Extension.CultureDate.ConvertUTCBasedOnCuture(DateTime.UtcNow.Date).Date.AddDays(1);
                 var patients = from pt in db.Patients
                                join pr in db.Prescriptions on pt.ID equals pr.PatientID
                                where DbFunctions.TruncateTime(pr.FollowDate) == DbFunctions.TruncateTime(tomorowDate)
@@ -441,6 +442,43 @@ namespace DoctorWeb.Controllers
                 
             }
         }
+
+
+        [AllowAnonymous]
+        public void DOB()
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                var tomorowDate = Extension.CultureDate.ConvertUTCBasedOnCuture(DateTime.UtcNow.Date).Date;
+                var patients = from pt in db.Patients
+                               where pt.DOB != null  && ( pt.DOB.Value.Day == tomorowDate.Day && pt.DOB.Value.Month== tomorowDate.Month)
+                               select pt;
+
+                //string hDoc_web = WebConfigurationManager.AppSettings["DRName"];
+                //string hospitalName = WebConfigurationManager.AppSettings["HName"];
+                //string City = WebConfigurationManager.AppSettings["City"];
+
+                //string birthdayMessage = CheckDBNull.ToStr(WebConfigurationManager.AppSettings["BirthdayMessage"]) + hDoc_web + hospitalName + City;
+
+                //SMSHelper.sendMessage("7016745959", birthdayMessage);
+                foreach (Patient p in patients)
+                {
+                    if (!string.IsNullOrEmpty(p.Contact))
+                    {
+                        string hDoc_web = WebConfigurationManager.AppSettings["DRName"];
+                        string hospitalName = WebConfigurationManager.AppSettings["HName"];
+                        string City = WebConfigurationManager.AppSettings["City"];
+
+                        string birthdayMessage = CheckDBNull.ToStr(WebConfigurationManager.AppSettings["BirthdayMessage"]) + Environment.NewLine + hDoc_web + Environment.NewLine + hospitalName + Environment.NewLine + City;
+
+                        SMSHelper.sendMessage(p.Contact, birthdayMessage);
+
+                    }
+                }
+
+            }
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -131,7 +131,7 @@ namespace DoctorWeb.Controllers
         [AllowAnonymous]
         public ActionResult FollowUpMessage()
         {
-            var tomorowDate = Extension.CultureDate.ConvertUTCBasedOnCuture(DateTime.UtcNow.Date).Date.AddDays(0);
+            var tomorowDate = Extension.CultureDate.ConvertUTCBasedOnCuture(DateTime.UtcNow.Date).Date.AddDays(1);
             var patients = from pt in db.Patients
                         join pr in db.Prescriptions on pt.ID equals pr.PatientID
                         where DbFunctions.TruncateTime(pr.FollowDate) == DbFunctions.TruncateTime(tomorowDate)
@@ -145,8 +145,32 @@ namespace DoctorWeb.Controllers
                     string hospitalName = WebConfigurationManager.AppSettings["HospitalName"];
                     string mobileNumber = WebConfigurationManager.AppSettings["HDocMobile"];
                     var visitDate = db.Prescriptions.Where(w => w.PatientID == p.ID).Max(m => m.Date);
-                    string message = "Dear " + p.Name + ", Your Appointment has been confirmed with " + hDoc_web + "  at " + hospitalName + "  on " + visitDate.Date.ToShortDateString() + " at " + visitDate.Date.ToShortTimeString() + ". Call " + mobileNumber + " for any query.";
-                    SMSHelper.sendMessage(p.Contact, message);
+                    string FollowupString = "";
+                    if (CheckDBNull.ToStr(WebConfigurationManager.AppSettings["MessageLanguag"]) == "Hindi")
+                    {
+                        if (p.Gender == Models.Enums.Gender.Male)
+                        {
+                            FollowupString = "श्रीमान ";
+                        }
+                        else
+                        {
+                            FollowupString = "श्रीमंती ";
+                        }
+                        string webConfigStrig = CheckDBNull.ToStr(WebConfigurationManager.AppSettings["FollowupMessageText"]);
+                        webConfigStrig = webConfigStrig.Replace("@FollowupDate", visitDate.Date.ToShortDateString());
+                        string messageGuj = FollowupString + p.Name + ", " + webConfigStrig  + ". Call " + mobileNumber + " for any query.";
+                        SMSHelper.sendMessage(p.Contact, messageGuj);
+                    }
+                    else if (CheckDBNull.ToStr(WebConfigurationManager.AppSettings["MessageLanguag"]) == "Gujarati")
+                    {
+                        string messageGuj = "Dear " + p.Name + ", Your Appointment has been confirmed with " + hDoc_web + "  at " + hospitalName + "  on " + visitDate.Date.ToShortDateString() + " at " + visitDate.Date.ToShortTimeString() + ". Call " + mobileNumber + " for any query.";
+                        SMSHelper.sendMessage(p.Contact, messageGuj);
+                    }
+                    else
+                    {
+                        string message = "Dear " + p.Name + ", Your Appointment has been confirmed with " + hDoc_web + "  at " + hospitalName + "  on " + visitDate.Date.ToShortDateString() + " at " + visitDate.Date.ToShortTimeString() + ". Call " + mobileNumber + " for any query.";
+                        SMSHelper.sendMessage(p.Contact, message);
+                    }
                 }
             }
 
@@ -154,7 +178,35 @@ namespace DoctorWeb.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-         
+        [AllowAnonymous]
+        public ActionResult DOB()
+        {
+
+            var tomorowDate = Extension.CultureDate.ConvertUTCBasedOnCuture(DateTime.UtcNow.Date).Date;
+            var patients = from pt in db.Patients
+                           where DbFunctions.TruncateTime(pt.DOB) == DbFunctions.TruncateTime(tomorowDate)
+                           select pt;
+
+            foreach (Patient p in patients)
+            {
+                if (!string.IsNullOrEmpty(p.Contact))
+                {
+                    string hDoc_web = WebConfigurationManager.AppSettings["DRName"];
+                    string hospitalName = WebConfigurationManager.AppSettings["HName"];
+                    string City = WebConfigurationManager.AppSettings["City"];
+                    
+                    string birthdayMessage = CheckDBNull.ToStr(WebConfigurationManager.AppSettings["BirthdayMessage"])  + hDoc_web  + hospitalName + City;
+
+                    SMSHelper.sendMessage(p.Contact, birthdayMessage);
+                   
+                }
+            }
+
+            TempData["Message"] = "SMS Sent to " + patients.Count() + " Patient(s)";
+            return RedirectToAction("Index", "Home");
+        }
+
+
         // GET: SMS/Edit/5
         public ActionResult Edit(int? id)
         {
